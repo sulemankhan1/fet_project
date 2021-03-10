@@ -1,0 +1,97 @@
+.logo-text {
+  font-size: 20px !important;
+  padding: 15px !important;
+}
+
+.panel {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  padding: 15px;
+}
+.panel-default {
+  border-color: #ddd;
+}
+#details_rows {
+  margin-bottom: 10px;
+}
+.remove_row {
+  margin-top: 32px;
+  margin-bottom: 0px;
+}
+.details_table th {
+  background: #f2f2f2;
+  width: 30%;
+  font-weight: 500 !important;
+}
+.details_table td {
+  width: 70%;
+}
+.small-btn {
+  padding: 1px;
+  font-size: 12px;
+}
+table#inventory_table {
+  padding-right: 30px;
+  border: none;
+}
+
+.dt-button, a.paginate_button {
+  padding: 2px 10px !important;
+  font-size: 12px !important;
+  margin: 0 0 10px 5px;
+  background: #009DA0;
+}
+div#inventory_table_filter input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-size: 11px;
+}
+.navbar-light {
+  padding-bottom: 0px;
+}
+.main-content .card {
+  margin-top: 0px;
+}
+.main-content {
+  min-height: 600px;
+}
+
+
+
+
+/* datashowing_on_datatable */
+.card .card-header {
+  padding-bottom: 0px;
+}
+#DataTable th {
+  font-weight: 500;
+  font-size: 12px;
+  padding: 8px;
+}
+#DataTable td {
+  font-size: 11px;
+  padding: 8px;
+}
+.dimg {
+  max-width: 100px;
+  max-height: 100px;
+}
+.custom-control{
+  margin-left: 10px;
+}
+.input-group{
+  margin-bottom: 0px!important;
+}
+.special_input {
+  width: 150px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+.btnaddnew {
+  float:right;
+}
