@@ -4,6 +4,7 @@ class Admin extends CI_Controller
 
     function __construct(){
         parent::__construct();
+        $this->load->library('session');
 
         if (empty($this->session->userdata('username'))) {
             redirect('login');

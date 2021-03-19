@@ -3,8 +3,6 @@
       cursor: pointer;
   }
 </style>
-<div class="main-content">
-  <div class="content-wrapper"><!-- Basic Elements start -->
     <section class="basic-elements">
     <div class="row">
       <div class="col-md-12">

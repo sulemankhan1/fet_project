@@ -65,6 +65,28 @@ $notifications = $this->notifications->getAllForUser();
                 </ul>
             </li>
 
+            <li class="has-sub nav-item <?=(@$active_menu=='add_notification' || @$active_menu=='view_notifications'?'open':'')?>"><a><i class="icon-speech"></i><span data-i18n="" class="menu-title"> Notifications</span></a>
+                <ul class="menu-content" style="">
+                  <li class="<?=(@$active_menu=='add_notification'?'active':'')?>"><a href="<?=site_url('new_notification')?>" class="menu-item"> Add Notification</a>
+                  </li>
+                </ul>
+                <ul class="menu-content" style="">
+                  <li class="<?=(@$active_menu=='view_notifications'?'active':'')?>"><a href="<?=site_url('view_notifications')?>" class="menu-item"> View Notifications</a>
+                  </li>
+                </ul>
+            </li>
+
+            <li class="has-sub nav-item <?=(@$active_menu=='add_timetable' || @$active_menu=='view_timetables'?'open':'')?>"><a><i class="icon-calendar"></i><span data-i18n="" class="menu-title"> Timetable</span></a>
+                <ul class="menu-content" style="">
+                  <li class="<?=(@$active_menu=='add_timetable'?'active':'')?>"><a href="<?=site_url('new_timetable')?>" class="menu-item"> Add Timetable</a>
+                  </li>
+                </ul>
+                <ul class="menu-content" style="">
+                  <li class="<?=(@$active_menu=='view_timetables'?'active':'')?>"><a href="<?=site_url('view_timetables')?>" class="menu-item"> View Timetables</a>
+                  </li>
+                </ul>
+            </li>
+
             <li class="has-sub nav-item <?=(@$active_menu=='setting' || @$active_menu=='registeration_email_temp'?'open':'')?>"><a><i class="ft-settings"></i><span data-i18n="" class="menu-title"> Settings</span></a>
                 <ul class="menu-content" style="">
                   <li class="<?=(@$active_menu=='setting'?'active':'')?>"><a href="<?=site_url('settings')?>" class="menu-item"> General Settings</a>
@@ -133,9 +155,9 @@ $notifications = $this->notifications->getAllForUser();
                 <p class="d-none">User Settings</p></a>
               <div ngbdropdownmenu="" aria-labelledby="dropdownBasic3" class="dropdown-menu dropdown-menu-right">
 
-                <a href="<?=site_url('edit_profile')?>" class="dropdown-item"><i class="icon-pencil mr-2"></i><span><?=__('edit_profile_txt')?></span></a>
-                <a href="<?=site_url('view_profile')?>" class="dropdown-item"><i class="ft-eye mr-2"></i><span><?=__('view_profile_txt')?></span></a>
-                <a href="<?=site_url('Auth/logout')?>" class="dropdown-item"><i class="ft-power mr-2"></i><span><?=__('logout_txt')?></span></a>
+                <a href="<?=site_url('edit_profile')?>" class="dropdown-item"><i class="icon-pencil mr-2"></i><span> Edit Profile</span></a>
+                <a href="<?=site_url('view_profile')?>" class="dropdown-item"><i class="ft-eye mr-2"></i><span> View Profile</span></a>
+                <a href="<?=site_url('Auth/logout')?>" class="dropdown-item"><i class="ft-power mr-2"></i><span> Logout</span></a>
 
               </div>
             </li>
@@ -147,3 +169,5 @@ $notifications = $this->notifications->getAllForUser();
   </nav>
 
   <!-- Navbar (Header) Ends-->
+  <div class="main-content">
+    <div class="content-wrapper"><!-- Basic Elements start -->

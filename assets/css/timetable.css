@@ -1,0 +1,57 @@
+.tt_timetable th {
+  font-size: 15px;
+}
+.tt_timetable td {
+  font-size: 13px;
+}
+.teacher-card {
+  display: inline-block;
+  border: 1px solid #ccc;
+  background: #f3f3f3;
+  margin: 5px;
+  line-height: 1.5;
+  margin: 5px;
+  padding: 5px;
+  box-shadow: 2px 2px #ccc;
+  cursor: pointer;
+
+}
+.teacher-card .tc-left {
+  display: inline-block;
+  float: left;
+  width: 35%;
+  padding: 5px;
+}
+.teacher-card .tc-right {
+  display: inline-block;
+  float: left;
+  width: 65%;
+}
+.teacher-card .tc-right .text-lg {
+  font-size: 14px;
+}
+.teacher-card .tc-right .text-sm {
+  font-size: 12px !important;
+}
+.teacher-card img, .teacher-card p  {
+  margin: 0;
+}
+.teacher-searchbar {
+  margin-bottom: 10px;
+}
+.teacher-searchbar input {
+  width: 80%;
+  display: inline-block;
+}
+.teacher-searchbar a {
+  display: inline-block;
+  font-size: 25px;
+}
+.padded  {
+  padding: 15px;
+}
+
+.teacher-cards-container {
+  height: 200px;
+  overflow-x: scroll;
+}

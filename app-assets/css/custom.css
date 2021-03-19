@@ -95,3 +95,6 @@ div#inventory_table_filter input {
 .btnaddnew {
   float:right;
 }
+.card-body {
+  padding: 20px 30px;
+}

@@ -12,7 +12,7 @@
 
     <meta name="author" content="Alphinex solutions">
 
-    <title><?=@($title) ? $title : "316 Startups"?></title>
+    <title><?=@($title) ? $title : "F.A.T System"?></title>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
 

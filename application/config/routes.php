@@ -58,9 +58,16 @@ $route['notification_settings'] = 'profile/notification_settings';
 //setting
 $route['settings'] = 'settings/index';
 $route['save_settings'] = 'settings/save_settings';
-$route['registeration_email_template'] = 'setting/registeration_email_template';
-$route['qr_setting'] = 'setting/qr_setting';
 
 
 // notifications
 $route['notifications'] = 'admin/show_all_notifications';
+$route['new_notification'] = 'Notification/new';
+$route['save_notification'] = 'Notification/save';
+$route['view_notifications'] = 'Notification/index';
+$route['edit_notification/(:any)'] = 'Notification/edit/$1';
+$route['delete_notification/(:any)'] = 'Notification/delete/$1';
+
+
+// timetable
+$route['new_timetable'] = 'Timetable/new';

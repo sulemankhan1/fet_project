@@ -155,25 +155,10 @@ class Profile extends CI_Controller {
       $data = [
         'title' => __('edit_profile_txt'),
         'edit' => $this->Users_model->getUser($id),
-        'colleges' => $this->bm->getAll('college', 'id', 'desc'),
         'notification_settings' => $this->bm->getByuserId('notification_settings', $id),
       ];
 
 
-
-      if ($this->session->userdata('role_id') != 1) {
-
-        $this->load->model('Roles_model');
-
-        $data['roles'] = $this->Roles_model->getRoles('', 2);
-
-        $data['departments'] = $this->bm->getWhereRows('departments', 'college_id', $data['edit']->college_id);
-
-        $data['labs'] = $this->bm->getWhereRows('labs', 'depart_id', $data['edit']->depart_id);
-
-        $data['programs'] = $this->bm->getWhereRows('departments_programs', 'depart_id', $data['edit']->depart_id);
-
-      }
 
       $this->load->view('header',$data);
       $this->load->view('sidebar');
