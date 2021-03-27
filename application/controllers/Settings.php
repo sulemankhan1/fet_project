@@ -14,10 +14,16 @@ class Settings extends CI_Controller {
     public function index() {
 
       $data = [
-        'title' => __('general_setting_txt'),
+        'title' => 'Settings',
         'active_menu' => 'settings',
-        'settings' => $this->bm->getById('settings', 1)
+        'logo' => $this->bm->getWhere('admin_panel_setting', 'name', 'LOGO'),
+        'sidebar_img' => $this->bm->getWhere('admin_panel_setting', 'name', 'SIDEBAR_IMG'),
+        'sidebar_color' => $this->bm->getWhere('admin_panel_setting', 'name', 'SIDEBAR_COLOR'),
+        'name' => $this->bm->getWhere('admin_panel_setting', 'name', 'NAME'),
+        'footer' => $this->bm->getWhere('admin_panel_setting', 'name', 'FOOTER'),
+        'sliders' => $this->bm->getAll('slider_setting', 'id', 'desc')
       ];
+
 
       $this->load->view('header',$data);
       $this->load->view('sidebar');
@@ -27,70 +33,221 @@ class Settings extends CI_Controller {
 
 
 
-    public function save_settings() {
+    public function save_settings() 
+    {
 
-      if($this->input->post()) {
+      $p = $this->input->post();
+      
+      $array['value'] = '';
 
-        //logo
-        $logo = $_FILES['logo'];
+      switch ($p['type']) {
 
-        //background-img
-        $sidebar_img = $_FILES['sidebar_img'];
+        case 'sidebar_logo':
+        
+          //sidebar_logo
+          $logo = $_FILES['logo'];
 
-        $name = $this->input->post('name', TRUE);
-        $about = $this->input->post('about', TRUE);
-        $terms = $this->input->post('terms', TRUE);
-        $footer = $this->input->post('footer', TRUE);
-        $department_email = $this->input->post('department_email', TRUE);
+          if($logo['name'] != "") {
+            $img = $this->bm->uploadFile($logo, 'uploads/sidebar_logo');
+            $array['value'] = $img;
+            $this->session->set_userdata('logo', $img);
+          }
 
-        $array = [];
+          if ($array['value'] != '') {
+            
+            $this->bm->updateRow('admin_panel_setting',$array,'name','LOGO');
+          
+          }
+          
+          break;
+          case 'sidebar_img':
+
+            //sidebar_img
+            if($p['sidebar_img'] != "") {
+              $sidebar_img_name = $this->bm->uploadFile($sidebar_img, 'uploads');
+              $array['value'] = $sidebar_img_name;
+              $this->session->set_userdata('sidebar_img', $sidebar_img_name);
+            }
+      
+            if ($array['value'] != '') {
+
+              $this->bm->updateRow('admin_panel_setting',$array,'name','SIDEBAR_IMG');
+
+            }
+
+          break;
+
+        case 'name':
+          
+          $array['value'] = $p['name'];
+
+          if ($array['value'] != '') {
+
+            $this->bm->updateRow('admin_panel_setting',$array,'name','NAME');
+
+            $this->session->set_userdata('footer', $p['name']);
+
+          }
+
+          break;
+        
+        case 'footer':
+
+          $array['value'] = $p['footer'];
+          
+          if ($array['value'] != '') {
+
+            $this->bm->updateRow('admin_panel_setting',$array,'name','FOOTER');
+
+            $this->session->set_userdata('footer', $p['footer']);
+
+          }
 
 
-        if($logo['name'] != "") {
-          $img = $this->bm->uploadFile($logo, 'uploads');
-          $array['logo'] = $img;
-          $this->session->set_userdata('logo', $img);
-        }
+          break;
 
-        if($sidebar_img['name'] != "") {
-          $sidebar_img_name = $this->bm->uploadFile($sidebar_img, 'uploads');
-          $array['sidebar_img'] = $sidebar_img_name;
-          $this->session->set_userdata('sidebar_img', $sidebar_img_name);
-        }
+        case 'slider':
+      
+          //slider_image
+          $slider_image = $_FILES['slider_image'];
 
-        // FOR THE PURPOSE TO SHOW ON ADMIN PANEL
-        $this->session->set_userdata('name', $name);
-        $this->session->set_userdata('about', $about);
-        $this->session->set_userdata('terms', $terms);
-        $this->session->set_userdata('footer', $footer);
-        $this->session->set_userdata('department_email', $department_email);
+          if($slider_image['name'] != "") {
+            $img = $this->bm->uploadFile($slider_image, 'uploads/slider_image');
+          }
 
-        $array['name'] = $name;
-        $array['about'] = $about;
-        $array['terms'] = $terms;
-        $array['footer'] = $footer;
-        $array['department_email'] = $department_email;
+          $arr = [
 
+            'image' => $img,
+            'title' => $p['title'],
+            'title_color' => $p['title_color'],
+            'title_link' => $p['title_link'],
+            'description' => $p['description'],
+            'description_color' => $p['description_color'],
+            'description_link' => $p['description_link']
 
-        $this->bm->updateRow('settings',$array, 'id', 1);
-        $this->session->set_flashdata(array('response' => 'success', 'msg' => 'Settings Updated Successfully'  ));
-        redirect('settings');
+          ];
+
+          $this->bm->insertRow('slider_setting',$arr);
+          
+          break;
+  
 
       }
+
+        $this->session->set_flashdata(array('response' => 'success', 'msg' => 'Setting Updated Successfully'  ));
+        redirect('settings');
 
     }
 
     public function update_sidebar_clr() {
 
+
       $sidebar_color = $this->input->post('sidebar_clr');
 
       $arr = [
-        'sidebar_color' => $sidebar_color
+        'value' => $sidebar_color
       ];
 
-      $this->bm->updateRow('setting',$arr, 'id', 1);
+      $this->bm->updateRow('admin_panel_setting',$arr, 'name', 'SIDEBAR_COLOR');
       $this->session->set_userdata('sidebar_color',$sidebar_color);
+
+    }
+
+    public function delete_setting($id,$type)
+    {
+
+      $id = hashids_decrypt($id);
+      
+      switch ($type) {
+        
+        case 'slider_setting':
+          
+          $this->bm->delete('slider_setting','id',$id);
+
+          $this->session->set_flashdata(array('response' => 'success', 'msg' => 'Slider Setting Deleted Successfully' ));
+          redirect('settings');
+
+          break;
+        
+      }
+      
+
+    }
+
+    public function edit_slider($id)
+    {
+
+      $data['edit'] = $this->bm->getWhere('slider_setting', 'id', $id);
+
+      $output = $this->load->view('settings/edit_slider',$data,true);
+
+      echo $output;
+
+    }
+
+    public function update_slider()
+    {
+
+      $p = $this->input->post();
+
+      $slider_image = $_FILES['slider_image'];
+
+      if($slider_image['name'] != "") {
+
+        $img = $this->bm->uploadFile($slider_image, 'uploads/slider_image');
+        $arr['image'] = $img;
+
+      }
+
+      $arr = [
+
+        'title' => $p['title'],
+        'title_color' => $p['title_color'],
+        'title_link' => $p['title_link'],
+        'description' => $p['description'],
+        'description_color' => $p['description_color'],
+        'description_link' => $p['description_link']
+
+      ];
+
+      $this->bm->updateRow('slider_setting',$arr,'id',$p['id']);
+
+      $this->session->set_flashdata(array('response' => 'success', 'msg' => 'Slider Setting Updated Successfully' ));
+      redirect('settings');
+
+    }
+
+    public function change_slider_status($id,$type)
+    {
+
+      $arr = [];
+
+      if ($type == 1) {
+
+        $arr = [
+          'active' => 0
+        ];
+
+      }
+      else{
+
+        $arr = [
+          'active' => 1
+        ];
+
+      }
+
+      $id = hashids_decrypt($id);
+      
+      $this->bm->updateRow('slider_setting',$arr,'id',$id);
+
+      $this->session->set_flashdata(array('response' => 'success', 'msg' => 'Slider Setting Updated Successfully' ));
+      redirect('settings');
+
     }
 
 
+
+
 }
+
