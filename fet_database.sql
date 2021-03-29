@@ -1,5 +1,5 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
@@ -8,7 +8,6 @@
 -- PHP Version: 7.1.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,8 +18,31 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `fet_database`
+-- Database: `fet`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_panel_setting`
+--
+
+CREATE TABLE `admin_panel_setting` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `value` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin_panel_setting`
+--
+
+INSERT INTO `admin_panel_setting` (`id`, `name`, `value`) VALUES
+(1, 'LOGO', '1737958500618456057logo.png'),
+(2, 'SIDEBAR_IMG', '1276140079pngtree-tech-interlaced-texture-texture-propaganda-background-image_214967.jpg'),
+(3, 'SIDEBAR_COLOR', 'man-of-steel'),
+(4, 'NAME', 'F.E.T'),
+(5, 'FOOTER', 'University Of Sindh');
 
 -- --------------------------------------------------------
 
@@ -347,10 +369,10 @@ CREATE TABLE `news_notifications` (
   `DEPT_ID` int(11) NOT NULL,
   `NOTIFY_TYPE_ID` int(11) NOT NULL,
   `NOTIFICATION_FOR` varchar(255) NOT NULL,
-  `TITLE` text,
-  `DESCRIPTION` longtext,
+  `TITLE` text DEFAULT NULL,
+  `DESCRIPTION` longtext DEFAULT NULL,
   `DATA_TIME` datetime DEFAULT NULL,
-  `IMAGE_PATH` text,
+  `IMAGE_PATH` text DEFAULT NULL,
   `PUBLISHER_ID` int(11) DEFAULT NULL,
   `USER_TYPE_ID` varchar(256) DEFAULT NULL,
   `PROG_ID` varchar(256) DEFAULT NULL,
@@ -369,7 +391,7 @@ CREATE TABLE `notifications` (
   `msg` text NOT NULL,
   `redirect_link` text NOT NULL,
   `is_seen` tinyint(1) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `datetime` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -437,7 +459,7 @@ CREATE TABLE `notification_settings` (
   `notf_accepted_usage_req` tinyint(1) NOT NULL,
   `notf_ret_usage_req` tinyint(1) NOT NULL,
   `email_notification` varchar(255) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT current_timestamp(),
   `notf_gen_chem_inv_req` tinyint(1) NOT NULL,
   `notf_acc_chem_inv_req` tinyint(1) NOT NULL,
   `notf_rej_chem_inv_req` tinyint(1) NOT NULL,
@@ -1033,6 +1055,32 @@ INSERT INTO `settings` (`id`, `logo`, `sidebar_img`, `sidebar_color`, `footer`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `slider_setting`
+--
+
+CREATE TABLE `slider_setting` (
+  `id` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `title` varchar(150) NOT NULL,
+  `title_color` varchar(50) DEFAULT NULL,
+  `title_link` varchar(255) DEFAULT NULL,
+  `description` varchar(255) NOT NULL,
+  `description_color` varchar(50) DEFAULT NULL,
+  `description_link` varchar(255) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `slider_setting`
+--
+
+INSERT INTO `slider_setting` (`id`, `image`, `title`, `title_color`, `title_link`, `description`, `description_color`, `description_link`, `active`) VALUES
+(1, '', 'title', '#614a8c', 'http://localhost/fet_project/settings', 'description', '#21ab9b', 'http://localhost/fet_project/settings', 1),
+(2, '622989903two_auth.jpeg', 'title1', '#e8e8e8', 'http://localhost/fet_project/settings', 'description1', '#e3e3e3', '212', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -1169,6 +1217,12 @@ INSERT INTO `users_info` (`info_id`, `user_id`, `college_id`, `depart_id`, `depa
 --
 
 --
+-- Indexes for table `admin_panel_setting`
+--
+ALTER TABLE `admin_panel_setting`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `department`
 --
 ALTER TABLE `department`
@@ -1232,6 +1286,12 @@ ALTER TABLE `settings`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `slider_setting`
+--
+ALTER TABLE `slider_setting`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -1246,6 +1306,12 @@ ALTER TABLE `users_info`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `admin_panel_setting`
+--
+ALTER TABLE `admin_panel_setting`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `department`
@@ -1306,6 +1372,12 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `settings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `slider_setting`
+--
+ALTER TABLE `slider_setting`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
