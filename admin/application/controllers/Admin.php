@@ -9,6 +9,7 @@ class Admin extends CI_Controller
         if (empty($this->session->userdata('username'))) {
             redirect('login');
         }
+        // updated
     }
 
     public function dashboard()
