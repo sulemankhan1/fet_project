@@ -5,6 +5,9 @@
     <div class="col-sm-12">
       <div class="card">
         <div class="card-header">
+          <a href="#" class="btn btn-success pull-right"><i class="fa fa-save"></i> Save</a>
+          <a href="#" class="btn btn-secondary pull-right mr-2"><i class="icon-drawer"></i> Save as Draft</a>
+          <a href="#" class="btn btn-link  mr-2"><i class="ft-arrow-left"></i> Go Back</a>
           <h4 class="card-title">Create New Timetable</h4>
         </div>
         <div class="card-content">
@@ -67,6 +70,7 @@
                   <input type="radio" name="tt_for" value="Both" id="tt_both"> <label for="tt_both">Both</label>
                 </div>
               </div>
+
             </div>
 
 
@@ -77,7 +81,7 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-8">
+    <div class="col-sm-12">
       <div class="card">
 
         <div class="card-content">
@@ -96,53 +100,53 @@
                 </tr>
                 <tr>
                   <th>Monday</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
                 </tr>
                 <tr>
                   <th>Tuesday</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
                 </tr>
                 <tr>
                   <th>Wednesday</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
                 </tr>
                 <tr>
                   <th>Thursday</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
                 </tr>
                 <tr>
                   <th>Friday</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
+                  <td class="addable droppable"></td>
                 </tr>
               </table>
             </div>
@@ -152,106 +156,171 @@
     </div>
     <div class="col-sm-4">
       <div class="card">
-
         <div class="card-content">
-          <div class="card-body">
+          <div class="card-body bordered">
             <div class="">
               <div class="teacher-searchbar col-md-12">
-                <p class="">Drag & Drop Teachers from here</p>
+                <p class="">Drag & Drop <strong>Teachers</strong> from here</p>
                 <input type="text" placeholder="Search" class="form-control round">
                 <a href="#" class="btn-default"><div class="form-control-position"><i class="ft-search"></i></div></a>
               </div>
               <div class="teacher-cards-container">
-                <div class="teacher-card">
-                  <div class="tc-left">
+                <div class="teacher-card draggable" draggable="true" >
+                  <!-- <div class="tc-left">
                     <img src="app-assets/img/portrait/small/avatar-s-3.png" class="rounded-circle width-50 mr-2">
-                  </div>
-                  <div class="tc-right">
-                    <p class="text-lg">Sir Kamran Taj</p>
-                    <p class="text-sm badge badge-primary">Professor</p>
-                  </div>
+                  </div> -->
+                  <!-- <div class="tc-right"> -->
+                    <p class="text-lg teacher-name">Sir Kamran Taj</p>
+                    <!-- <p class="text-sm badge badge-primary">Professor</p> -->
+                  <!-- </div> -->
                 </div>
-                <div class="teacher-card">
-                  <div class="tc-left">
-                    <img src="app-assets/img/portrait/small/avatar-s-3.png" class="rounded-circle width-50 mr-2">
-                  </div>
-                  <div class="tc-right">
-                    <p class="text-lg">Sir Kamran Taj</p>
-                    <p class="text-sm badge badge-primary">Professor</p>
-                  </div>
+                <div class="teacher-card draggable" draggable="true" >
+                  <p class="text-lg teacher-name">Sir Kamran Taj</p>
                 </div>
-                <div class="teacher-card">
-                  <div class="tc-left">
-                    <img src="app-assets/img/portrait/small/avatar-s-3.png" class="rounded-circle width-50 mr-2">
-                  </div>
-                  <div class="tc-right">
-                    <p class="text-lg">Sir Kamran Taj</p>
-                    <p class="text-sm badge badge-primary">Professor</p>
-                  </div>
+                <div class="teacher-card draggable" draggable="true" >
+                  <p class="text-lg teacher-name">Sir Kamran Taj</p>
                 </div>
-                <div class="teacher-card">
-                  <div class="tc-left">
-                    <img src="app-assets/img/portrait/small/avatar-s-3.png" class="rounded-circle width-50 mr-2">
-                  </div>
-                  <div class="tc-right">
-                    <p class="text-lg">Sir Kamran Taj</p>
-                    <p class="text-sm badge badge-primary">Professor</p>
-                  </div>
+                <div class="teacher-card draggable" draggable="true" >
+                  <p class="text-lg teacher-name">Sir Kamran Taj</p>
                 </div>
-                <div class="teacher-card">
-                  <div class="tc-left">
-                    <img src="app-assets/img/portrait/small/avatar-s-3.png" class="rounded-circle width-50 mr-2">
-                  </div>
-                  <div class="tc-right">
-                    <p class="text-lg">Sir Kamran Taj</p>
-                    <p class="text-sm badge badge-primary">Professor</p>
-                  </div>
+                <div class="teacher-card draggable" draggable="true" >
+                  <p class="text-lg teacher-name">Sir Kamran Taj</p>
                 </div>
-                <div class="teacher-card">
-                  <div class="tc-left">
-                    <img src="app-assets/img/portrait/small/avatar-s-3.png" class="rounded-circle width-50 mr-2">
-                  </div>
-                  <div class="tc-right">
-                    <p class="text-lg">Sir Kamran Taj</p>
-                    <p class="text-sm badge badge-primary">Professor</p>
-                  </div>
+                <div class="teacher-card draggable" draggable="true" >
+                  <p class="text-lg teacher-name">Sir Kamran Taj</p>
                 </div>
-                <div class="teacher-card">
-                  <div class="tc-left">
-                    <img src="app-assets/img/portrait/small/avatar-s-3.png" class="rounded-circle width-50 mr-2">
-                  </div>
-                  <div class="tc-right">
-                    <p class="text-lg">Sir Kamran Taj</p>
-                    <p class="text-sm badge badge-secondary">Assistant Prof</p>
-                  </div>
+                <div class="teacher-card draggable" draggable="true" >
+                  <p class="text-lg teacher-name">Sir Kamran Taj</p>
                 </div>
-                <div class="teacher-card">
-                  <div class="tc-left">
-                    <img src="app-assets/img/portrait/small/avatar-s-3.png" class="rounded-circle width-50 mr-2">
-                  </div>
-                  <div class="tc-right">
-                    <p class="text-lg">Maam Arifa bhutto</p>
-                    <p class="text-sm badge badge-primary">Professor</p>
-                  </div>
+                <div class="teacher-card draggable" draggable="true" >
+                  <p class="text-lg teacher-name">Sir Kamran Taj</p>
                 </div>
-                <div class="teacher-card">
-                  <div class="tc-left">
-                    <img src="app-assets/img/portrait/small/avatar-s-3.png" class="rounded-circle width-50 mr-2">
-                  </div>
-                  <div class="tc-right">
-                    <p class="text-lg">Maam Arifa bhutto</p>
-                    <p class="text-sm badge badge-primary">Professor</p>
-                  </div>
+                <div class="teacher-card draggable" draggable="true" >
+                  <p class="text-lg teacher-name">Sir Kamran Taj</p>
                 </div>
-                <div class="teacher-card">
-                  <div class="tc-left">
-                    <img src="app-assets/img/portrait/small/avatar-s-3.png" class="rounded-circle width-50 mr-2">
-                  </div>
-                  <div class="tc-right">
-                    <p class="text-lg">Maam Arifa bhutto</p>
-                    <p class="text-sm badge badge-primary">Professor</p>
-                  </div>
+                <div class="teacher-card draggable" draggable="true" >
+                  <p class="text-lg teacher-name">Sir Kamran Taj</p>
                 </div>
+                <div class="teacher-card draggable" draggable="true" >
+                  <p class="text-lg teacher-name">Sir Kamran Taj</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body bordered">
+            <div class="">
+              <div class="teacher-searchbar col-md-12">
+                <p class="">Drag & Drop <strong>Subjects</strong> from here</p>
+                <input type="text" placeholder="Search" class="form-control round">
+                <a href="#" class="btn-default"><div class="form-control-position"><i class="ft-search"></i></div></a>
+              </div>
+              <div class="teacher-cards-container">
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">SENG-616</p>
+                  <p class="text-sm badge badge-default">Distributed Computing</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">SENG-616</p>
+                  <p class="text-sm badge badge-default">Distributed Computing</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">SENG-616</p>
+                  <p class="text-sm badge badge-default">Distributed Computing</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">SENG-616</p>
+                  <p class="text-sm badge badge-default">Distributed Computing</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">SENG-616</p>
+                  <p class="text-sm badge badge-default">Distributed Computing</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">SENG-616</p>
+                  <p class="text-sm badge badge-default">Distributed Computing</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">SENG-616</p>
+                  <p class="text-sm badge badge-default">Distributed Computing</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">SENG-616</p>
+                  <p class="text-sm badge badge-default">Distributed Computing</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">SENG-616</p>
+                  <p class="text-sm badge badge-default">Distributed Computing</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">SENG-616</p>
+                  <p class="text-sm badge badge-default">Distributed Computing</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">SENG-616</p>
+                  <p class="text-sm badge badge-default">Distributed Computing</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body bordered">
+            <div class="">
+              <div class="teacher-searchbar col-md-12">
+                <p class="">Drag & Drop <strong>Class Rooms</strong> from here</p>
+                <input type="text" placeholder="Search" class="form-control round">
+                <a href="#" class="btn-default"><div class="form-control-position"><i class="ft-search"></i></div></a>
+              </div>
+              <div class="teacher-cards-container">
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">Room # 1</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">Computer Lab I</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">Electronics Lab I</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">Electronics Lab I</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">Electronics Lab I</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">Electronics Lab I</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">Electronics Lab I</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">Electronics Lab I</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">Electronics Lab I</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">Electronics Lab I</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">Electronics Lab I</p>
+                </div>
+                <div class="teacher-card draggable" draggable="true">
+                  <p class="text-lg">Electronics Lab I</p>
+                </div>
+
               </div>
             </div>
           </div>
@@ -261,3 +330,4 @@
   </div>
 </section>
 <!--Basic Table Ends-->
+<script src="<?=base_url('assets/js/timetable.js')?>" charset="utf-8"></script>

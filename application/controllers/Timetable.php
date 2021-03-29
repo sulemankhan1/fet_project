@@ -30,7 +30,8 @@ class Timetable extends CI_Controller
 
       $data = array(
         'title' => 'Add New Timetable',
-        'active_menu' => 'add_timetable',
+        // 'active_menu' => 'add_timetable',
+        'menu_collapsed' => true,
       );
 
       $this->load->view('header',$data);

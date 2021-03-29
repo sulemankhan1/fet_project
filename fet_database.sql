@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2021 at 02:10 AM
+-- Generation Time: Mar 29, 2021 at 11:40 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.28
 
@@ -1269,7 +1269,7 @@ ALTER TABLE `faculty`
 -- AUTO_INCREMENT for table `news_notifications`
 --
 ALTER TABLE `news_notifications`
-  MODIFY `NOTIFICATION_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `NOTIFICATION_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `notifications`

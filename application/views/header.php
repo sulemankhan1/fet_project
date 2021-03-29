@@ -104,5 +104,5 @@
   <body data-col="2-columns" class=" 2-columns ">
 
 
-    <div class="wrapper">
+    <div class="wrapper <?=@($menu_collapsed && $menu_collapsed == true)?'nav-collapsed menu-collapsed':'' ?>">
 <div class="main-content">
