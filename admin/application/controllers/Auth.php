@@ -33,13 +33,14 @@ class Auth extends CI_Controller {
 		$username = strip_tags($this->input->post('username'));
 		$password = strip_tags($this->input->post('password'));
 
+
 		$data = array(
 			'username' =>$username,
 			'password' =>$password
 		);
 
 		$res = $this->Auth_model->login_verify($data);
-
+		
 		// get and update settings
 		$settings = $this->Basic_model->getById('settings', 1);
 
