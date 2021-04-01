@@ -113,6 +113,10 @@ $notifications = $this->notifications->getAllForUser();
       <div class="navbar-container">
         <div id="navbarSupportedContent" class="collapse navbar-collapse">
           <ul class="navbar-nav">
+
+            <li class="dropdown nav-item">
+              <a href="../" class="btn btn-default" target="_blank">Open Site <i class="icon-action-redo"></i> </a>
+            </li>
             <li class="dropdown nav-item">
                <a id="dropdownBasic2" href="#" data-toggle="dropdown" class="nav-link position-relative dropdown-toggle">
                  <i class="ft-bell font-medium-3 blue-grey darken-4"></i>

@@ -68,7 +68,7 @@
             <ul class="list-border">
               <li><a href="javascript:void(0)">FAQ</a></li>
               <li><a href="javascript:void(0)">Sitemap</a></li>
-              <li><a href="javascript:void(0)">Policy</a></li>
+              <li><a href="admin">Admin Login</a></li>
             </ul>
           </div>
         </div>
