@@ -11,7 +11,6 @@ class Notifications_model extends CI_Model
     $this->db->join('users u', 'n.PUBLISHER_ID = u.user_id');
     $this->db->join('notification_type nt', 'n.NOTIFY_TYPE_ID = nt.NOTIFY_TYPE_ID');
     $this->db->order_by('n.NOTIFICATION_ID', 'desc');
-
     return $this->db->get()->result();
 
   }

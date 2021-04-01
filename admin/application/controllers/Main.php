@@ -7,10 +7,9 @@ class Main extends CI_Controller
     function __construct() {
       parent::__construct();
 
-
       // validate user logged in
-      if ($this->session->userdata('USER_ID') == "") {
-        redirect('login');
+      if (empty($this->session->userdata('username'))) {
+          redirect('login');
       }
     }
 

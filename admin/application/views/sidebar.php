@@ -65,7 +65,7 @@ $notifications = $this->notifications->getAllForUser();
                 </ul>
             </li>
 
-            <li class="has-sub nav-item <?=(@$active_menu=='add_notification' || @$active_menu=='view_notifications'?'open':'')?>"><a><i class="icon-speech"></i><span data-i18n="" class="menu-title"> Notifications</span></a>
+            <li class="has-sub nav-item <?=(@$active_menu=='add_notification' || @$active_menu=='view_notifications'?'open':'')?>"><a><i class="icon-speech"></i><span data-i18n="" class="menu-title"> News / Notifications</span></a>
                 <ul class="menu-content" style="">
                   <li class="<?=(@$active_menu=='add_notification'?'active':'')?>"><a href="<?=site_url('new_notification')?>" class="menu-item"> Add Notification</a>
                   </li>
@@ -116,9 +116,6 @@ $notifications = $this->notifications->getAllForUser();
 
             <li class="dropdown nav-item">
               <a href="../" class="btn btn-default" target="_blank">Open Site <i class="icon-action-redo"></i> </a>
-            </li>
-            <li class="dropdown nav-item">
-              <a href="../" class="btn btn-link" target="_blank">Open Site <i class="fa fa-external-link"></i> </a>
             </li>
             <li class="dropdown nav-item">
                <a id="dropdownBasic2" href="#" data-toggle="dropdown" class="nav-link position-relative dropdown-toggle">
