@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2021 at 01:41 PM
+-- Generation Time: Apr 01, 2021 at 05:20 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.28
 
@@ -367,7 +367,7 @@ INSERT INTO `faculty` (`FAC_ID`, `FAC_NAME`, `REMARKS`) VALUES
 CREATE TABLE `news_notifications` (
   `NOTIFICATION_ID` int(11) NOT NULL,
   `FAC_ID` int(11) NOT NULL,
-  `DEPT_ID` int(11) NOT NULL,
+  `DEPT_ID` varchar(255) NOT NULL,
   `NOTIFY_TYPE_ID` int(11) NOT NULL,
   `NOTIFICATION_FOR` varchar(255) NOT NULL,
   `TITLE` text,
@@ -385,9 +385,9 @@ CREATE TABLE `news_notifications` (
 --
 
 INSERT INTO `news_notifications` (`NOTIFICATION_ID`, `FAC_ID`, `DEPT_ID`, `NOTIFY_TYPE_ID`, `NOTIFICATION_FOR`, `TITLE`, `DESCRIPTION`, `DATA_TIME`, `IMAGE_PATH`, `PUBLISHER_ID`, `USER_TYPE_ID`, `PROG_ID`, `REMARKS`) VALUES
-(1, 9, 57, 1, 'specific_faculty', 'asdfasdfasdf', '<p><strong>asdfasdfasdf</strong></p>\r\n', NULL, '', 1, NULL, '62', 'asdfasdfasdf'),
-(2, 0, 0, 2, 'everyone', 'asdfasd', '<p>asdfasdasdfasdf</p>\r\n', NULL, 'uploads/notifications_images/128057981_MG_0036.JPG', 1, NULL, NULL, 'asdfasdf'),
-(3, 0, 0, 2, 'everyone', 'asdfasd', '<p>asdfasdasdfasdf</p>\r\n', NULL, 'uploads/notifications_images/1487831377_MG_0036.JPG', 1, NULL, NULL, 'asdfasdf');
+(1, 9, '57', 1, 'specific_faculty', 'asdfasdfasdf', '<p><strong>asdfasdfasdf</strong></p>\r\n', NULL, '', 1, NULL, '62', 'asdfasdfasdf'),
+(2, 0, '0', 2, 'everyone', 'asdfasd', '<p>asdfasdasdfasdf</p>\r\n', NULL, 'uploads/notifications_images/128057981_MG_0036.JPG', 1, NULL, NULL, 'asdfasdf'),
+(3, 5, '10', 1, 'specific_faculty', 'asdfasd', '<p>asdfasdasdfasdf</p>\r\n', NULL, 'uploads/notifications_images/1487831377_MG_0036.JPG', 1, NULL, 'all', 'asdfasdf');
 
 -- --------------------------------------------------------
 
