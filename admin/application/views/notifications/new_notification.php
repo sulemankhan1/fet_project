@@ -126,7 +126,45 @@
                             </div>
                           </div>
                           <div class="col-md-12" id="choose_options">
-
+                            <?php if(@$record->NOTIFICATION_FOR == "specific_faculty") { ?>
+                              <div>
+                                <div class="row">
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label for="department"> Select Faculty *</label>
+                                      <select class="form-control" name="FAC_ID" id="department" required>
+                                        <option value="all">All Faculties</option>
+                                        <?php foreach ($faculties as $fac): ?>
+                                          <option value="<?=$fac->FAC_ID?>" <?=@$record->FAC_ID == $fac->FAC_ID?"selected":"" ?>><?=$fac->FAC_NAME?></option>
+                                        <?php endforeach; ?>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label for="department"> Select Department *</label>
+                                      <select class="form-control" name="DEPT_ID" id="department" required>
+                                        <option value="all">All Departments</option>
+                                        <?php if(@$record->DEPT_ID) { ?>
+                                          <option value="<?=@$record->DEPT_ID?>" selected><?=@$record->DEPT_NAME?></option>
+                                        <?php } ?>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label for="program"> Select Program *</label>
+                                      <select class="form-control" name="PROG_ID" id="program" required>
+                                        <option value="all">All Programs</option>
+                                        <?php if(@$record->PROG_ID) { ?>
+                                          <option value="<?=@$record->PROG_ID?>" selected><?=@$record->PROGRAM_TITLE?></option>
+                                        <?php } ?>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            <?php } ?>
                           </div>
                         </div>
 
@@ -193,26 +231,63 @@
     </div>
   </div>
 </div>
+<input type="hidden" name="FAC_ID" value="<?=@$record->FAC_ID?>">
+<input type="hidden" name="DEPT_ID" value="<?=@$record->DEPT_ID?>">
+<input type="hidden" name="PROG_ID" value="<?=@$record->PROG_ID?>">
 <script type="text/javascript">
+
+// ONLY FOR EDIT
+$('document').ready(function() {
+  // for edit take faculty id
+    let fac_id = $('input[name=FAC_ID]').val();
+    let dept_id = $('input[name=DEPT_ID]').val();
+    let prog_id = $('input[name=PROG_ID]').val();
+
+    // if there is faculty id then fetch departments for that faculty
+    if(fac_id) {
+
+      getDepartByFacId(fac_id, dept_id);
+      // fetch programs for that department
+      if(dept_id) {
+        console.log(prog_id);
+        getProgramsByDeptId(dept_id, prog_id);
+      }
+    }
+})
 $(document).on('change','select[name=FAC_ID]',function(){
   let id = $(this).val();
+  // empty department and program dropdowns first
+  $('select[name=DEPT_ID]').html('');
+  $('select[name=PROG_ID]').html('');
+
+  getDepartByFacId(id);
+})
+function getDepartByFacId(id, selected_depart_id="") {
   $.ajax({
-    url : '<?=site_url('main/getDepartByFacId')?>/'+id,
+    url : '<?=site_url('main/getDepartByFacId')?>/'+id+'/'+selected_depart_id,
     success :function(data){
         $('select[name=DEPT_ID]').html(data);
     }
   })
-})
+}
 $(document).on('change','select[name=DEPT_ID]',function(){
   let id = $(this).val();
+
+  // empty program dropdown
+  $('select[name=PROG_ID]').html('');
+  getProgramsByDeptId(id);
+})
+
+function getProgramsByDeptId(id, selected_program_id="") {
   $.ajax({
-    url : '<?=site_url('main/getProgramsByDeptId')?>/'+id,
+    url : '<?=site_url('main/getProgramsByDeptId')?>/'+id+'/'+selected_program_id,
     success :function(data){
         $('select[name=PROG_ID]').html(data);
     }
   })
-})
-$(document).on('change','input[name=NOTIFICATION_FOR]',function(){
+}
+
+$(document).on('change','input[name=NOTIFICATION_FOR]',function() {
   let value = $(this).val();
   let options = $('#extra_options').html();
 
@@ -222,5 +297,6 @@ $(document).on('change','input[name=NOTIFICATION_FOR]',function(){
     $("#choose_options").html('');
   }
 })
+
 CKEDITOR.replace( 'DESCRIPTION' );
 </script>

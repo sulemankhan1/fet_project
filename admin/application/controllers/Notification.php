@@ -92,14 +92,22 @@ class Notification extends CI_Controller
 
     public function edit($id) {
       $id = hashids_decrypt($id);
+      // get notification record
+      $record = $this->nm->getNotification($id);
+
+      // get departments for selected faculty
+
+
+      // get program for selected department
 
       $data = array(
         'title' => 'Add New Notification',
         'active_menu' => 'add_notification',
         'faculties' => $this->bm->getAll('faculty', 'FAC_ID'),
         'notification_types' => $this->bm->getAll('notification_type', 'NOTIFY_TYPE_ID', 'ASC'),
-        'record' => $this->nm->getNotification($id),
+        'record' => $record,
       );
+
 
       $this->load->view('header',$data);
       $this->load->view('sidebar');
