@@ -1,0 +1,31 @@
+.shadowed {
+  box-shadow: 0 0 4px 1px rgba(0,0,0,0.1);
+}
+.teacher-subject-list {
+  list-style-type: circle;
+}
+.teacher-subject-list li {
+  display: inline-block;
+  width: 50%;
+  float: left;
+}
+.barr {
+  display: block;
+  margin: 5px;
+  /* border: 1px solid #333; */
+  padding: 0px;
+}
+.barr-left {
+  display: inline-block;
+  /* background: #333; */
+  width: 28%;
+  /* float: left; */
+  /* color: #fff; */
+}
+.barr-right {
+  display: inline-block;
+  width: 70%;
+  font-size: 11px;
+  text-align: left
+  /* float: left; */
+}

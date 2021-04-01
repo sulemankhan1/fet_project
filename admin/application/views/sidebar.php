@@ -118,6 +118,9 @@ $notifications = $this->notifications->getAllForUser();
               <a href="../" class="btn btn-default" target="_blank">Open Site <i class="icon-action-redo"></i> </a>
             </li>
             <li class="dropdown nav-item">
+              <a href="../" class="btn btn-link" target="_blank">Open Site <i class="fa fa-external-link"></i> </a>
+            </li>
+            <li class="dropdown nav-item">
                <a id="dropdownBasic2" href="#" data-toggle="dropdown" class="nav-link position-relative dropdown-toggle">
                  <i class="ft-bell font-medium-3 blue-grey darken-4"></i>
                  <?php  if(count($notifications) > 0) { ?>

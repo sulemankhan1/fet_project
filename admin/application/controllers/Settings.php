@@ -5,9 +5,9 @@ class Settings extends CI_Controller {
     function __construct() {
         parent::__construct();
 
-        if (empty($this->session->userdata('username'))) {
-            redirect('login');
-        }
+        // if (empty($this->session->userdata('username'))) {
+        //     redirect('login');
+        // }
 
     }
 
@@ -42,7 +42,7 @@ class Settings extends CI_Controller {
 
       switch ($p['type']) {
 
-        case 'sidebar_logo':
+        case 'general_setting':
         
           //sidebar_logo
           $logo = $_FILES['logo'];
@@ -58,26 +58,19 @@ class Settings extends CI_Controller {
             $this->bm->updateRow('admin_panel_setting',$array,'name','LOGO');
           
           }
-          
-          break;
-          case 'sidebar_img':
 
-            //sidebar_img
-            if($p['sidebar_img'] != "") {
-              $sidebar_img_name = $this->bm->uploadFile($sidebar_img, 'uploads');
-              $array['value'] = $sidebar_img_name;
-              $this->session->set_userdata('sidebar_img', $sidebar_img_name);
-            }
-      
-            if ($array['value'] != '') {
+          //sidebar_img
+          if($p['sidebar_img'] != "") {
+            $sidebar_img_name = $this->bm->uploadFile($sidebar_img, 'uploads');
+            $array['value'] = $sidebar_img_name;
+            $this->session->set_userdata('sidebar_img', $sidebar_img_name);
+          }
+    
+          if ($array['value'] != '') {
 
-              $this->bm->updateRow('admin_panel_setting',$array,'name','SIDEBAR_IMG');
+            $this->bm->updateRow('admin_panel_setting',$array,'name','SIDEBAR_IMG');
 
-            }
-
-          break;
-
-        case 'name':
+          }
           
           $array['value'] = $p['name'];
 
@@ -89,10 +82,6 @@ class Settings extends CI_Controller {
 
           }
 
-          break;
-        
-        case 'footer':
-
           $array['value'] = $p['footer'];
           
           if ($array['value'] != '') {
@@ -102,33 +91,38 @@ class Settings extends CI_Controller {
             $this->session->set_userdata('footer', $p['footer']);
 
           }
-
-
+          
           break;
 
         case 'slider':
       
           //slider_image
           $slider_image = $_FILES['slider_image'];
+          
+          $img = $this->bm->uploadMultiFiles($slider_image, 'uploads/slider_image');
+          
+          if (count($p['title']) > 0) {
+            
+            foreach ($p['title'] as $key => $v) {
+                
+                $arr[] = [
+                
+                'image' => $img[$key],
+                'title' => $p['title'][$key],
+                'title_color' => $p['title_color'][$key],
+                'title_link' => $p['title_link'][$key],
+                'description' => $p['description'][$key],
+                'description_color' => $p['description_color'][$key],
+                'description_link' => $p['description_link'][$key]
+                
+              ];
+              
+            }
 
-          if($slider_image['name'] != "") {
-            $img = $this->bm->uploadFile($slider_image, 'uploads/slider_image');
+            $this->bm->insertRows('slider_setting',$arr);
+
           }
 
-          $arr = [
-
-            'image' => $img,
-            'title' => $p['title'],
-            'title_color' => $p['title_color'],
-            'title_link' => $p['title_link'],
-            'description' => $p['description'],
-            'description_color' => $p['description_color'],
-            'description_link' => $p['description_link']
-
-          ];
-
-          $this->bm->insertRow('slider_setting',$arr);
-          
           break;
   
 
@@ -244,6 +238,13 @@ class Settings extends CI_Controller {
       $this->session->set_flashdata(array('response' => 'success', 'msg' => 'Slider Setting Updated Successfully' ));
       redirect('settings');
 
+    }
+
+    function get_sliders()
+    {
+        $data['sliders'] = $this->bm->getAll('slider_setting','id','desc');
+
+        echo $this->load->view('settings/sliders',$data,true);
     }
 
 
