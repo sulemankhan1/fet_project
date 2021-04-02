@@ -12,7 +12,6 @@ class Notification extends CI_Controller
       if (empty($this->session->userdata('username'))) {
           redirect('login');
       }
-
     }
 
     public function index() {
@@ -22,7 +21,6 @@ class Notification extends CI_Controller
         'active_menu' => 'notifications',
         'notifications' => $this->nm->getNotifications(),
       );
-
 
       $this->load->view('header',$data);
       $this->load->view('sidebar');
@@ -73,7 +71,7 @@ class Notification extends CI_Controller
 
 
         $data['IMAGE_PATH'] = $image_path;
-        $data['PUBLISHER_ID'] = $this->session->userdata('user_id');
+        $data['PUBLISHER_ID'] = $this->session->userdata('USER_ID');
 
         if($data['NOTIFICATION_ID'] == "") {
           $this->bm->insertRow('news_notifications', $data);
@@ -85,6 +83,7 @@ class Notification extends CI_Controller
           $msg = 'Notification Updated Successfully';
         }
 
+
         $this->session->set_flashdata(array('type' => 'success', 'msg' => $msg));
     		redirect('view_notifications');
       }
@@ -92,22 +91,14 @@ class Notification extends CI_Controller
 
     public function edit($id) {
       $id = hashids_decrypt($id);
-      // get notification record
-      $record = $this->nm->getNotification($id);
-
-      // get departments for selected faculty
-
-
-      // get program for selected department
 
       $data = array(
         'title' => 'Add New Notification',
         'active_menu' => 'add_notification',
         'faculties' => $this->bm->getAll('faculty', 'FAC_ID'),
         'notification_types' => $this->bm->getAll('notification_type', 'NOTIFY_TYPE_ID', 'ASC'),
-        'record' => $record,
+        'record' => $this->nm->getNotification($id),
       );
-
 
       $this->load->view('header',$data);
       $this->load->view('sidebar');

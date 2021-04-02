@@ -51,7 +51,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url','form','file','custom_helper','hashids_helper','html');
+$autoload['helper'] = array('url','form','file','custom_helper','hashids_helper','html', '__');
 
 /*
 | -------------------------------------------------------------------

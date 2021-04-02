@@ -9,7 +9,6 @@ class Auth extends CI_Controller {
         parent::__construct();
 
         $this->load->model('Auth_model');
-       $this->load->model('Basic_model');
 
   }
 
@@ -21,7 +20,7 @@ class Auth extends CI_Controller {
 
 		}
 
-		$data['settings'] = $this->Basic_model->getById('settings',1);
+		$data['logo'] = $this->bm->getWhere('admin_panel_setting', 'name', 'LOGO');
 
 		$this->load->view('login',$data);
 
@@ -30,44 +29,30 @@ class Auth extends CI_Controller {
 	public function login()
 	{
 
-		$username = strip_tags($this->input->post('username'));
-		$password = strip_tags($this->input->post('password'));
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
 
 
-		$data = array(
-			'username' =>$username,
-			'password' =>$password
-		);
+		$data = [
+			'username' => $username,
+			'password' => $password
+		];
 
 		$res = $this->Auth_model->login_verify($data);
-		
+
 		// get and update settings
 		$settings = $this->Basic_model->getById('settings', 1);
 
 			if ($res['valid']) {
-				$user_data = array(
 
-					'user_id' => $res['user_id'] ,
-					'user_img' => $res['user_img'] ,
-					'username' => $res['username'],
-					'role_id' => $res['role_id'],
-					'role_name' => $res['role_name'],
+				$user_data = [
 
-					//setting
-					'logo' => $settings->logo,
-					'sidebar_img' => $settings->sidebar_img,
-					'sidebar_color' => $settings->sidebar_color,
-					'name' => $settings->name,
-					'about' => $settings->about,
-					'terms' => $settings->terms,
-					'footer' => $settings->footer,
-					'email' => $settings->email
-				);
+					'user_id' => $res['user_data']->id,
+					'user_img' => $res['user_data']->image ,
+					'username' => $res['user_data']->username
+				];				
 
-
-
-
-				 if(empty($user_data['username'])) {
+				 if(empty($res['user_data']->username)) {
 					 $this->session->set_flashdata('alert_msg', array('failure', 'in', "You are not authorized to login please ask your admin"));
 									 redirect('auth');
 				 }
@@ -94,113 +79,137 @@ class Auth extends CI_Controller {
 	public function forget_password_email()
 	{
 
-			$data['setting'] = $this->Basic_model->getById('setting',1);
+		$data['logo'] = $this->bm->getWhere('admin_panel_setting', 'name', 'LOGO');
 
-			$this->load->view('forgetpassword_email',$data);
+		$this->load->view('forgetpassword_email',$data);
 
 	}
 
-	public function is_university_email_valid()
+	public function is_email_valid()
 	{
 
 		$user_email = $this->input->post('email');
 
-		$data = $this->Auth_model->is_university_email_valid($user_email);
+		$data = $this->Auth_model->is_email_valid($user_email);
 
 			if ($data['valid']) {
 
+				$user = $data['user_data'];
+
 				$token = rand(10000,99999);
 
-				$dateTime = date('Y-m-d h:i:s');
-
-				$this->Basic_model->updateRow('users',['token' => $token,'token_dateTime' => $dateTime],'user_id',$data['user_id']);
-
-				$settings = $this->Basic_model->getById('setting',1);
-
-				$email['setting_data'] = $settings;
-
-				$email['title'] = 'Forget Password';
-
+				
 				$token = hashids_encrypt($token);
 
-				$email['msg'] =  'Hi,'.$data['username'].'<br>To change your password click below:<br><a href="'.base_url('change_password/'.$token).'">Change Password</a>';
-				// $email['msg'] =  'Hello';
+				$mail = [
+					
+					'title' => 'Forget Password',
+					
+					'logo' => $this->bm->getWhere('admin_panel_setting', 'name', 'LOGO'),
+					
+					'name' => $this->bm->getWhere('admin_panel_setting', 'name', 'NAME'),
+					
+					'footer' => $this->bm->getWhere('admin_panel_setting', 'name', 'FOOTER'),
+					
+					'msg' => 'Hi,'.$user->username.'<br>To change your password click below:<br><a href="'.site_url('change_password/'.$token).'">Change Password</a>'
+					
+				];
+				
 
 				$html_content = $this->load->view('mail_template',$email,true);
-
+				
 				// for live send email use this array
 				$emailConfig = [
-									'protocol' => 'smtp',
-									'smtp_host' => 'alphinex.com',
-									'smtp_port' => 587,
-									'smtp_user' => 'fardeen@alphinex.com',
-									'smtp_pass' => 'X8X=}-?HiKV?',
-									'mailtype' => 'html',
-									'charset' => 'iso-8859-1'
-							];
-
+					
+					'protocol' => 'smtp',
+					'smtp_host' => 'alphinex.com',
+					'smtp_port' => 587,
+					'smtp_user' => 'fardeen@alphinex.com',
+					'smtp_pass' => 'X8X=}-?HiKV?',
+					'mailtype' => 'html',
+					'charset' => 'iso-8859-1'
+				];
+				
 
 				$this->load->library('email' , $emailConfig);
-
+				
 				$from = 'system@'.$_SERVER['HTTP_HOST'];
-				$to = $data['email'];
-					// $this->email->initialize($emailConfig);
+				$to = $user->email;
+				
 				$this->email->set_newline("\r\n");
-				$this->email->from($from,$settings->name);
+				$this->email->from($from,$name->value);
 				$this->email->to($to);
 				$this->email->subject('Forget Password');
 				$this->email->message($html_content);
 				$this->email->set_mailtype("html");
-				if(!$this->email->send()){}
+				if(!$this->email->send())
+				{
+					
+					$this->session->set_flashdata(array('response' => 'success', 'msg' => 'Connection error try again..!' ));
+					
+				}
+				else
+				{
+					
+					$this->session->set_flashdata(array('response' => 'success', 'msg' => 'Password reset link has sent to your email' ));
+					
+					$this->bm->insertRow('password_reset',['token' => $token],'user_id',$user->id);
 
-					$this->session->set_flashdata(array('response' => 'success', 'msg' => 'Link has been sent to your email' ));
-
+				}
+				
 			}
-			else {
+			else 
+			{
 
 				$this->session->set_flashdata('alert_msg', array('failure', 'Login', $data['error']));
 
 			}
-
+			
 			redirect('forget_password');
-
+			
 	}
 
 	public function change_password($id)
 	{
 
-		if (isset($_POST['submit'])) {
+		if (isset($_POST['submit'])) 
+		{
 
 			$p = $this->input->post();
 
 			$pass = $this->encryption->encrypt($p['confirmed_password']);
 
-			$this->Basic_model->updateRow('users',['password'=>$pass],'token',$id);
+			$this->bm->updateRow('users',['password'=>$pass],'id',$id);
 
-			$this->session->set_flashdata(array('response' => 'success', 'msg' => 'Link has been sent to your email' ));
+			$this->session->set_flashdata(array('response' => 'success', 'msg' => 'Password has changed Successfully' ));
 
 			redirect('password_changed');
 
-		}else{
+		}
+		else
+		{
 
-			$id = hashids_decrypt($id);
+			$token = hashids_decrypt($id);
 
 			$data['expired'] = false;
 
-			$user = $this->Basic_model->getWhere('users','token',$id);
+			$reset_password = $this->bm->getWhere('passsword_reset','token',$token);
 
-			if (empty($user)) {
+			$user = $this->bm->getById('users',$reset_password->user_id);
+
+			if (empty($user)) 
+			{
 
 				$data['expired'] = true;
 
-			}else{
+			}
+			else
+			{
 
-				$expire_time =  date('d-m-Y h:i', strtotime("+10 minutes", strtotime($user->token_dateTime)));
+				$expire_time =  date('d-m-Y h:i', strtotime("+10 minutes", strtotime($reset_password->datetime)));
 
-				// echo $expire_time."<br>";
-				// echo date('d-m-Y h:i');
-
-				if (strtotime($expire_time) <= strtotime(date('d-m-Y h:i'))) {
+				if (strtotime($expire_time) <= strtotime(date('d-m-Y h:i'))) 
+				{
 
 					$data['expired'] = true;
 
@@ -210,9 +219,9 @@ class Auth extends CI_Controller {
 
 
 
-			$data['id'] = $id;
+			$data['id'] = $user->id;
 
-			$data['setting'] = $this->Basic_model->getById('setting',1);
+			$data['logo'] = $this->bm->getWhere('admin_panel_setting', 'name', 'LOGO');
 
 			$this->load->view('change_password',$data);
 
@@ -223,7 +232,7 @@ class Auth extends CI_Controller {
 	public function password_changed()
 	{
 
-			$this->load->view('changed_password');
+		$this->load->view('changed_password');
 
 	}
 

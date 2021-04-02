@@ -10,7 +10,7 @@
 <meta name="description" content="">
 
 <!-- Page Title -->
-<title>Faculty of Engineering & Technology, University of Sindh</title>
+<title><?=(@$title != ''?$title:'Faculty of Engineering & Technology, University of Sindh')?></title>
 
 <!-- Favicon and Touch Icons -->
 <link rel="shortcut icon" href="assets/images/FET-logo.png">

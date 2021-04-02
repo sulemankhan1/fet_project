@@ -43,6 +43,7 @@
                               <th>Cnic </th>
                               <th>Phone Number</th>
                               <th>Gender </th>
+                              <th>Type </th>
 
                               <th width="150px">Actions</th>
 

@@ -1,82 +1,15 @@
-<?php
-$alert_msg=$this->session->userdata('alert_msg');
-?>
-<!DOCTYPE html>
-<html lang="en" class="loading">
-  <!-- BEGIN : Head-->
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="Apex admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Apex admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
-    <title>Registration</title>
-    <link rel="apple-touch-icon" sizes="60x60" href="<?=base_url('app-assets/img/ico/apple-icon-60.png')?>">
-    <link rel="apple-touch-icon" sizes="76x76" href="<?=base_url('app-assets/img/ico/apple-icon-76.png')?>">
-    <link rel="apple-touch-icon" sizes="120x120" href="<?=base_url('app-assets/img/ico/apple-icon-120.png')?>">
-    <link rel="apple-touch-icon" sizes="152x152" href="<?=base_url('app-assets/img/ico/apple-icon-152.png')?>">
-    <link rel="shortcut icon" type="image/x-icon" href="<?=base_url('app-assets/img/ico/favicon.ico')?>">
-    <link rel="shortcut icon" type="image/png" href="<?=base_url('app-assets/img/ico/favicon-32.png')?>">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-touch-fullscreen" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900|Montserrat:300,400,500,600,700,800,900" rel="stylesheet">
-    <!-- BEGIN VENDOR CSS-->
-    <!-- font icons-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url('app-assets/fonts/feather/style.min.css')?>">
-    <link rel="stylesheet" type="text/css" href="<?=base_url('app-assets/fonts/simple-line-icons/style.css')?>">
-    <link rel="stylesheet" type="text/css" href="<?=base_url('app-assets/fonts/font-awesome/css/font-awesome.min.css')?>">
-    <link rel="stylesheet" type="text/css" href="<?=base_url('app-assets/vendors/css/perfect-scrollbar.min.css')?>">
-    <link rel="stylesheet" type="text/css" href="<?=base_url('app-assets/vendors/css/prism.min.css')?>">
-    <!-- END VENDOR CSS-->
-    <!-- BEGIN APEX CSS-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url('app-assets/css/app.css')?>">
-    <!-- END APEX CSS-->
-    <!-- BEGIN Page Level CSS-->
-    <!-- END Page Level CSS-->
-    <style media="screen">
-      .wrapper.nav-collapsed .main-panel .main-content {
-        padding-left: 0;
-      }
-    </style>
-  </head>
-  <!-- END : Head-->
-
-  <!-- BEGIN : Body-->
-  <body data-col="1-column" class=" 1-column  blank-page">
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
-    <div class="wrapper nav-collapsed menu-collapsed">
-      <div class="main-panel">
-        <!-- BEGIN : Main Content-->
-        <div class="main-content">
-          <div class="content-wrapper"><!--Login Page Starts-->
-<!-- <section id="login" style="background-image: url(<?=base_url('app-assets/img/gallery/light-bg.jpg')?>);" > -->
-  <div class="container-fluid">
-    <div class="row full-height-vh m-0">
-      <div class="col-md-12 p-5">
-        <div class="card">
-          <div class="card-content">
-            <div class="card-body login-img">
-              <div class="row m-0">
-                <div class="col-lg-12 col-md-12 bg-white px-4 pt-3">
-                  <div class="row">
-                    <div class="col-md-12 text-center">
-
-                      <?php if (@getimagesize(base_url('uploads/sidebar_logo/'.$logo->value))): ?>
-
-                        <img src="<?=base_url('uploads/sidebar_logo/'.$logo->value)?>" style="max-height: 125px;max-width: 215px;margin-bottom:10px;"/>
-
-                          <?php else: ?>
-
-                        <img src="<?=base_url('app-assets/images/no-image-available.png')?>" style="max-height: 125px;max-width: 215px;" />
-
-                      <?php endif; ?>
-
-                    </div>
-                  </div>
-                  <form class="login-form" action="<?=site_url('registered')?>" method="post" enctype="multipart/form-data">
-                  <h4 class="mb-2 card-title">Registration</h4>
+<div class="main-content">
+  <div class="content-wrapper"><!-- Basic Elements start -->
+    <section class="basic-elements">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0"><?=$title;?></h4>
+            </div>
+            <div class="card-body">
+                <div class="px-3">
+                <form class="login-form" action="<?=site_url('update_profile')?>" method="post" enctype="multipart/form-data">
                   <hr>
                   <?php if($this->session->flashdata('response') == 'success') { ?>
 
@@ -87,20 +20,36 @@ $alert_msg=$this->session->userdata('alert_msg');
 
                   <?php } ?>
                   <div class="form-body">
-                    <input type="hidden" name="type" class="type">
+                    <input type="hidden" name="id" value="<?=$edit->uid?>">
+                    <input type="hidden" name="type" class="type" value="<?=$edit->type?>">
+                    <input type="hidden" name="account_active" value="<?=$edit->account_active?>">
 
-                      <div class="row mt-2">
+                      <div class="row">
 
                         <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                             <fieldset class="form-group">
                                 <label for="basicInput">Title *</label>
                                 <select class="form-control"  name="title">
                                     <option value="">select title</option>
-                                    <option value="Mr" <?=(@$this->input->post('title') == 'Mr'?'selected':'')?>>Mr</option>
+
+                                    <?php if(@$this->input->post('title') != ''): ?>
+
+                                    <option value="Mr" <?=(@$this->input->post('title') == 'Mr' ?'selected':'')?>>Mr</option>
                                     <option value="Ms" <?=(@$this->input->post('title') == 'Ms'?'selected':'')?>>Ms</option>
                                     <option value="Mrs" <?=(@$this->input->post('title') == 'Mrs'?'selected':'')?>>Mrs</option>
                                     <option value="Dr" <?=(@$this->input->post('title') == 'Dr'?'selected':'')?>>Dr</option>
                                     <option value="Prof" <?=(@$this->input->post('title') == 'Prof'?'selected':'')?>>Prof</option>
+
+                                    <?php else:?>
+
+                                    <option value="Mr" <?=(@$edit->title == 'Mr' ?'selected':'')?>>Mr</option>
+                                    <option value="Ms" <?=(@$edit->title == 'Ms'?'selected':'')?>>Ms</option>
+                                    <option value="Mrs" <?=(@$edit->title == 'Mrs'?'selected':'')?>>Mrs</option>
+                                    <option value="Dr" <?=(@$edit->title == 'Dr'?'selected':'')?>>Dr</option>
+                                    <option value="Prof" <?=(@$edit->title == 'Prof'?'selected':'')?>>Prof</option>
+
+                                    <?php endif ?>
+
                                 </select>
                             </fieldset>
                             <span class="text-danger"><?=form_error('title')?></span>
@@ -109,7 +58,8 @@ $alert_msg=$this->session->userdata('alert_msg');
                         <div class="col-xl-3 col-lg-3 col-md-3 mb-1">
                             <fieldset class="form-group">
                                 <label for="basicInput">Username *</label>
-                                <input type="text" id="ResUsername" class="form-control"  name="username" value="<?=@$this->input->post('username')?>">
+                                <input type="text" id="ResUsername" class="form-control"  name="username" value="<?=(@$this->input->post('username') == ''?@$edit->username:$this->input->post('username'))?>">
+                                <input type="hidden" name="username_old" value="<?=$edit->username?>">
 
                             </fieldset>
                             <span class="text-danger"><?=form_error('username')?></span>
@@ -118,7 +68,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                         <div class="col-xl-3 col-lg-3 col-md-3 mb-1">
                             <fieldset class="form-group">
                                 <label for="basicInput">Password *</label>
-                                <input type="password" class="form-control"  name="password" value="<?=@$this->input->post('password')?>">
+                                <input type="password" class="form-control"  name="password" value="<?=(@$this->input->post('password') == ''?@$this->encryption->decrypt($edit->password):$this->input->post('password'))?>">
                             </fieldset>
                             <span class="text-danger"><?=form_error('password')?></span>
 
@@ -126,7 +76,8 @@ $alert_msg=$this->session->userdata('alert_msg');
                         <div class="col-xl-4 col-lg-4 col-md-4 mb-1">
                             <fieldset class="form-group">
                                 <label for="basicInput">Email *</label>
-                                <input type="text" class="form-control"  name="email" value="<?=@$this->input->post('email')?>">
+                                <input type="text" class="form-control"  name="email" value="<?=(@$this->input->post('email') == ''?@$edit->email:$this->input->post('email'))?>">
+                                <input type="hidden" name="email_old" value="<?=$edit->email?>">
                             </fieldset>
                             <span class="text-danger"><?=form_error('email')?></span>
 
@@ -134,7 +85,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                         <div class="col-xl-3 col-lg-3 col-md-3 mb-1">
                             <fieldset class="form-group">
                                 <label for="basicInput">Full Name *</label>
-                                <input type="text" class="form-control"  name="full_name" value="<?=@$this->input->post('full_name')?>">
+                                <input type="text" class="form-control"  name="full_name" value="<?=(@$this->input->post('full_name') == ''?@$edit->full_name:$this->input->post('full_name'))?>">
                             </fieldset>
                             <span class="text-danger"><?=form_error('full_name')?></span>
 
@@ -143,7 +94,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                         <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                             <fieldset class="form-group">
                                 <label for="basicInput">Surename *</label>
-                                <input type="text" class="form-control"  name="surename" value="<?=@$this->input->post('surename')?>">
+                                <input type="text" class="form-control"  name="surename" value="<?=(@$this->input->post('surename') == ''?@$edit->surename:$this->input->post('surename'))?>">
                             </fieldset>
                             <span class="text-danger"><?=form_error('surename')?></span>
 
@@ -151,7 +102,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                         <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                             <fieldset class="form-group">
                                 <label for="basicInput">Date of birth *</label>
-                                <input type="date" class="form-control"  name="dob" value="<?=@$this->input->post('dob')?>">
+                                <input type="date" class="form-control"  name="dob" value="<?=(@$this->input->post('dob') == ''?@$edit->dob:$this->input->post('dob'))?>">
                             </fieldset>
                             <span class="text-danger"><?=form_error('dob')?></span>
 
@@ -161,10 +112,17 @@ $alert_msg=$this->session->userdata('alert_msg');
                             <fieldset class="form-group">
                               <label for="basicInput">Gender *</label>
                               <br>
+                                <?php if(@$this->input->post('gender') != ''): ?>
                                 <input type="radio" name="gender" value="male" <?=(@$this->input->post('gender') == 'male'?'checked':'')?>>
                                 <label for="basicInput">Male</label>
                                 <input type="radio" name="gender" value="female" <?=(@$this->input->post('gender') == 'female'?'checked':'')?>>
                                 <label for="basicInput">Female</label>
+                                <?php else: ?>
+                                <input type="radio" name="gender" value="male" <?=(@$edit->gender == 'male'?'checked':'')?>>
+                                <label for="basicInput">Male</label>
+                                <input type="radio" name="gender" value="female" <?=(@$edit->gender == 'female'?'checked':'')?>>
+                                <label for="basicInput">Female</label>
+                                <?php endif; ?>
                             </fieldset>
                             <span class="text-danger"><?=form_error('gender')?></span>
 
@@ -177,25 +135,35 @@ $alert_msg=$this->session->userdata('alert_msg');
                                     <label for="basicInput">Cnic / B-Form *</label>
                                   </div>
                                   <div class="col-lg-6 text-right">
-                                    <input type="checkbox" name="show_cnic_to_public" value="1" <?=(@$this->input->post('show_cnic_to_public') == '1'?'checked':'')?>>
+    
+                                    <?php if(@$this->input->post('show_cnic_to_public') != ''): ?>
+    
+                                        <input type="checkbox" name="show_cnic_to_public" value="1" <?=(@$this->input->post('show_cnic_to_public') == '1'?'checked':'')?>>
+    
+                                    <?php else: ?>
+    
+                                        <input type="checkbox" name="show_cnic_to_public" value="1" <?=(@$edit->show_cnic_public == '1'?'checked':'')?>>
+        
+                                    <?php endif; ?>
+
                                     <label for="basicInput">Show Public</label>
                                   </div>
                                 </div>
-                                <input type="text" class="form-control"  name="cnic" value="<?=@$this->input->post('cnic')?>">
+                                <input type="text" class="form-control"  name="cnic" value="<?=(@$this->input->post('cnic') == ''?@$edit->cnic:$this->input->post('cnic'))?>">
                             </fieldset>
                             <span class="text-danger"><?=form_error('cnic')?></span>
                         </div>
                         <div class="col-xl-3 col-lg-3 col-md-3 mb-1">
                             <fieldset class="form-group">
                                 <label for="basicInput">Father Name *</label>
-                                <input type="text" class="form-control"  name="father_name" value="<?=@$this->input->post('father_name')?>">
+                                <input type="text" class="form-control"  name="father_name" value="<?=(@$this->input->post('father_name') == ''?@$edit->father_name:$this->input->post('father_name'))?>">
                             </fieldset>
                             <span class="text-danger"><?=form_error('father_name')?></span>
                         </div>
                         <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                             <fieldset class="form-group">
                                 <label for="basicInput">Nationality *</label>
-                                <input type="text" class="form-control"  name="nationality" value="<?=@$this->input->post('nationality')?>">
+                                <input type="text" class="form-control"  name="nationality" value="<?=(@$this->input->post('nationality') == ''?@$edit->nationality:$this->input->post('nationality'))?>">
                             </fieldset>
                             <span class="text-danger"><?=form_error('nationality')?></span>
                             
@@ -203,7 +171,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                         <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                             <fieldset class="form-group">
                                 <label for="basicInput">Province *</label>
-                                <input type="text" class="form-control"  name="province" value="<?=@$this->input->post('province')?>">
+                                <input type="text" class="form-control"  name="province" value="<?=(@$this->input->post('province') == ''?@$edit->province:$this->input->post('province'))?>">
                             </fieldset>
                             <span class="text-danger"><?=form_error('province')?></span>
 
@@ -211,7 +179,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                         <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                             <fieldset class="form-group">
                                 <label for="basicInput">District *</label>
-                                <input type="text" class="form-control"  name="district" value="<?=@$this->input->post('district')?>">
+                                <input type="text" class="form-control"  name="district" value="<?=(@$this->input->post('district') == ''?@$edit->district:$this->input->post('district'))?>">
                             </fieldset>
                             <span class="text-danger"><?=form_error('district')?></span>
 
@@ -219,7 +187,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                         <div class="col-xl-3 col-lg-3 col-md-3 mb-1">
                             <fieldset class="form-group">
                                 <label for="basicInput">City *</label>
-                                <input type="text" class="form-control"  name="city" value="<?=@$this->input->post('city')?>">
+                                <input type="text" class="form-control"  name="city" value="<?=(@$this->input->post('city') == ''?@$edit->city:$this->input->post('city'))?>">
                             </fieldset>
                             <span class="text-danger"><?=form_error('city')?></span>
 
@@ -227,7 +195,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                         <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                             <fieldset class="form-group">
                                 <label for="basicInput">Zip Code *</label>
-                                <input type="number" class="form-control"  name="zip_code" value="<?=@$this->input->post('zip_code')?>">
+                                <input type="number" class="form-control"  name="zip_code" value="<?=(@$this->input->post('zip_code') == ''?@$edit->zip_code:$this->input->post('zip_code'))?>">
                             </fieldset>
                             <span class="text-danger"><?=form_error('zip_code')?></span>
 
@@ -239,16 +207,25 @@ $alert_msg=$this->session->userdata('alert_msg');
                                     <label for="basicInput">Phone No *</label>
                                   </div>
                                   <div class="col-lg-6 text-right">
-                                    <input type="checkbox" name="show_phone_no_to_public" value="1" <?=(@$this->input->post('show_phone_no_to_public') == '1'?'checked':'')?>>
+                                  
+                                    <?php if(@$this->input->post('show_phone_no_to_public') != ''): ?>
+                                    
+                                        <input type="checkbox" name="show_phone_no_to_public" value="1" <?=(@$this->input->post('show_phone_no_to_public') == '1'?'checked':'')?>>
+                                    
+                                    <?php else: ?>
+                                    
+                                        <input type="checkbox" name="show_phone_no_to_public" value="1" <?=(@$edit->show_phone_no_public == '1'?'checked':'')?>>
+                                    
+                                    <?php endif; ?>
                                     <label for="basicInput">Show Public</label>
                                   </div>
                                 </div>
                                 <div class="row">
                                   <div class="col-md-4">
-                                    <input type="number" class="form-control" placeholder="code"  name="phone_no_code" value="<?=@$this->input->post('phone_no_code')?>" style="padding-right:0px;">
+                                    <input type="number" class="form-control" placeholder="code"  name="phone_no_code" value="<?=(@$this->input->post('phone_no_code') == ''?@$edit->phone_no_code:$this->input->post('phone_no_code'))?>" style="padding-right:0px;">
                                   </div>
                                   <div class="col-md-8">
-                                    <input type="number" class="form-control" placeholder="number"  name="phone_no" value="<?=@$this->input->post('phone_no')?>">
+                                    <input type="number" class="form-control" placeholder="number"  name="phone_no" value="<?=(@$this->input->post('phone_no') == ''?@$edit->phone_no:$this->input->post('phone_no'))?>">
                                   </div>
                                 </div>
                             </fieldset>
@@ -265,8 +242,17 @@ $alert_msg=$this->session->userdata('alert_msg');
 
                                 <?php if($v->name != 'Superadmin'): ?>
 
-                                <input type="radio" class="role_id" name="role_id" value="<?=$v->id?>" role-name="<?=$v->name?>" <?=(@$this->input->post('role_id') == $v->id?'checked':'')?>>
-                                <label for="basicInput"><?=$v->name?></label>
+                                    <?php if(@$this->input->post('role_id') != ''): ?>
+
+                                        <input type="radio" class="role_id" name="role_id" value="<?=$v->id?>" role-name="<?=$v->name?>" <?=(@$this->input->post('role_id') == $v->id?'checked':'')?>>
+                                    
+                                    <?php else:?>
+
+                                        <input type="radio" class="role_id" name="role_id" value="<?=$v->id?>" role-name="<?=$v->name?>" <?=(@$edit->role_id == $v->id?'checked':'')?>>
+
+                                    <?php endif ?>
+
+                                    <label for="basicInput"><?=$v->name?></label>
 
                                 <?php endif ?>
 
@@ -279,7 +265,8 @@ $alert_msg=$this->session->userdata('alert_msg');
                         <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                             <fieldset class="form-group">
                               <label for="basicInput">Image </label>
-                              <input type="file" class="form-control" name="image">                                
+                              <input type="file" class="form-control" name="image">
+                              <input type="hidden" name="image_old" value="<?=@$edit->image?>">                        
                             </fieldset>
 
                         </div>
@@ -290,11 +277,20 @@ $alert_msg=$this->session->userdata('alert_msg');
                                     <label for="basicInput">Home Address *</label>
                                   </div>
                                   <div class="col-lg-6 text-right">
-                                    <input type="checkbox" name="show_address_to_public" value="1" <?=(@$this->input->post('show_address_to_public') == '1'?'checked':'')?>>
+                                  
+                                        <?php if(@$this->input->post('show_address_to_public') != ''): ?>
+
+                                            <input type="checkbox" name="show_address_to_public" value="1" <?=(@$this->input->post('show_address_to_public') == '1'?'checked':'')?>>
+                                        
+                                        <?php else:?>
+                                        
+                                            <input type="checkbox" name="show_address_to_public" value="1" <?=(@$edit->show_address_public == '1'?'checked':'')?>>
+                                        
+                                        <?php endif ?>
                                     <label for="basicInput">Show Public</label>
                                   </div>
                                 </div>
-                                <textarea class="form-control" name="home_address" id="" cols="30" rows="4"><?=@$this->input->post('home_address')?></textarea>
+                                <textarea class="form-control" name="home_address" id="" cols="30" rows="4"><?=(@$this->input->post('home_address') == ''?@$edit->home_address:$this->input->post('home_address'))?></textarea>
                             </fieldset>
                             <span class="text-danger"><?=form_error('home_address')?></span>
 
@@ -302,7 +298,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                         <div class="col-xl-4 col-lg-4 col-md-4 mb-1">
                             <fieldset class="form-group">
                                 <label for="basicInput">Parmanent Address *</label>
-                                <textarea class="form-control" name="permanent_address" id="" cols="30" rows="4"><?=@$this->input->post('permanent_address')?></textarea>
+                                <textarea class="form-control" name="permanent_address" id="" cols="30" rows="4"><?=(@$this->input->post('permanent_address') == ''?@$edit->permanent_address:$this->input->post('permanent_address'))?></textarea>
                             </fieldset>
                             <span class="text-danger"><?=form_error('permanent_address')?></span>
 
@@ -311,7 +307,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                         <div class="col-xl-4 col-lg-4 col-md-4 mb-1">
                             <fieldset class="form-group">
                                 <label for="basicInput">Bio *</label>
-                                <textarea class="form-control" name="bio" max="500" id="" cols="30" rows="4"><?=@$this->input->post('bio')?></textarea>
+                                <textarea class="form-control" name="bio" max="500" id="" cols="30" rows="4"><?=(@$this->input->post('bio') == ''?@$edit->bio:$this->input->post('bio'))?></textarea>
                             </fieldset>
                             <span class="text-danger"><?=form_error('bio')?></span>
 
@@ -319,7 +315,7 @@ $alert_msg=$this->session->userdata('alert_msg');
 
                       </div>
                       <div class="row">
-                        
+                      
                         <div class="col-lg-12 additional_info">
                                 
                             <div class="row">
@@ -376,30 +372,32 @@ $alert_msg=$this->session->userdata('alert_msg');
                               <!-- additional_info_student_start -->
                               <!-- <div class="additional_info_student"> -->
 
-                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_student">
+                                <?php $student_display = 'none'; if($edit->type == 'Student'){ $student_display = 'block'; }?>
+
+                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_student" style="display:<?=$student_display?>">
                                     <fieldset class="form-group">
                                         <label for="basicInput">Roll No *</label>
-                                        <input type="text" class="form-control"  name="roll_no" value="<?=@$this->input->post('roll_no')?>">
+                                        <input type="text" class="form-control"  name="roll_no" value="<?=(@$this->input->post('roll_no') == ''?@$edit->roll_no:$this->input->post('roll_no'))?>">
                                     </fieldset>
                                       <?php if(@$this->input->post('type') == 'Student'){ ?>
                                         <span class="text-danger"><?=form_error('roll_no')?></span>
                                       <?php } ?>
 
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_student">
+                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_student" style="display:<?=$student_display?>">
                                     <fieldset class="form-group">
                                         <label for="basicInput">Batch Year *</label>
-                                        <input type="text" class="form-control"  name="batch_year" value="<?=@$this->input->post('batch_year')?>">
+                                        <input type="text" class="form-control"  name="batch_year" value="<?=(@$this->input->post('batch_year') == ''?@$edit->batch_year:$this->input->post('batch_year'))?>">
                                     </fieldset>
                                     <?php if(@$this->input->post('type') == 'Student'){ ?>
                                       <span class="text-danger"><?=form_error('batch_year')?></span>
                                     <?php } ?>
 
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_student">
+                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_student" style="display:<?=$student_display?>">
                                     <fieldset class="form-group">
                                         <label for="basicInput">Current Semester No# *</label>
-                                        <input type="number" class="form-control"  name="current_semester_no" value="<?=@$this->input->post('current_semester_no')?>">
+                                        <input type="number" class="form-control"  name="current_semester_no" value="<?=(@$this->input->post('current_semester_no') == ''?@$edit->current_semester_no:$this->input->post('current_semester_no'))?>">
                                     </fieldset>
                                     <?php if(@$this->input->post('type') == 'Student'){ ?>
                                       <span class="text-danger"><?=form_error('current_semester_no')?></span>
@@ -412,31 +410,32 @@ $alert_msg=$this->session->userdata('alert_msg');
 
                               <!-- additional_info_teacher_start -->
                               <!-- <div class="additional_info_teacher"> -->
-
-                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_teacher">
+                                <?php $teacher_display = 'none'; if($edit->type == 'Teacher'){ $teacher_display = 'block'; }?>
+                                
+                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_teacher" style="display:<?=$teacher_display?>">
                                       <fieldset class="form-group">
                                           <label for="basicInput">Designation *</label>
-                                          <input type="text" class="form-control"  name="designation" value="<?=@$this->input->post('designation')?>">
+                                          <input type="text" class="form-control"  name="designation" value="<?=(@$this->input->post('designation') == ''?@$edit->designation:$this->input->post('designation'))?>">
                                       </fieldset>
                                       <?php if(@$this->input->post('type') == 'Teacher'){ ?>
                                         <span class="text-danger"><?=form_error('designation')?></span>
                                       <?php } ?>
 
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_teacher">
+                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_teacher" style="display:<?=$teacher_display?>">
                                       <fieldset class="form-group">
                                           <label for="basicInput">Speciality *</label>
-                                          <input type="text" class="form-control"  name="speciality" value="<?=@$this->input->post('speciality')?>">
+                                          <input type="text" class="form-control"  name="speciality" value="<?=(@$this->input->post('speciality') == ''?@$edit->speciality:$this->input->post('speciality'))?>">
                                       </fieldset>
                                       <?php if(@$this->input->post('type') == 'Teacher'){ ?>
                                         <span class="text-danger"><?=form_error('speciality')?></span>
                                       <?php } ?>
 
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_teacher">
+                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_teacher" style="display:<?=$teacher_display?>">
                                       <fieldset class="form-group">
                                           <label for="basicInput">Last Degree *</label>
-                                          <input type="text" class="form-control"  name="last_degree" value="<?=@$this->input->post('last_degree')?>">
+                                          <input type="text" class="form-control"  name="last_degree" value="<?=(@$this->input->post('last_degree') == ''?@$edit->last_degree:$this->input->post('last_degree'))?>">
                                       </fieldset>
                                       <?php if(@$this->input->post('type') == 'Teacher'){ ?>
                                         <span class="text-danger"><?=form_error('last_degree')?></span>
@@ -462,102 +461,12 @@ $alert_msg=$this->session->userdata('alert_msg');
                     </div>
                   </div>
                 </form>
-                <div class="col-md-12 mb-2 mr-2" >
-                  <a href="<?=site_url('login')?>" style="margin-left:-16px!important;"><i class="ft-user"></i> Already have Account</a>
-                </div>
 
                 </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </div>
-<!-- </section> -->
-<!--Login Page Ends-->
-
-          </div>
-        </div>
-        <!-- END : End Main Content-->
-      </div>
-    </div>
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
-
-    <!-- BEGIN VENDOR JS-->
-    <script src="<?=base_url('app-assets/vendors/js/core/jquery-3.2.1.min.js')?>" type="text/javascript"></script>
-    <script src="<?=base_url('app-assets/vendors/js/core/popper.min.js')?>" type="text/javascript"></script>
-    <script src="<?=base_url('app-assets/vendors/js/core/bootstrap.min.js')?>" type="text/javascript"></script>
-    <!-- BEGIN VENDOR JS-->
- 
-
-    <script type="text/javascript">
-
-      let role_name = $(".role_id:checked").attr('role-name');
-      check_role(role_name);
-
-      $('input[name=role_id]').change(function(){
-
-        let role_name = $(this).attr('role-name');
-        check_role(role_name);
-
-      })
-
-      function hide_roles_field() 
-      {
-
-        $('.additional_info').hide();
-        $('.additional_info_student').hide();
-        $('.additional_info_teacher').hide();
-        
-      }
-
-      function check_role(role_name)
-      {
-
-          $('.type').val(role_name);
-
-          if(role_name == 'Teacher')
-          {
-              hide_roles_field();
-              $('.additional_info').show();
-              $('.additional_info_teacher').show();
-          }
-          else if(role_name == 'Student')
-          {
-              hide_roles_field();
-              $('.additional_info').show();
-              $('.additional_info_student').show();
-          }
-          else if(role_name == 'Faculty')
-          {
-              hide_roles_field();
-              $('.additional_info').show();
-              // $('.additional_info_student').show();
-          }
-          else if(role_name == 'Admin')
-          {
-              hide_roles_field();
-              $('.additional_info').show();
-              // $('.additional_info_student').show();
-          }
-          else if(role_name == 'Other')
-          {
-              hide_roles_field();
-              $('.additional_info').show();
-              // $('.additional_info_student').show();
-          }
-          else
-          {
-            
-            hide_roles_field();
-
-          }
-
-      }
-      
-    </script>
-  </body>
-  <!-- END : Body-->
-</html>
+</div>

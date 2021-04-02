@@ -3,14 +3,13 @@
 class Users_model extends CI_Model
 {
 
-	 var $order_column = array(null, "u.username", "u.title", "u.first_name_eng", "u.middle_name_eng","u.family_last_name_eng","u.gender","u.nationality",null,null);
-  function make_query()
+  var $user_order_column = array(null, "u.title","u.username", "u.email", "u.full_name","u.cnic","u.phone_number","u.gender","u.type",null);
+  function make_users_query()
   {
 
 			$this->db->select('u.*');
 			$this->db->from('users u');
-			$this->db->join('users_info ui','ui.user_id=u.user_id');
-			$this->db->join('roles r','r.role_id=u.user_status');
+			$this->db->join('users_info ui','ui.user_id=u.id');
 
 			if(@$_POST["search"]["value"] != '')
 			{
@@ -19,11 +18,12 @@ class Users_model extends CI_Model
 				$this->db->group_start();
 				$this->db->or_like('u.username',  $_POST["search"]["value"]);
 				$this->db->or_like('u.title',  $_POST["search"]["value"]);
-				$this->db->or_like('u.first_name_eng',  $_POST["search"]["value"]);
-				$this->db->or_like('u.middle_name_eng',  $_POST["search"]["value"]);
-				$this->db->or_like('u.family_last_name_eng',  $_POST["search"]["value"]);
+				$this->db->or_like('u.email',  $_POST["search"]["value"]);
+				$this->db->or_like('u.cnic',  $_POST["search"]["value"]);
 				$this->db->or_like('u.gender',  $_POST["search"]["value"]);
-				$this->db->or_like('u.nationality',  $_POST["search"]["value"]);
+				$this->db->or_like('u.phone_no',  $_POST["search"]["value"]);
+				$this->db->or_like('u.full_name',  $_POST["search"]["value"]);
+				$this->db->or_like('u.type',  $_POST["search"]["value"]);
 				$this->db->group_end();
 
 			}
@@ -32,31 +32,42 @@ class Users_model extends CI_Model
 			{
 					$order_by = $_POST['order']['0'];
 
-					$this->db->order_by($this->order_column[$order_by['column']], $order_by['dir']);
+					$this->db->order_by($this->user_order_column[$order_by['column']], $order_by['dir']);
 
 			}
 			else
 			{
-					 $this->db->order_by('u.user_id', 'DESC');
+					 $this->db->order_by('u.id', 'DESC');
 			}
 
-		 	$this->db->where('u.user_status_type !=',1);
+			$this->db->where('u.is_deleted',0);
 
   }
 
 
-  function make_datatables($status){
+  function get_user_data_length($status)
+  {
 
-       $this->make_query();
+       $this->make_users_query();
 
-			 $this->db->where('u.is_active', $status);
+	   	if($status == 'active')
+		{
+
+			$this->db->where('u.account_active', 1);
+			
+		}
+		else
+		{
+			$this->db->where('u.account_active', 0);
+
+		}
 
        if(@$_POST["length"] != '')
        {
 
             $this->db->limit(@$_POST['length'], @$_POST['start']);
 
-			 }
+		}
 
 
        $query = $this->db->get();
@@ -64,64 +75,63 @@ class Users_model extends CI_Model
 
   }
 
-  function get_filtered_data($status){
+  function get_user_filtered_data($status)
+  {
 
-       $this->make_query();
+       $this->make_users_query();
 
-			 $this->db->where('u.is_active', $status);
+	   if($status == 'active')
+	   {
 
+		   $this->db->where('u.account_active', 1);
+		   
+	   }
+	   else
+	   {
+		   $this->db->where('u.account_active', 0);
+
+	   }
+		
        $query = $this->db->get();
 
        return $query->num_rows();
 
   }
 
-  function get_all_data($status)
+  function get_users_count($status)
   {
 
-		$this->db->select('u.*');
-		$this->db->from('users u');
-		$this->db->join('users_info ui','ui.user_id=u.user_id');
-		$this->db->join('roles r','r.role_id=u.user_status');
+	  $this->db->select('u.*');
+	  $this->db->from('users u');
+		$this->db->join('users_info ui','ui.user_id=u.id');
+		
+		if($status == 'active')
+		{
 
-	 	$this->db->where('u.user_status_type !=',1);
+			$this->db->where('u.account_active', 1);
+			
+		}
+		else
+		{
+			$this->db->where('u.account_active', 0);
 
-		$this->db->where('u.is_active', $status);
-
+		}
+		
 
     return $this->db->count_all_results();
 
   }
 
-	function get_excel_data_by_ids($ids_arr)
-  {
-
-    $this->db->select('u.username, u.title, u.first_name_eng, u.middle_name_eng, u.family_last_name_eng, u.gender, u.nationality, u.is_active');
-    $this->db->from('users u');
-		$this->db->join('users_info ui','ui.user_id=u.user_id');
-		$this->db->join('roles r','r.role_id=u.user_status');
-
-    if(!empty($ids_arr)) {
-      $this->db->where_in('u.user_id', $ids_arr);
-    }
-
-    return $this->db->get()->result_array();
-
-  }
 
 	public function getUsersDetails($id)
 	{
 
-		$this->db->select('u.*,ui.*,r.*,d.*,dp.*,l.*,c.colg_name');
+		$this->db->select('*,r.name as role_name');
 		$this->db->from('users u');
-		$this->db->join('users_info ui','ui.user_id=u.user_id','left');
-		$this->db->join('roles r','r.role_id=u.user_status','left');
-		$this->db->join('departments d','d.depart_id=ui.depart_id','left');
-		$this->db->join('departments_programs dp','dp.program_id=ui.program_id','left');
-		$this->db->join('labs l','l.lab_id=ui.laboratory_numb','left');
-		$this->db->join('college c','c.id=ui.college_id','left');
+		$this->db->join('users_info ui','ui.user_id=u.id','left');
+		$this->db->join('roles r','r.id=u.role_id','left');
 
-		$this->db->where('u.user_id',$id);
+		$this->db->where('u.id',$id);
 
 		 return $this->db->get()->row();
 
@@ -130,14 +140,12 @@ class Users_model extends CI_Model
 	public function getUserToEdit($id)
 	{
 
-		$this->db->select('*');
+		$this->db->select('u.id as uid,u.*,ui.*');
 		$this->db->from('users u');
 
+		$this->db->join('users_info ui','ui.user_id=u.id','left');
 
-			$this->db->join('users_info ui','ui.user_id=u.user_id');
-
-
-		 $this->db->where('u.user_id',$id);
+		 $this->db->where('u.id',$id);
 
 		 return $this->db->get()->row();
 

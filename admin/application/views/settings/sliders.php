@@ -28,8 +28,8 @@
         </p>
         <hr>
         <a href="javascript:void(0)" class="btn btn-sm btn-primary" onclick="edit_slider(<?=$v->id?>)"><i class='icon-pencil'></i> Edit</a>
-        <a href="<?=site_url('change_status/'.$v->id.'/'.$v->active)?>" class="btn btn-sm btn-danger" onclick="\return confirm('Are you sure you want to change status?')\" ><i class='icon-crosshair'></i> Change Status</a>
-        <a href="<?=site_url('delete_setting/'.hashids_encrypt($v->id).'/slider_setting')?>" class="btn btn-sm btn-danger" onclick="\return confirm('Are you sure you want to delete?')\" ><i class='icon-trash'></i> Delete</a>
+        <a href="<?=site_url('change_status/'.$v->id.'/'.$v->active)?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to change status?')" ><i class='icon-crosshair'></i> Change Status</a>
+        <a href="<?=site_url('delete_setting/'.hashids_encrypt($v->id).'/slider_setting')?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete?')" ><i class='icon-trash'></i> Delete</a>
         </div>
     </div>
 
