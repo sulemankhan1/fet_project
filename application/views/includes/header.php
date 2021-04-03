@@ -56,7 +56,6 @@
 <script src="<?=base_url('assets/js/revolution-slider/js/jquery.themepunch.revolution.min.js')?>"></script>
 <link rel="stylesheet" href="<?=base_url('assets/css/style.css')?>">
 
-
 </head>
 <body class="">
   <div id="wrapper" class="clearfix">
@@ -182,13 +181,14 @@
                   </div>
                 </div>
               </li>
-              <li><a href="timetable.php">Timetable</a></li>
-               <li><a href="teachers.php">FET Faculty</a></li>
-              <li><a href="javascript:void(0)">About Us</a>
+              <li><a href="<?=site_url('timetable')?>">Timetable</a></li>
+               <li><a href="<?=site_url('faculty')?>">Faculty</a></li>
+               <li><a href="javascript:void(0)">News</a></li>
+               <li><a href="javascript:void(0)">Resources</a></li>
+               <li><a href="javascript:void(0)">About</a>
+              <li><a href="<?=site_url('contact')?>">Contact</a></li>
 
-                </li>
-                <li><a href="javascript:void(0)">Final Year Projects</a></li>
-                 <li><a href="javascripts:void(0)">Sign In</a>
+                 <!-- <li><a href="javascripts:void(0)">Sign In</a> -->
 
                 </li>
             </ul>

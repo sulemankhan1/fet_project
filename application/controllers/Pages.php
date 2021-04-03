@@ -17,8 +17,48 @@ class Pages extends CI_Controller {
 
 		$data = [];
 
-		$this->load->view('includes/header',$data);
+		$this->load->view('includes/header', $data);
 		$this->load->view('pages/homepage');
 		$this->load->view('includes/footer');
 	}
+
+	public function view_profile() {
+
+		$data = [];
+
+		$this->load->view('includes/header', $data);
+		$this->load->view('pages/profile');
+		$this->load->view('includes/footer');
+	}
+
+	public function timetable() {
+
+		$data = [];
+
+		$this->load->view('includes/header', $data);
+		$this->load->view('pages/timetable');
+		$this->load->view('includes/footer');
+
+	}
+
+	public function faculty() {
+
+		$data = [];
+
+		$this->load->view('includes/header', $data);
+		$this->load->view('pages/faculty');
+		$this->load->view('includes/footer');
+
+	}
+
+	public function contact_us() {
+
+		$data = [];
+
+		$this->load->view('includes/header', $data);
+		$this->load->view('pages/contact_us');
+		$this->load->view('includes/footer');
+
+	}
+
 }
