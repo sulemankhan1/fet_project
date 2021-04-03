@@ -68,9 +68,9 @@ $alert_msg=$this->session->userdata('alert_msg');
                   <p class="card-text mb-3">
                   </p>
 
-                        <?php if ($setting->logo != ''): ?>
+                  <?php if (@getimagesize(base_url('uploads/sidebar_logo/'.$logo->value))): ?>
 
-                          <img src="<?=base_url('uploads/'.$setting->logo)?>" style="max-height: 125px;max-width: 215px;margin-bottom:10px;">
+                          <img src="<?=base_url('uploads/sidebar_logo/'.$logo->value)?>" style="max-height: 125px;max-width: 215px;margin-bottom:10px;">
                           <?php else: ?>
 
                           <img src="<?=base_url('app-assets/img/logos/logo-big-black.png')?>" style="max-height: 125px;max-width: 215px;">
@@ -95,12 +95,8 @@ $alert_msg=$this->session->userdata('alert_msg');
                               </div>
 
                             <?php } ?>
-                  <input type="email" class="form-control mb-3" name="email" id="email" placeholder="university email" />
-                  <div class="d-flex justify-content-between mt-2">
-                    <div class="remember-me">
-
-                    </div>
-                  </div>
+                  <input type="email" class="form-control mb-3" name="email" id="email" placeholder="Enter your email here" />
+                 
                   <div class="fg-actions d-flex justify-content-between">
                     <div class="recover-pass">
                       <button type="submit" class="btn btn-primary text-decoration-none text-white">
@@ -139,21 +135,7 @@ $alert_msg=$this->session->userdata('alert_msg');
     <script src="<?=base_url('app-assets/vendors/js/core/jquery-3.2.1.min.js')?>" type="text/javascript"></script>
     <script src="<?=base_url('app-assets/vendors/js/core/popper.min.js')?>" type="text/javascript"></script>
     <script src="<?=base_url('app-assets/vendors/js/core/bootstrap.min.js')?>" type="text/javascript"></script>
-    <script src="<?=base_url('app-assets/vendors/js/perfect-scrollbar.jquery.min.js')?>" type="text/javascript"></script>
-    <script src="<?=base_url('app-assets/vendors/js/prism.min.js')?>" type="text/javascript"></script>
-    <script src="<?=base_url('app-assets/vendors/js/jquery.matchHeight-min.js')?>" type="text/javascript"></script>
-    <script src="<?=base_url('app-assets/vendors/js/screenfull.min.js')?>" type="text/javascript"></script>
-    <script src="<?=base_url('app-assets/vendors/js/pace/pace.min.js')?>" type="text/javascript"></script>
-    <!-- BEGIN VENDOR JS-->
-    <!-- BEGIN PAGE VENDOR JS-->
-    <!-- END PAGE VENDOR JS-->
-    <!-- BEGIN APEX JS-->
-    <script src="<?=base_url('app-assets/js/app-sidebar.js')?>" type="text/javascript"></script>
-    <script src="<?=base_url('app-assets/js/notification-sidebar.js')?>" type="text/javascript"></script>
-    <script src="<?=base_url('app-assets/js/customizer.js')?>" type="text/javascript"></script>
     <!-- END APEX JS-->
-    <!-- BEGIN PAGE LEVEL JS-->
-    <!-- END PAGE LEVEL JS-->
   </body>
   <!-- END : Body-->
 </html>

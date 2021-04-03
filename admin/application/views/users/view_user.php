@@ -10,9 +10,9 @@
           <div class="col-md-10 text-center">
               <a class="profile-image">
 
-                <?php if (@getimagesize(base_url('uploads/users/'.$user->user_img))): ?>
+                <?php if (@getimagesize(base_url('uploads/users/'.@$user->image))): ?>
 
-                  <img src="<?=base_url('uploads/users/'.$user->user_img)?>" width="200" class="text align-middle img-border width-100" />
+                  <img src="<?=base_url('uploads/users/'.@$user->image)?>" width="200" class="text align-middle img-border width-100" />
 
                     <?php else: ?>
 
@@ -30,18 +30,11 @@
             <div class="col-lg-3 col-md-3 ">
             </div>
             <div class="col-lg-6 col-md-6 text-center">
-              <span class="font-medium-2 text-uppercase"><?=$user->title?>. <?=$user->username?></span>
-              <p class="grey font-small-2">(<?=$user->role_name?>)</p>
+              <span class="font-medium-2 text-uppercase"><?=@$user->title?>. <?=@$user->username?></span>
+              <p class="grey font-small-2">(<?=@$user->role_name?>)</p>
             </div>
             <div class="col-lg-3 col-md-3">
-              <!-- <ul class="profile-menu no-list-style">
-                <li>
-                  <a href="#friends" class="primary font-medium-2 font-weight-600">Friends</a>
-                </li>
-                <li>
-                  <a href="#photos" class="primary font-medium-2 font-weight-600">Photos</a>
-                </li>
-              </ul> -->
+             
             </div>
           </div>
         </div>
@@ -61,136 +54,194 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="card">
-        <div class="card-header" style="padding:none!important;">
-          <h5><?=__('personal_info_txt')?></h5>
-        </div>
+        
         <div class="card-content">
           <div class="card-body">
             <hr>
             <div class="row">
               <div class="col-12 col-md-6 col-lg-4">
                 <ul class="no-list-style">
-             <!--      <li class="mb-2">
-                    <span class="text-bold-500 primary"><a><i class="icon-present font-small-3"></i> <?=__('password_txt')?>:</a></span>
-                    <span class="d-block overflow-hidden"><?=$this->encryption->decrypt($user->password);?></span>
-                  </li> -->
-
-                  <?php if ($this->session->userdata('language_to_user') != 'AR'): ?>
 
                   <li class="mb-2">
-                    <span class="text-bold-500 primary"><a><i class="ft-user font-small-3"></i> <?=__('family_last_name_txt')?>:</a></span>
-                    <span class="d-block overflow-hidden"><?=$user->family_last_name_eng?></span>
-                  </li>
-
-                  <?php else: ?>
-
-                    <li class="mb-2">
-                      <span class="text-bold-500 primary"><a><i class="ft-user font-small-3"></i> <?=__('family_last_name_txt')?>:</a></span>
-                      <span class="d-block overflow-hidden"><?=$user->family_last_name_arabic?></span>
-                    </li>
-
-                  <?php endif; ?>
-
-                  <li class="mb-2">
-                    <span class="text-bold-500 primary"><a><i class="ft-user font-small-3"></i> <?=__('gender_txt')?>:</a></span>
-                    <span class="d-block overflow-hidden"><?=$user->gender?></span>
+                    <span class="text-bold-500 primary"><a>Full Name:</a></span>
+                    <span class="d-block overflow-hidden"><?=@$user->full_name?></span>
                   </li>
                 </ul>
               </div>
               <div class="col-12 col-md-6 col-lg-4">
                 <ul class="no-list-style">
 
-                  <?php if ($this->session->userdata('language_to_user') != 'AR'): ?>
-
-                    <li class="mb-2">
-                      <span class="text-bold-500 primary"><a><i class="ft-user font-small-3"></i> <?=__('first_name_txt')?>:</a></span>
-                      <span class="d-block overflow-hidden"><?=$user->first_name_eng?></span>
-                    </li>
-
-                  <?php else: ?>
-
-                    <li class="mb-2">
-                      <span class="text-bold-500 primary"><a><i class="ft-user font-small-3"></i> <?=__('first_name_txt')?>:</a></span>
-                      <span class="d-block overflow-hidden"><?=$user->first_name_arabic?></span>
-                    </li>
-
-                  <?php endif; ?>
-
                   <li class="mb-2">
-                    <span class="text-bold-500 primary"><a><i class="ft-mail font-small-3"></i> <?=__('university_email_txt')?>:</a></span>
-                    <a class="d-block overflow-hidden"><?=$user->university_email?></a>
-                  </li>
-                  <li class="mb-2">
-                    <span class="text-bold-500 primary"><a><i class="ft-globe font-small-3"></i> <?=__('nationality_txt')?>:</a></span>
-                    <span class="d-block overflow-hidden"><?=$user->nationality?></span>
+                    <span class="text-bold-500 primary"><a>Surename:</a></span>
+                    <span class="d-block overflow-hidden"><?=@$user->surename?></span>
                   </li>
                 </ul>
               </div>
               <div class="col-12 col-md-6 col-lg-4">
                 <ul class="no-list-style">
 
-                  <?php if ($this->session->userdata('language_to_user') != 'AR'): ?>
-
-                    <li class="mb-2">
-                      <span class="text-bold-500 primary"><a><i class="ft-user font-small-3"></i> <?=__('middle_name_txt')?>:</a></span>
-                      <span class="d-block overflow-hidden"><?=$user->middle_name_eng?></span>
-                    </li>
-
-                  <?php else: ?>
-
-                    <li class="mb-2">
-                      <span class="text-bold-500 primary"><a><i class="ft-user font-small-3"></i> <?=__('middle_name_txt')?>:</a></span>
-                      <span class="d-block overflow-hidden"><?=$user->middle_name_arabic?></span>
-                    </li>
-
-                  <?php endif; ?>
-
                   <li class="mb-2">
-                    <span class="text-bold-500 primary"><a><i class="ft-phone font-small-3"></i> <?=__('mobile_txt')?>:</a></span>
-                    <span class="d-block overflow-hidden"><?=$user->phone_2?></span>
+                    <span class="text-bold-500 primary"><a>Email:</a></span>
+                    <span class="d-block overflow-hidden"><?=@$user->email?></span>
                   </li>
-                  <li class="mb-2">
-                    <span class="text-bold-500 primary"><a><i class="ft-phone font-small-3"></i> <?=__('phone_txt')?>:</a></span>
-                    <span class="d-block overflow-hidden"><?=$user->phone_1?></span>
-                  </li>
-
                 </ul>
               </div>
               <div class="col-12 col-md-6 col-lg-4">
                 <ul class="no-list-style">
-                  <li class="mb-2">
-                    <span class="text-bold-500 primary"><a><i class="ft-phone-call font-small-3"></i> <?=__('emergency_number_for_after_few_hours')?>:</a></span>
-                    <a class="d-block overflow-hidden"><?=$user->emergency_numb?></a>
-                  </li>
 
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary"><a>Date Of Birth:</a></span>
+                    <span class="d-block overflow-hidden"><?=@$user->dob?></span>
+                  </li>
                 </ul>
               </div>
               <div class="col-12 col-md-6 col-lg-4">
                 <ul class="no-list-style">
-                  <li class="mb-2">
-                    <span class="text-bold-500 primary"><a><i class="ft-message-square font-small-3"></i> <?=__('fax_txt')?>:</a></span>
-                    <a class="d-block overflow-hidden"><?=$user->fax?></a>
-                  </li>
 
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary"><a>Gender:</a></span>
+                    <span class="d-block overflow-hidden"><?=@$user->gender?></span>
+                  </li>
                 </ul>
               </div>
-              <?php if ($user->user_status_type == 6 || ($user->user_status_type >= 2 && $user->user_status_type <= 4)): ?>
-
               <div class="col-12 col-md-6 col-lg-4">
                 <ul class="no-list-style">
+
                   <li class="mb-2">
-                    <?php $label = __('secondary_email_txt'); if (@$user->user_status_type == 2) {
-                        $label = __('research_interest_txt');
-                    } ?>
-                    <span class="text-bold-500 primary"><a><i class="ft-mail font-small-3"></i> <?=$label?>:</a></span>
-                    <a class="d-block overflow-hidden"><?=$user->secondary_email?></a>
+                    <span class="text-bold-500 primary"><a>Cnic / B-form:</a></span>
+                    <span class="d-block overflow-hidden"><?=@$user->cnic?></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 col-lg-4">
+                <ul class="no-list-style">
+
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary"><a>Show Cnic To Public :</a></span>
+                    <span class="d-block overflow-hidden"><?=(@$user->show_cnic_public == 1?'Yes':'No')?></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 col-lg-4">
+                <ul class="no-list-style">
+
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary"><a>Father Name:</a></span>
+                    <span class="d-block overflow-hidden"><?=@$user->father_name?></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 col-lg-4">
+                <ul class="no-list-style">
+
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary"><a>Nationality:</a></span>
+                    <span class="d-block overflow-hidden"><?=@$user->nationality?></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 col-lg-4">
+                <ul class="no-list-style">
+
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary"><a>Province:</a></span>
+                    <span class="d-block overflow-hidden"><?=@$user->province?></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 col-lg-4">
+                <ul class="no-list-style">
+
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary"><a>District:</a></span>
+                    <span class="d-block overflow-hidden"><?=@$user->district?></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 col-lg-4">
+                <ul class="no-list-style">
+
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary"><a>City:</a></span>
+                    <span class="d-block overflow-hidden"><?=@$user->city?></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 col-lg-4">
+                <ul class="no-list-style">
+
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary"><a>Zip Code:</a></span>
+                    <span class="d-block overflow-hidden"><?=@$user->zip_code?></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 col-lg-4">
+                <ul class="no-list-style">
+
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary"><a>Home Address:</a></span>
+                    <span class="d-block overflow-hidden"><?=@$user->home_address?></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 col-lg-4">
+                <ul class="no-list-style">
+
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary"><a>Permanent Address:</a></span>
+                    <span class="d-block overflow-hidden"><?=@$user->permanent_address?></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 col-lg-4">
+                <ul class="no-list-style">
+
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary"><a>Show Address To Public :</a></span>
+                    <span class="d-block overflow-hidden"><?=(@$user->show_address_public == 1?'Yes':'No')?></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 col-lg-4">
+                <ul class="no-list-style">
+
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary"><a>Bio :</a></span>
+                    <span class="d-block overflow-hidden"><?=@$user->bio?></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 col-lg-4">
+                <ul class="no-list-style">
+
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary"><a>Phone Number Code :</a></span>
+                    <span class="d-block overflow-hidden"><?=@$user->phone_no_code?></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 col-lg-4">
+                <ul class="no-list-style">
+
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary"><a>Phone Number :</a></span>
+                    <span class="d-block overflow-hidden"><?=@$user->phone_no?></span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div class="col-12 col-md-6 col-lg-4">
+                <ul class="no-list-style">
+
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary"><a>Show Phone Number Public :</a></span>
+                    <span class="d-block overflow-hidden"><?=(@$user->show_phone_no_public == 1?'Yes':'No')?></span>
                   </li>
                 </ul>
               </div>
 
-              <?php endif; ?>
-
-            </div>
+             </div>
             <hr>
 
           </div>
@@ -200,20 +251,20 @@
     <div class="col-sm-12">
       <div class="card">
         <div class="card-header">
-          <h5> <?=__('educational_info_txt')?></h5>
+          <h5> Additional Info </h5>
         </div>
         <div class="card-content">
           <div class="card-body">
             <div class="row">
 
-              <?php if ($user->user_status_type == 6 || ($user->user_status_type >= 2 && $user->user_status_type <= 4)): ?>
+              
 
                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                   <ul class="no-list-style">
 
                     <li class="mb-2">
-                      <span class="text-bold-500 primary"><a><i class="ft-layers font-small-3"></i> <?=__('college_txt')?>:</a></span>
-                      <a class="d-block overflow-hidden"><?=$user->colg_name?></a>
+                      <span class="text-bold-500 primary"><a> Campus:</a></span>
+                      <a class="d-block overflow-hidden"><?=@$user->campus_id?></a>
                     </li>
 
 
@@ -223,190 +274,89 @@
                   <ul class="no-list-style">
 
                     <li class="mb-2">
-                      <span class="text-bold-500 primary"><a><i class="ft-layers font-small-3"></i> <?=__('department_txt')?>:</a></span>
-                      <a class="d-block overflow-hidden"><?=$user->depart_name?></a>
+                      <span class="text-bold-500 primary"><a> Faculty:</a></span>
+                      <a class="d-block overflow-hidden"><?=@$user->faculty_id?></a>
                     </li>
 
 
                   </ul>
                 </div>
-              <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                <ul class="no-list-style">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <ul class="no-list-style">
 
-                  <li class="mb-2">
-                    <span class="text-bold-500 primary"><a><i class="ft-layers font-small-3"></i> <?=__('lab_name_txt')?>:</a></span>
-                    <a class="d-block overflow-hidden"><?=$user->lab_name?></a>
-                  </li>
+                    <li class="mb-2">
+                      <span class="text-bold-500 primary"><a> Department:</a></span>
+                      <a class="d-block overflow-hidden"><?=@$user->depart_id?></a>
+                    </li>
 
 
-                </ul>
-              </div>
+                  </ul>
+                </div>
 
+                <?php if(@$user->type == 'Student'): ?>
+                
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <ul class="no-list-style">
 
+                    <li class="mb-2">
+                      <span class="text-bold-500 primary"><a> Batch Year:</a></span>
+                      <a class="d-block overflow-hidden"><?=@$user->batch_year?></a>
+                    </li>
 
-            <?php endif; ?>
 
+                  </ul>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <ul class="no-list-style">
 
+                    <li class="mb-2">
+                      <span class="text-bold-500 primary"><a> Current Semester No:</a></span>
+                      <a class="d-block overflow-hidden"><?=@$user->current_semester_no?></a>
+                    </li>
 
-              <?php if ($user->user_status_type >= 2 && $user->user_status_type <= 3): ?>
 
-              <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                <ul class="no-list-style">
+                  </ul>
+                </div>
 
-                  <li class="mb-2">
-                    <span class="text-bold-500 primary"><a><i class="ft-home font-small-3"></i> <?=__('college_campus_txt')?>:</a></span>
-                    <a class="d-block overflow-hidden"><?=$user->campus?></a>
-                  </li>
+                <?php endif; ?>
+                
+                <?php if(@$user->type == 'Teacher'): ?>
+                
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <ul class="no-list-style">
 
+                    <li class="mb-2">
+                      <span class="text-bold-500 primary"><a>Designation:</a></span>
+                      <a class="d-block overflow-hidden"><?=@$user->designation?></a>
+                    </li>
 
 
-                </ul>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                <ul class="no-list-style">
+                  </ul>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <ul class="no-list-style">
 
-                  <li class="mb-2">
-                    <span class="text-bold-500 primary"><a><i class="ft-gitlab font-small-3"></i> <?=__('employee_id_numb_txt')?>:</a></span>
-                    <a class="d-block overflow-hidden"><?=$user->employee_id_numb?></a>
-                  </li>
+                    <li class="mb-2">
+                      <span class="text-bold-500 primary"><a> Speciality:</a></span>
+                      <a class="d-block overflow-hidden"><?=@$user->speciality?></a>
+                    </li>
 
-                </ul>
-              </div>
 
-            <?php endif; ?>
+                  </ul>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <ul class="no-list-style">
 
-            <?php if ($user->user_status_type == 4): ?>
+                    <li class="mb-2">
+                      <span class="text-bold-500 primary"><a> Last Degree:</a></span>
+                      <a class="d-block overflow-hidden"><?=@$user->last_degree?></a>
+                    </li>
 
-            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-              <ul class="no-list-style">
 
-                <li class="mb-2">
-                  <span class="text-bold-500 primary"><a><i class="ft-home font-small-3"></i> <?=__('college_campus_txt')?>:</a></span>
-                  <a class="d-block overflow-hidden"><?=$user->campus?></a>
-                </li>
-
-                <li class="mb-2">
-                  <span class="text-bold-500 primary"><a><i class="ft-file-text font-small-3"></i> <?=__('program_txt')?>:</a></span>
-                  <a class="d-block overflow-hidden"><?=$user->program_name?></a>
-                </li>
-
-
-
-              </ul>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-              <ul class="no-list-style">
-
-                <li class="mb-2">
-                  <span class="text-bold-500 primary"><a><i class="ft-gitlab font-small-3"></i> <?=__('uni_student_number_txt')?>:</a></span>
-                  <a class="d-block overflow-hidden"><?=$user->student_numb?></a>
-                </li>
-
-                <li class="mb-2">
-                  <span class="text-bold-500 primary"><a><i class="ft-gitlab font-small-3"></i> <?=__('scientific_degree_txt')?>:</a></span>
-                  <a class="d-block overflow-hidden"><?=$user->degree?></a>
-                </li>
-
-              </ul>
-            </div>
-
-          <?php endif; ?>
-
-          <?php if ($user->user_status_type == 6): ?>
-
-            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-              <ul class="no-list-style">
-
-                <li class="mb-2">
-                  <span class="text-bold-500 primary"><a><i class="ft-gitlab font-small-3"></i> <?=__('employee_id_numb_txt')?>:</a></span>
-                  <a class="d-block overflow-hidden"><?=$user->employee_id_numb?></a>
-                </li>
-
-                <li class="mb-2">
-                  <span class="text-bold-500 primary"><a><i class="ft-layers font-small-3"></i> <?=__('id_numb')?>:</a></span>
-                  <a class="d-block overflow-hidden"><?=$user->id_numb?></a>
-                </li>
-
-              </ul>
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-              <ul class="no-list-style">
-
-                <li class="mb-2">
-                  <span class="text-bold-500 primary"><a><i class="ft-gitlab font-small-3"></i> <?=__('university_txt')?>:</a></span>
-                  <a class="d-block overflow-hidden"><?=$user->university?></a>
-                </li>
-
-                <li class="mb-2">
-                  <span class="text-bold-500 primary"><a><i class="ft-layers font-small-3"></i> <?=__('college_txt')?>:</a></span>
-                  <a class="d-block overflow-hidden"><?=$user->college?></a>
-                </li>
-
-
-
-              </ul>
-            </div>
-
-
-
-        <?php endif; ?>
-
-
-        <?php if ($user->user_status_type == 5 || $user->user_status_type == 0): ?>
-
-          <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-            <ul class="no-list-style">
-
-              <li class="mb-2">
-                <span class="text-bold-500 primary"><a><i class="ft-gitlab font-small-3"></i> <?=__('employee_id_numb_txt')?>:</a></span>
-                <a class="d-block overflow-hidden"><?=$user->employee_id_numb?></a>
-              </li>
-
-              <li class="mb-2">
-                <span class="text-bold-500 primary"><a><i class="ft-layers font-small-3"></i> <?=__('id_number_txt')?>:</a></span>
-                <a class="d-block overflow-hidden"><?=$user->id_numb?></a>
-              </li>
-
-            </ul>
-          </div>
-
-          <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-            <ul class="no-list-style">
-
-              <li class="mb-2"> <?php $label1 = __('university_txt'); if (@$user->user_status >= 11){ $label1 = __('institute_or_college_txt');} ?>
-                <span class="text-bold-500 primary"><a><i class="ft-gitlab font-small-3"></i> <?=$label1?>:</a></span>
-                <a class="d-block overflow-hidden"><?=$user->university?></a>
-              </li>
-
-              <li class="mb-2">
-                <span class="text-bold-500 primary"><a><i class="ft-layers font-small-3"></i> <?=__('college_txt')?>:</a></span>
-                <a class="d-block overflow-hidden"><?=$user->college?></a>
-              </li>
-
-
-
-            </ul>
-          </div>
-          <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-            <ul class="no-list-style">
-
-              <li class="mb-2">
-                <span class="text-bold-500 primary"><a><i class="ft-gitlab font-small-3"></i> <?=__('depart_name_txt')?>:</a></span>
-                <a class="d-block overflow-hidden"><?=$user->department_name?></a>
-              </li>
-
-
-
-            </ul>
-          </div>
-
-
-
-      <?php endif; ?>
-
-
-
+                  </ul>
+                </div>
+              
+                <?php endif; ?>
 
 
             </div>

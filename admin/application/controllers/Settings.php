@@ -33,17 +33,17 @@ class Settings extends CI_Controller {
 
 
 
-    public function save_settings()
+    public function save_settings() 
     {
 
       $p = $this->input->post();
-
+      
       $array['value'] = '';
 
       switch ($p['type']) {
 
         case 'general_setting':
-
+        
           //sidebar_logo
           $logo = $_FILES['logo'];
 
@@ -54,9 +54,9 @@ class Settings extends CI_Controller {
           }
 
           if ($array['value'] != '') {
-
+            
             $this->bm->updateRow('admin_panel_setting',$array,'name','LOGO');
-
+          
           }
 
           //sidebar_img
@@ -65,13 +65,13 @@ class Settings extends CI_Controller {
             $array['value'] = $sidebar_img_name;
             $this->session->set_userdata('sidebar_img', $sidebar_img_name);
           }
-
+    
           if ($array['value'] != '') {
 
             $this->bm->updateRow('admin_panel_setting',$array,'name','SIDEBAR_IMG');
 
           }
-
+          
           $array['value'] = $p['name'];
 
           if ($array['value'] != '') {
@@ -83,7 +83,7 @@ class Settings extends CI_Controller {
           }
 
           $array['value'] = $p['footer'];
-
+          
           if ($array['value'] != '') {
 
             $this->bm->updateRow('admin_panel_setting',$array,'name','FOOTER');
@@ -91,22 +91,22 @@ class Settings extends CI_Controller {
             $this->session->set_userdata('footer', $p['footer']);
 
           }
-
+          
           break;
 
         case 'slider':
-
+      
           //slider_image
           $slider_image = $_FILES['slider_image'];
-
+          
           $img = $this->bm->uploadMultiFiles($slider_image, 'uploads/slider_image');
-
+          
           if (count($p['title']) > 0) {
-
+            
             foreach ($p['title'] as $key => $v) {
-
+                
                 $arr[] = [
-
+                
                 'image' => $img[$key],
                 'title' => $p['title'][$key],
                 'title_color' => $p['title_color'][$key],
@@ -114,9 +114,9 @@ class Settings extends CI_Controller {
                 'description' => $p['description'][$key],
                 'description_color' => $p['description_color'][$key],
                 'description_link' => $p['description_link'][$key]
-
+                
               ];
-
+              
             }
 
             $this->bm->insertRows('slider_setting',$arr);
@@ -124,7 +124,7 @@ class Settings extends CI_Controller {
           }
 
           break;
-
+  
 
       }
 
@@ -151,20 +151,20 @@ class Settings extends CI_Controller {
     {
 
       $id = hashids_decrypt($id);
-
+      
       switch ($type) {
-
+        
         case 'slider_setting':
-
+          
           $this->bm->delete('slider_setting','id',$id);
 
           $this->session->set_flashdata(array('response' => 'success', 'msg' => 'Slider Setting Deleted Successfully' ));
           redirect('settings');
 
           break;
-
+        
       }
-
+      
 
     }
 
@@ -232,7 +232,7 @@ class Settings extends CI_Controller {
       }
 
       $id = hashids_decrypt($id);
-
+      
       $this->bm->updateRow('slider_setting',$arr,'id',$id);
 
       $this->session->set_flashdata(array('response' => 'success', 'msg' => 'Slider Setting Updated Successfully' ));
@@ -251,3 +251,4 @@ class Settings extends CI_Controller {
 
 
 }
+

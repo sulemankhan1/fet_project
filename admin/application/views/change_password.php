@@ -74,12 +74,12 @@ $alert_msg=$this->session->userdata('alert_msg');
                   <h4 class="mb-2 card-title">Change Password</h4>
                   <p class="card-text mb-3">
                   </p>
-                  <?php if ($setting->logo != ''): ?>
+                  <?php if (@getimagesize(base_url('uploads/sidebar_logo/'.$logo->value))): ?>
 
-                    <img src="<?=base_url('uploads/'.$setting->logo)?>" style="max-height: 125px;max-width: 215px;margin-bottom:10px;">
+                    <img src="<?=base_url('uploads/sidebar_logo/'.$logo->value)?>" style="max-height: 125px;max-width: 215px;margin-bottom:10px;">
                     <?php else: ?>
 
-                    <img src="<?=base_url('app-assets/img/logos/logo-big-black.png')?>" style="max-height: 125px;max-width: 215px;">
+                    <img src="<?=base_url('app-assets/images/no-image-available.png')?>" style="max-height: 125px;max-width: 215px;">
                   <?php endif; ?>
                   <?php
                       if (!empty($alert_msg)) {
@@ -103,16 +103,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                       <?php } ?>
                   <input type="password" class="form-control mb-3" name="new_password" id="txtPassword" placeholder="new password" />
                   <input type="password" class="form-control mb-1" name="confirmed_password" id="txtConfirmPassword" placeholder="confirm password" />
-                  <div class="d-flex justify-content-between mt-2">
-                    <div class="remember-me">
-                      <!-- <div class="custom-control custom-checkbox custom-control-inline mb-3"> -->
-                        <!-- <input type="checkbox" id="customCheckboxInline1" name="customCheckboxInline1" class="custom-control-input" /> -->
-                        <!-- <label class="custom-control-label" for="customCheckboxInline1"> -->
-                          <!-- Remember Me -->
-                        <!-- </label> -->
-                      <!-- </div> -->
-                    </div>
-                  </div>
+                  
                   <div class="fg-actions d-flex justify-content-between">
                     <div class="recover-pass">
                       <button type="submit" class="btn btn-primary text-decoration-none text-white" id="btnSubmit" name="submit">
@@ -146,18 +137,6 @@ $alert_msg=$this->session->userdata('alert_msg');
     <script src="<?=base_url('app-assets/vendors/js/core/jquery-3.2.1.min.js')?>" type="text/javascript"></script>
     <script src="<?=base_url('app-assets/vendors/js/core/popper.min.js')?>" type="text/javascript"></script>
     <script src="<?=base_url('app-assets/vendors/js/core/bootstrap.min.js')?>" type="text/javascript"></script>
-    <script src="<?=base_url('app-assets/vendors/js/perfect-scrollbar.jquery.min.js')?>" type="text/javascript"></script>
-    <script src="<?=base_url('app-assets/vendors/js/prism.min.js')?>" type="text/javascript"></script>
-    <script src="<?=base_url('app-assets/vendors/js/jquery.matchHeight-min.js')?>" type="text/javascript"></script>
-    <script src="<?=base_url('app-assets/vendors/js/screenfull.min.js')?>" type="text/javascript"></script>
-    <script src="<?=base_url('app-assets/vendors/js/pace/pace.min.js')?>" type="text/javascript"></script>
-    <!-- BEGIN VENDOR JS-->
-    <!-- BEGIN PAGE VENDOR JS-->
-    <!-- END PAGE VENDOR JS-->
-    <!-- BEGIN APEX JS-->
-    <script src="<?=base_url('app-assets/js/app-sidebar.js')?>" type="text/javascript"></script>
-    <script src="<?=base_url('app-assets/js/notification-sidebar.js')?>" type="text/javascript"></script>
-    <script src="<?=base_url('app-assets/js/customizer.js')?>" type="text/javascript"></script>
 
     <script type="text/javascript">
 

@@ -10,7 +10,7 @@ $route['login'] = 'auth/index';
 
 //forgetpassword
 $route['forget_password'] = 'auth/forget_password_email';
-$route['send_token'] = 'auth/is_university_email_valid';
+$route['send_token'] = 'auth/is_email_valid';
 $route['change_password/(:any)'] = 'auth/change_password/$1';
 $route['password_changed'] = 'auth/password_changed';
 
@@ -33,10 +33,12 @@ $route['delete_department/(:any)'] = 'departments/delete_department/$1';
 $route['create_user'] = 'users/create_user';
 $route['save_user'] = 'users/save_user';
 $route['edit_user/(:any)'] = 'users/edit_user/$1';
-$route['view_active_users'] = 'users/view_active_users';
-$route['view_deactive_users'] = 'users/view_deactive_users';
+$route['update_user'] = 'users/update_user';
+$route['view_users/(:any)'] = 'users/view_users/$1';
 $route['change_user_status/(:any)'] = 'users/change_user_status/$1';
 $route['delete_user/(:any)'] = 'users/delete_user/$1';
+$route['view_user/(:any)'] = 'users/user_details/$1';
+
 
 
 //roles
@@ -50,7 +52,8 @@ $route['delete_role/(:any)'] = 'roles/delete_role/$1';
 //profile
 $route['edit_profile'] = 'profile/edit_profile';
 $route['update_profile'] = 'profile/update_profile';
-$route['view_profile'] = 'profile/view_profile';
+$route['view_profile/(:any)'] = 'users/user_details/$1';
+$route['change_password'] = 'profile/change_password';
 $route['update_password'] = 'profile/update_password';
 $route['notification_settings'] = 'profile/notification_settings';
 

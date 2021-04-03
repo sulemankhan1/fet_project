@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2021 at 05:20 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.1.28
+-- Generation Time: Apr 02, 2021 at 05:27 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `fet_database`
+-- Database: `fet`
 --
 
 -- --------------------------------------------------------
@@ -367,27 +366,18 @@ INSERT INTO `faculty` (`FAC_ID`, `FAC_NAME`, `REMARKS`) VALUES
 CREATE TABLE `news_notifications` (
   `NOTIFICATION_ID` int(11) NOT NULL,
   `FAC_ID` int(11) NOT NULL,
-  `DEPT_ID` varchar(255) NOT NULL,
+  `DEPT_ID` int(11) NOT NULL,
   `NOTIFY_TYPE_ID` int(11) NOT NULL,
   `NOTIFICATION_FOR` varchar(255) NOT NULL,
-  `TITLE` text,
-  `DESCRIPTION` longtext,
+  `TITLE` text DEFAULT NULL,
+  `DESCRIPTION` longtext DEFAULT NULL,
   `DATA_TIME` datetime DEFAULT NULL,
-  `IMAGE_PATH` text,
+  `IMAGE_PATH` text DEFAULT NULL,
   `PUBLISHER_ID` int(11) DEFAULT NULL,
   `USER_TYPE_ID` varchar(256) DEFAULT NULL,
   `PROG_ID` varchar(256) DEFAULT NULL,
   `REMARKS` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `news_notifications`
---
-
-INSERT INTO `news_notifications` (`NOTIFICATION_ID`, `FAC_ID`, `DEPT_ID`, `NOTIFY_TYPE_ID`, `NOTIFICATION_FOR`, `TITLE`, `DESCRIPTION`, `DATA_TIME`, `IMAGE_PATH`, `PUBLISHER_ID`, `USER_TYPE_ID`, `PROG_ID`, `REMARKS`) VALUES
-(1, 9, '57', 1, 'specific_faculty', 'asdfasdfasdf', '<p><strong>asdfasdfasdf</strong></p>\r\n', NULL, '', 1, NULL, '62', 'asdfasdfasdf'),
-(2, 0, '0', 2, 'everyone', 'asdfasd', '<p>asdfasdasdfasdf</p>\r\n', NULL, 'uploads/notifications_images/128057981_MG_0036.JPG', 1, NULL, NULL, 'asdfasdf'),
-(3, 5, '10', 1, 'specific_faculty', 'asdfasd', '<p>asdfasdasdfasdf</p>\r\n', NULL, 'uploads/notifications_images/1487831377_MG_0036.JPG', 1, NULL, 'all', 'asdfasdf');
 
 -- --------------------------------------------------------
 
@@ -401,7 +391,7 @@ CREATE TABLE `notifications` (
   `msg` text NOT NULL,
   `redirect_link` text NOT NULL,
   `is_seen` tinyint(1) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `datetime` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -469,7 +459,7 @@ CREATE TABLE `notification_settings` (
   `notf_accepted_usage_req` tinyint(1) NOT NULL,
   `notf_ret_usage_req` tinyint(1) NOT NULL,
   `email_notification` varchar(255) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT current_timestamp(),
   `notf_gen_chem_inv_req` tinyint(1) NOT NULL,
   `notf_acc_chem_inv_req` tinyint(1) NOT NULL,
   `notf_rej_chem_inv_req` tinyint(1) NOT NULL,
@@ -521,6 +511,19 @@ INSERT INTO `notification_type` (`NOTIFY_TYPE_ID`, `NAME`, `REMARKS`) VALUES
 (11, 'Univeristy Campus', NULL),
 (12, 'Affiliate Colleges', NULL),
 (13, 'Student Notice', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_reset`
+--
+
+CREATE TABLE `password_reset` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `token` int(11) NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -906,136 +909,34 @@ INSERT INTO `program` (`PROG_ID`, `DEPT_ID`, `PROGRAM_TITLE`, `SEM_DURATION`, `S
 --
 
 CREATE TABLE `roles` (
-  `role_id` int(11) NOT NULL,
-  `role_name` varchar(150) NOT NULL,
-  `role_type` int(11) NOT NULL,
-  `college_s` varchar(3) NOT NULL,
-  `college_ps` varchar(3) NOT NULL,
-  `college_a` varchar(3) NOT NULL,
-  `college_e` varchar(3) NOT NULL,
-  `college_d` varchar(3) NOT NULL,
-  `college_v` varchar(3) NOT NULL,
-  `depart_s` varchar(3) NOT NULL,
-  `depart_ps` varchar(3) NOT NULL,
-  `depart_s_colg` varchar(3) NOT NULL,
-  `depart_a` varchar(3) NOT NULL,
-  `depart_a_colg` varchar(3) NOT NULL,
-  `depart_e` varchar(3) NOT NULL,
-  `depart_d` varchar(3) NOT NULL,
-  `depart_v` varchar(3) NOT NULL,
-  `lab_s` varchar(3) NOT NULL,
-  `lab_ps` varchar(3) NOT NULL,
-  `lab_s_colg` varchar(3) NOT NULL,
-  `lab_s_depart` varchar(3) NOT NULL,
-  `lab_a` varchar(3) NOT NULL,
-  `lab_a_colg` varchar(3) NOT NULL,
-  `lab_a_depart` varchar(3) NOT NULL,
-  `lab_e` varchar(3) NOT NULL,
-  `lab_d` varchar(3) NOT NULL,
-  `my_lab` varchar(3) NOT NULL,
-  `machine_s` varchar(3) NOT NULL,
-  `machine_colg_s` varchar(3) NOT NULL DEFAULT 'yes',
-  `machine_depart_s` varchar(3) NOT NULL,
-  `machine_lab_s` varchar(3) NOT NULL,
-  `machine_a` varchar(3) NOT NULL,
-  `machine_a_colg` varchar(3) NOT NULL,
-  `machine_a_depart` varchar(3) NOT NULL,
-  `machine_a_lab` varchar(3) NOT NULL,
-  `machine_e` varchar(3) NOT NULL,
-  `machine_d` varchar(3) NOT NULL,
-  `machine_v` varchar(3) NOT NULL,
-  `machine_exp` varchar(3) NOT NULL,
-  `user_sa` varchar(3) NOT NULL,
-  `user_sd` varchar(3) NOT NULL,
-  `user_a_to_d` varchar(3) NOT NULL,
-  `user_d_to_a` varchar(3) NOT NULL,
-  `user_a` varchar(3) NOT NULL,
-  `user_va` varchar(3) NOT NULL,
-  `user_vd` varchar(3) NOT NULL,
-  `user_ad` varchar(3) NOT NULL,
-  `user_dd` varchar(3) NOT NULL,
-  `maintenance_sysr` varchar(3) NOT NULL,
-  `maintenance_sys_colg_r` varchar(3) NOT NULL DEFAULT 'yes',
-  `maintenance_sys_lab_r` varchar(3) NOT NULL,
-  `maintenance_sys_depart_r` varchar(3) NOT NULL,
-  `maintenance_str` varchar(3) NOT NULL,
-  `maintenance_st_colg_r` varchar(3) NOT NULL DEFAULT 'yes',
-  `maintenance_st_lab_r` varchar(3) NOT NULL,
-  `maintenance_st_depart_r` varchar(3) NOT NULL,
-  `maintenance_pstr` varchar(3) NOT NULL,
-  `maintenance_a` varchar(3) NOT NULL,
-  `maintenance_a_colg` varchar(3) NOT NULL,
-  `maintenance_a_depart` varchar(3) NOT NULL,
-  `change_sys_st` varchar(3) NOT NULL,
-  `change_students_st` varchar(3) NOT NULL,
-  `usage_s` varchar(3) NOT NULL,
-  `usage_colg_s` varchar(3) NOT NULL DEFAULT 'yes',
-  `usage_lab_s` varchar(3) NOT NULL,
-  `usage_depart_s` varchar(3) NOT NULL,
-  `usage_ps` varchar(3) NOT NULL,
-  `usage_a` varchar(3) NOT NULL,
-  `user_ea` varchar(3) NOT NULL,
-  `user_ed` varchar(3) NOT NULL,
-  `usage_change_st` varchar(3) NOT NULL,
-  `order_s` varchar(3) NOT NULL,
-  `order_ps` varchar(3) NOT NULL,
-  `order_s_colg` varchar(3) NOT NULL,
-  `order_s_depart` varchar(3) NOT NULL,
-  `order_s_lab` varchar(3) NOT NULL,
-  `order_a` varchar(3) NOT NULL,
-  `order_a_colg` varchar(3) NOT NULL,
-  `order_a_depart` varchar(3) NOT NULL,
-  `order_a_lab` varchar(3) NOT NULL,
-  `order_e` varchar(3) NOT NULL,
-  `order_d` varchar(3) NOT NULL,
-  `order_v` varchar(3) NOT NULL,
-  `order_change_st` varchar(3) NOT NULL,
-  `usage_add_lab` varchar(3) NOT NULL,
-  `maintenance_a_lab` varchar(3) NOT NULL,
-  `usage_add_colg` varchar(3) NOT NULL,
-  `usage_add_depart` varchar(3) NOT NULL,
-  `chem_storage_a` varchar(3) NOT NULL,
-  `chem_storage_e` varchar(3) NOT NULL,
-  `chem_storage_del` varchar(3) NOT NULL,
-  `chem_storage_s` varchar(3) NOT NULL,
-  `chem_storage_s_lab` varchar(3) NOT NULL,
-  `chem_storage_gen_req` varchar(3) NOT NULL,
-  `chem_storage_gen_req_lab` varchar(3) NOT NULL,
-  `chem_req_s` varchar(3) NOT NULL,
-  `chem_req_s_lab` varchar(3) NOT NULL,
-  `chem_req_s_gen` varchar(3) NOT NULL,
-  `chem_req_change_st` varchar(3) NOT NULL,
-  `animal_s` varchar(3) NOT NULL,
-  `animal_s_colg` varchar(3) NOT NULL,
-  `animal_s_depart` varchar(3) NOT NULL,
-  `animal_s_lab` varchar(3) NOT NULL,
-  `animal_a` varchar(3) NOT NULL,
-  `animal_a_colg` varchar(3) NOT NULL,
-  `animal_a_depart` varchar(3) NOT NULL,
-  `animal_a_lab` varchar(3) NOT NULL,
-  `animal_e` varchar(3) NOT NULL,
-  `animal_del` varchar(3) NOT NULL,
-  `animal_vd` varchar(3) NOT NULL,
-  `cage_a` varchar(3) NOT NULL
+  `id` int(255) NOT NULL,
+  `name` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `roles`
 --
 
-INSERT INTO `roles` (`role_id`, `role_name`, `role_type`, `college_s`, `college_ps`, `college_a`, `college_e`, `college_d`, `college_v`, `depart_s`, `depart_ps`, `depart_s_colg`, `depart_a`, `depart_a_colg`, `depart_e`, `depart_d`, `depart_v`, `lab_s`, `lab_ps`, `lab_s_colg`, `lab_s_depart`, `lab_a`, `lab_a_colg`, `lab_a_depart`, `lab_e`, `lab_d`, `my_lab`, `machine_s`, `machine_colg_s`, `machine_depart_s`, `machine_lab_s`, `machine_a`, `machine_a_colg`, `machine_a_depart`, `machine_a_lab`, `machine_e`, `machine_d`, `machine_v`, `machine_exp`, `user_sa`, `user_sd`, `user_a_to_d`, `user_d_to_a`, `user_a`, `user_va`, `user_vd`, `user_ad`, `user_dd`, `maintenance_sysr`, `maintenance_sys_colg_r`, `maintenance_sys_lab_r`, `maintenance_sys_depart_r`, `maintenance_str`, `maintenance_st_colg_r`, `maintenance_st_lab_r`, `maintenance_st_depart_r`, `maintenance_pstr`, `maintenance_a`, `maintenance_a_colg`, `maintenance_a_depart`, `change_sys_st`, `change_students_st`, `usage_s`, `usage_colg_s`, `usage_lab_s`, `usage_depart_s`, `usage_ps`, `usage_a`, `user_ea`, `user_ed`, `usage_change_st`, `order_s`, `order_ps`, `order_s_colg`, `order_s_depart`, `order_s_lab`, `order_a`, `order_a_colg`, `order_a_depart`, `order_a_lab`, `order_e`, `order_d`, `order_v`, `order_change_st`, `usage_add_lab`, `maintenance_a_lab`, `usage_add_colg`, `usage_add_depart`, `chem_storage_a`, `chem_storage_e`, `chem_storage_del`, `chem_storage_s`, `chem_storage_s_lab`, `chem_storage_gen_req`, `chem_storage_gen_req_lab`, `chem_req_s`, `chem_req_s_lab`, `chem_req_s_gen`, `chem_req_change_st`, `animal_s`, `animal_s_colg`, `animal_s_depart`, `animal_s_lab`, `animal_a`, `animal_a_colg`, `animal_a_depart`, `animal_a_lab`, `animal_e`, `animal_del`, `animal_vd`, `cage_a`) VALUES
-(1, 'Other', 6, 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', '', 'no', 'no', 'no', 'no', '', '', '', '', '', '', '', '', '', '', '', ''),
-(2, 'admin', 1, 'yes', 'no', 'yes', 'yes', 'yes', 'no', 'yes', 'no', 'no', 'yes', 'no', 'yes', 'yes', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'yes', 'no', 'yes', 'no', 'yes', 'no', 'no', 'yes', '', '', '', '', '', '', '', '', '', '', '', ''),
-(3, 'Faculty', 2, 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'yes', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'yes', 'no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', '', 'no', 'no', 'no', 'no', '', '', '', '', '', '', '', '', '', '', '', ''),
-(4, 'Lab Manager', 3, 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'yes', 'yes', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', '', 'no', 'no', 'no', 'no', '', '', '', '', '', '', '', '', '', '', '', ''),
-(5, 'Post-Doctoral', 3, 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', '', 'no', 'no', 'no', 'no', '', '', '', '', '', '', '', '', '', '', '', ''),
-(6, 'Resident/Fellow', 3, 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', '', 'no', 'no', 'no', 'no', '', '', '', '', '', '', '', '', '', '', '', ''),
-(7, 'Researcher', 3, 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', '', 'no', 'no', 'no', 'no', '', '', '', '', '', '', '', '', '', '', '', ''),
-(8, 'Technician', 3, 'no', 'yes', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', '', 'no', 'no', 'no', 'no', '', '', '', '', '', '', '', '', '', '', '', ''),
-(9, 'Employee', 3, 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', '', 'no', 'no', 'no', 'no', '', '', '', '', '', '', '', '', '', '', '', ''),
-(10, 'Graduate Student', 4, 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', '', 'no', 'no', 'no', 'no', '', '', '', '', '', '', '', '', '', '', '', ''),
-(11, 'Undergraduate Student', 4, 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', '', 'no', 'no', 'no', 'no', '', '', '', '', '', '', '', '', '', '', '', ''),
-(12, 'guest', 5, 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', '', 'no', 'no', 'no', 'no', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `roles` (`id`, `name`) VALUES
+(1, 'Other'),
+(2, 'Superadmin'),
+(3, 'Admin'),
+(4, 'Faculty'),
+(5, 'Teacher'),
+(6, 'Student');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles_details`
+--
+
+CREATE TABLE `roles_details` (
+  `id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `value` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1077,7 +978,7 @@ CREATE TABLE `slider_setting` (
   `description` varchar(255) NOT NULL,
   `description_color` varchar(50) DEFAULT NULL,
   `description_link` varchar(255) DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1'
+  `active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -1095,26 +996,51 @@ INSERT INTO `slider_setting` (`id`, `image`, `title`, `title_color`, `title_link
 --
 
 CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL,
-  `user_img` varchar(255) NOT NULL,
+  `id` int(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `title` varchar(10) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `full_name` varchar(255) NOT NULL,
+  `surename` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `dob` date DEFAULT NULL,
   `gender` enum('male','female') NOT NULL,
-  `nationality` varchar(200) NOT NULL,
-  `is_active` varchar(20) NOT NULL,
-  `token` int(11) DEFAULT NULL,
-  `token_dateTime` datetime DEFAULT NULL,
-  `email_notification` enum('enable','disable') NOT NULL,
-  `user_status` int(11) NOT NULL COMMENT 'role',
-  `account_status` varchar(50) NOT NULL
+  `cnic` varchar(20) NOT NULL,
+  `show_cnic_public` tinyint(1) NOT NULL DEFAULT 0,
+  `father_name` varchar(150) NOT NULL,
+  `nationality` varchar(50) NOT NULL,
+  `province` varchar(50) NOT NULL,
+  `district` varchar(50) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `home_address` varchar(255) NOT NULL,
+  `permanent_address` varchar(255) NOT NULL,
+  `zip_code` varchar(30) NOT NULL,
+  `show_address_public` tinyint(1) NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `bio` varchar(255) NOT NULL,
+  `phone_no_code` varchar(11) NOT NULL,
+  `phone_no` varchar(50) NOT NULL,
+  `show_phone_no_public` tinyint(1) NOT NULL DEFAULT 0,
+  `account_verified` tinyint(1) NOT NULL DEFAULT 0,
+  `reg_datetime` timestamp NULL DEFAULT current_timestamp(),
+  `account_active` tinyint(1) NOT NULL DEFAULT 0,
+  `deactivated_on` timestamp NULL DEFAULT NULL,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_img`, `username`, `password`, `gender`, `nationality`, `is_active`, `token`, `token_dateTime`, `email_notification`, `user_status`, `account_status`) VALUES
-(1, '912271381Profile-PNG-Icon.png', 'admin', '6d9ddacd9fcb13298d34b3876da0ddbb7488fe656fdf33a8df9aa5d4b5c63a6e1f7608ad361513add944a558bcbd42304d860b172ab5f701d3785dd55d825928oTqsUvtMcd7hd9Pxcdwkv4GZdDT7N+bnmC3FQKjPLjE=', 'male', 'Pakistani', 'active', 52068, '2020-10-12 01:12:30', '', 2, '');
+INSERT INTO `users` (`id`, `image`, `title`, `username`, `password`, `full_name`, `surename`, `email`, `dob`, `gender`, `cnic`, `show_cnic_public`, `father_name`, `nationality`, `province`, `district`, `city`, `home_address`, `permanent_address`, `zip_code`, `show_address_public`, `type`, `role_id`, `bio`, `phone_no_code`, `phone_no`, `show_phone_no_public`, `account_verified`, `reg_datetime`, `account_active`, `deactivated_on`, `is_deleted`) VALUES
+(1, '1245787577america.png', 'Mr', 'admin', '18cfa8bbcd660afa40c027d7fb49a642b095b1eb1e8873a758daf1830e25f66d9cd30615344d45e86244f80b5059088c18b501cf239a01f358d7c60bec4014b1+LwoXdFPpmmktGxCVHITQtIQVl+X3xJbJKIqKQJfEzs=', '', '', 'admin@gmail.com', NULL, 'male', '', 1, '', '', '', '', '', '', '', '', 0, 'Superadmin', 2, '', '0', '', 1, 0, '2021-04-01 11:16:53', 1, NULL, 0),
+(2, '', 'Ms', 'username2', '0', 'asfasf', 'surename', 'asfas@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, 0, '2021-04-01 20:16:30', 0, NULL, 0),
+(3, '', 'Ms', 'username3', '0', 'asfasf', 'surename', 'asfa1s@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, 0, '2021-04-01 20:17:06', 0, NULL, 0),
+(4, '1245787577america.png', 'Mr', 'username4', '0', 'hkj@Gmail.com', 'asfas', 'kj', '2019-11-29', 'female', 'safgasfasf', 0, 'asfasf', 'safasf', 'sadfasf', 'wfdsafasf', 'gkj', 'asfa', 'safasf', '', 0, '', 6, 'sdgdsgasdg', '92', '92', 0, 0, '2021-04-01 20:35:11', 0, NULL, 0),
+(5, '', 'Ms', 'username5', '60d6286756664a00529f479cf4a587f37ff85d5414368c79bde505d47261a01c308d09d4f35e2002ddf6052bf62cc773a8a8c5af6f2ebb1b4a5b02669108fef2b8R2B1KUAsge1//C+qsLOVcFWIw5sQYu2XvKOnUdG9s=', '11', 'sdfsd', 'sdfsdf@gmail.com', '2021-04-07', 'male', '444342134', 1, 'asfasfasf', 'afsas', 'a', 'asf', 'asf', 'safaf', 'asfsafasf', '', 0, 'Other', 1, 'asfasfas', '323', '32232223', 0, 0, '2021-04-02 04:52:31', 0, NULL, 0),
+(6, '361688680romanian.png', 'Ms', 'username6', '042ac6ebade10f1e9db85dc627e817685c004ed27215d7e01543f3f636f569e8e968f535cea6f8620ea5e3f7c32788b7c063a431cf4220492ddab3633a8f00e67Ez1aKJObhYcSHHOwGCeLUZ7GeYuc2rcX+aHNhoy3j0=', '1', '1', '1', '0001-01-10', 'female', '1111', 1, '111', '111', '111', '11', '111', '111', '111', '324', 1, 'Teacher', 5, '111', '11', '11', 1, 0, '2021-04-02 07:50:35', 1, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -1123,104 +1049,28 @@ INSERT INTO `users` (`user_id`, `user_img`, `username`, `password`, `gender`, `n
 --
 
 CREATE TABLE `users_info` (
-  `info_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `college_id` int(11) NOT NULL,
+  `roll_number` varchar(20) DEFAULT NULL,
+  `campus_id` int(11) NOT NULL,
+  `faculty_id` int(11) NOT NULL,
   `depart_id` int(11) NOT NULL,
-  `department_name` varchar(150) NOT NULL,
-  `laboratory_numb` varchar(255) NOT NULL,
-  `phone_1` varchar(30) NOT NULL,
-  `fax` varchar(255) NOT NULL,
-  `phone_2` varchar(30) NOT NULL,
-  `emergency_numb` varchar(30) NOT NULL,
-  `university_email` varchar(100) NOT NULL,
-  `secondary_email` varchar(100) NOT NULL,
-  `campus` enum('male','female') DEFAULT NULL,
-  `employee_id_numb` varchar(100) DEFAULT NULL,
-  `program_id` int(11) DEFAULT NULL,
-  `degree` enum('Bachelor','Master','Ph.D') DEFAULT NULL,
-  `student_numb` varchar(100) DEFAULT NULL,
-  `university` varchar(100) DEFAULT NULL,
-  `college` varchar(100) DEFAULT NULL,
-  `id_numb` varchar(100) DEFAULT NULL
+  `batch_year` varchar(5) NOT NULL,
+  `current_semester_no` int(11) DEFAULT NULL,
+  `designation` varchar(150) DEFAULT NULL,
+  `speciality` varchar(150) DEFAULT NULL,
+  `last_degree` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users_info`
 --
 
-INSERT INTO `users_info` (`info_id`, `user_id`, `college_id`, `depart_id`, `department_name`, `laboratory_numb`, `phone_1`, `fax`, `phone_2`, `emergency_numb`, `university_email`, `secondary_email`, `campus`, `employee_id_numb`, `program_id`, `degree`, `student_numb`, `university`, `college`, `id_numb`) VALUES
-(5, 7, 0, 3, '', '4', '123456', '123456', '123456sadasf', '123456', 'uni@gmail.com', 'uni2@gmail.com', 'male', NULL, 6, 'Bachelor', '123456aaa', NULL, NULL, NULL),
-(6, 8, 0, 2, '', '3', 'kjh', 'kjh', 'kjh', 'kjh', 'kjh@gmail.com', 'asa@gmail.com', 'male', 'safajkqjkh', NULL, NULL, NULL, NULL, NULL, NULL),
-(7, 9, 0, 0, '', '', 'g', 'dsd', 'dsdsg', 'dsdsg', 'dsdds@gmail.com', '', NULL, 'sdgsdg', NULL, NULL, NULL, 'afa', 'dsgdsds', 'sdsdg'),
-(8, 10, 0, 3, '', '4', 'gj', 'hg', 'jh', 'gj', 'gjh@gmail.com', 'sasfas@gmail.com', 'male', NULL, 5, 'Bachelor', 'afasJjhGjh', NULL, NULL, NULL),
-(9, 12, 0, 0, '', '', '', '', '', '', '', '', NULL, '', NULL, NULL, NULL, '', '', ''),
-(10, 13, 0, 0, 'sjdg', '', 'sdg', 'sdkjh', 'sdjkgk', 'sdkjgdhjkghq', 'aa@gmail.com', '', NULL, 'sdjgk', NULL, NULL, NULL, 'afhkj', 'jkdg', 'sdkjg'),
-(11, 14, 0, 0, 'dsg', '', 'dsg', 'dg`s', 'afs', 'afa', 'ga@gmail.com', '', NULL, 'dsg', NULL, NULL, NULL, 'saf', 'sd', 'dsg'),
-(12, 15, 0, 3, 'skjds', '4', 'sdkjfgdkj', 'sdkfgk', 'dskjfgdsk', 'sdkjgfdsjk', 'sdkjgfdsjk@gmail.com', 'sf@GMAIL.COM', 'male', 'sdkjfgdsjk', NULL, NULL, NULL, 'safahsk', 'sjkfgjk', 'sdkjgfdkj'),
-(13, 16, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(14, 17, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(15, 18, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(16, 19, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(17, 20, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(18, 21, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(19, 22, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(20, 23, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(21, 24, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(22, 25, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(23, 26, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(24, 27, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(25, 28, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(26, 29, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(27, 30, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(28, 31, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'uni@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(29, 32, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(30, 33, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(31, 34, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(32, 35, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(33, 36, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(34, 37, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(35, 38, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(36, 39, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(37, 40, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(38, 41, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(39, 42, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(40, 43, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(41, 44, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(42, 45, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(43, 46, 0, 3, '', '4', 'gj', 'g', 'hjgjhg', 'jh', 'fardeenkhan7337@gmail.com', 'hsd@gmail.com', 'male', 'hjgjh', NULL, NULL, NULL, NULL, NULL, NULL),
-(44, 47, 0, 0, 'sjagjh', '', 'ajgfhj', 'ajgfaj', 'agfh', 'ajgfj', 'sasjfgsjh@gmail.com', '', NULL, 'sjagfhj', NULL, NULL, NULL, 'safkj', 'hsgf', 'ahsfghj'),
-(45, 48, 0, 3, '', '4', 'gk', 'jg', 'j', 'gj', 'g@Gmail.com', 'jhsafas@gmail.com', 'male', 'afs', NULL, NULL, NULL, NULL, NULL, NULL),
-(46, 1, 0, 0, '', '', '', '', '', '', 'test@email.com', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(47, 49, 0, 2, '', '3', 'cc', 'cc', 'cc', 'cc', 'fardeenkhan7337@gmail.com', 'ccc@gmail.com', 'male', 'cc', NULL, NULL, NULL, NULL, NULL, NULL),
-(48, 50, 0, 0, 'A', '', 'A', 'A', 'A', 'A', 'fardeenkhan7337@gmail.com', '', NULL, 'A', NULL, NULL, NULL, 'A', 'A', 'A'),
-(49, 51, 0, 3, '', '4', 'aa', 'aa', 'aa', 'aa', 'fardeenkhan7337@gmail.com', 'asafa@gmail.com', 'male', 'aa', NULL, NULL, NULL, NULL, NULL, NULL),
-(51, 53, 0, 3, '', '4', '0', '0', '0', '0', 'm.alhadab@yahoo.com', '0', 'male', '0', NULL, NULL, NULL, NULL, NULL, NULL),
-(52, 54, 0, 6, '', '5', '0', '0', '0', '0', 'm.alhadab@yahoo.com', '', 'male', '0000', NULL, NULL, NULL, NULL, NULL, NULL),
-(54, 56, 0, 3, '', '4', '0', '0', '0', '0000', 'm.alhadab@yahoo.com', '', 'male', '0000', NULL, NULL, NULL, NULL, NULL, NULL),
-(55, 57, 0, 0, 'asfas', '', 'safas', 'asfas', 'asfas', '', 'fardeenkhan7337@gmail.com', '', NULL, 'asfasfas', NULL, NULL, NULL, 'asfas', 'asfas', 'safas'),
-(56, 58, 0, 0, 'kjg', '', 'gjh', 'gj', 'h', 'fardeenkhan7337@gmail.com', 'safas@gmail.com', '', NULL, 'jhg', NULL, NULL, NULL, 'asf', 'jk', 'jh'),
-(57, 59, 0, 0, 'gj', '', 'jhg', 'jh', 'gjh', 'g', 'fardeenkhan7337@gmail.com', '', NULL, 'gj', NULL, NULL, NULL, 'safas', 'gk', 'hg'),
-(58, 60, 0, 0, 'jh', '', 'hg', 'jhg', 'jh', 'gj', 'hgj@gmail.com', '', NULL, 'gjh', NULL, NULL, NULL, 'g', 'jhg', 'gj'),
-(59, 61, 0, 0, 'jh', '', 'hg', 'jhg', 'jg', 'jjhgj', 'asf@gmail.com', '', NULL, 'gh', NULL, NULL, NULL, 'asf', 'hjg', 'jgj'),
-(60, 62, 0, 0, 'hgj', '', 'jhg', 'jhg', 'jh', 'gjh', 'g@gmail.com', '', NULL, 'hg', NULL, NULL, NULL, 'gj', 'hj', 'jhg'),
-(61, 63, 0, 0, 'jhf', '', 'f', 'ghf', 'hg', 'fhg', 'gg@gmail.com', '', NULL, 'jh', NULL, NULL, NULL, 'asf', 'hjf', 'fgh'),
-(62, 64, 0, 0, 'hf', '', 'hf', 'hjg', 'jhg', 'jh', 'gjhjhgjhgjhgjhgjhgjhgjh@Gmail.com', '', NULL, 'j', NULL, NULL, NULL, 'safa', 'fhf', 'fj'),
-(63, 65, 10, 11, '', '6', 'sf', 'dsf', 'sdf', 'dss', 'sdds@gmail.com', 'afas@gmai.com', 'male', 'asf', NULL, NULL, NULL, NULL, NULL, NULL),
-(64, 66, 10, 11, '', '6', 'hf', 'hg', 'fg', 'f', 'hg@gmail.com', 'faaa@gmail.ccom', 'male', 'sdgfg', NULL, NULL, NULL, NULL, NULL, NULL),
-(65, 67, 0, 11, '', '6', '123456789', 'fax', '123456789', 'saassasaasas', 'abcdeg@gmail.com', 'aaaaa@gmail.com', 'male', NULL, 9, 'Bachelor', '123', NULL, NULL, NULL),
-(66, 68, 10, 11, '', '6', 'ad', 'sf', 'g', 'jhg', 'jhg@a', 'a@a', 'male', 'a', 9, 'Bachelor', 'aaa', NULL, '10', NULL),
-(67, 69, 0, 11, '', '6', 'a', 'a', 'a', 'a', 'a@gmail.com', 'a', 'male', 'aa', NULL, NULL, NULL, NULL, NULL, NULL),
-(68, 70, 10, 11, '', '6', 'a', 'a', 'a', 'a', 'a@a', 'A@A', 'male', NULL, 9, 'Bachelor', 'a', NULL, NULL, NULL),
-(69, 71, 10, 11, '', '6', 'A', 'A', 'A', 'A', 'A@A', 'A@A', 'male', NULL, 9, 'Bachelor', 'A', NULL, NULL, NULL),
-(70, 72, 10, 11, '', '6', 'aaa', 'a', 'a', 'a', 'faculty@Gmail.com', 'faculty@gmail.com', 'male', 'aa', 9, 'Bachelor', 'aa', NULL, NULL, NULL),
-(71, 73, 11, 12, '', '7', 'll', 'll', 'll', 'll', 'labmanager@gmail.com', 'labmanager@gmail.com', 'male', 'll', NULL, NULL, NULL, NULL, NULL, NULL),
-(72, 74, 10, 11, '', '6', 'pd', 'pd', 'pd', 'pd', 'pd@gmail.com', 'pd@gmail.com', 'male', 'pd', NULL, NULL, NULL, NULL, NULL, NULL),
-(73, 75, 10, 11, '', '6', 'rf', 'rf', 'rf', 'rf', 'rf@gmail.com', 'rf@gmail.com', 'male', 'rf', NULL, NULL, NULL, NULL, NULL, NULL),
-(74, 76, 10, 11, '', '6', 'rr', 'rr', 'rr', 'rr', 'rr@gmail.com', 'rr@gmail.com', 'male', 'rr', NULL, NULL, NULL, NULL, NULL, NULL),
-(75, 77, 10, 11, '', '6', 'tt', 'tt', 'tt1', 'tt', 'tt1@gmail.com', 'tt1@gmail.com', 'male', 'tt', NULL, NULL, NULL, NULL, NULL, NULL),
-(76, 78, 11, 12, '', '10', '1010', '1010', '1010', '1010', 'm.alhadab@gmail.com', 'm.alhadab@gmail.com', NULL, '101', NULL, NULL, NULL, '2030', NULL, '101'),
-(77, 79, 11, 12, '', '10', '100', '100', '100', '100', 'm.alhadab@hotmail.com', '', 'male', '100', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `users_info` (`id`, `user_id`, `roll_number`, `campus_id`, `faculty_id`, `depart_id`, `batch_year`, `current_semester_no`, `designation`, `speciality`, `last_degree`) VALUES
+(1, 3, NULL, 1, 2, 4, '', 0, 'designatoiom', 'asfasf', 'safasfas'),
+(2, 4, NULL, 1, 3, 1, 'safas', 545, '', '', ''),
+(3, 5, NULL, 2, 2, 2, '', 0, '', '', ''),
+(4, 6, NULL, 2, 3, 3, '', 0, '111', '111', '11');
 
 --
 -- Indexes for dumped tables
@@ -1277,6 +1127,12 @@ ALTER TABLE `notification_type`
   ADD PRIMARY KEY (`NOTIFY_TYPE_ID`);
 
 --
+-- Indexes for table `password_reset`
+--
+ALTER TABLE `password_reset`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `program`
 --
 ALTER TABLE `program`
@@ -1287,7 +1143,13 @@ ALTER TABLE `program`
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
-  ADD PRIMARY KEY (`role_id`);
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `roles_details`
+--
+ALTER TABLE `roles_details`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `settings`
@@ -1305,13 +1167,13 @@ ALTER TABLE `slider_setting`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users_info`
 --
 ALTER TABLE `users_info`
-  ADD PRIMARY KEY (`info_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1345,7 +1207,7 @@ ALTER TABLE `faculty`
 -- AUTO_INCREMENT for table `news_notifications`
 --
 ALTER TABLE `news_notifications`
-  MODIFY `NOTIFICATION_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `NOTIFICATION_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -1366,6 +1228,12 @@ ALTER TABLE `notification_type`
   MODIFY `NOTIFY_TYPE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT for table `password_reset`
+--
+ALTER TABLE `password_reset`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `program`
 --
 ALTER TABLE `program`
@@ -1375,7 +1243,13 @@ ALTER TABLE `program`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `roles_details`
+--
+ALTER TABLE `roles_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -1393,13 +1267,13 @@ ALTER TABLE `slider_setting`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users_info`
 --
 ALTER TABLE `users_info`
-  MODIFY `info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

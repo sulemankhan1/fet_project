@@ -41,15 +41,15 @@ $notifications = $this->notifications->getAllForUser();
 
             <li class="has-sub nav-item <?=(@$active_menu=='view_deactive_users' || @$active_menu=='view_active_users'?'open':'')?>"><a><i class="ft-users"></i><span data-i18n="" class="menu-title"> Users</span></a>
               <ul class="menu-content" style="">
-                <li class="<?=(@$active_menu=='create_user'?'active':'')?>"><a href="<?=site_url('create_user');?>" class="menu-item">Add User</a>
+                <li class="<?=(@$active_menu=='create_user'?'active':'')?>"><a href="<?=site_url('create_user');?>" class="menu-item">Create User</a>
                 </li>
               </ul>
               <ul class="menu-content" style="">
-                <li class="<?=(@$active_menu=='view_active_users'?'active':'')?>"><a href="<?=site_url('view_active_users');?>" class="menu-item"> Active Users</a>
+                <li class="<?=(@$active_menu=='view_active_users'?'active':'')?>"><a href="<?=site_url('view_users/active');?>" class="menu-item"> Active Users</a>
                 </li>
               </ul>
               <ul class="menu-content" style="">
-                <li class="<?=(@$active_menu=='view_deactive_users'?'active':'')?>"><a href="<?=site_url('view_deactive_users');?>" class="menu-item"> Deactivated users</a>
+                <li class="<?=(@$active_menu=='view_deactive_users'?'active':'')?>"><a href="<?=site_url('view_users/deactive');?>" class="menu-item"> Deactivated users</a>
                 </li>
               </ul>
             </li>
@@ -65,7 +65,7 @@ $notifications = $this->notifications->getAllForUser();
                 </ul>
             </li>
 
-            <li class="has-sub nav-item <?=(@$active_menu=='add_notification' || @$active_menu=='view_notifications'?'open':'')?>"><a><i class="icon-speech"></i><span data-i18n="" class="menu-title"> News / Notifications</span></a>
+            <li class="has-sub nav-item <?=(@$active_menu=='add_notification' || @$active_menu=='view_notifications'?'open':'')?>"><a><i class="icon-speech"></i><span data-i18n="" class="menu-title"> Notifications</span></a>
                 <ul class="menu-content" style="">
                   <li class="<?=(@$active_menu=='add_notification'?'active':'')?>"><a href="<?=site_url('new_notification')?>" class="menu-item"> Add Notification</a>
                   </li>
@@ -118,6 +118,9 @@ $notifications = $this->notifications->getAllForUser();
               <a href="../" class="btn btn-default" target="_blank">Open Site <i class="icon-action-redo"></i> </a>
             </li>
             <li class="dropdown nav-item">
+              <a href="../" class="btn btn-link" target="_blank">Open Site <i class="fa fa-external-link"></i> </a>
+            </li>
+            <li class="dropdown nav-item">
                <a id="dropdownBasic2" href="#" data-toggle="dropdown" class="nav-link position-relative dropdown-toggle">
                  <i class="ft-bell font-medium-3 blue-grey darken-4"></i>
                  <?php  if(count($notifications) > 0) { ?>
@@ -159,7 +162,8 @@ $notifications = $this->notifications->getAllForUser();
               <div ngbdropdownmenu="" aria-labelledby="dropdownBasic3" class="dropdown-menu dropdown-menu-right">
 
                 <a href="<?=site_url('edit_profile')?>" class="dropdown-item"><i class="icon-pencil mr-2"></i><span> Edit Profile</span></a>
-                <a href="<?=site_url('view_profile')?>" class="dropdown-item"><i class="ft-eye mr-2"></i><span> View Profile</span></a>
+                <a href="<?=site_url('change_password')?>" class="dropdown-item"><i class="icon-pencil mr-2"></i><span> Change Password</span></a>
+                <a href="<?=site_url('view_profile/'.$this->session->userdata('user_id'))?>" class="dropdown-item"><i class="ft-eye mr-2"></i><span> View Profile</span></a>
                 <a href="<?=site_url('Auth/logout')?>" class="dropdown-item"><i class="ft-power mr-2"></i><span> Logout</span></a>
 
               </div>
