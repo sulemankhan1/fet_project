@@ -807,7 +807,7 @@
                       <span class="subject-tag">English</span>
                     </p>
                   </div>
-                  <button class="btn hvr-float-shadow bg-theme-colored2"><a href="profile.php" class="mt-0 mb-0 text-white">View Profile</a></button>
+                  <button class="btn hvr-float-shadow bg-theme-colored2"><a href="<?=site_url('view_profile')?>" class="mt-0 mb-0 text-white">View Profile</a></button>
                 </div>
               </div>
             </div>
@@ -827,7 +827,7 @@
                       <span class="subject-tag">English</span>
                     </p>
                   </div>
-                  <button class="btn hvr-float-shadow bg-theme-colored"><a href="profile.php" class="mt-0 mb-0 text-white">View Profile</a></button>
+                  <button class="btn hvr-float-shadow bg-theme-colored"><a href="<?=site_url('view_profile')?>" class="mt-0 mb-0 text-white">View Profile</a></button>
                 </div>
               </div>
             </div>
@@ -847,7 +847,7 @@
                       <span class="subject-tag">English</span>
                     </p>
                   </div>
-                  <button class="btn hvr-float-shadow bg-theme-colored3"><a href="profile.php" class="mt-0 mb-0 text-white">View Profile</a></button>
+                  <button class="btn hvr-float-shadow bg-theme-colored3"><a href="<?=site_url('view_profile')?>" class="mt-0 mb-0 text-white">View Profile</a></button>
                 </div>
               </div>
             </div>
@@ -867,7 +867,7 @@
                       <span class="subject-tag">English</span>
                     </p>
                   </div>
-                  <button class="btn hvr-float-shadow bg-theme-colored"><a href="profile.php" class="mt-0 mb-0 text-white">View Profile</a></button>
+                  <button class="btn hvr-float-shadow bg-theme-colored"><a href="<?=site_url('view_profile')?>" class="mt-0 mb-0 text-white">View Profile</a></button>
                 </div>
               </div>
             </div>
