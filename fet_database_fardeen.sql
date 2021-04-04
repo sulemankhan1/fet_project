@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2021 at 05:27 PM
+-- Generation Time: Apr 04, 2021 at 08:22 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -356,6 +356,25 @@ INSERT INTO `faculty` (`FAC_ID`, `FAC_NAME`, `REMARKS`) VALUES
 (13, 'AFFILIATED COLLEGES/ INSTITUTIONS PUBLIC & PRIVATE', ''),
 (14, 'ANNUAL SYSTEM', ''),
 (15, 'ADMINISTRATIVE OFFICES', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `general_setting`
+--
+
+CREATE TABLE `general_setting` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `value` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `general_setting`
+--
+
+INSERT INTO `general_setting` (`id`, `name`, `value`) VALUES
+(1, 'ACCOUNT_ACTIVITY', 'active');
 
 -- --------------------------------------------------------
 
@@ -986,7 +1005,7 @@ CREATE TABLE `slider_setting` (
 --
 
 INSERT INTO `slider_setting` (`id`, `image`, `title`, `title_color`, `title_link`, `description`, `description_color`, `description_link`, `active`) VALUES
-(1, '', 'title', '#614a8c', 'http://localhost/fet_project/settings', 'description', '#21ab9b', 'http://localhost/fet_project/settings', 1),
+(1, '622989903two_auth.jpeg', 'title', '#614a8c', 'http://localhost/fet_project/settings', 'description', '#21ab9b', 'http://localhost/fet_project/settings', 1),
 (2, '622989903two_auth.jpeg', 'title1', '#e8e8e8', 'http://localhost/fet_project/settings', 'description1', '#e3e3e3', '212', 0);
 
 -- --------------------------------------------------------
@@ -1026,6 +1045,7 @@ CREATE TABLE `users` (
   `account_verified` tinyint(1) NOT NULL DEFAULT 0,
   `reg_datetime` timestamp NULL DEFAULT current_timestamp(),
   `account_active` tinyint(1) NOT NULL DEFAULT 0,
+  `is_pending` tinyint(1) NOT NULL DEFAULT 1,
   `deactivated_on` timestamp NULL DEFAULT NULL,
   `is_deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -1034,13 +1054,13 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `image`, `title`, `username`, `password`, `full_name`, `surename`, `email`, `dob`, `gender`, `cnic`, `show_cnic_public`, `father_name`, `nationality`, `province`, `district`, `city`, `home_address`, `permanent_address`, `zip_code`, `show_address_public`, `type`, `role_id`, `bio`, `phone_no_code`, `phone_no`, `show_phone_no_public`, `account_verified`, `reg_datetime`, `account_active`, `deactivated_on`, `is_deleted`) VALUES
-(1, '1245787577america.png', 'Mr', 'admin', '18cfa8bbcd660afa40c027d7fb49a642b095b1eb1e8873a758daf1830e25f66d9cd30615344d45e86244f80b5059088c18b501cf239a01f358d7c60bec4014b1+LwoXdFPpmmktGxCVHITQtIQVl+X3xJbJKIqKQJfEzs=', '', '', 'admin@gmail.com', NULL, 'male', '', 1, '', '', '', '', '', '', '', '', 0, 'Superadmin', 2, '', '0', '', 1, 0, '2021-04-01 11:16:53', 1, NULL, 0),
-(2, '', 'Ms', 'username2', '0', 'asfasf', 'surename', 'asfas@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, 0, '2021-04-01 20:16:30', 0, NULL, 0),
-(3, '', 'Ms', 'username3', '0', 'asfasf', 'surename', 'asfa1s@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, 0, '2021-04-01 20:17:06', 0, NULL, 0),
-(4, '1245787577america.png', 'Mr', 'username4', '0', 'hkj@Gmail.com', 'asfas', 'kj', '2019-11-29', 'female', 'safgasfasf', 0, 'asfasf', 'safasf', 'sadfasf', 'wfdsafasf', 'gkj', 'asfa', 'safasf', '', 0, '', 6, 'sdgdsgasdg', '92', '92', 0, 0, '2021-04-01 20:35:11', 0, NULL, 0),
-(5, '', 'Ms', 'username5', '60d6286756664a00529f479cf4a587f37ff85d5414368c79bde505d47261a01c308d09d4f35e2002ddf6052bf62cc773a8a8c5af6f2ebb1b4a5b02669108fef2b8R2B1KUAsge1//C+qsLOVcFWIw5sQYu2XvKOnUdG9s=', '11', 'sdfsd', 'sdfsdf@gmail.com', '2021-04-07', 'male', '444342134', 1, 'asfasfasf', 'afsas', 'a', 'asf', 'asf', 'safaf', 'asfsafasf', '', 0, 'Other', 1, 'asfasfas', '323', '32232223', 0, 0, '2021-04-02 04:52:31', 0, NULL, 0),
-(6, '361688680romanian.png', 'Ms', 'username6', '042ac6ebade10f1e9db85dc627e817685c004ed27215d7e01543f3f636f569e8e968f535cea6f8620ea5e3f7c32788b7c063a431cf4220492ddab3633a8f00e67Ez1aKJObhYcSHHOwGCeLUZ7GeYuc2rcX+aHNhoy3j0=', '1', '1', '1', '0001-01-10', 'female', '1111', 1, '111', '111', '111', '11', '111', '111', '111', '324', 1, 'Teacher', 5, '111', '11', '11', 1, 0, '2021-04-02 07:50:35', 1, NULL, 0);
+INSERT INTO `users` (`id`, `image`, `title`, `username`, `password`, `full_name`, `surename`, `email`, `dob`, `gender`, `cnic`, `show_cnic_public`, `father_name`, `nationality`, `province`, `district`, `city`, `home_address`, `permanent_address`, `zip_code`, `show_address_public`, `type`, `role_id`, `bio`, `phone_no_code`, `phone_no`, `show_phone_no_public`, `account_verified`, `reg_datetime`, `account_active`, `is_pending`, `deactivated_on`, `is_deleted`) VALUES
+(1, '1245787577america.png', 'Mr', 'admin', '18cfa8bbcd660afa40c027d7fb49a642b095b1eb1e8873a758daf1830e25f66d9cd30615344d45e86244f80b5059088c18b501cf239a01f358d7c60bec4014b1+LwoXdFPpmmktGxCVHITQtIQVl+X3xJbJKIqKQJfEzs=', '', '', 'admin@gmail.com', NULL, 'male', '', 1, '', '', '', '', '', '', '', '', 0, 'Superadmin', 2, '', '0', '', 1, 0, '2021-04-01 11:16:53', 1, 1, NULL, 0),
+(2, '', 'Ms', 'username2', '0', 'asfasf', 'surename', 'asfas@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, 0, '2021-04-01 20:16:30', 0, 1, NULL, 0),
+(3, '', 'Ms', 'username3', '0', 'asfasf', 'surename', 'asfa1s@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, 0, '2021-04-01 20:17:06', 0, 0, NULL, 0),
+(4, '1245787577america.png', 'Mr', 'username4', '0', 'hkj@Gmail.com', 'asfas', 'kj', '2019-11-29', 'female', 'safgasfasf', 0, 'asfasf', 'safasf', 'sadfasf', 'wfdsafasf', 'gkj', 'asfa', 'safasf', '', 0, '', 6, 'sdgdsgasdg', '92', '92', 0, 0, '2021-04-01 20:35:11', 0, 0, NULL, 0),
+(5, '', 'Ms', 'username5', '60d6286756664a00529f479cf4a587f37ff85d5414368c79bde505d47261a01c308d09d4f35e2002ddf6052bf62cc773a8a8c5af6f2ebb1b4a5b02669108fef2b8R2B1KUAsge1//C+qsLOVcFWIw5sQYu2XvKOnUdG9s=', '11', 'sdfsd', 'sdfsdf@gmail.com', '2021-04-07', 'male', '444342134', 1, 'asfasfasf', 'afsas', 'a', 'asf', 'asf', 'safaf', 'asfsafasf', '', 0, 'Other', 1, 'asfasfas', '323', '32232223', 0, 0, '2021-04-02 04:52:31', 0, 0, NULL, 0),
+(6, '361688680romanian.png', 'Ms', 'username6', '042ac6ebade10f1e9db85dc627e817685c004ed27215d7e01543f3f636f569e8e968f535cea6f8620ea5e3f7c32788b7c063a431cf4220492ddab3633a8f00e67Ez1aKJObhYcSHHOwGCeLUZ7GeYuc2rcX+aHNhoy3j0=', '1', '1', '1', '0001-01-10', 'female', '1111', 1, '111', '111', '111', '11', '111', '111', '111', '324', 1, 'Teacher', 5, '111', '11', '11', 1, 0, '2021-04-02 07:50:35', 1, 0, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -1101,6 +1121,12 @@ ALTER TABLE `departments_programs`
 --
 ALTER TABLE `faculty`
   ADD PRIMARY KEY (`FAC_ID`);
+
+--
+-- Indexes for table `general_setting`
+--
+ALTER TABLE `general_setting`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `news_notifications`
@@ -1202,6 +1228,12 @@ ALTER TABLE `departments_programs`
 --
 ALTER TABLE `faculty`
   MODIFY `FAC_ID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `general_setting`
+--
+ALTER TABLE `general_setting`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `news_notifications`

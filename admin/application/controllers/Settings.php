@@ -21,6 +21,7 @@ class Settings extends CI_Controller {
         'sidebar_color' => $this->bm->getWhere('admin_panel_setting', 'name', 'SIDEBAR_COLOR'),
         'name' => $this->bm->getWhere('admin_panel_setting', 'name', 'NAME'),
         'footer' => $this->bm->getWhere('admin_panel_setting', 'name', 'FOOTER'),
+        'account_activity' => $this->bm->getWhere('general_setting', 'name', 'ACCOUNT_ACTIVITY'),
         'sliders' => $this->bm->getAll('slider_setting', 'id', 'desc')
       ];
 
@@ -94,36 +95,51 @@ class Settings extends CI_Controller {
           
           break;
 
-        case 'slider':
+          case 'slider':
       
-          //slider_image
-          $slider_image = $_FILES['slider_image'];
-          
-          $img = $this->bm->uploadMultiFiles($slider_image, 'uploads/slider_image');
-          
-          if (count($p['title']) > 0) {
+            //slider_image
+            $slider_image = $_FILES['slider_image'];
             
-            foreach ($p['title'] as $key => $v) {
-                
-                $arr[] = [
-                
-                'image' => $img[$key],
-                'title' => $p['title'][$key],
-                'title_color' => $p['title_color'][$key],
-                'title_link' => $p['title_link'][$key],
-                'description' => $p['description'][$key],
-                'description_color' => $p['description_color'][$key],
-                'description_link' => $p['description_link'][$key]
-                
-              ];
+            $img = $this->bm->uploadMultiFiles($slider_image, 'uploads/slider_image');
+            
+            if (count($p['title']) > 0) {
               
+              foreach ($p['title'] as $key => $v) {
+                  
+                  $arr[] = [
+                  
+                  'image' => $img[$key],
+                  'title' => $p['title'][$key],
+                  'title_color' => $p['title_color'][$key],
+                  'title_link' => $p['title_link'][$key],
+                  'description' => $p['description'][$key],
+                  'description_color' => $p['description_color'][$key],
+                  'description_link' => $p['description_link'][$key]
+                  
+                ];
+                
+              }
+  
+              $this->bm->insertRows('slider_setting',$arr);
+  
             }
+  
+            break;
 
-            $this->bm->insertRows('slider_setting',$arr);
+          case 'main_general_setting':
+      
+            //account_activity
+            
+            $array['value'] = $p['account_active'];
+          
+            if ($array['value'] != '') 
+            {
 
-          }
+              $this->bm->updateRow('general_setting',$array,'name','ACCOUNT_ACTIVITY');
 
-          break;
+            }
+  
+            break;
   
 
       }

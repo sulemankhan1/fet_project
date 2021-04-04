@@ -34,8 +34,9 @@ $route['create_user'] = 'users/create_user';
 $route['save_user'] = 'users/save_user';
 $route['edit_user/(:any)'] = 'users/edit_user/$1';
 $route['update_user'] = 'users/update_user';
+$route['view_users'] = 'users/view_users';
 $route['view_users/(:any)'] = 'users/view_users/$1';
-$route['change_user_status/(:any)'] = 'users/change_user_status/$1';
+$route['change_user_status/(:any)/(:any)'] = 'users/change_user_status/$1/$2';
 $route['delete_user/(:any)'] = 'users/delete_user/$1';
 $route['view_user/(:any)'] = 'users/user_details/$1';
 

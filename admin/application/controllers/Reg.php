@@ -75,14 +75,31 @@ class Reg extends CI_Controller
 		    if($this->form_validation->run())
 		    {
 
-
+          
           $p = $this->input->post();
 
           $image = $_FILES['image'];
           $img = '';
           if($image['name'] != '')
           {
-              $img = $this->bm->uploadFile($image , 'uploads/users');
+            $img = $this->bm->uploadFile($image , 'uploads/users');
+          }
+          
+          $account_activity = $this->bm->getWhere('general_setting', 'name', 'ACCOUNT_ACTIVITY');
+          
+          if($account_activity->value == 'pending')
+          {
+
+            $pending = 1;
+            $account_active = 0;
+
+          }
+          else
+          {
+
+            $pending = 0;
+            $account_active = 1;
+
           }
 
           $data = [
@@ -112,6 +129,8 @@ class Reg extends CI_Controller
               'type' => $p['type'],
               'role_id' => $p['role_id'],
               'show_phone_no_public' => (@$p['show_phone_no_to_public'] == ''?0:1),
+              'account_activity' => $account_active,
+              'is_pending' => $pending
 
           ];
 

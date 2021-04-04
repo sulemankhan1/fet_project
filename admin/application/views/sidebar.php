@@ -39,17 +39,17 @@ $notifications = $this->notifications->getAllForUser();
               </a>
             </li>
 
-            <li class="has-sub nav-item <?=(@$active_menu=='view_deactive_users' || @$active_menu=='view_active_users'?'open':'')?>"><a><i class="ft-users"></i><span data-i18n="" class="menu-title"> Users</span></a>
+            <li class="has-sub nav-item <?=(@$active_menu=='view_pending_users' || @$active_menu=='view_users'?'open':'')?>"><a><i class="ft-users"></i><span data-i18n="" class="menu-title"> Users</span></a>
               <ul class="menu-content" style="">
                 <li class="<?=(@$active_menu=='create_user'?'active':'')?>"><a href="<?=site_url('create_user');?>" class="menu-item">Create User</a>
                 </li>
               </ul>
               <ul class="menu-content" style="">
-                <li class="<?=(@$active_menu=='view_active_users'?'active':'')?>"><a href="<?=site_url('view_users/active');?>" class="menu-item"> Active Users</a>
+                <li class="<?=(@$active_menu=='view_users'?'active':'')?>"><a href="<?=site_url('view_users');?>" class="menu-item"> View Users</a>
                 </li>
               </ul>
               <ul class="menu-content" style="">
-                <li class="<?=(@$active_menu=='view_deactive_users'?'active':'')?>"><a href="<?=site_url('view_users/deactive');?>" class="menu-item"> Deactivated users</a>
+                <li class="<?=(@$active_menu=='view_pending_users'?'active':'')?>"><a href="<?=site_url('view_users/pending');?>" class="menu-item"> Pending users</a>
                 </li>
               </ul>
             </li>

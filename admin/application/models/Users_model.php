@@ -9,7 +9,7 @@ class Users_model extends CI_Model
 
 			$this->db->select('u.*');
 			$this->db->from('users u');
-			$this->db->join('users_info ui','ui.user_id=u.id');
+			$this->db->join('users_info ui','ui.user_id=u.id','left');
 
 			if(@$_POST["search"]["value"] != '')
 			{
@@ -41,6 +41,8 @@ class Users_model extends CI_Model
 			}
 
 			$this->db->where('u.is_deleted',0);
+			$this->db->where('u.type!=','Superadmin');
+
 
   }
 
@@ -50,15 +52,16 @@ class Users_model extends CI_Model
 
        $this->make_users_query();
 
-	   	if($status == 'active')
+	   	if($status == 'pending')
 		{
 
-			$this->db->where('u.account_active', 1);
+			$this->db->where('u.is_pending', 1);
 			
 		}
 		else
 		{
-			$this->db->where('u.account_active', 0);
+
+			$this->db->where('u.is_pending', 0);
 
 		}
 
@@ -72,6 +75,8 @@ class Users_model extends CI_Model
 
        $query = $this->db->get();
        return $query->result();
+      
+
 
   }
 
@@ -80,17 +85,18 @@ class Users_model extends CI_Model
 
        $this->make_users_query();
 
-	   if($status == 'active')
-	   {
+	   	if($status == 'pending')
+		{
 
-		   $this->db->where('u.account_active', 1);
-		   
-	   }
-	   else
-	   {
-		   $this->db->where('u.account_active', 0);
+			$this->db->where('u.is_pending', 1);
+			
+		}
+		else
+		{
 
-	   }
+			$this->db->where('u.is_pending', 0);
+
+		}
 		
        $query = $this->db->get();
 
@@ -103,19 +109,23 @@ class Users_model extends CI_Model
 
 	  $this->db->select('u.*');
 	  $this->db->from('users u');
-		$this->db->join('users_info ui','ui.user_id=u.id');
+		$this->db->join('users_info ui','ui.user_id=u.id','left');
+		$this->db->where('u.is_deleted',0);
+		$this->db->where('u.type!=','Superadmin');
 		
-		if($status == 'active')
+		if($status == 'pending')
 		{
 
-			$this->db->where('u.account_active', 1);
+			$this->db->where('u.is_pending', 1);
 			
 		}
 		else
 		{
-			$this->db->where('u.account_active', 0);
+			
+			$this->db->where('u.is_pending', 0);
 
 		}
+
 		
 
     return $this->db->count_all_results();

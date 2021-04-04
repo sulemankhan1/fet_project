@@ -39,7 +39,7 @@
                                   <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab_website" aria-expanded="false">Webiste Setting</a>
                                 </li>
                                 <li class="nav-item">
-                                  <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tab_general_setting" aria-expanded="false">General Setting</a>
+                                  <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tab_main_general_setting" aria-expanded="false">General Setting</a>
                                 </li>
                               </ul>
                               <div class="tab-content px-1 pt-1">
@@ -246,8 +246,131 @@
                                     </div>
                                 </div>
 
-                                <div class="tab-pane" id="tab_general_setting" aria-labelledby="base-tab3">
-                                              <h3>General Setting</h3>     
+                                <div class="tab-pane" id="tab_website" aria-labelledby="base-tab2">
+                                    <div class="col-xl-12 col-lg-12">
+                                      <div class="card" style="">
+                                        <div class="card-content">
+                                          <div class="card-body">
+                                            <ul class="nav nav-tabs">
+                                              <li class="nav-item">
+                                                <a class="nav-link active" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab_add_home_page_slider" aria-expanded="true">Add Homepage Slider</a>
+                                              </li>
+                                              <li class="nav-item">
+                                                <a class="nav-link" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab_view_home_page_slider" aria-expanded="true">View Sliders</a>
+                                              </li>                                              
+                                            </ul>
+                                            <div class="tab-content px-1 pt-1">
+                                              <div role="tabpanel" class="tab-pane active" id="tab_add_home_page_slider" aria-expanded="true" aria-labelledby="base-tab1">
+                                                
+                                                <form class="form" action="<?=site_url('save_settings');?>" method="post" enctype="multipart/form-data">
+
+                                                  <div class="row float-right">
+                                                    <div class="col-md-12">
+                                                        
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput"> Slider Image</label>
+                                                            <input type="hidden" name="type" value="slider">
+                                                            <input type="file" class="form-control" name="slider_image[]" required>
+                                                        </fieldset>
+                                                    </div>
+                                                  </div>
+                                                  <div class="row">
+                                                    <div class="col-md-6 mt-3">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput"> Title</label>
+                                                            <input type="text" class="form-control" name="title[]" required>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-6 mt-3">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput"> Title Color (optional)</label>
+                                                            <input type="color" class="form-control" name="title_color[]">
+                                                        </fieldset>
+                                                    </div>
+                                                  </div>
+                                                  <div class="row">
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput"> Title Link (optional)</label>
+                                                            <input type="text" class="form-control" name="title_link[]">
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput"> Description Color (optional)</label>
+                                                            <input type="color" class="form-control" name="description_color[]">
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput"> Description Link (optional)</label>
+                                                            <input type="text" class="form-control" name="description_link[]">
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput"> Description</label>
+                                                            <textarea name="description[]" class="form-control" cols="30" rows="6"></textarea>
+                                                        </fieldset>
+                                                    </div>
+                                                  </div>
+
+                                                <!-- add-more-sliders-div -->
+                                                <div class="add_sliders"></div>
+
+                                                <div class="col-md-12">
+                                                  <button type="Submit" class="btn btn-raised btn-primary float-right"> <i class="ft-check position-right"></i>  Save</button>
+                                                  <button type="button" class="btn btn-raised btn-success float-right mr-2 add-more-slider"> <i class="ft-plus circle"></i>  Add more</button>
+                                                </div>
+                                                </form>
+
+                                              </div>
+                                              <div class="tab-pane" id="tab_view_home_page_slider" aria-labelledby="base-tab2">
+                                                    
+                                                <div class="row" id="view_sliders_">
+                                                  
+                                                </div>
+
+                                              </div>                                                                                        
+                                             
+
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                                
+                                <div role="tabpanel" class="tab-pane" id="tab_main_general_setting" aria-expanded="true" aria-labelledby="base-tab1">
+                                              
+                                                        
+                                  <form class="form mt-3" action="<?=site_url('save_settings');?>" method="post">
+                                    <div class="row">
+
+                                      <div class="col-md-6">
+                                          
+                                          <fieldset class="form-group">
+                                              <label for="basicInput"> When user registered it will direct :</label><br>
+                                              <input type="hidden" name="type" value="main_general_setting">
+                                              <input type="radio" name="account_active" value="active" <?=(@$account_activity->value == 'active'?'checked':'')?>>
+                                              <label for="basicInput"> Active </label>
+                                              <input type="radio" name="account_active" value="pending" <?=(@$account_activity->value == 'pending'?'checked':'')?>>
+                                              <label for="basicInput"> Pending</label>
+                                          </fieldset>
+                                      </div>
+
+                                    </div>
+                                    <div class="row">
+
+                                      <div class="col-md-12">
+                                        <button type="Submit" class="btn btn-raised btn-primary float-right"> 
+                                          <i class="ft-check position-right"></i>  Save
+                                        </button>
+                                      </div>
+                                    </div>
+
+                                  </form>
+                                                      
                                 </div>
                                 
 
