@@ -41,7 +41,7 @@ class Auth extends CI_Controller {
 		$res = $this->Auth_model->login_verify($data);
 
 		// get and update settings
-		$settings = $this->Basic_model->getById('settings', 1);
+		$settings = $this->bm->getById('settings', 1);
 
 			if ($res['valid']) {
 
@@ -50,7 +50,7 @@ class Auth extends CI_Controller {
 					'user_id' => $res['user_data']->id,
 					'user_img' => $res['user_data']->image ,
 					'username' => $res['user_data']->username
-				];				
+				];
 
 				 if(empty($res['user_data']->username)) {
 					 $this->session->set_flashdata('alert_msg', array('failure', 'in', "You are not authorized to login please ask your admin"));
@@ -98,29 +98,29 @@ class Auth extends CI_Controller {
 
 				$token = rand(10000,99999);
 
-				
+
 				$token = hashids_encrypt($token);
 
 				$mail = [
-					
+
 					'title' => 'Forget Password',
-					
+
 					'logo' => $this->bm->getWhere('admin_panel_setting', 'name', 'LOGO'),
-					
+
 					'name' => $this->bm->getWhere('admin_panel_setting', 'name', 'NAME'),
-					
+
 					'footer' => $this->bm->getWhere('admin_panel_setting', 'name', 'FOOTER'),
-					
+
 					'msg' => 'Hi,'.$user->username.'<br>To change your password click below:<br><a href="'.site_url('change_password/'.$token).'">Change Password</a>'
-					
+
 				];
-				
+
 
 				$html_content = $this->load->view('mail_template',$email,true);
-				
+
 				// for live send email use this array
 				$emailConfig = [
-					
+
 					'protocol' => 'smtp',
 					'smtp_host' => 'alphinex.com',
 					'smtp_port' => 587,
@@ -129,13 +129,13 @@ class Auth extends CI_Controller {
 					'mailtype' => 'html',
 					'charset' => 'iso-8859-1'
 				];
-				
+
 
 				$this->load->library('email' , $emailConfig);
-				
+
 				$from = 'system@'.$_SERVER['HTTP_HOST'];
 				$to = $user->email;
-				
+
 				$this->email->set_newline("\r\n");
 				$this->email->from($from,$name->value);
 				$this->email->to($to);
@@ -144,35 +144,35 @@ class Auth extends CI_Controller {
 				$this->email->set_mailtype("html");
 				if(!$this->email->send())
 				{
-					
+
 					$this->session->set_flashdata(array('response' => 'success', 'msg' => 'Connection error try again..!' ));
-					
+
 				}
 				else
 				{
-					
+
 					$this->session->set_flashdata(array('response' => 'success', 'msg' => 'Password reset link has sent to your email' ));
-					
+
 					$this->bm->insertRow('password_reset',['token' => $token],'user_id',$user->id);
 
 				}
-				
+
 			}
-			else 
+			else
 			{
 
 				$this->session->set_flashdata('alert_msg', array('failure', 'Login', $data['error']));
 
 			}
-			
+
 			redirect('forget_password');
-			
+
 	}
 
 	public function change_password($id)
 	{
 
-		if (isset($_POST['submit'])) 
+		if (isset($_POST['submit']))
 		{
 
 			$p = $this->input->post();
@@ -197,7 +197,7 @@ class Auth extends CI_Controller {
 
 			$user = $this->bm->getById('users',$reset_password->user_id);
 
-			if (empty($user)) 
+			if (empty($user))
 			{
 
 				$data['expired'] = true;
@@ -208,7 +208,7 @@ class Auth extends CI_Controller {
 
 				$expire_time =  date('d-m-Y h:i', strtotime("+10 minutes", strtotime($reset_password->datetime)));
 
-				if (strtotime($expire_time) <= strtotime(date('d-m-Y h:i'))) 
+				if (strtotime($expire_time) <= strtotime(date('d-m-Y h:i')))
 				{
 
 					$data['expired'] = true;
