@@ -41,7 +41,7 @@ class Auth extends CI_Controller {
 		$res = $this->Auth_model->login_verify($data);
 
 		// get and update settings
-		$settings = $this->Basic_model->getById('settings', 1);
+		// $settings = $this->bm->getById('settings', 1);
 
 			if ($res['valid']) {
 

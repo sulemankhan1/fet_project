@@ -33,10 +33,13 @@
                             <div class="card-body">
                               <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                  <a class="nav-link" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab_admin_panel" aria-expanded="true">Admin Panel Setting</a>
+                                  <a class="nav-link active" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab_admin_panel" aria-expanded="true">Admin Panel Setting</a>
                                 </li>
                                 <li class="nav-item">
-                                  <a class="nav-link active" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab_website" aria-expanded="false">Webiste Setting</a>
+                                  <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab_website" aria-expanded="false">Webiste Setting</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tab_general_setting" aria-expanded="false">General Setting</a>
                                 </li>
                               </ul>
                               <div class="tab-content px-1 pt-1">
@@ -241,6 +244,10 @@
                                         </div>
                                       </div>
                                     </div>
+                                </div>
+
+                                <div class="tab-pane" id="tab_general_setting" aria-labelledby="base-tab3">
+                                              <h3>General Setting</h3>     
                                 </div>
                                 
 
