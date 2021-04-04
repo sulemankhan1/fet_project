@@ -1,1 +1,4 @@
 front
+application/config/config.php
+application/config/database.php
+.ftpconfig
