@@ -90,3 +90,6 @@ div#rev_slider_home_forcefullwidth {
   color: #0d5189 !important;
   text-shadow: 0 0 1px #f3f3f3;
 }
+.custom-width1 {
+  width: 80px;
+}

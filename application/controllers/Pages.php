@@ -6,13 +6,13 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pages extends CI_Controller 
+class Pages extends CI_Controller
 {
 
 
 	public function __construct()
 	{
-		
+
 		parent::__construct();
 
 	}
@@ -21,7 +21,7 @@ class Pages extends CI_Controller
 	{
 
 		$data = [
-			
+
 			'title' => 'Home',
 
 			'sliders' => $this->bm->getAll('slider_setting','id','desc')
@@ -69,6 +69,26 @@ class Pages extends CI_Controller
 
 		$this->load->view('includes/header', $data);
 		$this->load->view('pages/contact_us');
+		$this->load->view('includes/footer');
+
+	}
+
+	public function news() {
+
+		$data = [];
+
+		$this->load->view('includes/header', $data);
+		$this->load->view('pages/news');
+		$this->load->view('includes/footer');
+
+	}
+
+	public function single_news($param1) {
+
+		$data = [];
+
+		$this->load->view('includes/header', $data);
+		$this->load->view('pages/single_news');
 		$this->load->view('includes/footer');
 
 	}

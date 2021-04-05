@@ -183,7 +183,7 @@
               </li>
               <li><a href="<?=site_url('timetable')?>">Timetable</a></li>
                <li><a href="<?=site_url('faculty')?>">Faculty</a></li>
-               <li><a href="javascript:void(0)">News</a></li>
+               <li><a href="<?=site_url('news')?>">News</a></li>
                <li><a href="javascript:void(0)">Resources</a></li>
                <li><a href="javascript:void(0)">About</a>
               <li><a href="<?=site_url('contact')?>">Contact</a></li>
