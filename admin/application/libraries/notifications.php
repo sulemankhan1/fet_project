@@ -38,7 +38,7 @@ class Notifications  {
     $this->CI->db->from('notifications');
 
     $this->CI->db->where('for_user_id', $this->CI->session->userdata('user_id'));
-    
+
     $this->CI->db->order_by('id','desc');
 
     if($type == "seen") {

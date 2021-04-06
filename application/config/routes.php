@@ -10,3 +10,5 @@ $route['view_profile'] = 'pages/view_profile';
 $route['timetable'] = 'pages/timetable';
 $route['faculty'] = 'pages/faculty';
 $route['contact'] = 'pages/contact_us';
+$route['news'] = 'pages/news';
+$route['news/(:any)'] = 'pages/single_news/$1';

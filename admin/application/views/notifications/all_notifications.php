@@ -67,7 +67,7 @@
                               <td><?=$notification->PROGRAM_TITLE?></td> -->
                               <td><?=(strlen($notification->DESCRIPTION)> 10)?substr($notification->DESCRIPTION, 0, 10)."...":$notification->DESCRIPTION?></td>
                               <td><?=$notification->NOTIFICATION_TYPE?></td>
-                              <td><?=$notification->USERNAME?></td>
+                              <td><?=$notification->username?></td>
                               <td><?=($notification->DATA_TIME)?date('d M Y H:i a', strtotime($notification->DATA_TIME)):" - "?></td>
                               <td>
                                 <!-- <a href="#" class="btn-sm btn-link" title="View"><i class="ft-eye"></i></a> -->
