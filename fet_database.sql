@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2021 at 06:41 PM
+-- Generation Time: Apr 06, 2021 at 10:21 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -47,7 +48,7 @@ CREATE TABLE `class_rooms` (
   `name` varchar(255) NOT NULL,
   `barcode` varchar(255) NOT NULL,
   `room_no` varchar(255) NOT NULL,
-  `date_added` timestamp NOT NULL DEFAULT current_timestamp(),
+  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `remarks` text NOT NULL,
   `is_archived` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -433,7 +434,7 @@ CREATE TABLE `password_reset` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `token` int(11) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT current_timestamp()
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -854,7 +855,7 @@ CREATE TABLE `slider_setting` (
   `description` varchar(255) NOT NULL,
   `description_color` varchar(50) DEFAULT NULL,
   `description_link` varchar(255) DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT 1
+  `active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -916,7 +917,7 @@ CREATE TABLE `sys_notifications` (
   `msg` text NOT NULL,
   `redirect_link` text NOT NULL,
   `is_seen` tinyint(1) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT current_timestamp()
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -993,7 +994,7 @@ CREATE TABLE `timetable` (
   `faculty_id` int(50) NOT NULL,
   `user_id` int(50) NOT NULL,
   `semester` int(10) NOT NULL,
-  `datetime_added` timestamp NOT NULL DEFAULT current_timestamp(),
+  `datetime_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `datettime_updated` datetime NOT NULL,
   `is_deleted` tinyint(1) NOT NULL,
   `evening_morning` enum('morning','evening') NOT NULL,
@@ -1035,12 +1036,12 @@ CREATE TABLE `users` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `full_name` varchar(255) NOT NULL,
-  `surename` varchar(255) NOT NULL,
+  `surname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `dob` date DEFAULT NULL,
   `gender` enum('male','female') NOT NULL,
   `cnic` varchar(20) NOT NULL,
-  `show_cnic_public` tinyint(1) NOT NULL DEFAULT 0,
+  `show_cnic_public` tinyint(1) NOT NULL DEFAULT '0',
   `father_name` varchar(150) NOT NULL,
   `nationality` varchar(50) NOT NULL,
   `province` varchar(50) NOT NULL,
@@ -1055,23 +1056,23 @@ CREATE TABLE `users` (
   `bio` varchar(255) NOT NULL,
   `phone_no_code` varchar(11) NOT NULL,
   `phone_no` varchar(50) NOT NULL,
-  `show_phone_no_public` tinyint(1) NOT NULL DEFAULT 0,
+  `show_phone_no_public` tinyint(1) NOT NULL DEFAULT '0',
   `last_qualitification` varchar(255) NOT NULL,
   `registered_from` enum('frontend','backend') NOT NULL,
-  `account_verified` tinyint(1) NOT NULL DEFAULT 0,
-  `reg_datetime` timestamp NULL DEFAULT current_timestamp(),
-  `account_active` tinyint(1) NOT NULL DEFAULT 0,
+  `account_verified` tinyint(1) NOT NULL DEFAULT '0',
+  `reg_datetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `account_active` tinyint(1) NOT NULL DEFAULT '0',
   `deactivated_on` timestamp NULL DEFAULT NULL,
   `remarks` text NOT NULL,
-  `is_archived` tinyint(1) NOT NULL DEFAULT 0
+  `is_archived` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `campuss_id`, `faculty_id`, `depart_id`, `image`, `title`, `username`, `password`, `full_name`, `surename`, `email`, `dob`, `gender`, `cnic`, `show_cnic_public`, `father_name`, `nationality`, `province`, `district`, `city`, `home_address`, `permanent_address`, `zip_code`, `show_address_public`, `type`, `role_id`, `bio`, `phone_no_code`, `phone_no`, `show_phone_no_public`, `last_qualitification`, `registered_from`, `account_verified`, `reg_datetime`, `account_active`, `deactivated_on`, `remarks`, `is_archived`) VALUES
-(1, 0, 0, 0, '1245787577america.png', 'Mr', 'admin', '284bf3fdab5fa4def9a9f3981e882ed407ef9fc45f3feb99d2ab6f4231e96bd9b5053e970b41e713bcf4b9d8d6f78a41ae1a4fef79207a77ebee23d30807eab5NY4Haa3ex1TB75GwOpsI2qqk91rCcWx1T2aVKIf11xQ=', '', '', 'admin@gmail.com', NULL, 'male', '', 1, '', '', '', '', '', '', '', '', 0, 'Superadmin', 2, '', '0', '', 1, '', 'frontend', 0, '2021-04-01 11:16:53', 1, NULL, '', 0),
+INSERT INTO `users` (`id`, `campuss_id`, `faculty_id`, `depart_id`, `image`, `title`, `username`, `password`, `full_name`, `surname`, `email`, `dob`, `gender`, `cnic`, `show_cnic_public`, `father_name`, `nationality`, `province`, `district`, `city`, `home_address`, `permanent_address`, `zip_code`, `show_address_public`, `type`, `role_id`, `bio`, `phone_no_code`, `phone_no`, `show_phone_no_public`, `last_qualitification`, `registered_from`, `account_verified`, `reg_datetime`, `account_active`, `deactivated_on`, `remarks`, `is_archived`) VALUES
+(1, 0, 0, 0, '1245787577america.png', 'Mr', 'admin', '284bf3fdab5fa4def9a9f3981e882ed407ef9fc45f3feb99d2ab6f4231e96bd9b5053e970b41e713bcf4b9d8d6f78a41ae1a4fef79207a77ebee23d30807eab5NY4Haa3ex1TB75GwOpsI2qqk91rCcWx1T2aVKIf11xQ=', '', '', 'admin@gmail.com', NULL, 'male', '', 1, '', '', '', '', '', '', '', '', 0, 'Superadmin', 2, '', '0', '', 1, '', 'frontend', 1, '2021-04-01 11:16:53', 1, NULL, '', 0),
 (2, 0, 0, 0, '', 'Ms', 'username2', '0', 'asfasf', 'surename', 'asfas@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, '', 'frontend', 0, '2021-04-01 20:16:30', 0, NULL, '', 0),
 (3, 0, 0, 0, '', 'Ms', 'username3', '0', 'asfasf', 'surename', 'asfa1s@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, '', 'frontend', 0, '2021-04-01 20:17:06', 0, NULL, '', 0),
 (4, 0, 0, 0, '1245787577america.png', 'Mr', 'username4', '0', 'hkj@Gmail.com', 'asfas', 'kj', '2019-11-29', 'female', 'safgasfasf', 0, 'asfasf', 'safasf', 'sadfasf', 'wfdsafasf', 'gkj', 'asfa', 'safasf', '', 0, '', 6, 'sdgdsgasdg', '92', '92', 0, '', 'frontend', 0, '2021-04-01 20:35:11', 0, NULL, '', 0),
