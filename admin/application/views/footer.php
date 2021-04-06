@@ -3,7 +3,7 @@
 
 <footer class="footer footer-static footer-light mt-4 mb-1" style="background-color:white;">
 
-  <p class="clearfix text-muted text-sm-center" style="text-align:center!important;"><?=$this->session->userdata('footer')?></p>
+  <p class="clearfix text-muted text-sm-center" style="text-align:center!important;"><?=$this->session->userdata('settings')['FOOTER']?></p>
 </footer>
 
 </div>

@@ -27,7 +27,7 @@ class Notifications  {
       'redirect_link' => $redirect_link,
       'for_user_id' => ($user_id == "") ? $this->CI->session->userdata('user_id') : $user_id,
     );
-    return $this->CI->db->insert('notifications', $array);
+    return $this->CI->db->insert('sys_notifications', $array);
   }
 
   // returns all notifications for current user
@@ -35,7 +35,7 @@ class Notifications  {
   public function getAllForUser($type="") {
 
     // get notifications for logged in user
-    $this->CI->db->from('notifications');
+    $this->CI->db->from('sys_notifications');
 
     $this->CI->db->where('for_user_id', $this->CI->session->userdata('user_id'));
 
@@ -60,7 +60,7 @@ class Notifications  {
     } else {
       $this->CI->db->where('for_user_id', $this->CI->session->userdata('user_id'));
     }
-    return $this->CI->db->update('notifications');
+    return $this->CI->db->update('sys_notifications');
   }
 
   private function mark_seen($notification_id) {
@@ -70,7 +70,7 @@ class Notifications  {
   }
 
   public function open_notification($notification_id) {
-    $notification = $this->CI->db->get_where('notifications', array('id'=>$notification_id))->row();
+    $notification = $this->CI->db->get_where('sys_notifications', array('id'=>$notification_id))->row();
     $this->mark_seen($notification_id);
     redirect($notification->redirect_link);
   }

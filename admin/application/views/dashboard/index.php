@@ -15,7 +15,7 @@
       <div class="card-header">
         <div class="row p-2">
           <div class="col-md-12 text-center text-white" style="text-transform:uppercase!important;">
-            <h3><b>Welcome to <?=$this->session->userdata('name')?></b></h3>
+            <h3><b>Welcome to <?=@$this->session->userdata('settings')['NAME']?></b></h3>
           </div>
         </div>
       </div>

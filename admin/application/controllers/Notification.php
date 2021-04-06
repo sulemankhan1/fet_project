@@ -19,10 +19,9 @@ class Notification extends CI_Controller
 
       $data = array(
         'title' => 'Notifications',
-        'active_menu' => 'notifications',
+        'active_menu' => 'view_notifications',
         'notifications' => $this->nm->getNotifications(),
       );
-
 
       $this->load->view('header',$data);
       $this->load->view('sidebar');
@@ -38,8 +37,8 @@ class Notification extends CI_Controller
       $data = array(
         'title' => 'Add New Notification',
         'active_menu' => 'add_notification',
-        'faculties' => $this->bm->getAll('faculty', 'FAC_ID'),
-        'notification_types' => $this->bm->getAll('notification_type', 'NOTIFY_TYPE_ID', 'ASC'),
+        'faculties' => $this->bm->getAll('faculties', 'id'),
+        'notification_types' => $this->bm->getAll('notification_type','id'),
       );
 
       $this->load->view('header',$data);

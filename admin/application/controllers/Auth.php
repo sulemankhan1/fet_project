@@ -15,12 +15,14 @@ class Auth extends CI_Controller {
 	public function index()
 	{
 		if ($this->session->userdata('username') != '') {
-
 			redirect('dashboard');
-
 		}
 
-		$data['logo'] = $this->bm->getWhere('admin_panel_setting', 'name', 'LOGO');
+		 $data['logo'] = $this->bm->getWithMultipleWhere('settings', array(
+			'name' => 'LOGO',
+			'type' => 'admin_panel',
+		));
+
 
 		$this->load->view('login',$data);
 
@@ -40,8 +42,16 @@ class Auth extends CI_Controller {
 
 		$res = $this->Auth_model->login_verify($data);
 
+
 		// get and update settings
-		// $settings = $this->bm->getById('settings', 1);
+		$settings = $this->bm->getWhereRows('settings', 'type', 'admin_panel');
+		// resort settings array
+		$new_settings = [];
+		if(!empty($settings)) {
+			foreach ($settings as $key => $value) {
+				$new_settings[$value->name] = $value->value;
+			}
+		}
 
 			if ($res['valid']) {
 
@@ -49,7 +59,8 @@ class Auth extends CI_Controller {
 
 					'user_id' => $res['user_data']->id,
 					'user_img' => $res['user_data']->image ,
-					'username' => $res['user_data']->username
+					'username' => $res['user_data']->username,
+					'settings' => $new_settings,
 				];
 
 				 if(empty($res['user_data']->username)) {

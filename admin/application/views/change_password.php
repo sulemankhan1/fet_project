@@ -103,7 +103,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                       <?php } ?>
                   <input type="password" class="form-control mb-3" name="new_password" id="txtPassword" placeholder="new password" />
                   <input type="password" class="form-control mb-1" name="confirmed_password" id="txtConfirmPassword" placeholder="confirm password" />
-                  
+
                   <div class="fg-actions d-flex justify-content-between">
                     <div class="recover-pass">
                       <button type="submit" class="btn btn-primary text-decoration-none text-white" id="btnSubmit" name="submit">

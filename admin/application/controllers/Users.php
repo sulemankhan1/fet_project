@@ -1,21 +1,21 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Users extends CI_Controller 
+class Users extends CI_Controller
 {
 
-  function __construct() 
+  function __construct()
   {
 
       parent::__construct();
 
-      if (empty($this->session->userdata('username'))) 
+      if (empty($this->session->userdata('username')))
       {
 
           redirect('login');
 
       }
-      
+
   }
 
   public function create_user()
@@ -27,7 +27,7 @@ class Users extends CI_Controller
 
       'active_menu' => 'create_user',
 
-      'roles' => $this->bm->getAll('roles', 'id', 'desc'),
+      // 'roles' => $this->bm->getAll('roles', 'id', 'desc'),
 
     ];
 
@@ -39,7 +39,7 @@ class Users extends CI_Controller
 
   }
 
-  public function save_user() 
+  public function save_user()
   {
 
     $p = $this->input->post();
@@ -49,7 +49,7 @@ class Users extends CI_Controller
       $this->form_validation->set_rules('password', 'Password', 'required');
       $this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]');
       $this->form_validation->set_rules('full_name', 'Full name', 'required');
-      $this->form_validation->set_rules('surename', 'Surename', 'required');
+      $this->form_validation->set_rules('surname', 'Surename', 'required');
       $this->form_validation->set_rules('dob', 'Date of birth', 'required');
       $this->form_validation->set_rules('gender', 'Gender', 'required');
       $this->form_validation->set_rules('cnic', 'Cnic / B-form', 'required');
@@ -68,7 +68,7 @@ class Users extends CI_Controller
       $this->form_validation->set_rules('campus_id', 'Campus', 'required');
       $this->form_validation->set_rules('faculty_id', 'Faculty', 'required');
       $this->form_validation->set_rules('depart_id', 'Department', 'required');
-      
+
       if($p['type'] == 'Teacher'){
 
         $this->form_validation->set_rules('designation', 'Designation', 'required');
@@ -99,7 +99,7 @@ class Users extends CI_Controller
           }
 
           $account_activity = $this->bm->getWhere('general_setting', 'name', 'ACCOUNT_ACTIVITY');
-          
+
           if($account_activity->value == 'pending')
           {
 
@@ -122,7 +122,7 @@ class Users extends CI_Controller
               'username' => $p['username'],
               'password' => $this->encryption->encrypt($p['password']),
               'full_name' => $p['full_name'],
-              'surename' => $p['surename'],
+              'surname' => $p['surname'],
               'email' => $p['email'],
               'dob' => $p['dob'],
               'gender' => $p['gender'],
@@ -178,10 +178,10 @@ class Users extends CI_Controller
         }
 
   }
-  
+
   public function edit_user($id)
   {
-    
+
     $this->load->model('Users_model');
 
     $id = hashids_decrypt($id);
@@ -206,13 +206,13 @@ class Users extends CI_Controller
 
   }
 
-  public function update_user() 
+  public function update_user()
   {
 
     $p = $this->input->post();
 
       $this->form_validation->set_rules('title', 'Title', 'required');
-      
+
       if($p['username'] != $p['username_old'])
       {
 
@@ -221,18 +221,18 @@ class Users extends CI_Controller
       }
       else
       {
-        
+
         $this->form_validation->set_rules('username', 'Username', 'required');
 
       }
 
       $this->form_validation->set_rules('password', 'Password', 'required');
-      
+
       if($p['email'] != $p['email_old'])
       {
 
         $this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]');
-        
+
       }
       else
       {
@@ -240,9 +240,9 @@ class Users extends CI_Controller
         $this->form_validation->set_rules('email', 'Email', 'required');
 
       }
-      
+
       $this->form_validation->set_rules('full_name', 'Full name', 'required');
-      $this->form_validation->set_rules('surename', 'Surename', 'required');
+      $this->form_validation->set_rules('surname', 'Surename', 'required');
       $this->form_validation->set_rules('dob', 'Date of birth', 'required');
       $this->form_validation->set_rules('gender', 'Gender', 'required');
       $this->form_validation->set_rules('cnic', 'Cnic / B-form', 'required');
@@ -261,7 +261,7 @@ class Users extends CI_Controller
       $this->form_validation->set_rules('campus_id', 'Campus', 'required');
       $this->form_validation->set_rules('faculty_id', 'Faculty', 'required');
       $this->form_validation->set_rules('depart_id', 'Department', 'required');
-      
+
       if($p['type'] == 'Teacher'){
 
         $this->form_validation->set_rules('designation', 'Designation', 'required');
@@ -300,7 +300,7 @@ class Users extends CI_Controller
               'username' => $p['username'],
               'password' => $this->encryption->encrypt($p['password']),
               'full_name' => $p['full_name'],
-              'surename' => $p['surename'],
+              'surname' => $p['surname'],
               'email' => $p['email'],
               'dob' => $p['dob'],
               'gender' => $p['gender'],
@@ -324,7 +324,7 @@ class Users extends CI_Controller
           ];
 
           $this->bm->updateRow('users', $data,'id',$p['id']);
-          
+
           $info = [
 
             'campus_id' => $p['campus_id'],
@@ -335,9 +335,9 @@ class Users extends CI_Controller
             'designation' => $p['designation'],
             'speciality' => $p['speciality'],
             'last_degree' => $p['last_degree']
-            
+
           ];
-          
+
           $this->bm->updateRow('users_info', $info,'user_id',$p['id']);
 
           $this->session->set_flashdata(array('response' => 'success', 'msg' => "User updated Successfully "));
@@ -346,11 +346,11 @@ class Users extends CI_Controller
           {
 
             redirect('view_users/active');
-            
+
           }
           else
           {
-            
+
             redirect('view_users/deactive');
 
           }
@@ -368,13 +368,13 @@ class Users extends CI_Controller
 
   public function view_users($status = '')
   {
- 
+
       if($status == 'pending')
       {
 
         $title = 'View Pending Users';
         $active_menu = 'view_pending_users';
-        
+
 
       }
       else
@@ -408,7 +408,7 @@ class Users extends CI_Controller
 
       $this->load->model('Users_model');
 
-      $result = $this->Users_model->get_user_data_length($status);      
+      $result = $this->Users_model->get_user_data_length($status);
       $filter_data = $this->Users_model->get_user_filtered_data($status);
       $all_data = $this->Users_model->get_users_count($status);
 
@@ -428,21 +428,21 @@ class Users extends CI_Controller
         $sub_array[] = $v->phone_no;
         $sub_array[] = $v->gender;
         $sub_array[] = $v->type;
-        
-        
+
+
         $buttons .= "<a href='".site_url('edit_user/'.hashids_encrypt(@$v->id))."' class='btn small-btn' ><i class='icon-pencil'></i> Edit</a>";
-        if ($status != 'pending') 
+        if ($status != 'pending')
         {
 
           if($v->account_active == 1)
           {
 
             $buttons .= "<a href='".site_url('change_user_status/deactive/'.hashids_encrypt(@$v->id))."' class='btn small-btn' onclick=\"return confirm('Are you sure you want to deactive this user?')\" ><i class='ft-x'></i> Deactive</a>";
-          
+
           }
           else
           {
-            
+
             $buttons .= "<a href='".site_url('change_user_status/active/'.hashids_encrypt(@$v->id))."' class='btn small-btn' onclick=\"return confirm('Are you sure you want to active this user?')\" ><i class='ft-check'></i> Active</a>";
 
           }
@@ -450,9 +450,9 @@ class Users extends CI_Controller
         }
         else
         {
-          
+
           $buttons .= "<a href='".site_url('change_user_status/pending'.hashids_encrypt(@$v->id))."' class='btn small-btn' onclick=\"return confirm('Are you sure you want to active this user?')\" ><i class='ft-check'></i> Active</a>";
-          
+
         }
 
         $buttons .= "<a href='".site_url('delete_user/'.hashids_encrypt(@$v->id))."' class='btn small-btn' onclick=\"return confirm('Are you sure you want to delete?')\" ><i class='icon-trash'></i> Delete</a>";
@@ -490,34 +490,34 @@ class Users extends CI_Controller
     switch ($type) {
 
       case 'deactive':
-        
+
         $update = ['account_active' => 1, 'is_pending' => 0];
-  
+
         $this->bm->updateRow('users' , $update , 'id' ,$id);
 
         $this->session->set_flashdata(array('response' => 'success', 'msg' => 'User active Successfully' ));
-        
+
         redirect('view_users');
 
 
         break;
       case 'active':
-        
+
         $update = ['account_active' => 0, 'is_pending' => 0];
-  
+
         $this->bm->updateRow('users' , $update , 'id' ,$id);
-        
+
         $this->session->set_flashdata(array('response' => 'success', 'msg' => 'User deactive Successfully' ));
 
         redirect('view_users');
 
         break;
       case 'pending':
-        
+
         $update = ['account_active' => 1, 'is_pending' => 0];
-  
+
         $this->bm->updateRow('users' , $update , 'id' ,$id);
-        
+
         $this->session->set_flashdata(array('response' => 'success', 'msg' => 'User active Successfully' ));
 
         redirect('view_users/pending');
@@ -541,11 +541,11 @@ class Users extends CI_Controller
 
       $this->session->set_flashdata(array('response' => 'success', 'msg' => 'User deleted Successfully'));
 
-      if ($user->account_active == 1) 
+      if ($user->account_active == 1)
       {
 
           redirect('view_users/active');
-      
+
       }
 
       else
@@ -571,7 +571,7 @@ class Users extends CI_Controller
       'user' => $this->Users_model->getUsersDetails($id)
 
     ];
-    
+
     $this->load->view('header',$data);
     $this->load->view('sidebar');
     $this->load->view('users/view_user');

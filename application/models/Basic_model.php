@@ -24,17 +24,6 @@ class Basic_model extends CI_Model {
     return $this->db->get_where($tbl_name, array($pass_id => $id))->row();
   }
 
-public function QRrecordget($tbl_name, $col_name, $where_val){
-
-  $query_obj = $this->db->get_where($tbl_name, array($col_name => $where_val));
-
-  // check if result has multiple records
-    return $query_obj->result_array(); // return multiple records
-
-
-}
-
-
   public function getRowsWithMultipleWhere($tbl_name, $where_array)
   {
 
@@ -263,39 +252,6 @@ public function QRrecordget($tbl_name, $col_name, $where_val){
     if ($id != '') {
 
         $this->db->where('u.user_id !=',$id);
-
-    }
-
-    $q = $this->db->get();
-
-    if ($q) {
-
-      return $q->result();
-
-    }
-    else
-    {
-
-      return false;
-
-    }
-
-  }
-
-  public function checkMachineName($machinename , $id = '')
-  {
-
-    $this->db->select('m.*');
-    $this->db->from('machines m');
-    $this->db->join('labs l','l.lab_id=m.lab_id');
-    $this->db->join('departments d','d.depart_id=m.depart_id');
-    $this->db->join('college c','c.id=m.college_id');
-
-    $this->db->where('m.machine_name',$machinename);
-
-    if ($id != '') {
-
-        $this->db->where('m.machine_id !=',$id);
 
     }
 

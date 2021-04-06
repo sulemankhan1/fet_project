@@ -75,10 +75,10 @@
 
                       <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                           <fieldset class="form-group">
-                              <label for="basicInput">Surename *</label>
-                              <input type="text" class="form-control"  name="surename" value="<?=@$this->input->post('surename')?>">
+                              <label for="basicInput">Surname *</label>
+                              <input type="text" class="form-control"  name="surname" value="<?=@$this->input->post('surname')?>">
                           </fieldset>
-                          <span class="text-danger"><?=form_error('surename')?></span>
+                          <span class="text-danger"><?=form_error('surname')?></span>
 
                       </div>
                       <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
@@ -131,7 +131,7 @@
                               <input type="text" class="form-control"  name="nationality" value="<?=@$this->input->post('nationality')?>">
                           </fieldset>
                           <span class="text-danger"><?=form_error('nationality')?></span>
-                          
+
                       </div>
                       <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                           <fieldset class="form-group">
@@ -189,11 +189,12 @@
                           <span class="text-danger"><?=form_error('phone_no')?></span>
 
                       </div>
-                      <div class="col-xl-4 col-lg-4 col-md-4 mb-1">
+                      <!-- <div class="col-xl-4 col-lg-4 col-md-4 mb-1">
                           <fieldset class="form-group">
                             <label for="basicInput">Role *</label>
-                            <br>
+                            <br> -->
 
+                            <?php if(@$roles) { ?>
                               <?php foreach($roles as $key => $v) : ?>
 
                               <?php if($v->name != 'Superadmin'): ?>
@@ -204,15 +205,16 @@
                               <?php endif ?>
 
                               <?php endforeach ?>
-                              
-                          </fieldset>
+                            <?php } ?>
+
+                          <!-- </fieldset>
                           <span class="text-danger"><?=form_error('role_id')?></span>
 
-                      </div>
+                      </div> -->
                       <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                           <fieldset class="form-group">
                             <label for="basicInput">Image </label>
-                            <input type="file" class="form-control" name="image">                                
+                            <input type="file" class="form-control" name="image">
                           </fieldset>
 
                       </div>
@@ -254,9 +256,9 @@
                       <div class="row">
 
                         <div class="col-lg-12 additional_info">
-                                
+
                             <div class="row">
-                              
+
                               <div class="col-lg-12">
                                   <h3> Additional Information</h3>
                                   <hr>
@@ -374,18 +376,18 @@
                                       <?php if(@$this->input->post('type') == 'Teacher'){ ?>
                                         <span class="text-danger"><?=form_error('last_degree')?></span>
                                       <?php } ?>
-                                  
+
                                 </div>
 
                               <!-- </div> -->
                               <!-- additional_info_teacher_end -->
-                              
-                            </div>                          
+
+                            </div>
 
                         </div>
 
                       </div>
-                         
+
                   </div>
                   <div class="fg-actions d-flex justify-content-between">
                     <div class="recover-pass">

@@ -13,23 +13,23 @@ class Auth_model extends CI_Model
 
 		$this->db->select('users.*');
 		$this->db->from('users');
-		$this->db->join('users_info','users.id=users_info.user_id','left');
+		// $this->db->join('users_info','users.id=users_info.user_id','left');
 		$this->db->where('users.username',$username);
-		$this->db->where('users.type','Superadmin');
+		// $this->db->where('users.type','Superadmin');
 		$user_data = $this->db->get()->row();
 
 
-		if (!empty($user_data->username)) 
+		if (!empty($user_data->username))
 		{
 
 			$res = array();
 
-			if($user_data->is_pending == 1)
+			if($user_data->account_verified == 0)
 			{
-				
+
 				$result['valid'] = false;
-				$result['error'] = 'Your account is pending wait for activation your account!';
-				
+				$result['error'] = 'Your account is in pending.Please Wait for activation your account!';
+
 			}
 			else if($user_data->account_active == 0)
 			{
@@ -38,13 +38,13 @@ class Auth_model extends CI_Model
 				$result['error'] = 'Your account is deactive wait for activation your account!';
 
 			}
-			else if ($password == $this->encryption->decrypt($user_data->password)) 
+			else if ($password == $this->encryption->decrypt($user_data->password))
 			{
 
 				$result['valid'] = true;
-				$result['user_data'] = $user_data;		
+				$result['user_data'] = $user_data;
 			}
-			else 
+			else
 			{
 
 				$result['valid'] = false;
@@ -52,15 +52,15 @@ class Auth_model extends CI_Model
 
 			}
 
-		} 
-		else 
+		}
+		else
 		{
-		
+
 			$result['valid'] = false;
             $result['error'] = 'Invalid username or password!';
 
 		}
-			
+
         return $result;
 
 	}
@@ -74,7 +74,7 @@ class Auth_model extends CI_Model
 		$this->db->where('u.email',$email);
 		$user_data = $this->db->get()->row();
 
-		if (!empty($user_data->username)) 
+		if (!empty($user_data->username))
 		{
 
 			if($user_data->account_active == 0)
@@ -93,14 +93,14 @@ class Auth_model extends CI_Model
 
 			}
 
-			
+
 		}
 		else
 		{
-			
+
 			$result['valid'] = false;
 			$result['error'] = 'Invalid email';
-			
+
 		}
 
 		return $result;

@@ -58,7 +58,7 @@
                                 <div class="form-group">
                                   <select class="form-control" name="NOTIFY_TYPE_ID">
                                     <?php foreach ($notification_types as $type) { ?>
-                                      <option value="<?=$type->NOTIFY_TYPE_ID?>" <?=(@$record->NOTIFY_TYPE_ID == $type->NOTIFY_TYPE_ID)?'checked': ''?>><?=ucfirst($type->NAME)?></option>
+                                      <option value="<?=$type->id?>" <?=(@$record->notify_type_id == $type->NOTIFY_TYPE_ID)?'checked': ''?>><?=ucfirst($type->NAME)?></option>
                                     <?php } ?>
                                   </select>
                                 </div>

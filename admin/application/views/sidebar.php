@@ -4,16 +4,16 @@ $notifications = $this->notifications->getAllForUser();
 
 <!-- main menu-->
 <!--.main-menu(class="#{menuColor} #{menuOpenType}", class=(menuShadow == true ? 'menu-shadow' : ''))-->
-<div data-active-color="white" data-background-color="<?=$this->session->userdata('sidebar_color');?>" data-image="<?=base_url('uploads/sidebar_img/'.$this->session->userdata('sidebar_img'))?>" class="app-sidebar">
+<div data-active-color="white" data-background-color="<?=@$this->session->userdata('settings')['SIDEBAR_COLOR'];?>" data-image="<?=@base_url('uploads/sidebar_img/'.$this->session->userdata('settings')['SIDEBAR_IMG'])?>" class="app-sidebar">
   <!-- main menu header-->
   <!-- Sidebar Header starts-->
   <div class="sidebar-header">
       <a href="<?=site_url('/')?>">
         <div class="logo clearfix" style="padding-top: 30px">
 
-          <?php if (@getimagesize('uploads/sidebar_logo/'.$this->session->userdata('logo'))): ?>
+          <?php if (@getimagesize('uploads/sidebar_logo/'.$this->session->userdata('settings')['LOGO'])): ?>
 
-            <img src="<?=base_url('uploads/sidebar_logo/'.$this->session->userdata('logo'))?>" class="text align-middle" style="max-height: 125px;max-width: 215px;"/>
+            <img src="<?=base_url('uploads/sidebar_logo/'.$this->session->userdata('settings')['LOGO'])?>" class="text align-middle" style="max-height: 125px;max-width: 215px;"/>
 
               <?php else: ?>
 
@@ -54,7 +54,7 @@ $notifications = $this->notifications->getAllForUser();
               </ul>
             </li>
 
-            <li class="has-sub nav-item <?=(@$active_menu=='add_role' || @$active_menu=='view_roles'?'open':'')?>"><a><i class="ft-shuffle"></i><span data-i18n="" class="menu-title"> Roles</span></a>
+            <!-- <li class="has-sub nav-item <?=(@$active_menu=='add_role' || @$active_menu=='view_roles'?'open':'')?>"><a><i class="ft-shuffle"></i><span data-i18n="" class="menu-title"> Roles</span></a>
                 <ul class="menu-content" style="">
                   <li class="<?=(@$active_menu=='add_role'?'active':'')?>"><a href="<?=site_url('add_role')?>" class="menu-item"> Add New Role</a>
                   </li>
@@ -63,7 +63,7 @@ $notifications = $this->notifications->getAllForUser();
                   <li class="<?=(@$active_menu=='view_roles'?'active':'')?>"><a href="<?=site_url('roles')?>" class="menu-item"> View Roles</a>
                   </li>
                 </ul>
-            </li>
+            </li> -->
 
             <li class="has-sub nav-item <?=(@$active_menu=='add_notification' || @$active_menu=='view_notifications'?'open':'')?>"><a><i class="icon-speech"></i><span data-i18n="" class="menu-title"> Notifications</span></a>
                 <ul class="menu-content" style="">

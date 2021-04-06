@@ -69,8 +69,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                     <!-- Wellcome to Musad Inventory Management System -->
                   </p>
 
-                  <?php if (@getimagesize(base_url('uploads/sidebar_logo/'.$logo->value))): ?>
-
+                  <?php if (@getimagesize('uploads/sidebar_logo/'.$logo->value)): ?>
                     <img src="<?=base_url('uploads/sidebar_logo/'.$logo->value)?>" style="max-height: 125px;max-width: 215px;margin-bottom:10px;"/>
 
                       <?php else: ?>
