@@ -22,6 +22,7 @@ class Notifications_model extends CI_Model
     // $this->db->join('department d', 'n.DEPT_ID = d.DEPT_ID');
     // $this->db->join('program p', 'n.PROG_ID = p.PROG_ID');
     $this->db->join('notification_type nt', 'n.notify_type_id = nt.id');
+    $this->db->join('users u', 'n.publisher_id = u.id');
     $this->db->order_by('n.id', 'desc');
 
     return $this->db->get()->row();

@@ -8,6 +8,7 @@ class Notification extends CI_Controller
     function __construct() {
       parent::__construct();
       $this->load->model('Notifications_model', 'nm');
+      // $this->load->model('Basic_model', 'bm');
       // validate user logged in
       if (empty($this->session->userdata('username'))) {
           redirect('login');
@@ -52,35 +53,39 @@ class Notification extends CI_Controller
       if($this->input->post()) {
         $data = $this->input->post();
 
-        if($_FILES['IMAGE_PATH']['name'] != "")  {
+        if($_FILES['image']['name'] != "")  {
           // image is changed
           // delete old image
-          if(isset($data['OLD_IMAGE_PATH']) && file_exists($data['OLD_IMAGE_PATH'])) {
+          if(isset($data['old_image']) && file_exists($data['old_image'])) {
             // if on edit remove old image from server
-            unlink($data['OLD_IMAGE_PATH']);
+            unlink($data['old_image']);
           }
 
           $image_path = 'uploads/notifications_images/';
-          $image_path .= $this->bm->uploadFile($_FILES['IMAGE_PATH'], $image_path);
+          $img_resp = $this->bm->uploadFile($_FILES['image'], $image_path);
+          if($img_resp == 'error') {
+            $this->session->set_flashdata(array('type' => 'error', 'msg' => 'Image Error'));
+            redirect('new_notification');
+          }
+          $image_path .= $img_resp;
 
-        } elseif($_FILES['IMAGE_PATH']['name'] == "" && isset($data['OLD_IMAGE_PATH'])) {
+        } elseif($_FILES['image']['name'] == "" && isset($data['old_image'])) {
           // image is not changed use old image (for edit only)
-          $image_path = $data['OLD_IMAGE_PATH'];
+          $image_path = $data['old_image'];
         } else {
           $image_path = "";
         }
 
+        $data['image'] = $image_path;
+        $data['publisher_id'] = $this->session->userdata('user_id');
 
-        $data['IMAGE_PATH'] = $image_path;
-        $data['PUBLISHER_ID'] = $this->session->userdata('user_id');
-
-        if($data['NOTIFICATION_ID'] == "") {
+        if($data['id'] == "") {
           $this->bm->insertRow('news_notifications', $data);
           $msg = 'Notification Added Successfully';
         } else {
           // remove old image from array
-          unset($data['OLD_IMAGE_PATH']);
-          $this->bm->updateRow('news_notifications', $data, 'NOTIFICATION_ID', $data['NOTIFICATION_ID']);
+          unset($data['old_image']);
+          $this->bm->updateRow('news_notifications', $data, 'id', $data['id']);
           $msg = 'Notification Updated Successfully';
         }
 
@@ -90,20 +95,16 @@ class Notification extends CI_Controller
     }
 
     public function edit($id) {
+
       $id = hashids_decrypt($id);
       // get notification record
       $record = $this->nm->getNotification($id);
 
-      // get departments for selected faculty
-
-
-      // get program for selected department
-
-      $data = array(
+      $data = array (
         'title' => 'Add New Notification',
         'active_menu' => 'add_notification',
-        'faculties' => $this->bm->getAll('faculty', 'FAC_ID'),
-        'notification_types' => $this->bm->getAll('notification_type', 'NOTIFY_TYPE_ID', 'ASC'),
+        'faculties' => $this->bm->getAll('faculties', 'id'),
+        'notification_types' => $this->bm->getAll('notification_type', 'id', 'ASC'),
         'record' => $record,
       );
 
@@ -116,7 +117,7 @@ class Notification extends CI_Controller
 
     public function delete($id) {
       $id = hashids_decrypt($id);
-      $this->bm->delete('news_notifications', 'NOTIFICATION_ID', $id);
+      $this->bm->delete('news_notifications', 'id', $id);
       $this->session->set_flashdata(array('type' => 'success', 'msg' => 'Notification Deleted Successfully!'));
       redirect('view_notifications');
     }

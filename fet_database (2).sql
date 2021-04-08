@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2021 at 10:21 PM
+-- Generation Time: Apr 08, 2021 at 06:52 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.28
 
@@ -366,20 +366,27 @@ CREATE TABLE `keywords` (
 
 CREATE TABLE `news_notifications` (
   `id` int(11) NOT NULL,
-  `faculty_id` int(11) NOT NULL,
-  `depart_id` int(11) NOT NULL,
+  `faculty_id` varchar(100) NOT NULL,
+  `depart_id` varchar(100) NOT NULL,
   `notify_type_id` int(11) NOT NULL,
   `notification_for` varchar(255) NOT NULL,
   `title` varchar(100) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `date_time` datetime DEFAULT NULL,
+  `date_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `image` varchar(255) DEFAULT NULL,
   `publisher_id` int(11) DEFAULT NULL,
   `user_type_id` varchar(256) DEFAULT NULL,
-  `program_id` varchar(256) DEFAULT NULL,
+  `program_id` varchar(100) DEFAULT NULL,
   `remarks` varchar(256) DEFAULT NULL,
   `is_archieved` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `news_notifications`
+--
+
+INSERT INTO `news_notifications` (`id`, `faculty_id`, `depart_id`, `notify_type_id`, `notification_for`, `title`, `description`, `date_time`, `image`, `publisher_id`, `user_type_id`, `program_id`, `remarks`, `is_archieved`) VALUES
+(2, 'all', 'all', 4, 'university_faculty', 'updated title', '<p>asdfasdf&nbsp;updated&nbsp;</p>\r\n', '2021-04-08 16:32:55', 'uploads/notifications_images/70438808horizon_zero_dawn_2017_video_game-wallpaper-3554x1999.jpg', 1, NULL, 'all', 'asdfasdf updated ', 0);
 
 -- --------------------------------------------------------
 
@@ -1238,7 +1245,7 @@ ALTER TABLE `keywords`
 -- AUTO_INCREMENT for table `news_notifications`
 --
 ALTER TABLE `news_notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `notification_type`

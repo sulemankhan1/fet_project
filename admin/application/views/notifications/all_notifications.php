@@ -53,26 +53,26 @@
                             <tr>
                               <td><?=$sno?></td>
                               <td>
-                                <?php if(file_exists($notification->IMAGE_PATH)) { ?>
-                                  <a href="<?=base_url($notification->IMAGE_PATH)?>" target="_blank">
-                                    <img src="<?=base_url($notification->IMAGE_PATH)?>" width="150" class="img-thumbnail">
+                                <?php if(@getimagesize($notification->image)) { ?>
+                                  <a href="<?=base_url($notification->image)?>" target="_blank">
+                                    <img src="<?=base_url($notification->image)?>" width="150" class="img-thumbnail">
                                   </a>
                                 <?php } else { ?>
                                   <img src="<?=base_url('app-assets/images/no-image-available.png')?>" width="150" class="img-thumbnail">
                                 <?php } ?>
                               </td>
-                              <td><?=$notification->TITLE?></td>
+                              <td><?=$notification->title?></td>
                               <!-- <td><?=$notification->FAC_NAME?></td>
                               <td><?=$notification->DEPT_NAME?></td>
                               <td><?=$notification->PROGRAM_TITLE?></td> -->
-                              <td><?=(strlen($notification->DESCRIPTION)> 10)?substr($notification->DESCRIPTION, 0, 10)."...":$notification->DESCRIPTION?></td>
-                              <td><?=$notification->NOTIFICATION_TYPE?></td>
+                              <td><?=(strlen($notification->description)> 10)?substr($notification->description, 0, 10)."...":$notification->description?></td>
+                              <td><?=$notification->notification_type?></td>
                               <td><?=$notification->username?></td>
-                              <td><?=($notification->DATA_TIME)?date('d M Y H:i a', strtotime($notification->DATA_TIME)):" - "?></td>
+                              <td><?=($notification->date_time)?date('d M Y H:i a', strtotime($notification->date_time)):" - "?></td>
                               <td>
                                 <!-- <a href="#" class="btn-sm btn-link" title="View"><i class="ft-eye"></i></a> -->
-                                <a href="<?=site_url('edit_notification/'.hashids_encrypt($notification->NOTIFICATION_ID))?>" class="btn-sm btn-link" title="Edit"><i class="ft-edit"></i></a>
-                                <a href="<?=site_url('delete_notification/'.hashids_encrypt($notification->NOTIFICATION_ID))?>" class="btn-sm btn-link" title="Delete" onclick="return confirm('Are you sure you want to Delete this Notification? This Action Cannot be reverted.')"><i class="ft-trash"></i></a>
+                                <a href="<?=site_url('edit_notification/'.hashids_encrypt($notification->id))?>" class="btn-sm btn-link" title="Edit"><i class="ft-edit"></i></a>
+                                <a href="<?=site_url('delete_notification/'.hashids_encrypt($notification->id))?>" class="btn-sm btn-link" title="Delete" onclick="return confirm('Are you sure you want to Delete this Notification? This Action Cannot be reverted.')"><i class="ft-trash"></i></a>
                               </td>
                             </tr>
                           <?php $sno++; endforeach; ?>
