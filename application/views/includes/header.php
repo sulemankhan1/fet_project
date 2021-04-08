@@ -109,13 +109,13 @@
 
            <div class="row">
             <div class="col-sm-5 col-md-5">
-              <a class="menuzord-brand pull-left flip mb-15" href="index.php" id="logo-size"><img src="<?=base_url('assets/images/FET-logo.png')?>" alt=""></a>
+              <a class="menuzord-brand pull-left flip mb-15" href="<?=site_url()?>" id="logo-size"><img src="<?=base_url('assets/images/FET-logo.png')?>" alt=""></a>
              <h4 id="logo-size1">Faculty of Engineering & Technology</h4>
               <h5 id="logo-size2">University of Sindh, Pakistan</h5>
             </div>
             <div class="col-sm-7 col-md-7">
             <ul class="menuzord-menu">
-              <li><a href="index.php">Home</a></li>
+              <li><a href="<?=site_url()?>">Home</a></li>
              <li><a href="javascripts:void(0)">Programs</a>
                 <div class="megamenu megamenu-bg-img">
                   <div class="megamenu-row">

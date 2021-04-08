@@ -70,7 +70,7 @@ div#rev_slider_home_forcefullwidth {
 .ns-slider {
   list-style-type: none;
   margin: 0; padding: 0;
-  width: auto;
+  width: 100%;
 }
 .ns-slider li {
   display: inline-block;

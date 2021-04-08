@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2021 at 06:52 PM
+-- Generation Time: Apr 08, 2021 at 08:03 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.28
 
@@ -370,7 +370,7 @@ CREATE TABLE `news_notifications` (
   `depart_id` varchar(100) NOT NULL,
   `notify_type_id` int(11) NOT NULL,
   `notification_for` varchar(255) NOT NULL,
-  `title` varchar(100) DEFAULT NULL,
+  `title` text,
   `description` varchar(255) DEFAULT NULL,
   `date_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `image` varchar(255) DEFAULT NULL,
@@ -378,6 +378,7 @@ CREATE TABLE `news_notifications` (
   `user_type_id` varchar(256) DEFAULT NULL,
   `program_id` varchar(100) DEFAULT NULL,
   `remarks` varchar(256) DEFAULT NULL,
+  `in_draft` tinyint(1) NOT NULL,
   `is_archieved` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -385,8 +386,10 @@ CREATE TABLE `news_notifications` (
 -- Dumping data for table `news_notifications`
 --
 
-INSERT INTO `news_notifications` (`id`, `faculty_id`, `depart_id`, `notify_type_id`, `notification_for`, `title`, `description`, `date_time`, `image`, `publisher_id`, `user_type_id`, `program_id`, `remarks`, `is_archieved`) VALUES
-(2, 'all', 'all', 4, 'university_faculty', 'updated title', '<p>asdfasdf&nbsp;updated&nbsp;</p>\r\n', '2021-04-08 16:32:55', 'uploads/notifications_images/70438808horizon_zero_dawn_2017_video_game-wallpaper-3554x1999.jpg', 1, NULL, 'all', 'asdfasdf updated ', 0);
+INSERT INTO `news_notifications` (`id`, `faculty_id`, `depart_id`, `notify_type_id`, `notification_for`, `title`, `description`, `date_time`, `image`, `publisher_id`, `user_type_id`, `program_id`, `remarks`, `in_draft`, `is_archieved`) VALUES
+(2, 'all', 'all', 4, 'university_faculty', 'updated title', '<p>asdfasdf&nbsp;updated&nbsp;</p>\r\n', '2021-04-08 16:32:55', 'uploads/notifications_images/70438808horizon_zero_dawn_2017_video_game-wallpaper-3554x1999.jpg', 1, NULL, 'all', 'asdfasdf updated ', 0, 0),
+(3, '', '', 13, 'everyone', 'test student notice', '<p>asdf asdf asdf asdf asdf asdf asf asdfasdfas dfasdf asdfa sdfasdfasdf asdf asdf asdf asdf asdf asdf asdfa sdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdfas dfas dfa sdfasdf </p>\r\n', '2021-04-08 17:20:49', '', 1, NULL, NULL, '', 0, 0),
+(4, '', '', 13, 'everyone', 'another test notice Lorem ipsum dolor sit amet\r\nanother test notice Lorem ipsum dolor sit amet\r\n\r\n\r\n', '', '2021-04-08 17:21:05', 'uploads/notifications_images/136198974assassins_creed_valhalla_6-wallpaper-3554x1999.jpg', 1, NULL, NULL, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1245,7 +1248,7 @@ ALTER TABLE `keywords`
 -- AUTO_INCREMENT for table `news_notifications`
 --
 ALTER TABLE `news_notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `notification_type`

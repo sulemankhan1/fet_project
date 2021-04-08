@@ -10,23 +10,21 @@ class Pages extends CI_Controller
 {
 
 
-	public function __construct()
-	{
-
+	public function __construct() {
 		parent::__construct();
-
+		$this->load->model('news_model', 'nm');
 	}
 
 	public function index()
 	{
 
-		$data = [
-
+		$data = array(
 			'title' => 'Home',
-
-			'sliders' => $this->bm->getAll('slider_setting','id','desc')
-
-		];
+			'sliders' => $this->bm->getAll('slider_setting','id','desc'),
+			'headlines' => $this->nm->getHeadlines(10),
+			'latest_news' => $this->nm->getLatestNews(4),
+			'notices' => $this->nm->getNotices(5),
+		);
 
 		$this->load->view('includes/header', $data);
 		$this->load->view('pages/homepage');

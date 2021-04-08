@@ -49,7 +49,7 @@
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="title">Title *</label>
-                                <input type="text" name="title" value="<?=@$record->title?>" id="title" class="form-control" required />
+                                <input type="text" required name="title" value="<?=@$record->title?>" id="title" class="form-control" required />
                               </div>
                             </div>
                             <div class="col-md-12">
@@ -67,7 +67,7 @@
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="description">Description *</label>
-                                <textarea name="description" rows="8" cols="80" id="description" class="form-control" required><?=@$record->description?></textarea>
+                                <textarea name="description" required rows="8" cols="80" id="description" class="form-control" required><?=@$record->description?></textarea>
                               </div>
                             </div>
                           </div>

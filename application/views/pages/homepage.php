@@ -400,9 +400,13 @@
             </div>
             <div class="ns-right">
               <marquee class='ns-slider'>
-                <li> <a href="#"><i class="fa fa-list-alt"></i> The Ph.D (IT) scholars, who have applied for appearing in the University-based GAT (Subject) test, are hereby informed that the test has been scheduled on Saturday, November 07, 2020 at 10.00 am at Institute of Mathematics and Computer Science, Allam I.I. Kazi Campus, University of Sindh, Jamshoro.</a> </li>
-                <li> <a href="#"><i class="fa fa-list-alt"></i> This is a news placeholder</a> </li>
-                <li> <a href="#"><i class="fa fa-list-alt"></i> This is last</a> </li>
+                <?php if(@!empty($headlines)) { ?>
+                  <?php foreach($headlines as $headline) { ?>
+                    <li> <a href="<?=site_url('news/'.myUrlEncode($headline->title))?>"><i class="fa fa-list-alt"></i> <?=$headline->title?> .</a> </li>
+                  <?php } ?>
+                <?php } else { ?>
+                  <li> No News Found! </li>
+                <?php } ?>
               </marquee>
             </div>
             <div class="clearfix"></div>
@@ -444,122 +448,38 @@
               </div>
             </div>
             <div class="col-sm-5 col-md-4">
-              <h2 class="mt-0 mt-xs-20 line-height-1 line-bottom-edu"><span>Notice</span> board</h2>
+              <h2 class="mt-0 mt-xs-20 line-height-1 line-bottom-edu"><span>Student</span> Notices</h2>
               <div class="bxslider bx-nav-top" data-minslides="5" >
-                <div class="event media mt-0 no-bg no-border">
-                  <div class="event-date-new media-left text-center flip bg-theme-colored pl-10">
-                    <ul class="mt-15 mt-sm-30">
-                      <li class="font-20 text-white font-weight-600">28</li>
-                      <li class="font-14 text-uppercase text-white">Feb</li>
-                    </ul>
-                  </div>
-                  <div class="media-body">
-                    <div class="event-content pull-left flip pl-20 pl-xs-10">
-                      <h4 class="event-title media-heading font-raleway font-weight-700 mb-0 pt-5"><a href="#">Gear up for giving</a></h4>
-                      <span class="mb-5 font-12 mr-10"><i class="fa fa-clock-o mr-5 text-theme-colored"></i> at 5.00 pm - 7.30 pm</span>
-                      <span class="font-12"><i class="fa fa-map-marker mr-5 text-theme-colored"></i> 25 Newyork City</span>
-                      <p class="mb-5">Lorem ipsum dolor sit amet</p>
+                <?php if(@!empty($notices)) { ?>
+                  <?php foreach($notices as $notice) { ?>
+                    <div class="event media mt-0 no-bg no-border">
+                      <div class="event-date-new media-left text-center flip bg-theme-colored pl-10">
+                        <ul class="mt-15 mt-sm-30">
+                          <li class="font-20 text-white font-weight-600"><?=date('d', strtotime($notice->date_time))?></li>
+                          <li class="font-14 text-uppercase text-white"><?=date('M', strtotime($notice->date_time))?></li>
+                        </ul>
+                      </div>
+                      <div class="media-body">
+                        <div class="event-content pull-left flip pl-20 pl-xs-10">
+                          <h4 class="event-title media-heading font-raleway font-weight-700 mb-0 pt-5"><a href="#"><?=(strlen($notice->title)> 50)?substr($notice->title, 0, 50)."...":$notice->title?></a></h4>
+                          <span class="mb-5 font-12 mr-10"><i class="fa fa-clock-o mr-5 text-theme-colored"></i> at <?=date('H:i a', strtotime($notice->date_time))?></span>
+                          <span class="font-12"><i class="fa fa-users mr-5 text-theme-colored"></i><?=$notice->notify_type_name?></span>
+                          <p class="mb-5"><?=(strlen($notice->description)> 80)?substr($notice->description, 0, 80)."...":$notice->description?></p>
+                        </div>
+                      </div>
+                    </div>
+                  <?php } ?>
+                <?php } else { ?>
+                  <div class="event media mt-0 no-bg no-border">
+                    <div class="media-body">
+                      <div class="event-content pull-left flip pl-20 pl-xs-10">
+                        <p class="mb-5">No Notices Found</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="event media mt-0 no-bg no-border">
-                  <div class="event-date-new media-left text-center flip bg-theme-colored2 p-10">
-                    <ul class="mt-5 mt-sm-20">
-                      <li class="font-20 text-white font-weight-600">28</li>
-                      <li class="font-14 text-uppercase text-white">Feb</li>
-                    </ul>
-                  </div>
-                  <div class="media-body">
-                    <div class="event-content pull-left flip pl-20 pl-xs-10">
-                      <h4 class="event-title media-heading font-raleway font-weight-700 mb-0 pt-5"><a href="#">Gear up for giving</a></h4>
-                      <span class="mb-5 font-12 mr-10"><i class="fa fa-clock-o mr-5 text-theme-colored"></i> at 5.00 pm - 7.30 pm</span>
-                      <span class="font-12"><i class="fa fa-map-marker mr-5 text-theme-colored"></i> 25 Newyork City</span>
-                      <p class="mb-5">Lorem ipsum dolor sit amet</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="event media mt-0 no-bg no-border">
-                  <div class="event-date-new media-left text-center flip bg-theme-colored3 p-10">
-                    <ul class="mt-5 mt-sm-20">
-                      <li class="font-20 text-white font-weight-600">28</li>
-                      <li class="font-14 text-uppercase text-white">Feb</li>
-                    </ul>
-                  </div>
-                  <div class="media-body">
-                    <div class="event-content pull-left flip pl-20 pl-xs-10">
-                      <h4 class="event-title media-heading font-raleway font-weight-700 mb-0 pt-5"><a href="#">Gear up for giving</a></h4>
-                      <span class="mb-5 font-12 mr-10"><i class="fa fa-clock-o mr-5 text-theme-colored"></i> at 5.00 pm - 7.30 pm</span>
-                      <span class="font-12"><i class="fa fa-map-marker mr-5 text-theme-colored"></i> 25 Newyork City</span>
-                      <p class="mb-5">Lorem ipsum dolor sit amet</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="event media mt-0 no-bg no-border">
-                  <div class="event-date-new media-left text-center flip bg-theme-colored p-10">
-                    <ul class="mt-5 mt-sm-20">
-                      <li class="font-20 text-white font-weight-600">28</li>
-                      <li class="font-14 text-uppercase text-white">Feb</li>
-                    </ul>
-                  </div>
-                  <div class="media-body">
-                    <div class="event-content pull-left flip pl-20 pl-xs-10">
-                      <h4 class="event-title media-heading font-raleway font-weight-700 mb-0 pt-5"><a href="#">Gear up for giving</a></h4>
-                      <span class="mb-5 font-12 mr-10"><i class="fa fa-clock-o mr-5 text-theme-colored"></i> at 5.00 pm - 7.30 pm</span>
-                      <span class="font-12"><i class="fa fa-map-marker mr-5 text-theme-colored"></i> 25 Newyork City</span>
-                      <p class="mb-5">Lorem ipsum dolor sit amet</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="event media mt-0 no-bg no-border">
-                  <div class="event-date-new media-left text-center flip bg-theme-colored2 p-10">
-                    <ul class="mt-5 mt-sm-20">
-                      <li class="font-20 text-white font-weight-600">28</li>
-                      <li class="font-14 text-uppercase text-white">Feb</li>
-                    </ul>
-                  </div>
-                  <div class="media-body">
-                    <div class="event-content pull-left flip pl-20 pl-xs-10">
-                      <h4 class="event-title media-heading font-raleway font-weight-700 mb-0 pt-5"><a href="#">Gear up for giving</a></h4>
-                      <span class="mb-5 font-12 mr-10"><i class="fa fa-clock-o mr-5 text-theme-colored"></i> at 5.00 pm - 7.30 pm</span>
-                      <span class="font-12"><i class="fa fa-map-marker mr-5 text-theme-colored"></i> 25 Newyork City</span>
-                      <p class="mb-5">Lorem ipsum dolor sit amet</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="event media mt-0 no-bg no-border">
-                  <div class="event-date-new media-left text-center flip bg-theme-colored3 p-10">
-                    <ul class="mt-5 mt-sm-20">
-                      <li class="font-20 text-white font-weight-600">28</li>
-                      <li class="font-14 text-uppercase text-white">Feb</li>
-                    </ul>
-                  </div>
-                  <div class="media-body">
-                    <div class="event-content pull-left flip pl-20 pl-xs-10">
-                      <h4 class="event-title media-heading font-raleway font-weight-700 mb-0 pt-5"><a href="#">Gear up for giving</a></h4>
-                      <span class="mb-5 font-12 mr-10"><i class="fa fa-clock-o mr-5 text-theme-colored"></i> at 5.00 pm - 7.30 pm</span>
-                      <span class="font-12"><i class="fa fa-map-marker mr-5 text-theme-colored"></i> 25 Newyork City</span>
-                      <p class="mb-5">Lorem ipsum dolor sit amet</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="event media mt-0 no-bg no-border">
-                  <div class="event-date-new media-left text-center flip bg-theme-colored p-10">
-                    <ul class="mt-5 mt-sm-20">
-                      <li class="font-20 text-white font-weight-600">28</li>
-                      <li class="font-14 text-uppercase text-white">Feb</li>
-                    </ul>
-                  </div>
-                  <div class="media-body">
-                    <div class="event-content pull-left flip pl-20 pl-xs-10">
-                      <h4 class="event-title media-heading font-raleway font-weight-700 mb-0 pt-5"><a href="#">Gear up for giving</a></h4>
-                      <span class="mb-5 font-12 mr-10"><i class="fa fa-clock-o mr-5 text-theme-colored"></i> at 5.00 pm - 7.30 pm</span>
-                      <span class="font-12"><i class="fa fa-map-marker mr-5 text-theme-colored"></i> 25 Newyork City</span>
-                      <p class="mb-5">Lorem ipsum dolor sit amet</p>
-                    </div>
-                  </div>
-                </div>
+                <?php } ?>
               </div>
-              <a class="btn btn-colored btn-sm btn-circled btn-theme-colored mt-40 ml-0" href="javascript:void(0)">View all</a>
+              <a class="btn btn-colored btn-sm btn-circled btn-theme-colored mt-40 ml-0" href="<?=site_url('news?type='.urlencode('student notice'))?>">View all</a>
             </div>
           </div>
         </div>
@@ -935,7 +855,7 @@
         </div>
         <div class="section-content">
           <div class="row">
-            <div class="col-sm-6 col-md-4 col-lg-4">
+            <div class="col-sm-6 col-md-3">
               <article class="post clearfix maxwidth600 mb-30 border-1px">
                 <div class="entry-header-new">
                   <div class="post-thumb thumb"><img src="assets/images/blog/1.jpg" alt="" class="img-responsive img-fullwidth">
@@ -953,7 +873,7 @@
                 </div>
               </article>
             </div>
-            <div class="col-sm-6 col-md-4 col-lg-4">
+            <div class="col-sm-6 col-md-3">
               <article class="post clearfix maxwidth600 mb-30 border-1px">
                 <div class="entry-header-new">
                   <div class="post-thumb thumb"><img src="assets/images/blog/2.jpg" alt="" class="img-responsive img-fullwidth">
@@ -971,7 +891,7 @@
                 </div>
               </article>
             </div>
-            <div class="col-sm-6 col-md-4 col-lg-4">
+            <div class="col-sm-6 col-md-3">
               <article class="post clearfix maxwidth600 mb-30 border-1px">
                 <div class="entry-header-new">
                   <div class="post-thumb thumb"><img src="assets/images/blog/3.jpg" alt="" class="img-responsive img-fullwidth">
@@ -988,6 +908,27 @@
                   <a class="btn btn-theme-colored btn-lg btn-flat mt-0 text-white mt-10" href="#">Read more <i class="fa fa-angle-double-right text-theme-colored2"></i></a>
                 </div>
               </article>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <article class="post clearfix maxwidth600 mb-30 border-1px">
+                <div class="entry-header-new">
+                  <div class="post-thumb thumb"><img src="assets/images/blog/3.jpg" alt="" class="img-responsive img-fullwidth">
+                  </div>
+                  <div class="blog-overlay"></div>
+                </div>
+                <div class="pr-20 pl-20 pb-30 text-center">
+                  <h3 class="entry-title mt-20 pt-0"><a class="text-theme-colored" href="#">The Celebration</a></h3>
+                  <ul class="list-inline entry-date font-13 mt-5">
+                    <li><i class="fa fa-clock-o mr-5 text-theme-colored"></i> Dec - 21 </li>
+                    <li><i class="fa fa-map-marker mr-5 text-theme-colored"></i>  121 King Street, Melbourne </li>
+                  </ul>
+                  <p class="mt-10">Lorem ipsum dolor sit amet. Reiciendis impedit expedita sit deleniti culpa nam fuga neque similique corporis.</p>
+                  <a class="btn btn-theme-colored btn-lg btn-flat mt-0 text-white mt-10" href="#">Read more <i class="fa fa-angle-double-right text-theme-colored2"></i></a>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-12 text-center">
+              <a class="btn btn-theme-colored btn-lg btn-flat mt-0 text-white mt-10" href="<?=site_url('news')?>">View All News</a>
             </div>
           </div>
         </div>
