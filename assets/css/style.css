@@ -93,3 +93,8 @@ div#rev_slider_home_forcefullwidth {
 .custom-width1 {
   width: 80px;
 }
+.thumb {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+}

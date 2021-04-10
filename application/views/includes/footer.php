@@ -16,15 +16,9 @@
               <h5 style="color: white"> University of Sindh, Pakistan</h5>
             </div>
           </div>
+          <div class="clearfix"></div>
           <div class="widget dark">
-            <ul class="list-inline mt-5">
-              <li class="m-0 pl-10 pr-10"> <i class="fa fa-map-marker text-theme-color-2 mr-5"></i> <a class="text-gray" href="#">University of sindh jamshoro, pakistan</a> </li>
-              <li class="m-0 pl-10 pr-10"> <i class="fa fa-phone text-theme-color-2 mr-5"></i> <a class="text-gray" href="#">+92-(0)22-9213181-90</a> </li>
-              <li class="m-0 pl-10 pr-10"> <i class="fa fa-envelope-o text-theme-color-2 mr-5"></i> <a class="text-gray" href="mailto:info@iict.usindh.edu.pk">info@iict.usindh.edu.pk</a> </li>
-            </ul>
-          </div>
-          <div class="widget dark">
-            <h5 class="widget-title mb-10">Connect With Us</h5>
+
             <ul class="styled-icons icon-dark mt-20">
               <li class="wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay=".1s" data-wow-offset="10"><a href="https://web.facebook.com/groups/522891551392759/?multi_permalinks=1400592813622624&notif_id=1616062110184178&notif_t=group_highlights&ref=notif" data-bg-color="#3B5998"><i class="fa fa-facebook"></i></a></li>
               <li class="wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay=".2s" data-wow-offset="10"><a href="#" data-bg-color="#02B0E8"><i class="fa fa-twitter"></i></a></li>
@@ -33,8 +27,10 @@
               <li class="wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay=".5s" data-wow-offset="10"><a href="#" data-bg-color="#C22E2A"><i class="fa fa-youtube"></i></a></li>
             </ul>
           </div>
+
+
         </div>
-        <div class="col-sm-6 col-md-4">
+        <!-- <div class="col-sm-6 col-md-4">
           <div class="widget dark">
             <h5 class="widget-title line-bottom">Latest News</h5>
             <div class="latest-posts">
@@ -61,7 +57,7 @@
               </article>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="col-sm-6 col-md-4">
           <div class="widget dark">
             <h5 class="widget-title">Useful Links</h5>
@@ -69,6 +65,16 @@
               <li><a href="javascript:void(0)">FAQ</a></li>
               <li><a href="javascript:void(0)">Sitemap</a></li>
               <li><a href="admin">Admin Login</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <div class="widget dark">
+            <ul class="list-inline mt-5">
+              <h5 class="widget-title mb-10">Connect With Us</h5>
+              <li class="m-0 pl-10 pr-10"> <i class="fa fa-map-marker text-theme-color-2 mr-5"></i> <a class="text-gray" href="#">University of sindh jamshoro, pakistan</a> </li>
+              <li class="m-0 pl-10 pr-10"> <i class="fa fa-phone text-theme-color-2 mr-5"></i> <a class="text-gray" href="#">+92-(0)22-9213181-90</a> </li>
+              <li class="m-0 pl-10 pr-10"> <i class="fa fa-envelope-o text-theme-color-2 mr-5"></i> <a class="text-gray" href="mailto:info@iict.usindh.edu.pk">info@iict.usindh.edu.pk</a> </li>
             </ul>
           </div>
         </div>

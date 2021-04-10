@@ -855,78 +855,32 @@
         </div>
         <div class="section-content">
           <div class="row">
-            <div class="col-sm-6 col-md-3">
-              <article class="post clearfix maxwidth600 mb-30 border-1px">
-                <div class="entry-header-new">
-                  <div class="post-thumb thumb"><img src="assets/images/blog/1.jpg" alt="" class="img-responsive img-fullwidth">
-                  </div>
-                  <div class="blog-overlay"></div>
+            <?php if(@!empty($latest_news)) { ?>
+              <?php foreach($latest_news as $news) { ?>
+                <div class="col-sm-6 col-md-3">
+                  <article class="post clearfix maxwidth600 mb-30 border-1px">
+                    <div class="entry-header-new">
+                    <?php if (@getimagesize('admin/'.$news->image)) { ?>
+                      <div class="post-thumb thumb" style="background-image: url(<?=base_url('admin/'.$news->image)?>)">
+                      <?php } else { ?>
+                        <div class="post-thumb thumb" style="background-image: url(<?=base_url('assets/images/usindh_logo.jpg')?>)">
+                      <?php } ?>
+                      </div>
+                      <div class="blog-overlay"></div>
+                    </div>
+                    <div class="pr-20 pl-20 pb-30 text-center">
+                      <h3 class="entry-title mt-20 pt-0"><a class="text-theme-colored" href="<?=site_url('news/'.myUrlEncode($news->title))?>"><?=(strlen($news->title)> 50)?substr($news->title, 0, 50)."...":$news->title?></a></h3>
+                      <ul class="list-inline entry-date font-13 mt-5">
+                        <li><i class="fa fa-clock-o mr-5 text-theme-colored"></i> <?=date('d M Y', strtotime($news->date_time))?> </li>
+                        <!-- <li><i class="fa fa-map-marker mr-5 text-theme-colored"></i>  121 King Street, Melbourne </li> -->
+                      </ul>
+                      <p class="mt-10"><?=(strlen($news->description)> 50)?substr($news->description, 0, 50)."...":$news->description?></p>
+                      <a class="btn btn-theme-colored btn-lg btn-flat mt-0 text-white mt-10" href="<?=site_url('news/'.myUrlEncode($news->title))?>">Read more <i class="fa fa-angle-double-right text-theme-colored2"></i></a>
+                    </div>
+                  </article>
                 </div>
-                <div class="pr-20 pl-20 pb-30 text-center">
-                  <h3 class="entry-title mt-20 pt-0"><a class="text-theme-colored" href="#">The Celebration</a></h3>
-                  <ul class="list-inline entry-date font-13 mt-5">
-                    <li><i class="fa fa-clock-o mr-5 text-theme-colored"></i> Dec - 21 </li>
-                    <li><i class="fa fa-map-marker mr-5 text-theme-colored"></i>  121 King Street, Melbourne </li>
-                  </ul>
-                  <p class="mt-10">Lorem ipsum dolor sit amet. Reiciendis impedit expedita sit deleniti culpa nam fuga neque similique corporis.</p>
-                  <a class="btn btn-theme-colored btn-lg btn-flat mt-0 text-white mt-10" href="#">Read more <i class="fa fa-angle-double-right text-theme-colored2"></i></a>
-                </div>
-              </article>
-            </div>
-            <div class="col-sm-6 col-md-3">
-              <article class="post clearfix maxwidth600 mb-30 border-1px">
-                <div class="entry-header-new">
-                  <div class="post-thumb thumb"><img src="assets/images/blog/2.jpg" alt="" class="img-responsive img-fullwidth">
-                  </div>
-                  <div class="blog-overlay"></div>
-                </div>
-                <div class="pr-20 pl-20 pb-30 text-center">
-                  <h3 class="entry-title mt-20 pt-0"><a class="text-theme-colored" href="#">The Celebration</a></h3>
-                  <ul class="list-inline entry-date font-13 mt-5">
-                    <li><i class="fa fa-clock-o mr-5 text-theme-colored"></i> Dec - 21 </li>
-                    <li><i class="fa fa-map-marker mr-5 text-theme-colored"></i>  121 King Street, Melbourne </li>
-                  </ul>
-                  <p class="mt-10">Lorem ipsum dolor sit amet. Reiciendis impedit expedita sit deleniti culpa nam fuga neque similique corporis.</p>
-                  <a class="btn btn-theme-colored btn-lg btn-flat mt-0 text-white mt-10" href="#">Read more <i class="fa fa-angle-double-right text-theme-colored2"></i></a>
-                </div>
-              </article>
-            </div>
-            <div class="col-sm-6 col-md-3">
-              <article class="post clearfix maxwidth600 mb-30 border-1px">
-                <div class="entry-header-new">
-                  <div class="post-thumb thumb"><img src="assets/images/blog/3.jpg" alt="" class="img-responsive img-fullwidth">
-                  </div>
-                  <div class="blog-overlay"></div>
-                </div>
-                <div class="pr-20 pl-20 pb-30 text-center">
-                  <h3 class="entry-title mt-20 pt-0"><a class="text-theme-colored" href="#">The Celebration</a></h3>
-                  <ul class="list-inline entry-date font-13 mt-5">
-                    <li><i class="fa fa-clock-o mr-5 text-theme-colored"></i> Dec - 21 </li>
-                    <li><i class="fa fa-map-marker mr-5 text-theme-colored"></i>  121 King Street, Melbourne </li>
-                  </ul>
-                  <p class="mt-10">Lorem ipsum dolor sit amet. Reiciendis impedit expedita sit deleniti culpa nam fuga neque similique corporis.</p>
-                  <a class="btn btn-theme-colored btn-lg btn-flat mt-0 text-white mt-10" href="#">Read more <i class="fa fa-angle-double-right text-theme-colored2"></i></a>
-                </div>
-              </article>
-            </div>
-            <div class="col-sm-6 col-md-3">
-              <article class="post clearfix maxwidth600 mb-30 border-1px">
-                <div class="entry-header-new">
-                  <div class="post-thumb thumb"><img src="assets/images/blog/3.jpg" alt="" class="img-responsive img-fullwidth">
-                  </div>
-                  <div class="blog-overlay"></div>
-                </div>
-                <div class="pr-20 pl-20 pb-30 text-center">
-                  <h3 class="entry-title mt-20 pt-0"><a class="text-theme-colored" href="#">The Celebration</a></h3>
-                  <ul class="list-inline entry-date font-13 mt-5">
-                    <li><i class="fa fa-clock-o mr-5 text-theme-colored"></i> Dec - 21 </li>
-                    <li><i class="fa fa-map-marker mr-5 text-theme-colored"></i>  121 King Street, Melbourne </li>
-                  </ul>
-                  <p class="mt-10">Lorem ipsum dolor sit amet. Reiciendis impedit expedita sit deleniti culpa nam fuga neque similique corporis.</p>
-                  <a class="btn btn-theme-colored btn-lg btn-flat mt-0 text-white mt-10" href="#">Read more <i class="fa fa-angle-double-right text-theme-colored2"></i></a>
-                </div>
-              </article>
-            </div>
+              <?php } ?>
+            <?php } ?>
             <div class="col-md-12 text-center">
               <a class="btn btn-theme-colored btn-lg btn-flat mt-0 text-white mt-10" href="<?=site_url('news')?>">View All News</a>
             </div>
