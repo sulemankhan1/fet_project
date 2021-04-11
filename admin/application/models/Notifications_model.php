@@ -23,9 +23,14 @@ class Notifications_model extends CI_Model
     // $this->db->join('program p', 'n.PROG_ID = p.PROG_ID');
     $this->db->join('notification_type nt', 'n.notify_type_id = nt.id');
     $this->db->join('users u', 'n.publisher_id = u.id');
-    $this->db->order_by('n.id', 'desc');
+    $this->db->where('n.id', $id);
 
     return $this->db->get()->row();
+  }
+
+
+  public function newsAlreadyExists($title) {
+    return $this->db->get_where('news_notifications n', array('n.title' => $title))->num_rows();
   }
 
 }

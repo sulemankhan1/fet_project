@@ -68,3 +68,12 @@
 .bordered {
   border: 1px solid #ccc !important;
 }
+.small-txt {
+  font-size: 11px;
+}
+.post-thumb {
+  height: auto !important;
+}
+.user-img {
+  width: 100px;
+}

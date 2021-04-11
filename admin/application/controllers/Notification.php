@@ -52,6 +52,22 @@ class Notification extends CI_Controller
     public function save() {
       if($this->input->post()) {
         $data = $this->input->post();
+        // for backend validation if error found where to redirect
+        $redirect_url = isset($data['id']) ? 'edit_notification/'.$data['id'] : 'new_notification';
+
+        // check if a news with same title exists
+        if(!isset($data['id']) && $this->nm->newsAlreadyExists($data['title'])) {
+          $this->session->set_flashdata(array('type' => 'error', 'msg' => 'A News with the Same Title Already Exists!', 'data' => $data));
+          redirect($redirect_url);
+        }
+        if($data['title'] == "" || $data['notify_type_id'] == "" || $data['description'] == "" || !isset($data['notification_for'])) {
+          $msg = 'Please Fill all Required Fields before Submitting!';
+          if(isset($data['id'])) {
+            $msg .= " Form is being Reset!";
+          }
+          $this->session->set_flashdata(array('type' => 'error', 'msg' => $msg, 'data' => $data));
+          redirect($redirect_url);
+        }
 
         if($_FILES['image']['name'] != "")  {
           // image is changed
@@ -64,8 +80,8 @@ class Notification extends CI_Controller
           $image_path = 'uploads/notifications_images/';
           $img_resp = $this->bm->uploadFile($_FILES['image'], $image_path);
           if($img_resp == 'error') {
-            $this->session->set_flashdata(array('type' => 'error', 'msg' => 'Image Error'));
-            redirect('new_notification');
+            $this->session->set_flashdata(array('type' => 'error', 'msg' => 'Image Error', 'data' => $data));
+            redirect($redirect_url);
           }
           $image_path .= $img_resp;
 

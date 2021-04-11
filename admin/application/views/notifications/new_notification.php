@@ -1,5 +1,10 @@
 <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
-
+<?php
+if($this->session->flashdata('data') && !isset($record)) {
+  // convert array into object and store in record variable to show data on form
+  $record = json_decode(json_encode($this->session->flashdata('data')));
+}
+ ?>
 <style media="screen">
   #extra_options {
     display: none;
@@ -21,6 +26,14 @@
                     <div class="col-md-12">
                       <div class="card-text">
                         <p class="card-text">Following Notification will be added for all the departments you select.</p>
+                        <?php if($this->session->flashdata('type') == 'error') { ?>
+                          <div class="mt-1">
+                            <div class="alert alert-danger alert-dismissible">
+                              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                              <?=$this->session->flashdata('msg')?>
+                            </div>
+                          </div>
+                        <?php } ?>
                       </div>
 
                       <form class="form" method="post" action="<?=site_url('save_notification')?>" metho="post" id="new_notification_form" enctype="multipart/form-data">
@@ -34,7 +47,7 @@
                                 <input type="file" name="image" value="<?=@$record->image?>" id="image" class="form-control" />
                               </div>
                             </div>
-                            <?php if(@$record) { ?>
+                            <?php if(@$record && @$record->image != "") { ?>
                               <div class="col-md-6">
                                 <div class="form-group">
                                   <label for="image">Current Image *</label> <br />

@@ -81,9 +81,12 @@ class Pages extends CI_Controller
 
 	}
 
-	public function single_news($param1) {
+	public function single_news($title) {
 
-		$data = [];
+		$data = array(
+			'news' => $this->nm->getNotificationByTitle(myUrlDecode($title)),
+			'recent_news' => $this->nm->getLatestNews(8),
+		);
 
 		$this->load->view('includes/header', $data);
 		$this->load->view('pages/single_news');

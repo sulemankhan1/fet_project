@@ -33,4 +33,16 @@ class News_model extends CI_Model {
     return $this->db->get()->result();
   }
 
+  public function getNotificationByTitle($title) {
+    $this->db->select('n.*, u.title as user_title, u.full_name as user_fullname,
+    u.image as user_img, u.email as user_email, u.id as user_id,
+    nt.name as notification_type, u.bio user_bio');
+    $this->db->from('news_notifications n');
+    $this->db->join('notification_type nt', 'n.notify_type_id = nt.id');
+    $this->db->join('users u', 'n.publisher_id = u.id');
+    $this->db->where('n.title', $title);
+
+    return $this->db->get()->row();
+  }
+
 }

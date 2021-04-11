@@ -870,6 +870,7 @@
                     </div>
                     <div class="pr-20 pl-20 pb-30 text-center">
                       <h3 class="entry-title mt-20 pt-0"><a class="text-theme-colored" href="<?=site_url('news/'.myUrlEncode($news->title))?>"><?=(strlen($news->title)> 50)?substr($news->title, 0, 50)."...":$news->title?></a></h3>
+                      
                       <ul class="list-inline entry-date font-13 mt-5">
                         <li><i class="fa fa-clock-o mr-5 text-theme-colored"></i> <?=date('d M Y', strtotime($news->date_time))?> </li>
                         <!-- <li><i class="fa fa-map-marker mr-5 text-theme-colored"></i>  121 King Street, Melbourne </li> -->
