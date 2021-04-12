@@ -3,7 +3,12 @@
 }
 .tt_timetable td {
   font-size: 13px;
+  transition: all 0.2s;
 }
+/* .tt_timetable td:hover {
+  border-right: 3px solid red;
+  cursor: pointer;
+} */
 .tt_timetable .teacher-card {
   display: block;
 }

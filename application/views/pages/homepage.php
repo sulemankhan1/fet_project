@@ -461,7 +461,8 @@
                       </div>
                       <div class="media-body">
                         <div class="event-content pull-left flip pl-20 pl-xs-10">
-                          <h4 class="event-title media-heading font-raleway font-weight-700 mb-0 pt-5"><a href="#"><?=(strlen($notice->title)> 50)?substr($notice->title, 0, 50)."...":$notice->title?></a></h4>
+                          <h4 class="event-title media-heading font-raleway font-weight-700 mb-0 pt-5">
+                            <a href="<?=site_url('news/'.myUrlEncode($notice->title))?>"><?=(strlen($notice->title)> 50)?substr($notice->title, 0, 50)."...":$notice->title?></a></h4>
                           <span class="mb-5 font-12 mr-10"><i class="fa fa-clock-o mr-5 text-theme-colored"></i> at <?=date('H:i a', strtotime($notice->date_time))?></span>
                           <span class="font-12"><i class="fa fa-users mr-5 text-theme-colored"></i><?=$notice->notify_type_name?></span>
                           <p class="mb-5"><?=(strlen($notice->description)> 80)?substr($notice->description, 0, 80)."...":$notice->description?></p>
@@ -802,10 +803,9 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-md-offset-3">
-            <h2 class="mt-0 text-white">Enter Your Email &amp; Stay Updated</h2>
-            <h4 class="text-white">You will get Emails for Notifications Circulars Notices etc. You can change emails settings by logging in to your account with same email</h4>
+            <h2 class="mt-0 text-white">Stay updated by Email</h2>
+            <p class="text-white">Enter your Email and you will get updates for Notifications, Circulars, Notices etc. You can change emails settings by logging in to your account with same email</p>
 
-            <!-- Mailchimp Subscription Form-->
             <form id="mailchimp-subscription-form3" class="newsletter-form mt-30">
               <label for="mce-EMAIL"></label>
               <div class="input-group">
@@ -816,27 +816,6 @@
                 </span>
               </div>
             </form>
-
-            <!-- Mailchimp Subscription Form Validation-->
-            <script>
-              $('#mailchimp-subscription-form3').ajaxChimp({
-                  callback: mailChimpCallBack,
-                  url: '//thememascot.us9.list-manage.com/subscribe/post?u=a01f440178e35febc8cf4e51f&amp;id=49d6d30e1e'
-              });
-
-              function mailChimpCallBack(resp) {
-                  // Hide any previous response text
-                  var $mailchimpform = $('#mailchimp-subscription-form3'),
-                      $response = '';
-                  $mailchimpform.children(".alert").remove();
-                  if (resp.result === 'success') {
-                      $response = '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + resp.msg + '</div>';
-                  } else if (resp.result === 'error') {
-                      $response = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + resp.msg + '</div>';
-                  }
-                  $mailchimpform.prepend($response);
-              }
-            </script>
           </div>
         </div>
       </div>
@@ -849,7 +828,7 @@
           <div class="row">
             <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
               <h2 class="mt-0 line-height-1 text-center">Latest <span class="text-theme-colored3">News</span></h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem temporibus quisquam voluptas natus, provident porro et odio perferendis ipsam, amet sint</p>
+              <p>Latest News, Circulars, Notices for University students Faculty Members Affiliated collages etc</p>
             </div>
           </div>
         </div>
@@ -860,7 +839,7 @@
                 <div class="col-sm-6 col-md-3">
                   <article class="post clearfix maxwidth600 mb-30 border-1px">
                     <div class="entry-header-new">
-                    <?php if (@getimagesize('admin/'.$news->image)) { ?>
+                    <?php if (@file_exists('admin/'.$news->image)) { ?>
                       <div class="post-thumb thumb" style="background-image: url(<?=base_url('admin/'.$news->image)?>)">
                       <?php } else { ?>
                         <div class="post-thumb thumb" style="background-image: url(<?=base_url('assets/images/usindh_logo.jpg')?>)">
@@ -870,7 +849,7 @@
                     </div>
                     <div class="pr-20 pl-20 pb-30 text-center">
                       <h3 class="entry-title mt-20 pt-0"><a class="text-theme-colored" href="<?=site_url('news/'.myUrlEncode($news->title))?>"><?=(strlen($news->title)> 50)?substr($news->title, 0, 50)."...":$news->title?></a></h3>
-                      
+
                       <ul class="list-inline entry-date font-13 mt-5">
                         <li><i class="fa fa-clock-o mr-5 text-theme-colored"></i> <?=date('d M Y', strtotime($news->date_time))?> </li>
                         <!-- <li><i class="fa fa-map-marker mr-5 text-theme-colored"></i>  121 King Street, Melbourne </li> -->

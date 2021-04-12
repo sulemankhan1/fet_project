@@ -13,6 +13,7 @@ class Pages extends CI_Controller
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('news_model', 'nm');
+		$this->load->model('pages_model', 'pm');
 	}
 
 	public function index()
@@ -25,6 +26,7 @@ class Pages extends CI_Controller
 			'latest_news' => $this->nm->getLatestNews(4),
 			'notices' => $this->nm->getNotices(5),
 		);
+
 
 		$this->load->view('includes/header', $data);
 		$this->load->view('pages/homepage');
@@ -73,7 +75,29 @@ class Pages extends CI_Controller
 
 	public function news() {
 
-		$data = [];
+		// parameters
+		$get = $this->input->get();
+
+		$news = [];
+		if(isset($get['search']) && $get['search'] != '') {
+			// search
+			$news = $this->nm->searchNews($get['search']);
+		} elseif(isset($get['notifications_for']) && $get['notifications_for'] != "") {
+			// notification for filter
+			$news = $this->nm->getNewsByFilter('notification_for', $get['notifications_for']);
+		} elseif(isset($get['keyword']) && $get['keyword'] != "") {
+			// get notifications by keywords
+			$news = $this->nm->getNewsByKeywords($get['keyword']);
+		} else {
+			// Normal Load Latest News
+			$news = $this->nm->getLatestNews(20);
+		}
+
+		$data = array(
+			'news' => $news,
+			'get' => $get,
+			'top_keywords' => $this->pm->getTopKeywords(),
+		);
 
 		$this->load->view('includes/header', $data);
 		$this->load->view('pages/news');
@@ -82,10 +106,29 @@ class Pages extends CI_Controller
 	}
 
 	public function single_news($title) {
+		// getting news by title
+		$news = $this->nm->getNotificationByTitle(myUrlDecode($title));
+		$keywords_txt = "";
+		if(!empty($news)) {
+			// get notification keywords
+			$keywords = $this->bm->getRowsWithMultipleWhere('keywords', array(
+				'type' => 'news',
+				'news_id' => $news->id,
+			));
+			$keywords_txt = "";
+			if(!empty($keywords)) {
+				foreach($keywords as $keyword) {
+					$keywords_txt .= "$keyword->keyword,";
+				}
+				$keywords_txt = substr($keywords_txt, 0, -1);
+			}
+		}
 
 		$data = array(
-			'news' => $this->nm->getNotificationByTitle(myUrlDecode($title)),
+			'news' => $news,
+			'keywords' => $keywords_txt,
 			'recent_news' => $this->nm->getLatestNews(8),
+			'top_keywords' => $this->pm->getTopKeywords(),
 		);
 
 		$this->load->view('includes/header', $data);

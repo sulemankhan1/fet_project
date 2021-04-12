@@ -62,7 +62,7 @@ if($this->session->flashdata('data') && !isset($record)) {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="title">Title *</label>
-                                <input type="text" required name="title" value="<?=@$record->title?>" id="title" class="form-control" required />
+                                <input type="text"  name="title" value="<?=@$record->title?>" id="title" class="form-control"  />
                               </div>
                             </div>
                             <div class="col-md-12">
@@ -80,7 +80,14 @@ if($this->session->flashdata('data') && !isset($record)) {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="description">Description *</label>
-                                <textarea name="description" required rows="8" cols="80" id="description" class="form-control" required><?=@$record->description?></textarea>
+                                <textarea name="description"  rows="8" cols="80" id="description" class="form-control" ><?=@$record->description?></textarea>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Keywords</label>
+                                <input type="text" name="keywords" placeholder="eg: university, sindh, students ..." class="form-control" value="<?=$keywords?>">
+                                <p class="text-muted small-text"><i>Use Comma seperated values</i> </p>
                               </div>
                             </div>
                           </div>
@@ -96,13 +103,13 @@ if($this->session->flashdata('data') && !isset($record)) {
                             </div>
                             <div class="col-md-4">
                               <div class="form-group">
-                                <div class="custom-control custom-radio d-inline-block ml-1" required>
+                                <div class="custom-control custom-radio d-inline-block ml-1" >
                                   <input type="radio" id="everyone" value="everyone" name="notification_for" class="custom-control-input" checked />
                                   <label class="custom-control-label" for="everyone"> General (Everyone)</label>
                                 </div>
                               </div>
                               <div class="form-group">
-                                <div class="custom-control custom-radio d-inline-block ml-1" required>
+                                <div class="custom-control custom-radio d-inline-block ml-1">
                                   <input type="radio" id="university_faculty" value="university_faculty" name="notification_for" class="custom-control-input" <?=(@$record->notification_for == 'university_faculty')?'checked': ''?> />
                                   <label class="custom-control-label" for="university_faculty"> All University Fculties</label>
                                 </div>
@@ -111,13 +118,13 @@ if($this->session->flashdata('data') && !isset($record)) {
                             </div>
                             <div class="col-md-4">
                               <div class="form-group">
-                                <div class="custom-control custom-radio d-inline-block ml-1" required>
+                                <div class="custom-control custom-radio d-inline-block ml-1">
                                   <input type="radio" id="college_students" value="college_students" name="notification_for" class="custom-control-input" <?=(@$record->notification_for == 'college_students')?'checked': ''?> />
                                   <label class="custom-control-label" for="college_students"> All College Students</label>
                                 </div>
                               </div>
                               <div class="form-group">
-                                <div class="custom-control custom-radio d-inline-block ml-1" required>
+                                <div class="custom-control custom-radio d-inline-block ml-1" >
                                   <input type="radio" id="university_teachers" value="university_teachers" name="notification_for" class="custom-control-input" <?=(@$record->notification_for == 'university_teachers')?'checked': ''?> />
                                   <label class="custom-control-label" for="university_teachers"> All University Teachers</label>
                                 </div>
@@ -125,13 +132,13 @@ if($this->session->flashdata('data') && !isset($record)) {
                             </div>
                             <div class="col-md-4">
                               <div class="form-group">
-                                <div class="custom-control custom-radio d-inline-block ml-1" required>
+                                <div class="custom-control custom-radio d-inline-block ml-1" >
                                   <input type="radio" id="university_students" value="university_students" name="notification_for" class="custom-control-input" <?=(@$record->notification_for == 'university_students')?'checked': ''?> />
                                   <label class="custom-control-label" for="university_students"> All University Students</label>
                                 </div>
                               </div>
                               <div class="form-group">
-                                <div class="custom-control custom-radio d-inline-block ml-1" required>
+                                <div class="custom-control custom-radio d-inline-block ml-1" >
                                   <input type="radio" id="specific_faculty" value="specific_faculty" name="notification_for" class="custom-control-input" <?=(@$record->notification_for == 'specific_faculty')?'checked': ''?> />
                                   <label class="custom-control-label" for="specific_faculty"> Specific Faculty</label>
                                 </div>
@@ -145,7 +152,7 @@ if($this->session->flashdata('data') && !isset($record)) {
                                   <div class="col-md-4">
                                     <div class="form-group">
                                       <label for="department"> Select Faculty *</label>
-                                      <select class="form-control" name="faculty_id" id="department" required>
+                                      <select class="form-control" name="faculty_id" id="department" >
                                         <option value="all">All Faculties</option>
                                         <?php foreach ($faculties as $fac): ?>
                                           <option value="<?=$fac->id?>" <?=@$record->faculty_id == $fac->id?"selected":"" ?>><?=$fac->name?></option>
@@ -156,7 +163,7 @@ if($this->session->flashdata('data') && !isset($record)) {
                                   <div class="col-md-4">
                                     <div class="form-group">
                                       <label for="department"> Select Department *</label>
-                                      <select class="form-control" name="depart_id" id="department" required>
+                                      <select class="form-control" name="depart_id" id="department" >
                                         <option value="all">All Departments</option>
                                         <?php if(@$record->depart_id) { ?>
                                           <option value="<?=@$record->depart_id?>" selected><?=@$record->dept_name?></option>
@@ -167,7 +174,7 @@ if($this->session->flashdata('data') && !isset($record)) {
                                   <div class="col-md-4">
                                     <div class="form-group">
                                       <label for="program"> Select Program *</label>
-                                      <select class="form-control" name="program_id" id="program" required>
+                                      <select class="form-control" name="program_id" id="program" >
                                         <option value="all">All Programs</option>
                                         <?php if(@$record->program_id) { ?>
                                           <option value="<?=@$record->program_id?>" selected><?=@$record->program_title?></option>
@@ -212,7 +219,7 @@ if($this->session->flashdata('data') && !isset($record)) {
     <div class="col-md-4">
       <div class="form-group">
         <label for="department"> Select Faculty *</label>
-        <select class="form-control" name="faculty_id" id="department" required>
+        <select class="form-control" name="faculty_id" id="department" >
           <option> -- Select Faculty -- </option>
           <?php foreach ($faculties as $fac): ?>
             <option value="<?=$fac->id?>" <?=@$record->faculty_id == $fac->id?"selected":"" ?>><?=$fac->name?></option>
@@ -223,7 +230,7 @@ if($this->session->flashdata('data') && !isset($record)) {
     <div class="col-md-4">
       <div class="form-group">
         <label for="department"> Select Department *</label>
-        <select class="form-control" name="depart_id" id="department" required>
+        <select class="form-control" name="depart_id" id="department" >
           <option value=""> -- <?=@($record)?"Select Department":"Select Faculty First"?> -- </option>
           <?php if(@$record->depart_id) { ?>
             <option value="<?=@$record->depart_id?>" selected><?=@$record->name?></option>
@@ -234,7 +241,7 @@ if($this->session->flashdata('data') && !isset($record)) {
     <div class="col-md-4">
       <div class="form-group">
         <label for="program"> Select Program *</label>
-        <select class="form-control" name="program_id" id="program" required>
+        <select class="form-control" name="program_id" id="program" >
           <option value=""> -- <?=@($record)?"Select Program":"Select Department First"?> -- </option>
           <?php if(@$record->program_id) { ?>
             <option value="<?=@$record->program_id?>" selected><?=@$record->program_title?></option>

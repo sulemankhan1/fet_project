@@ -71,9 +71,13 @@
 .small-txt {
   font-size: 11px;
 }
-.post-thumb {
+.single-post-image {
   height: auto !important;
 }
 .user-img {
   width: 100px;
+}
+.bg-filled {
+  background: #0d5189;
+  color: #fff;
 }

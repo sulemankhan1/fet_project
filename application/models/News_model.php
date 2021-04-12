@@ -45,4 +45,30 @@ class News_model extends CI_Model {
     return $this->db->get()->row();
   }
 
+  public function searchNews($query) {
+    $this->db->select('n.*');
+    $this->db->from('news_notifications n');
+    $this->db->like('n.title', $query);
+
+    return $this->db->get()->result();
+  }
+  public function getNewsByFilter($filter_type, $value) {
+    $this->db->select('n.*');
+    $this->db->from('news_notifications n');
+    if($filter_type == 'notifications_for') {
+      $this->db->where('n.notification_for', $value);
+    }
+    return $this->db->get()->result();
+  }
+  public function getNewsByKeywords($keyword) {
+    $this->db->select('k.keyword, n.*');
+    $this->db->from('news_notifications n');
+
+    $this->db->join('keywords k', "k.news_id = n.id AND k.type = 'news'", 'full');
+    $this->db->like('k.keyword', $keyword);
+    $this->db->group_by('n.id');
+    
+    return $this->db->get()->result();
+  }
+
 }

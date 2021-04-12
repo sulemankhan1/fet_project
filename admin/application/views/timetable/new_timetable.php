@@ -82,8 +82,10 @@
 
   <div class="row">
     <div class="col-sm-12">
+      <div class="alert alert-secondary">
+        <i class="fa fa-info-circle"></i> If two classes are taken by the same Teacher then keep the same values in both left and right cell. The System will automatically merge those cells when showing or sending Timetable anywhere.
+      </div>
       <div class="card">
-
         <div class="card-content">
           <div class="card-body">
             <div class="">

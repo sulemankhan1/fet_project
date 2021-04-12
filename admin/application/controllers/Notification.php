@@ -40,6 +40,7 @@ class Notification extends CI_Controller
         'active_menu' => 'add_notification',
         'faculties' => $this->bm->getAll('faculties', 'id'),
         'notification_types' => $this->bm->getAll('notification_type','id'),
+        'keywords' => "",
       );
 
       $this->load->view('header',$data);
@@ -53,14 +54,14 @@ class Notification extends CI_Controller
       if($this->input->post()) {
         $data = $this->input->post();
         // for backend validation if error found where to redirect
-        $redirect_url = isset($data['id']) ? 'edit_notification/'.$data['id'] : 'new_notification';
+        $redirect_url = isset($data['id']) && $data['id'] != "" ? 'edit_notification/'.$data['id'] : 'new_notification';
 
         // check if a news with same title exists
         if(!isset($data['id']) && $this->nm->newsAlreadyExists($data['title'])) {
           $this->session->set_flashdata(array('type' => 'error', 'msg' => 'A News with the Same Title Already Exists!', 'data' => $data));
           redirect($redirect_url);
         }
-        if($data['title'] == "" || $data['notify_type_id'] == "" || $data['description'] == "" || !isset($data['notification_for'])) {
+        if($data['title'] == "" || $data['notify_type_id'] == "" || $data['description'] == "" || !isset($data['notification_for']) || $data['keywords'] == "") {
           $msg = 'Please Fill all Required Fields before Submitting!';
           if(isset($data['id'])) {
             $msg .= " Form is being Reset!";
@@ -95,15 +96,41 @@ class Notification extends CI_Controller
         $data['image'] = $image_path;
         $data['publisher_id'] = $this->session->userdata('user_id');
 
+
+        $keywords = $data['keywords'];
+        unset($data['keywords']);
         if($data['id'] == "") {
-          $this->bm->insertRow('news_notifications', $data);
+
+          $data['id'] = $this->bm->insertRow('news_notifications', $data);
           $msg = 'Notification Added Successfully';
         } else {
           // remove old image from array
           unset($data['old_image']);
           $this->bm->updateRow('news_notifications', $data, 'id', $data['id']);
           $msg = 'Notification Updated Successfully';
+
+          // delete all keywords
+          $this->bm->deleteWithMultiWhere('keywords', array(
+            'type' => 'news',
+            'news_id' => $data['id']
+          ));
         }
+
+        // desctruct keywords if there are
+        $keywords_entries = [];
+        if($keywords != "") {
+          $keywords = explode(",", $keywords);
+          foreach($keywords as $keyword) {
+            if($keyword != "") {
+              $keywords_entries[] = array(
+                'keyword' => $keyword,
+                'news_id' => $data['id'],
+                'type' => 'news',
+              );
+            }
+          }
+        }
+        $this->bm->insertRows('keywords', $keywords_entries);
 
         $this->session->set_flashdata(array('type' => 'success', 'msg' => $msg));
     		redirect('view_notifications');
@@ -115,6 +142,19 @@ class Notification extends CI_Controller
       $id = hashids_decrypt($id);
       // get notification record
       $record = $this->nm->getNotification($id);
+      // get notification keywords
+      $keywords = $this->bm->getRowsWithMultipleWhere('keywords', array(
+        'type' => 'news',
+        'news_id' => $id,
+      ));
+      $keywords_txt = "";
+      if(!empty($keywords)) {
+        foreach($keywords as $keyword) {
+          $keywords_txt .= "$keyword->keyword,";
+        }
+        $keywords_txt = substr($keywords_txt, 0, -1);
+      }
+
 
       $data = array (
         'title' => 'Add New Notification',
@@ -122,6 +162,7 @@ class Notification extends CI_Controller
         'faculties' => $this->bm->getAll('faculties', 'id'),
         'notification_types' => $this->bm->getAll('notification_type', 'id', 'ASC'),
         'record' => $record,
+        'keywords' => $keywords_txt,
       );
 
 

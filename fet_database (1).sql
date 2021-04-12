@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2021 at 08:03 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.1.28
+-- Generation Time: Apr 12, 2021 at 02:13 AM
+-- Server version: 10.4.16-MariaDB
+-- PHP Version: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -48,7 +47,7 @@ CREATE TABLE `class_rooms` (
   `name` varchar(255) NOT NULL,
   `barcode` varchar(255) NOT NULL,
   `room_no` varchar(255) NOT NULL,
-  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_added` timestamp NOT NULL DEFAULT current_timestamp(),
   `remarks` text NOT NULL,
   `is_archived` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -353,10 +352,21 @@ INSERT INTO `faculties` (`id`, `name`, `remarks`, `is_archived`) VALUES
 
 CREATE TABLE `keywords` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL,
+  `keyword` varchar(255) NOT NULL,
+  `news_id` int(11) NOT NULL,
   `type` enum('news') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `keywords`
+--
+
+INSERT INTO `keywords` (`id`, `keyword`, `news_id`, `type`) VALUES
+(33, 'abc', 2, 'news'),
+(34, ' new', 3, 'news'),
+(35, ' xyz', 2, 'news'),
+(37, ' new', 2, 'news'),
+(38, 'tesy', 2, 'news');
 
 -- --------------------------------------------------------
 
@@ -370,9 +380,9 @@ CREATE TABLE `news_notifications` (
   `depart_id` varchar(100) NOT NULL,
   `notify_type_id` int(11) NOT NULL,
   `notification_for` varchar(255) NOT NULL,
-  `title` text,
-  `description` varchar(255) DEFAULT NULL,
-  `date_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `title` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `date_time` timestamp NULL DEFAULT current_timestamp(),
   `image` varchar(255) DEFAULT NULL,
   `publisher_id` int(11) DEFAULT NULL,
   `user_type_id` varchar(256) DEFAULT NULL,
@@ -387,9 +397,10 @@ CREATE TABLE `news_notifications` (
 --
 
 INSERT INTO `news_notifications` (`id`, `faculty_id`, `depart_id`, `notify_type_id`, `notification_for`, `title`, `description`, `date_time`, `image`, `publisher_id`, `user_type_id`, `program_id`, `remarks`, `in_draft`, `is_archieved`) VALUES
-(2, 'all', 'all', 4, 'university_faculty', 'updated title', '<p>asdfasdf&nbsp;updated&nbsp;</p>\r\n', '2021-04-08 16:32:55', 'uploads/notifications_images/70438808horizon_zero_dawn_2017_video_game-wallpaper-3554x1999.jpg', 1, NULL, 'all', 'asdfasdf updated ', 0, 0),
+(2, 'all', 'all', 4, 'university_faculty', 'updated title', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2021-04-08 16:32:55', 'uploads/notifications_images/70438808horizon_zero_dawn_2017_video_game-wallpaper-3554x1999.jpg', 1, NULL, 'all', 'asdfasdf updated ', 0, 0),
 (3, '', '', 13, 'everyone', 'test student notice', '<p>asdf asdf asdf asdf asdf asdf asf asdfasdfas dfasdf asdfa sdfasdfasdf asdf asdf asdf asdf asdf asdf asdfa sdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdfas dfas dfa sdfasdf </p>\r\n', '2021-04-08 17:20:49', '', 1, NULL, NULL, '', 0, 0),
-(4, '', '', 13, 'everyone', 'another test notice Lorem ipsum dolor sit amet\r\nanother test notice Lorem ipsum dolor sit amet\r\n\r\n\r\n', '', '2021-04-08 17:21:05', 'uploads/notifications_images/136198974assassins_creed_valhalla_6-wallpaper-3554x1999.jpg', 1, NULL, NULL, '', 0, 0);
+(4, '', '', 13, 'everyone', 'another test notice Lorem ipsum dolor sit amet\r\nanother test notice Lorem ipsum dolor sit amet\r\n\r\n\r\n', '', '2021-04-08 17:21:05', 'uploads/notifications_images/136198974assassins_creed_valhalla_6-wallpaper-3554x1999.jpg', 1, NULL, NULL, '', 0, 0),
+(5, '', '', 1, 'everyone', 'abc xyz', '<p>abc</p>\r\n', '2021-04-11 22:10:16', '', 1, NULL, NULL, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -444,7 +455,7 @@ CREATE TABLE `password_reset` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `token` int(11) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `datetime` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -865,7 +876,7 @@ CREATE TABLE `slider_setting` (
   `description` varchar(255) NOT NULL,
   `description_color` varchar(50) DEFAULT NULL,
   `description_link` varchar(255) DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1'
+  `active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -927,7 +938,7 @@ CREATE TABLE `sys_notifications` (
   `msg` text NOT NULL,
   `redirect_link` text NOT NULL,
   `is_seen` tinyint(1) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `datetime` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1004,7 +1015,7 @@ CREATE TABLE `timetable` (
   `faculty_id` int(50) NOT NULL,
   `user_id` int(50) NOT NULL,
   `semester` int(10) NOT NULL,
-  `datetime_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `datetime_added` timestamp NOT NULL DEFAULT current_timestamp(),
   `datettime_updated` datetime NOT NULL,
   `is_deleted` tinyint(1) NOT NULL,
   `evening_morning` enum('morning','evening') NOT NULL,
@@ -1051,7 +1062,7 @@ CREATE TABLE `users` (
   `dob` date DEFAULT NULL,
   `gender` enum('male','female') NOT NULL,
   `cnic` varchar(20) NOT NULL,
-  `show_cnic_public` tinyint(1) NOT NULL DEFAULT '0',
+  `show_cnic_public` tinyint(1) NOT NULL DEFAULT 0,
   `father_name` varchar(150) NOT NULL,
   `nationality` varchar(50) NOT NULL,
   `province` varchar(50) NOT NULL,
@@ -1066,15 +1077,15 @@ CREATE TABLE `users` (
   `bio` varchar(255) NOT NULL,
   `phone_no_code` varchar(11) NOT NULL,
   `phone_no` varchar(50) NOT NULL,
-  `show_phone_no_public` tinyint(1) NOT NULL DEFAULT '0',
+  `show_phone_no_public` tinyint(1) NOT NULL DEFAULT 0,
   `last_qualitification` varchar(255) NOT NULL,
   `registered_from` enum('frontend','backend') NOT NULL,
-  `account_verified` tinyint(1) NOT NULL DEFAULT '0',
-  `reg_datetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `account_active` tinyint(1) NOT NULL DEFAULT '0',
+  `account_verified` tinyint(1) NOT NULL DEFAULT 0,
+  `reg_datetime` timestamp NULL DEFAULT current_timestamp(),
+  `account_active` tinyint(1) NOT NULL DEFAULT 0,
   `deactivated_on` timestamp NULL DEFAULT NULL,
   `remarks` text NOT NULL,
-  `is_archived` tinyint(1) NOT NULL DEFAULT '0'
+  `is_archived` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -1242,13 +1253,13 @@ ALTER TABLE `faculties`
 -- AUTO_INCREMENT for table `keywords`
 --
 ALTER TABLE `keywords`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `news_notifications`
 --
 ALTER TABLE `news_notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `notification_type`
