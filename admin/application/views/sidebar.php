@@ -39,16 +39,21 @@ $notifications = $this->notifications->getAllForUser();
               </a>
             </li>
 
+            <li class="has-sub nav-item <?=(@$active_menu=='manage_subjects' || @$active_menu=='manage_classrooms'?'open':'')?>"><a><i class="icon-rocket"></i><span data-i18n="" class="menu-title"> Manage</span></a>
+                <ul class="menu-content" style="">
+                  <li class="<?=(@$active_menu=='manage_subjects'?'active':'')?>"><a href="<?=site_url('manage/subjects')?>" class="menu-item"> Subjects</a>
+                  </li>
+                  <li class="<?=(@$active_menu=='manage_classrooms'?'active':'')?>"><a href="<?=site_url('manage/classrooms')?>" class="menu-item"> Class Rooms</a>
+                  </li>
+                </ul>
+            </li>
+
             <li class="has-sub nav-item <?=(@$active_menu=='view_pending_users' || @$active_menu=='view_users'?'open':'')?>"><a><i class="ft-users"></i><span data-i18n="" class="menu-title"> Users</span></a>
               <ul class="menu-content" style="">
                 <li class="<?=(@$active_menu=='create_user'?'active':'')?>"><a href="<?=site_url('create_user');?>" class="menu-item">Create User</a>
                 </li>
-              </ul>
-              <ul class="menu-content" style="">
                 <li class="<?=(@$active_menu=='view_users'?'active':'')?>"><a href="<?=site_url('view_users');?>" class="menu-item"> View Users</a>
                 </li>
-              </ul>
-              <ul class="menu-content" style="">
                 <li class="<?=(@$active_menu=='view_pending_users'?'active':'')?>"><a href="<?=site_url('view_users/pending');?>" class="menu-item"> Pending users</a>
                 </li>
               </ul>
@@ -69,8 +74,6 @@ $notifications = $this->notifications->getAllForUser();
                 <ul class="menu-content" style="">
                   <li class="<?=(@$active_menu=='add_notification'?'active':'')?>"><a href="<?=site_url('new_notification')?>" class="menu-item"> Add Notification</a>
                   </li>
-                </ul>
-                <ul class="menu-content" style="">
                   <li class="<?=(@$active_menu=='view_notifications'?'active':'')?>"><a href="<?=site_url('view_notifications')?>" class="menu-item"> View Notifications</a>
                   </li>
                 </ul>
@@ -80,8 +83,6 @@ $notifications = $this->notifications->getAllForUser();
                 <ul class="menu-content" style="">
                   <li class="<?=(@$active_menu=='add_timetable'?'active':'')?>"><a href="<?=site_url('new_timetable')?>" class="menu-item"> Add Timetable</a>
                   </li>
-                </ul>
-                <ul class="menu-content" style="">
                   <li class="<?=(@$active_menu=='view_timetables'?'active':'')?>"><a href="<?=site_url('view_timetables')?>" class="menu-item"> View Timetables</a>
                   </li>
                 </ul>

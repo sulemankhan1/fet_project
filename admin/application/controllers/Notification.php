@@ -54,7 +54,7 @@ class Notification extends CI_Controller
       if($this->input->post()) {
         $data = $this->input->post();
         // for backend validation if error found where to redirect
-        $redirect_url = isset($data['id']) && $data['id'] != "" ? 'edit_notification/'.$data['id'] : 'new_notification';
+        $redirect_url = isset($data['id']) && $data['id'] != "" ? 'edit_notification/'.hashids_encrypt($data['id']) : 'new_notification';
 
         // check if a news with same title exists
         if(!isset($data['id']) && $this->nm->newsAlreadyExists($data['title'])) {

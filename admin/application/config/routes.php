@@ -21,6 +21,19 @@ $route['registered'] = 'reg/save_registeration';
 //dashboard
 $route['dashboard'] = 'admin/dashboard';
 
+// Manage
+$route['manage/subjects'] = 'Subjects';
+$route['add_subject'] = 'Subjects/add';
+$route['save_subject'] = 'Subjects/save';
+$route['edit_subject/(:any)'] = 'Subjects/edit/$1';
+$route['delete_subject/(:any)'] = 'Subjects/delete/$1';
+$route['manage/classrooms'] = 'Classrooms';
+$route['add_classroom'] = 'Classrooms/add';
+$route['save_classroom'] = 'Classrooms/save';
+$route['edit_classroom/(:any)'] = 'Classrooms/edit/$1';
+$route['delete_classroom/(:any)'] = 'Classrooms/delete/$1';
+
+
 //departments
 $route['departments'] = 'departments/view_departments';
 $route['add_department'] = 'departments/add_departments';

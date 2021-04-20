@@ -18,6 +18,7 @@
                   <label>Campus</label>
                   <select class="form-control" name="campus">
                     <option value="all"> -- All / General -- </option>
+
                   </select>
                 </div>
               </div>
@@ -37,14 +38,14 @@
                   </select>
                 </div>
               </div>
-              <div class="col-md-2">
+              <!-- <div class="col-md-2">
                 <div class="form-group">
                   <label>Program</label>
                   <select class="form-control" name="campus">
                     <option value="all"> -- All / General -- </option>
                   </select>
                 </div>
-              </div>
+              </div> -->
               <div class="col-md-2">
                 <div class="form-group">
                   <label>Semester</label>
@@ -62,9 +63,9 @@
                 </div>
               </div>
 
-              <div class="col-md-4">
+              <div class="col-md-2">
                 <div class="form-group">
-                  <label>Timetable For</label> <br />
+                  <label>For</label> <br />
                   <input type="radio" name="tt_for" value="Morning" id="tt_morning"> <label for="tt_morning">Morning</label>
                   <input type="radio" name="tt_for" value="Evening" id="tt_evening"> <label for="tt_evening">Evening</label>
                   <input type="radio" name="tt_for" value="Both" id="tt_both"> <label for="tt_both">Both</label>
@@ -83,10 +84,10 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="alert alert-secondary">
-        <i class="fa fa-info-circle"></i> If two classes are taken by the same Teacher then keep the same values in both left and right cell. The System will automatically merge those cells when showing or sending Timetable anywhere.
+        <i class="fa fa-info-circle"></i> <strong>Drag and drop from bottom</strong> If two classes are taken by the same Teacher then keep the same values in both left and right cell. The System will automatically merge those cells when showing or sending Timetable.
       </div>
-      <div class="card">
-        <div class="card-content">
+      <div class="card mb-0">
+        <div class="card-content ">
           <div class="card-body">
             <div class="">
               <table class="table table-hovered table-stripped table-bordered tt_timetable">

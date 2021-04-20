@@ -19,7 +19,7 @@ class Main extends CI_Controller
         $departments = $this->bm->getWhere('departments', 'fac_id', $id);
 
   	    $output = '';
-        $output .= '<option value=""> -- Select -- </option>';
+        // $output .= '<option value=""> -- Select -- </option>';
         $output .= '<option value="all" '.(($selected_depart_id == 'all')?'selected':'').'>All Departments</option>';
         foreach ($departments as $v) {
           $selected = "";
@@ -38,7 +38,7 @@ class Main extends CI_Controller
       if($id) {
         $programs = $this->bm->getWhere('programs', 'depart_id', $id);
   	    $output = '';
-        $output .= '<option value=""> -- Select -- </option>';
+        // $output .= '<option value=""> -- Select -- </option>';
         $output .= '<option value="all" '.(($selected_program_id == 'all')?'selected':'').'>All Programs</option>';
         foreach ($programs as $v) {
           $selected = "";

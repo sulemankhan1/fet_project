@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 12, 2021 at 02:13 AM
+-- Generation Time: Apr 20, 2021 at 11:55 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -36,6 +36,13 @@ CREATE TABLE `campus` (
   `is_archived` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `campus`
+--
+
+INSERT INTO `campus` (`id`, `logo`, `name`, `address`, `remarks`, `is_archived`) VALUES
+(1, '', 'University of sindh (Allama II Kazi Campus)', 'uos jamshoro', '', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -49,8 +56,19 @@ CREATE TABLE `class_rooms` (
   `room_no` varchar(255) NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT current_timestamp(),
   `remarks` text NOT NULL,
+  `added_by` int(11) NOT NULL,
   `is_archived` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `class_rooms`
+--
+
+INSERT INTO `class_rooms` (`id`, `name`, `barcode`, `room_no`, `date_added`, `remarks`, `added_by`, `is_archived`) VALUES
+(7, 'Data comm Lab', '', '1', '2021-04-20 21:47:00', '', 1, 0),
+(8, 'Comp Lab 1', '', '2', '2021-04-20 21:47:18', '', 1, 0),
+(9, 'Comp Lab 2', '', '3', '2021-04-20 21:47:28', '', 1, 0),
+(10, 'Some Class', '', '5', '2021-04-20 21:47:45', '', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -61,7 +79,7 @@ CREATE TABLE `class_rooms` (
 CREATE TABLE `departments` (
   `id` int(11) NOT NULL,
   `fac_id` int(3) DEFAULT NULL,
-  `inst_id` int(11) DEFAULT NULL,
+  `campus_id` int(11) DEFAULT NULL,
   `name` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
   `is_inst` varchar(1) COLLATE latin1_general_ci DEFAULT NULL,
   `code` varchar(5) COLLATE latin1_general_ci DEFAULT NULL,
@@ -80,7 +98,7 @@ CREATE TABLE `departments` (
 -- Dumping data for table `departments`
 --
 
-INSERT INTO `departments` (`id`, `fac_id`, `inst_id`, `name`, `is_inst`, `code`, `remarks`, `email`, `sac_password`, `reeset_token`, `user_temp`, `pass_temp`, `city_name`, `form_final_per`, `is_archived`) VALUES
+INSERT INTO `departments` (`id`, `fac_id`, `campus_id`, `name`, `is_inst`, `code`, `remarks`, `email`, `sac_password`, `reeset_token`, `user_temp`, `pass_temp`, `city_name`, `form_final_per`, `is_archived`) VALUES
 (1, 6, 0, 'ECONOMICS', 'N', 'ECON', 'ECONOMICS', 'chair.economics@usindh.edu.pk', 'fcae3f9041169c92e3fdd096f09dbff9', '', '', '', '', 40, 0),
 (2, 2, 6, 'BUSINESS ADMINSTRATION', 'N', 'BUS', 'BBA', '', 'e025582dca473c01bea5b4d525e5a59e', 'HoD6663', '', '', '', 40, 0),
 (3, 5, 0, 'INSTITUTE OF INFORMATION &COMMUNICATION TECHNOLOGY', 'Y', '', '', 'dir.iict@usindh.edu.pk', 'a4d08fe1309f4c270ad50c86c6916ec4', 'HoD566', '', '', '', 40, 0),
@@ -311,7 +329,10 @@ INSERT INTO `departments` (`id`, `fac_id`, `inst_id`, `name`, `is_inst`, `code`,
 (242, 13, 0, 'GOVERNMENT GIRLS DEGREE COLLEGE  SEHWAN SHARIF', 'N', '80', '', '.', 'd41d8cd98f00b204e9800998ecf8427e', '', '', '', 'SEHWAN', 40, 0),
 (243, 15, 0, 'DIRECTOR CAMPUS SECURITY', 'N', 'DCS', '', 'outward.csecurity@usindh.edu.pk', 'e91e6348157868de9dd8b25c81aebfb9', '', '', '', 'JAMSHORO', 40, 0),
 (244, 13, 0, 'GOVERNMENT DEGREE COLLEGE  LATIFABAD # 11  HYDERABAD', 'N', '7', '', 'xyz@test.com', 'd41d8cd98f00b204e9800998ecf8427e', '', '', '', 'HYDERABAD', 40, 0),
-(247, 5, 0, 'NATIONAL CENTRE OF EXCELLENCE IN ANALYTICAL CHEMISTRY', 'N', 'NCEAC', NULL, '', '', '', '', '', 'JAMSHORO', 40, 0);
+(247, 5, 0, 'NATIONAL CENTRE OF EXCELLENCE IN ANALYTICAL CHEMISTRY', 'N', 'NCEAC', NULL, '', '', '', '', '', 'JAMSHORO', 40, 0),
+(248, 16, 1, 'Software Engineering', NULL, 'SENG', NULL, '', '', '', '', '', '', 0, 0),
+(249, 16, 1, 'I.T', NULL, 'IT', NULL, '', '', '', '', '', '', 0, 0),
+(250, 16, 1, 'TELECOMMUNICATION', NULL, 'TELEC', NULL, '', '', '', '', '', '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -342,7 +363,8 @@ INSERT INTO `faculties` (`id`, `name`, `remarks`, `is_archived`) VALUES
 (12, 'LAW', '', 0),
 (13, 'AFFILIATED COLLEGES/ INSTITUTIONS PUBLIC & PRIVATE', '', 0),
 (14, 'ANNUAL SYSTEM', '', 0),
-(15, 'ADMINISTRATIVE OFFICES', NULL, 0);
+(15, 'ADMINISTRATIVE OFFICES', NULL, 0),
+(16, 'Faculty of Engineering and Telecommunication (FET)', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -913,18 +935,31 @@ CREATE TABLE `subjects` (
   `course_code` varchar(255) NOT NULL,
   `subject_title` varchar(255) NOT NULL,
   `subject_desc` text NOT NULL,
-  `subject_for` enum('general','specific') NOT NULL,
+  `for_campus` enum('general','specific') NOT NULL,
   `campus_id` int(11) NOT NULL,
   `for_depart` enum('general','specific') NOT NULL,
   `depart_id` int(11) NOT NULL,
   `for_program` enum('general','specific') NOT NULL,
   `program_id` int(11) NOT NULL,
-  `morning_evening` enum('morning','evening') NOT NULL,
+  `morning_evening` enum('morning','evening','both') NOT NULL,
   `for_faculty` enum('general','specific') NOT NULL,
+  `year` varchar(50) NOT NULL,
   `faculty_id` int(11) NOT NULL,
   `remarks` text NOT NULL,
+  `added_by` int(11) NOT NULL,
   `is_archived` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `subjects`
+--
+
+INSERT INTO `subjects` (`id`, `course_code`, `subject_title`, `subject_desc`, `for_campus`, `campus_id`, `for_depart`, `depart_id`, `for_program`, `program_id`, `morning_evening`, `for_faculty`, `year`, `faculty_id`, `remarks`, `added_by`, `is_archived`) VALUES
+(4, 'SENG-610', 'Distributed Computing', '', 'general', 0, 'general', 0, 'general', 0, 'both', 'general', '', 6, '', 1, 0),
+(5, 'SENG-612', 'Design Patterns', '', 'general', 0, 'general', 0, 'general', 0, 'both', 'general', '', 6, '', 1, 0),
+(6, 'SENG-614', 'Human Computer Interaction', '', 'general', 0, 'general', 0, 'general', 0, 'both', 'general', '', 6, '', 1, 0),
+(7, 'SENG-618', 'Software Project Management', '', 'general', 0, 'general', 0, 'general', 0, 'both', 'general', '', 6, '', 1, 0),
+(8, 'SENG-616', 'Software Design & Architecture', '', 'general', 0, 'general', 0, 'general', 0, 'both', 'general', '', 6, '', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -1093,12 +1128,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `campuss_id`, `faculty_id`, `depart_id`, `image`, `title`, `username`, `password`, `full_name`, `surname`, `email`, `dob`, `gender`, `cnic`, `show_cnic_public`, `father_name`, `nationality`, `province`, `district`, `city`, `home_address`, `permanent_address`, `zip_code`, `show_address_public`, `type`, `role_id`, `bio`, `phone_no_code`, `phone_no`, `show_phone_no_public`, `last_qualitification`, `registered_from`, `account_verified`, `reg_datetime`, `account_active`, `deactivated_on`, `remarks`, `is_archived`) VALUES
-(1, 0, 0, 0, '1245787577america.png', 'Mr', 'admin', '284bf3fdab5fa4def9a9f3981e882ed407ef9fc45f3feb99d2ab6f4231e96bd9b5053e970b41e713bcf4b9d8d6f78a41ae1a4fef79207a77ebee23d30807eab5NY4Haa3ex1TB75GwOpsI2qqk91rCcWx1T2aVKIf11xQ=', '', '', 'admin@gmail.com', NULL, 'male', '', 1, '', '', '', '', '', '', '', '', 0, 'Superadmin', 2, '', '0', '', 1, '', 'frontend', 1, '2021-04-01 11:16:53', 1, NULL, '', 0),
+(1, 0, 0, 0, '1245787577america.png', 'Mr', 'admin', '284bf3fdab5fa4def9a9f3981e882ed407ef9fc45f3feb99d2ab6f4231e96bd9b5053e970b41e713bcf4b9d8d6f78a41ae1a4fef79207a77ebee23d30807eab5NY4Haa3ex1TB75GwOpsI2qqk91rCcWx1T2aVKIf11xQ=', 'admin', '', 'admin@gmail.com', NULL, 'male', '', 1, '', '', '', '', '', '', '', '', 0, 'Superadmin', 2, '', '0', '', 1, '', 'frontend', 1, '2021-04-01 11:16:53', 1, NULL, '', 0),
 (2, 0, 0, 0, '', 'Ms', 'username2', '0', 'asfasf', 'surename', 'asfas@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, '', 'frontend', 0, '2021-04-01 20:16:30', 0, NULL, '', 0),
 (3, 0, 0, 0, '', 'Ms', 'username3', '0', 'asfasf', 'surename', 'asfa1s@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, '', 'frontend', 0, '2021-04-01 20:17:06', 0, NULL, '', 0),
 (4, 0, 0, 0, '1245787577america.png', 'Mr', 'username4', '0', 'hkj@Gmail.com', 'asfas', 'kj', '2019-11-29', 'female', 'safgasfasf', 0, 'asfasf', 'safasf', 'sadfasf', 'wfdsafasf', 'gkj', 'asfa', 'safasf', '', 0, '', 6, 'sdgdsgasdg', '92', '92', 0, '', 'frontend', 0, '2021-04-01 20:35:11', 0, NULL, '', 0),
 (5, 0, 0, 0, '', 'Ms', 'username5', '60d6286756664a00529f479cf4a587f37ff85d5414368c79bde505d47261a01c308d09d4f35e2002ddf6052bf62cc773a8a8c5af6f2ebb1b4a5b02669108fef2b8R2B1KUAsge1//C+qsLOVcFWIw5sQYu2XvKOnUdG9s=', '11', 'sdfsd', 'sdfsdf@gmail.com', '2021-04-07', 'male', '444342134', 1, 'asfasfasf', 'afsas', 'a', 'asf', 'asf', 'safaf', 'asfsafasf', '', 0, 'Other', 1, 'asfasfas', '323', '32232223', 0, '', 'frontend', 0, '2021-04-02 04:52:31', 0, NULL, '', 0),
-(6, 0, 0, 0, '361688680romanian.png', 'Ms', 'username6', '042ac6ebade10f1e9db85dc627e817685c004ed27215d7e01543f3f636f569e8e968f535cea6f8620ea5e3f7c32788b7c063a431cf4220492ddab3633a8f00e67Ez1aKJObhYcSHHOwGCeLUZ7GeYuc2rcX+aHNhoy3j0=', '1', '1', '1', '0001-01-10', 'female', '1111', 1, '111', '111', '111', '11', '111', '111', '111', '324', 1, 'Teacher', 5, '111', '11', '11', 1, '', 'frontend', 0, '2021-04-02 07:50:35', 1, NULL, '', 0);
+(6, 0, 0, 0, '361688680romanian.png', 'Ms', 'username6', '042ac6ebade10f1e9db85dc627e817685c004ed27215d7e01543f3f636f569e8e968f535cea6f8620ea5e3f7c32788b7c063a431cf4220492ddab3633a8f00e67Ez1aKJObhYcSHHOwGCeLUZ7GeYuc2rcX+aHNhoy3j0=', '1', '1', '1', '0001-01-10', 'female', '1111', 1, '111', '111', '111', '11', '111', '111', '111', '324', 1, 'Teacher', 5, '111', '11', '11', 1, '', 'frontend', 0, '2021-04-02 07:50:35', 1, NULL, '', 0),
+(7, 1, 16, 0, '', 'Mr', 'kamrantaj', '', 'Kamran Taj\r\n', 'Pathan', '', NULL, '', '', 0, '', '', '', '', '', '', '', '', 0, '', 0, '', '', '', 0, '', '', 0, '2021-04-20 21:54:34', 0, NULL, '', 0);
 
 --
 -- Indexes for dumped tables
@@ -1122,7 +1158,7 @@ ALTER TABLE `class_rooms`
 ALTER TABLE `departments`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FAC_ID` (`fac_id`),
-  ADD KEY `INST_ID` (`inst_id`);
+  ADD KEY `INST_ID` (`campus_id`);
 
 --
 -- Indexes for table `faculties`
@@ -1229,25 +1265,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `campus`
 --
 ALTER TABLE `campus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `class_rooms`
 --
 ALTER TABLE `class_rooms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=248;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
 
 --
 -- AUTO_INCREMENT for table `faculties`
 --
 ALTER TABLE `faculties`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `keywords`
@@ -1307,7 +1343,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `sys_notifications`
@@ -1337,7 +1373,7 @@ ALTER TABLE `timetable_details`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

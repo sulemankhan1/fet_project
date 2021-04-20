@@ -94,23 +94,3 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-$(document).on('change','select[name=FAC_ID]',function(){
-  var id = $(this).val();
-  $.ajax({
-    url : '<?=site_url('main/getDepartByFacId')?>/'+id,
-    success :function(data){
-        $('select[name=DEPT_ID]').html(data);
-    }
-  })
-})
-$(document).on('change','select[name=DEPT_ID]',function(){
-  var id = $(this).val();
-  $.ajax({
-    url : '<?=site_url('main/getProgramsByDeptId')?>/'+id,
-    success :function(data){
-        $('select[name=PROG_ID]').html(data);
-    }
-  })
-})
-</script>

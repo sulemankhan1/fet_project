@@ -33,8 +33,6 @@ public function QRrecordget($tbl_name, $col_name, $where_val){
 
 
 }
-
-
   public function getRowsWithMultipleWhere($tbl_name, $where_array)
   {
 
@@ -123,7 +121,7 @@ public function QRrecordget($tbl_name, $col_name, $where_val){
 
   //upload file
   function uploadFile($file, $uploads_dir) {
-    
+
         set_time_limit(0);
         if($file['error'] != 0) {
           return "error";
