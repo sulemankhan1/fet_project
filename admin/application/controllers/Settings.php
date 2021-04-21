@@ -16,12 +16,12 @@ class Settings extends CI_Controller {
       $data = [
         'title' => 'Settings',
         'active_menu' => 'settings',
-        'logo' => $this->bm->getWhere('admin_panel_setting', 'name', 'LOGO'),
-        'sidebar_img' => $this->bm->getWhere('admin_panel_setting', 'name', 'SIDEBAR_IMG'),
-        'sidebar_color' => $this->bm->getWhere('admin_panel_setting', 'name', 'SIDEBAR_COLOR'),
-        'name' => $this->bm->getWhere('admin_panel_setting', 'name', 'NAME'),
-        'footer' => $this->bm->getWhere('admin_panel_setting', 'name', 'FOOTER'),
-        'account_activity' => $this->bm->getWhere('general_setting', 'name', 'ACCOUNT_ACTIVITY'),
+        'logo' => $this->bm->getWhere('settings', 'name', 'LOGO'),
+        'sidebar_img' => $this->bm->getWhere('settings', 'name', 'SIDEBAR_IMG'),
+        'sidebar_color' => $this->bm->getWhere('settings', 'name', 'SIDEBAR_COLOR'),
+        'name' => $this->bm->getWhere('settings', 'name', 'NAME'),
+        'footer' => $this->bm->getWhere('settings', 'name', 'FOOTER'),
+        'account_activity' => $this->bm->getWhere('settings', 'name', 'ACCOUNT_ACTIVITY'),
         'sliders' => $this->bm->getAll('slider_setting', 'id', 'desc')
       ];
 
@@ -56,7 +56,7 @@ class Settings extends CI_Controller {
 
           if ($array['value'] != '') {
             
-            $this->bm->updateRow('admin_panel_setting',$array,'name','LOGO');
+            $this->bm->updateRow('settings',$array,'name','LOGO');
           
           }
 
@@ -69,7 +69,7 @@ class Settings extends CI_Controller {
     
           if ($array['value'] != '') {
 
-            $this->bm->updateRow('admin_panel_setting',$array,'name','SIDEBAR_IMG');
+            $this->bm->updateRow('settings',$array,'name','SIDEBAR_IMG');
 
           }
           
@@ -77,7 +77,7 @@ class Settings extends CI_Controller {
 
           if ($array['value'] != '') {
 
-            $this->bm->updateRow('admin_panel_setting',$array,'name','NAME');
+            $this->bm->updateRow('settings',$array,'name','NAME');
 
             $this->session->set_userdata('footer', $p['name']);
 
@@ -87,7 +87,7 @@ class Settings extends CI_Controller {
           
           if ($array['value'] != '') {
 
-            $this->bm->updateRow('admin_panel_setting',$array,'name','FOOTER');
+            $this->bm->updateRow('settings',$array,'name','FOOTER');
 
             $this->session->set_userdata('footer', $p['footer']);
 
@@ -135,7 +135,7 @@ class Settings extends CI_Controller {
             if ($array['value'] != '') 
             {
 
-              $this->bm->updateRow('general_setting',$array,'name','ACCOUNT_ACTIVITY');
+              $this->bm->updateRow('settings',$array,'name','ACCOUNT_ACTIVITY');
 
             }
   
@@ -158,7 +158,7 @@ class Settings extends CI_Controller {
         'value' => $sidebar_color
       ];
 
-      $this->bm->updateRow('admin_panel_setting',$arr, 'name', 'SIDEBAR_COLOR');
+      $this->bm->updateRow('settings',$arr, 'name', 'SIDEBAR_COLOR');
       $this->session->set_userdata('sidebar_color',$sidebar_color);
 
     }
