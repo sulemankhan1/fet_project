@@ -32,8 +32,7 @@
 
 <script src="<?=base_url('app-assets/vendors/js/pace/pace.min.js')?>" type="text/javascript"></script>
 
-<!-- BEGIN VENDOR JS-->
-<script src="<?=base_url('app-assets/vendors/js/chartist.min.js')?>" type="text/javascript"></script>
+
 <!-- BEGIN APEX JS-->
 
 <script src="<?=base_url('app-assets/js/app-sidebar.js')?>" type="text/javascript"></script>
@@ -46,7 +45,7 @@
 
 <!-- BEGIN PAGE LEVEL JS-->
 
-<script src="<?=base_url('app-assets/js/dashboard1.js')?>" type="text/javascript"></script>
+
 
 <!-- END PAGE LEVEL JS-->
 

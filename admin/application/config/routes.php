@@ -90,3 +90,7 @@ $route['delete_notification/(:any)'] = 'Notification/delete/$1';
 
 // timetable
 $route['new_timetable'] = 'Timetable/new';
+$route['create_timetable'] = 'Timetable/create';
+$route['edit_timetable'] = 'Timetable/edit';
+$route['customize_timetable/(:any)'] = 'Timetable/customize_timetable/$1';
+$route['view_timetables'] = 'Timetable/index';

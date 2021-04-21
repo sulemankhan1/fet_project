@@ -108,3 +108,5 @@
     </div>
     <!--Statistics cards Ends-->
 <!-- ViewModalEnd -->
+<script src="<?=base_url('app-assets/vendors/js/chartist.min.js')?>" type="text/javascript"></script>
+<script src="<?=base_url('app-assets/js/dashboard1.js')?>" type="text/javascript"></script>

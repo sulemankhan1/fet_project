@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2021 at 11:55 PM
+-- Generation Time: Apr 22, 2021 at 12:45 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -1043,6 +1043,8 @@ CREATE TABLE `teachers` (
 CREATE TABLE `timetable` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
+  `type` enum('image','custom') NOT NULL,
+  `image` text NOT NULL,
   `for_campus` enum('all','specific') NOT NULL,
   `campus_id` int(50) NOT NULL,
   `depart_id` int(50) NOT NULL,
@@ -1050,14 +1052,26 @@ CREATE TABLE `timetable` (
   `faculty_id` int(50) NOT NULL,
   `user_id` int(50) NOT NULL,
   `semester` int(10) NOT NULL,
+  `class_group` varchar(255) NOT NULL,
   `datetime_added` timestamp NOT NULL DEFAULT current_timestamp(),
   `datettime_updated` datetime NOT NULL,
   `is_deleted` tinyint(1) NOT NULL,
   `evening_morning` enum('morning','evening') NOT NULL,
+  `part` int(2) NOT NULL,
   `year` varchar(10) NOT NULL,
   `remarks` text NOT NULL,
-  `is_archive` tinyint(1) NOT NULL
+  `pbulished` tinyint(1) NOT NULL,
+  `is_archived` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `timetable`
+--
+
+INSERT INTO `timetable` (`id`, `title`, `type`, `image`, `for_campus`, `campus_id`, `depart_id`, `program_id`, `faculty_id`, `user_id`, `semester`, `class_group`, `datetime_added`, `datettime_updated`, `is_deleted`, `evening_morning`, `part`, `year`, `remarks`, `pbulished`, `is_archived`) VALUES
+(1, '', 'image', '1734855654SWE04e.jpg', 'all', 1, 248, 0, 16, 0, 0, 'Group (A)', '2021-04-21 21:57:48', '0000-00-00 00:00:00', 0, 'evening', 1, '2021', '', 0, 0),
+(2, '', 'image', '683872100SWE04e.jpg', 'all', 1, 248, 0, 16, 0, 0, 'Group (A)', '2021-04-21 21:59:08', '0000-00-00 00:00:00', 0, 'evening', 4, '2021', '', 0, 0),
+(3, '', 'custom', '', 'all', 1, 248, 0, 16, 0, 0, '', '2021-04-21 22:04:11', '0000-00-00 00:00:00', 0, 'evening', 4, '2021', '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1134,7 +1148,7 @@ INSERT INTO `users` (`id`, `campuss_id`, `faculty_id`, `depart_id`, `image`, `ti
 (4, 0, 0, 0, '1245787577america.png', 'Mr', 'username4', '0', 'hkj@Gmail.com', 'asfas', 'kj', '2019-11-29', 'female', 'safgasfasf', 0, 'asfasf', 'safasf', 'sadfasf', 'wfdsafasf', 'gkj', 'asfa', 'safasf', '', 0, '', 6, 'sdgdsgasdg', '92', '92', 0, '', 'frontend', 0, '2021-04-01 20:35:11', 0, NULL, '', 0),
 (5, 0, 0, 0, '', 'Ms', 'username5', '60d6286756664a00529f479cf4a587f37ff85d5414368c79bde505d47261a01c308d09d4f35e2002ddf6052bf62cc773a8a8c5af6f2ebb1b4a5b02669108fef2b8R2B1KUAsge1//C+qsLOVcFWIw5sQYu2XvKOnUdG9s=', '11', 'sdfsd', 'sdfsdf@gmail.com', '2021-04-07', 'male', '444342134', 1, 'asfasfasf', 'afsas', 'a', 'asf', 'asf', 'safaf', 'asfsafasf', '', 0, 'Other', 1, 'asfasfas', '323', '32232223', 0, '', 'frontend', 0, '2021-04-02 04:52:31', 0, NULL, '', 0),
 (6, 0, 0, 0, '361688680romanian.png', 'Ms', 'username6', '042ac6ebade10f1e9db85dc627e817685c004ed27215d7e01543f3f636f569e8e968f535cea6f8620ea5e3f7c32788b7c063a431cf4220492ddab3633a8f00e67Ez1aKJObhYcSHHOwGCeLUZ7GeYuc2rcX+aHNhoy3j0=', '1', '1', '1', '0001-01-10', 'female', '1111', 1, '111', '111', '111', '11', '111', '111', '111', '324', 1, 'Teacher', 5, '111', '11', '11', 1, '', 'frontend', 0, '2021-04-02 07:50:35', 1, NULL, '', 0),
-(7, 1, 16, 0, '', 'Mr', 'kamrantaj', '', 'Kamran Taj\r\n', 'Pathan', '', NULL, '', '', 0, '', '', '', '', '', '', '', '', 0, '', 0, '', '', '', 0, '', '', 0, '2021-04-20 21:54:34', 0, NULL, '', 0);
+(7, 1, 16, 0, '', 'Mr', 'kamrantaj', '', 'Kamran Taj\r\n', 'Pathan', '', NULL, '', '', 0, '', '', '', '', '', '', '', '', 0, 'Teacher', 0, '', '', '', 0, '', '', 1, '2021-04-20 21:54:34', 1, NULL, '', 0);
 
 --
 -- Indexes for dumped tables
@@ -1361,7 +1375,7 @@ ALTER TABLE `teachers`
 -- AUTO_INCREMENT for table `timetable`
 --
 ALTER TABLE `timetable`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `timetable_details`

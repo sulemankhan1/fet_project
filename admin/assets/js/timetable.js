@@ -39,3 +39,17 @@ function getDragAfterElement(droppable, y) {
     }
   }, { offset: Number.NEGATIVE_INFINITY }).element
 }
+
+$(document).on('change','input[name=tt_type]',function() {
+  let value = $(this).val();
+
+  if(value == 'image') {
+    $('.tt_image_cont').show();
+    $('.btn_image').show();
+    $('.btn_custom').hide();
+  } else {
+    $('.tt_image_cont').hide();
+    $('.btn_image').hide();
+    $('.btn_custom').show();
+  }
+})
