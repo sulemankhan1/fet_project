@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2021 at 11:55 PM
--- Server version: 10.4.16-MariaDB
--- PHP Version: 7.4.12
+-- Generation Time: Apr 21, 2021 at 10:25 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `fet_database`
+-- Database: `fet`
 --
 
 -- --------------------------------------------------------
@@ -463,9 +463,17 @@ INSERT INTO `notification_type` (`id`, `name`, `remarks`) VALUES
 
 CREATE TABLE `other_users` (
   `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `job_title` varchar(100) NOT NULL,
   `is_archived` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `other_users`
+--
+
+INSERT INTO `other_users` (`id`, `user_id`, `job_title`, `is_archived`) VALUES
+(1, 9, 'job', 0);
 
 -- --------------------------------------------------------
 
@@ -861,6 +869,29 @@ INSERT INTO `programs` (`id`, `depart_id`, `program_title`, `sem_duration`, `sem
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` int(11) NOT NULL,
+  `name` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`) VALUES
+(1, 'Other'),
+(2, 'Superadmin'),
+(3, 'Admin'),
+(4, 'Faculty'),
+(5, 'Teacher'),
+(6, 'Student');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `settings`
 --
 
@@ -878,7 +909,7 @@ CREATE TABLE `settings` (
 INSERT INTO `settings` (`id`, `name`, `value`, `type`) VALUES
 (1, 'LOGO', '1737958500618456057logo.png', 'admin_panel'),
 (2, 'SIDEBAR_IMG', '1276140079pngtree-tech-interlaced-texture-texture-propaganda-background-image_214967.jpg', 'admin_panel'),
-(3, 'SIDEBAR_COLOR', 'man-of-steel', 'admin_panel'),
+(3, 'SIDEBAR_COLOR', 'king-yna', 'admin_panel'),
 (4, 'NAME', 'F.E.T', 'admin_panel'),
 (5, 'FOOTER', 'University Of Sindh', 'admin_panel'),
 (6, 'ACCOUNT_ACTIVITY', 'active', 'general');
@@ -1084,7 +1115,7 @@ CREATE TABLE `timetable_details` (
 
 CREATE TABLE `users` (
   `id` int(255) NOT NULL,
-  `campuss_id` int(11) NOT NULL,
+  `campus_id` int(11) NOT NULL,
   `faculty_id` int(11) NOT NULL,
   `depart_id` int(11) NOT NULL,
   `image` varchar(255) NOT NULL,
@@ -1092,7 +1123,7 @@ CREATE TABLE `users` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `full_name` varchar(255) NOT NULL,
-  `surname` varchar(255) NOT NULL,
+  `surename` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `dob` date DEFAULT NULL,
   `gender` enum('male','female') NOT NULL,
@@ -1113,28 +1144,33 @@ CREATE TABLE `users` (
   `phone_no_code` varchar(11) NOT NULL,
   `phone_no` varchar(50) NOT NULL,
   `show_phone_no_public` tinyint(1) NOT NULL DEFAULT 0,
-  `last_qualitification` varchar(255) NOT NULL,
+  `last_qualification` varchar(255) NOT NULL,
   `registered_from` enum('frontend','backend') NOT NULL,
   `account_verified` tinyint(1) NOT NULL DEFAULT 0,
   `reg_datetime` timestamp NULL DEFAULT current_timestamp(),
   `account_active` tinyint(1) NOT NULL DEFAULT 0,
   `deactivated_on` timestamp NULL DEFAULT NULL,
+  `is_pending` tinyint(1) NOT NULL,
   `remarks` text NOT NULL,
-  `is_archived` tinyint(1) NOT NULL DEFAULT 0
+  `is_archived` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `campuss_id`, `faculty_id`, `depart_id`, `image`, `title`, `username`, `password`, `full_name`, `surname`, `email`, `dob`, `gender`, `cnic`, `show_cnic_public`, `father_name`, `nationality`, `province`, `district`, `city`, `home_address`, `permanent_address`, `zip_code`, `show_address_public`, `type`, `role_id`, `bio`, `phone_no_code`, `phone_no`, `show_phone_no_public`, `last_qualitification`, `registered_from`, `account_verified`, `reg_datetime`, `account_active`, `deactivated_on`, `remarks`, `is_archived`) VALUES
-(1, 0, 0, 0, '1245787577america.png', 'Mr', 'admin', '284bf3fdab5fa4def9a9f3981e882ed407ef9fc45f3feb99d2ab6f4231e96bd9b5053e970b41e713bcf4b9d8d6f78a41ae1a4fef79207a77ebee23d30807eab5NY4Haa3ex1TB75GwOpsI2qqk91rCcWx1T2aVKIf11xQ=', 'admin', '', 'admin@gmail.com', NULL, 'male', '', 1, '', '', '', '', '', '', '', '', 0, 'Superadmin', 2, '', '0', '', 1, '', 'frontend', 1, '2021-04-01 11:16:53', 1, NULL, '', 0),
-(2, 0, 0, 0, '', 'Ms', 'username2', '0', 'asfasf', 'surename', 'asfas@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, '', 'frontend', 0, '2021-04-01 20:16:30', 0, NULL, '', 0),
-(3, 0, 0, 0, '', 'Ms', 'username3', '0', 'asfasf', 'surename', 'asfa1s@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, '', 'frontend', 0, '2021-04-01 20:17:06', 0, NULL, '', 0),
-(4, 0, 0, 0, '1245787577america.png', 'Mr', 'username4', '0', 'hkj@Gmail.com', 'asfas', 'kj', '2019-11-29', 'female', 'safgasfasf', 0, 'asfasf', 'safasf', 'sadfasf', 'wfdsafasf', 'gkj', 'asfa', 'safasf', '', 0, '', 6, 'sdgdsgasdg', '92', '92', 0, '', 'frontend', 0, '2021-04-01 20:35:11', 0, NULL, '', 0),
-(5, 0, 0, 0, '', 'Ms', 'username5', '60d6286756664a00529f479cf4a587f37ff85d5414368c79bde505d47261a01c308d09d4f35e2002ddf6052bf62cc773a8a8c5af6f2ebb1b4a5b02669108fef2b8R2B1KUAsge1//C+qsLOVcFWIw5sQYu2XvKOnUdG9s=', '11', 'sdfsd', 'sdfsdf@gmail.com', '2021-04-07', 'male', '444342134', 1, 'asfasfasf', 'afsas', 'a', 'asf', 'asf', 'safaf', 'asfsafasf', '', 0, 'Other', 1, 'asfasfas', '323', '32232223', 0, '', 'frontend', 0, '2021-04-02 04:52:31', 0, NULL, '', 0),
-(6, 0, 0, 0, '361688680romanian.png', 'Ms', 'username6', '042ac6ebade10f1e9db85dc627e817685c004ed27215d7e01543f3f636f569e8e968f535cea6f8620ea5e3f7c32788b7c063a431cf4220492ddab3633a8f00e67Ez1aKJObhYcSHHOwGCeLUZ7GeYuc2rcX+aHNhoy3j0=', '1', '1', '1', '0001-01-10', 'female', '1111', 1, '111', '111', '111', '11', '111', '111', '111', '324', 1, 'Teacher', 5, '111', '11', '11', 1, '', 'frontend', 0, '2021-04-02 07:50:35', 1, NULL, '', 0),
-(7, 1, 16, 0, '', 'Mr', 'kamrantaj', '', 'Kamran Taj\r\n', 'Pathan', '', NULL, '', '', 0, '', '', '', '', '', '', '', '', 0, '', 0, '', '', '', 0, '', '', 0, '2021-04-20 21:54:34', 0, NULL, '', 0);
+INSERT INTO `users` (`id`, `campus_id`, `faculty_id`, `depart_id`, `image`, `title`, `username`, `password`, `full_name`, `surename`, `email`, `dob`, `gender`, `cnic`, `show_cnic_public`, `father_name`, `nationality`, `province`, `district`, `city`, `home_address`, `permanent_address`, `zip_code`, `show_address_public`, `type`, `role_id`, `bio`, `phone_no_code`, `phone_no`, `show_phone_no_public`, `last_qualification`, `registered_from`, `account_verified`, `reg_datetime`, `account_active`, `deactivated_on`, `is_pending`, `remarks`, `is_archived`, `created_at`, `updated_at`) VALUES
+(1, 0, 0, 0, '1245787577america.png', 'Mr', 'admin', 'f108554c12f282f9c53deb6720a2421de173e9c22ed3f812823e542d467f56942b9a5e7a8e7e7cc21cb800fa008fe8b07449d0cb041c64d3dd00a0160fca577dlooK+Uy14iqUkpt1Xud8+WNv50xosreNcYkhaJP9PoA=', 'admin', '', 'admin@gmail.com', NULL, 'male', '', 1, '', '', '', '', '', '', '', '', 0, 'Superadmin', 2, '', '0', '', 1, '', 'frontend', 1, '2021-04-01 11:16:53', 1, NULL, 0, '', 0, NULL, NULL),
+(2, 0, 0, 0, '', 'Ms', 'username2', '0', 'asfasf', 'surename', 'asfas@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, '', 'frontend', 0, '2021-04-01 20:16:30', 0, NULL, 0, '', 0, NULL, NULL),
+(3, 0, 0, 0, '', 'Ms', 'username3', '0', 'asfasf', 'surename', 'asfa1s@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, '', 'frontend', 0, '2021-04-01 20:17:06', 0, NULL, 0, '', 0, NULL, NULL),
+(4, 0, 0, 0, '1245787577america.png', 'Mr', 'username4', '0', 'hkj@Gmail.com', 'asfas', 'kj', '2019-11-29', 'female', 'safgasfasf', 0, 'asfasf', 'safasf', 'sadfasf', 'wfdsafasf', 'gkj', 'asfa', 'safasf', '', 0, '', 6, 'sdgdsgasdg', '92', '92', 0, '', 'frontend', 0, '2021-04-01 20:35:11', 0, NULL, 0, '', 0, NULL, NULL),
+(5, 0, 0, 0, '', 'Ms', 'username5', '60d6286756664a00529f479cf4a587f37ff85d5414368c79bde505d47261a01c308d09d4f35e2002ddf6052bf62cc773a8a8c5af6f2ebb1b4a5b02669108fef2b8R2B1KUAsge1//C+qsLOVcFWIw5sQYu2XvKOnUdG9s=', '11', 'sdfsd', 'sdfsdf@gmail.com', '2021-04-07', 'male', '444342134', 1, 'asfasfasf', 'afsas', 'a', 'asf', 'asf', 'safaf', 'asfsafasf', '', 0, 'Other', 1, 'asfasfas', '323', '32232223', 0, '', 'frontend', 0, '2021-04-02 04:52:31', 0, NULL, 0, '', 0, NULL, NULL),
+(6, 0, 0, 0, '361688680romanian.png', 'Ms', 'username6', '042ac6ebade10f1e9db85dc627e817685c004ed27215d7e01543f3f636f569e8e968f535cea6f8620ea5e3f7c32788b7c063a431cf4220492ddab3633a8f00e67Ez1aKJObhYcSHHOwGCeLUZ7GeYuc2rcX+aHNhoy3j0=', '1', '1', '1', '0001-01-10', 'female', '1111', 1, '111', '111', '111', '11', '111', '111', '111', '324', 1, 'Teacher', 5, '111', '11', '11', 1, '', 'frontend', 0, '2021-04-02 07:50:35', 1, NULL, 0, '', 0, NULL, NULL),
+(7, 1, 16, 0, '', 'Mr', 'kamrantaj', '', 'Kamran Taj\r\n', 'Pathan', '', NULL, '', '', 0, '', '', '', '', '', '', '', '', 0, '', 0, '', '', '', 0, '', '', 0, '2021-04-20 21:54:34', 0, NULL, 0, '', 0, NULL, NULL),
+(8, 1, 2, 3, '', 'Mr', 'abc', '8d3228f15a3ec29b07048a3a5c8756e6896e2aa0e7dbeee1b47f1c2d03ddb41a0fbf733f6fee95c2f2ca7eec08f11823dd6407a9d4cf9e38c1131deb8a3e7c1aU9W8WrXQJbAo59q7D40OV4N8TYKDaFEQ1gAN67CsRaU=', 'fullname', 'asfas', 'abc@gmail.com', '2009-11-30', 'male', '124124124124', 1, 'asfas', 'hkjhk', 'ljh', 'lkj', 'lk', 'asfasfas', 'asfasfa', '', 1, 'Other', 1, 'safasfafs', '112', '12313123123', 1, 'jlk', 'frontend', 0, '2021-04-21 20:17:13', 1, NULL, 0, '', 0, '2021-04-21 22:17:13', NULL),
+(9, 1, 2, 3, '', 'Mr', 'abccccc', '1600a221f4ff4a9e08866a2545c0b47c3d5728a12463a94301d10ac1f1c34e33f70e46833fcefb3e9fa237e76c917696e5c4b557488889a0b6dd2f9b24e0b43dPCrqjAOHIqQpWDgwpwyqvhjUX8PLZw/dVI6UzdpPoaI=', 'fullname', 'asfas', 'abcccc@gmail.com', '2009-11-30', 'male', '124124124124', 1, 'asfas', 'hkjhk', 'ljh', 'lkj', 'lk', 'asfasfas', 'asfasfa', '', 1, 'Other', 1, 'safasfafs', '112', '12313123123', 1, 'jlk', 'frontend', 0, '2021-04-21 20:18:04', 1, NULL, 0, '', 0, '2021-04-21 22:18:04', NULL);
 
 --
 -- Indexes for dumped tables
@@ -1202,6 +1238,12 @@ ALTER TABLE `password_reset`
 ALTER TABLE `programs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `DEPT_ID` (`depart_id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `settings`
@@ -1307,7 +1349,7 @@ ALTER TABLE `notification_type`
 -- AUTO_INCREMENT for table `other_users`
 --
 ALTER TABLE `other_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `password_reset`
@@ -1320,6 +1362,12 @@ ALTER TABLE `password_reset`
 --
 ALTER TABLE `programs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=382;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -1373,7 +1421,7 @@ ALTER TABLE `timetable_details`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

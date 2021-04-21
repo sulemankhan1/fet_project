@@ -18,7 +18,7 @@ class Reg extends CI_Controller
 
       'roles' => $this->bm->getAll('roles', 'id', 'desc'),
 
-      'logo' => $this->bm->getWhere('admin_panel_setting', 'name', 'LOGO')
+      'logo' => $this->bm->getWhere('settings', 'name', 'LOGO')
 
     ];
 
@@ -55,21 +55,27 @@ class Reg extends CI_Controller
       $this->form_validation->set_rules('campus_id', 'Campus', 'required');
       $this->form_validation->set_rules('faculty_id', 'Faculty', 'required');
       $this->form_validation->set_rules('depart_id', 'Department', 'required');
+      $this->form_validation->set_rules('last_degree', 'Last degree', 'required');
       
       if($p['type'] == 'Teacher'){
 
         $this->form_validation->set_rules('designation', 'Designation', 'required');
         $this->form_validation->set_rules('speciality', 'Speciality', 'required');
-        $this->form_validation->set_rules('last_degree', 'Last degree', 'required');
 
       }
       else if($p['type'] == 'Student')
       {
 
+        $this->form_validation->set_rules('program_id', 'Program', 'required');
         $this->form_validation->set_rules('roll_no', 'Roll no', 'required');
         $this->form_validation->set_rules('batch_year', 'Batch year', 'required');
         $this->form_validation->set_rules('current_semester_no', 'Current semester no', 'required');
 
+      }
+      else if($p['type'] == 'Other')
+      {
+
+        $this->form_validation->set_rules('job_title', 'Job Title', 'required');
       }
 
 		    if($this->form_validation->run())
@@ -85,7 +91,7 @@ class Reg extends CI_Controller
             $img = $this->bm->uploadFile($image , 'uploads/users');
           }
           
-          $account_activity = $this->bm->getWhere('general_setting', 'name', 'ACCOUNT_ACTIVITY');
+          $account_activity = $this->bm->getWhere('settings', 'name', 'ACCOUNT_ACTIVITY');
           
           if($account_activity->value == 'pending')
           {
@@ -105,6 +111,9 @@ class Reg extends CI_Controller
           $data = [
 
               'image' => $img,
+              'campus_id' => $p['campus_id'],
+              'faculty_id' => $p['faculty_id'],
+              'depart_id' => $p['depart_id'],
               'title' => $p['title'],
               'username' => $p['username'],
               'password' => $this->encryption->encrypt($p['password']),
@@ -126,31 +135,66 @@ class Reg extends CI_Controller
               'bio' => $p['bio'],
               'phone_no_code' => $p['phone_no_code'],
               'phone_no' => $p['phone_no'],
+              'last_qualification' => $p['last_degree'],
               'type' => $p['type'],
               'role_id' => $p['role_id'],
               'show_phone_no_public' => (@$p['show_phone_no_to_public'] == ''?0:1),
-              'account_activity' => $account_active,
-              'is_pending' => $pending
+              'account_active' => $account_active,
+              'is_pending' => $pending,
+              'created_at' => date('Y-m-d H:i:s')
 
           ];
 
           $ins_id = $this->bm->insertRow('users', $data);
+          
+          if ($p['type'] == 'Teacher')
+          {
 
-          $info = [
+            
+            $info = [
+              
+              'user_id' => $ins_id,
+              'designation' => $p['designation'],
+              'speciality' => $p['speciality']
+              
+            ];
+            
+            $this->bm->insertRow('teachers',$info);
+            
+          }
+          
+          elseif ($p['type'] == 'Student')
+          {
+            
+            $info = [
+              
+              'user_id' => $ins_id,
+              'program_id' => $p['program_id'],
+              'roll_number' => $p['roll_no'],
+              'batch_year' => $p['batch_year'],
+              'current_semester_no' => $p['current_semester_no']
+              
+            ];
+            
+            $this->bm->insertRow('students',$info);
+            
+          }
 
-            'user_id' => $ins_id,
-            'campus_id' => $p['campus_id'],
-            'faculty_id' => $p['faculty_id'],
-            'depart_id' => $p['depart_id'],
-            'batch_year' => $p['batch_year'],
-            'current_semester_no' => $p['current_semester_no'],
-            'designation' => $p['designation'],
-            'speciality' => $p['speciality'],
-            'last_degree' => $p['last_degree']
+          else
+          {
+            
+            $info = [
+              
+              'user_id' => $ins_id,
+              'job_title' => $p['job_title']
+              
+            ];
+            
+            $this->bm->insertRow('other_users',$info);
 
-          ];
+          }
 
-          $this->bm->insertRow('users_info',$info);
+
 
           $this->session->set_flashdata(array('response' => 'success', 'msg' => "Registration has been done Successfully wait for approving your account "));
 

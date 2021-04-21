@@ -9,7 +9,10 @@ class Auth extends CI_Controller {
         parent::__construct();
 
         $this->load->model('Auth_model');
+		
+		// echo $this->encryption->encrypt('admin');
 
+		// die();
   }
 
 	public function index()

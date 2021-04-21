@@ -161,10 +161,10 @@ $alert_msg=$this->session->userdata('alert_msg');
                             <fieldset class="form-group">
                               <label for="basicInput">Gender *</label>
                               <br>
-                                <input type="radio" name="gender" value="male" <?=(@$this->input->post('gender') == 'male'?'checked':'')?>>
-                                <label for="basicInput">Male</label>
-                                <input type="radio" name="gender" value="female" <?=(@$this->input->post('gender') == 'female'?'checked':'')?>>
-                                <label for="basicInput">Female</label>
+                                <input type="radio" id="maleRadio" name="gender" value="male" <?=(@$this->input->post('gender') == 'male'?'checked':'')?>>
+                                <label for="#maleRadio">Male</label>
+                                <input type="radio" id="femaleRadio" name="gender" value="female" <?=(@$this->input->post('gender') == 'female'?'checked':'')?>>
+                                <label for="#femaleRadio">Female</label>
                             </fieldset>
                             <span class="text-danger"><?=form_error('gender')?></span>
 
@@ -185,7 +185,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                             </fieldset>
                             <span class="text-danger"><?=form_error('cnic')?></span>
                         </div>
-                        <div class="col-xl-3 col-lg-3 col-md-3 mb-1">
+                        <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                             <fieldset class="form-group">
                                 <label for="basicInput">Father Name *</label>
                                 <input type="text" class="form-control"  name="father_name" value="<?=@$this->input->post('father_name')?>">
@@ -216,13 +216,23 @@ $alert_msg=$this->session->userdata('alert_msg');
                             <span class="text-danger"><?=form_error('district')?></span>
 
                         </div>
-                        <div class="col-xl-3 col-lg-3 col-md-3 mb-1">
+                        <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                             <fieldset class="form-group">
                                 <label for="basicInput">City *</label>
                                 <input type="text" class="form-control"  name="city" value="<?=@$this->input->post('city')?>">
                             </fieldset>
                             <span class="text-danger"><?=form_error('city')?></span>
 
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
+                            <fieldset class="form-group">
+                                <label for="basicInput">Last Degree *</label>
+                                <input type="text" class="form-control"  name="last_degree" value="<?=@$this->input->post('last_degree')?>">
+                            </fieldset>
+                            <?php if(@$this->input->post('type') == 'Teacher'){ ?>
+                              <span class="text-danger"><?=form_error('last_degree')?></span>
+                            <?php } ?>
+                                  
                         </div>
                         <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                             <fieldset class="form-group">
@@ -376,6 +386,22 @@ $alert_msg=$this->session->userdata('alert_msg');
                               <!-- additional_info_student_start -->
                               <!-- <div class="additional_info_student"> -->
 
+                              <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_student">
+                                <fieldset class="form-group">
+                                    <label for="basicInput">Select Program *</label>
+                                    <select class="form-control"  name="program_id">
+                                        <option value="">select program</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </fieldset>
+                                <span class="text-danger"><?=form_error('program_id')?></span>
+
+                              </div>
+
                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_student">
                                     <fieldset class="form-group">
                                         <label for="basicInput">Roll No *</label>
@@ -433,15 +459,16 @@ $alert_msg=$this->session->userdata('alert_msg');
                                       <?php } ?>
 
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_teacher">
+
+                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_other">
                                       <fieldset class="form-group">
-                                          <label for="basicInput">Last Degree *</label>
-                                          <input type="text" class="form-control"  name="last_degree" value="<?=@$this->input->post('last_degree')?>">
+                                          <label for="basicInput">Job Title *</label>
+                                          <input type="text" class="form-control"  name="job_title" value="<?=@$this->input->post('job_title')?>">
                                       </fieldset>
-                                      <?php if(@$this->input->post('type') == 'Teacher'){ ?>
-                                        <span class="text-danger"><?=form_error('last_degree')?></span>
+                                      <?php if(@$this->input->post('type') == 'Other'){ ?>
+                                        <span class="text-danger"><?=form_error('job_title')?></span>
                                       <?php } ?>
-                                  
+
                                 </div>
 
                               <!-- </div> -->
@@ -546,6 +573,7 @@ $alert_msg=$this->session->userdata('alert_msg');
           {
               hide_roles_field();
               $('.additional_info').show();
+              $('.additional_info_other').show();
               // $('.additional_info_student').show();
           }
           else
