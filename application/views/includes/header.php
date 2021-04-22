@@ -54,7 +54,11 @@
 <!-- Revolution Slider 5.x SCRIPTS -->
 <script src="<?=base_url('assets/js/revolution-slider/js/jquery.themepunch.tools.min.js')?>"></script>
 <script src="<?=base_url('assets/js/revolution-slider/js/jquery.themepunch.revolution.min.js')?>"></script>
+
+
 <link rel="stylesheet" href="<?=base_url('assets/css/style.css')?>">
+
+<link rel="stylesheet" href="<?=base_url('assets/css/Titlestyle.css')?>">
 
 </head>
 <body class="">
@@ -77,13 +81,14 @@
             <div class="col-md-6">
               <div class="widget">
                  <i class="fa fa-clock-o text-theme-colored"></i> Opening Hours:  Mon - Fri : 8.00 am - 7.00 pm, Sunday Closed
+                <a href="mailto:info@iict.usindh.edu.pk"><i class="fa fa-envelope ml-10"></i></a>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mt-4 mb-4">
               <div class="widget">
                 <ul class="list-inline pull-right flip sm-pull-none sm-text-center list-bordered">
-                  <li class="bg-theme-colored text-white mb-xs-5"><i class="fa fa-phone"></i><a class="text-white" href="contact.php"> Contact Us </a></li>
-                  <li class="bg-theme-colored3 text-white mb-xs-5"><i class="fa fa-envelope-o"></i> <a class="text-white" href="mailto:bisalbhatti4@gmail.com">info@iict.usindh.edu.pk</a></li>
+                  <li class="bg-theme-colored text-white mb-xs-5"><i class="fa fa-sign-in-alt"></i><a class="text-white" href="<?=site_url('login')?>"> Sign In </a></li>
+                  <li class="bg-theme-colored3 text-white mb-xs-5"><i class="fa fa-registered"></i> <a class="text-white" href="<?=site_url('register')?>">Register</a></li>
                 </ul>
               </div>
             </div>
@@ -106,94 +111,47 @@
       <div class="header-nav-wrapper navbar-scrolltofixed bg-white">
         <div class="container-fuild">
           <nav id="menuzord-right" class="menuzord orange no-bg">
-
-           <div class="row">
-            <div class="col-sm-5 col-md-5">
-              <a class="menuzord-brand pull-left flip mb-15" href="<?=site_url()?>" id="logo-size"><img src="<?=base_url('assets/images/FET-logo.png')?>" alt=""></a>
-             <h4 id="logo-size1">Faculty of Engineering & Technology</h4>
-              <h5 id="logo-size2">University of Sindh, Pakistan</h5>
-            </div>
-            <div class="col-sm-7 col-md-7">
+            
+          
+              <a class="menuzord-brand pull-left flip mb-15" href="index.php" id="logo-size"><img src="<?=base_url("assets/images/FET-logo.png")?>" alt="">
+                <h4 id="logo-size1">Faculty of Engineering & Technology<br><small><b>University of Sindh, Pakistan</b></small></h4>
+              </a>
+           
+            
+           
             <ul class="menuzord-menu">
-              <li><a href="<?=site_url()?>">Home</a></li>
-             <li><a href="javascripts:void(0)">Programs</a>
-                <div class="megamenu megamenu-bg-img">
-                  <div class="megamenu-row">
-                    <div class="col3">
-                      <h4 class="megamenu-col-title">Latest News:</h4>
-                      <div class="widget">
-                        <div class="latest-posts">
-                          <article class="post media-post clearfix pb-0 mb-10">
-                            <a href="blog-single-right-sidebar.html" class="post-thumb"><img alt="" src="http://placehold.it/80x55"></a>
-                            <div class="post-right">
-                              <h5 class="post-title mt-0 mb-5"><a href="blog-single-right-sidebar.html">Post Title Here</a></h5>
-                              <p class="post-date mb-0 font-12">Mar 08, 2015</p>
-                            </div>
-                          </article>
-                          <article class="post media-post clearfix pb-0 mb-10">
-                            <a href="blog-single-right-sidebar.html" class="post-thumb"><img alt="" src="http://placehold.it/80x55"></a>
-                            <div class="post-right">
-                              <h5 class="post-title mt-0 mb-5"><a href="blog-single-right-sidebar.html">Industrial Coatings</a></h5>
-                              <p class="post-date mb-0 font-12">Mar 08, 2015</p>
-                            </div>
-                          </article>
-                          <article class="post media-post clearfix pb-0 mb-10">
-                            <a href="blog-single-right-sidebar.html" class="post-thumb"><img alt="" src="http://placehold.it/80x55"></a>
-                            <div class="post-right">
-                              <h5 class="post-title mt-0 mb-5"><a href="blog-single-right-sidebar.html">Storefront Installations</a></h5>
-                              <p class="post-date mb-0 font-12">Mar 08, 2015</p>
-                            </div>
-                          </article>
-                          <article class="post media-post clearfix pb-0 mb-10">
-                            <a href="blog-single-right-sidebar.html" class="post-thumb"><img alt="" src="http://placehold.it/80x55"></a>
-                            <div class="post-right">
-                              <h5 class="post-title mt-0 mb-5"><a href="blog-single-right-sidebar.html">Industrial Coatings</a></h5>
-                              <p class="post-date mb-0 font-12">Mar 08, 2015</p>
-                            </div>
-                          </article>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col3">
-                      <h4 class="megamenu-col-title"><strong>Featured News:</strong></h4>
-                      <article class="post clearfix">
-                        <div class="entry-header">
-                          <div class="post-thumb"> <img class="img-responsive" src="<?=base_url('assetsimages/blog/1.jpg')?>" alt=""> </div>
-                        </div>
-                        <div class="entry-content">
-                          <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna et sed aliqua</p>
-                          <a class="btn btn-dark btn-theme-colored" href="#">read more..</a> </div>
-                      </article>
-                    </div>
-                    <div class="col3">
-                      <h4 class="megamenu-col-title">Promotional Offer:</h4>
-                      <img src="<?=base_url('images/megamenu/megamenu-sale-off.jpg')?>" alt="">
-                    </div>
-                    <div class="col3">
-                      <h4 class="megamenu-col-title">Quick Links:</h4>
-                      <ul class="list-dashed list-icon">
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Disclaimer</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Copyright Notice</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li><a href="<?=site_url('timetable')?>">Timetable</a></li>
-               <li><a href="<?=site_url('faculty')?>">Faculty</a></li>
-               <li><a href="<?=site_url('news')?>">News</a></li>
-               <li><a href="javascript:void(0)">Resources</a></li>
-               <li><a href="javascript:void(0)">About</a>
-              <li><a href="<?=site_url('contact')?>">Contact</a></li>
+              <li><a href="index.php">Home</a>
+               
+            </li>
+            <li>
+              <a href="javascript:void(0)">programs</a>
+              <ul class="dropdown">
+                <li><a href="">Bachelors</a></li>
+                <li><a href="">Masters</a></li>
+                <li><a href="">Ph.D</a></li>
+              </ul>
+            </li>
+             
+              <li><a href="<?=site_url('timetable')?>">Time Table</a>
+                  
+                </li>
+               <li><a href="<?=site_url('faculty') ?>">Faculty</a></li>
+                <li><a href="javascript:void(0)">News</a></li>
+                <li><a href="javascript:void(0)">Resources  </a>
+                  <ul class="dropdown">
+                    <li><a href="#">FYP Resources</a></li>
+                    <li><a href="<?=site_url('telephone')?>">Telephone</a></li>
+                    <li><a href="#">Sight Map</a></li>
+                  </ul>
+                </li>
+                <li><a href="<?=site_url('about')?>">About</a></li>
+                  <li><a href="javascript:void(0)">Contact</a></li>
 
-                 <!-- <li><a href="javascripts:void(0)">Sign In</a> -->
-
+                 <!--<li><a href="javascripts:void(0)">Sign In</a>-->
+                 
                 </li>
             </ul>
-            </div>
-           </div>
+            
           </nav>
         </div>
       </div>

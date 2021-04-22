@@ -62,6 +62,42 @@ class Pages extends CI_Controller
 		$this->load->view('includes/footer');
 
 	}
+	public function login() {
+
+		$data = [];
+
+		$this->load->view('includes/header', $data);
+		$this->load->view('pages/login');
+		$this->load->view('includes/footer');
+
+	}
+	public function about() {
+
+		$data = [];
+
+		$this->load->view('includes/header', $data);
+		$this->load->view('pages/about');
+		$this->load->view('includes/footer');
+
+	}
+	public function telephone() {
+
+		$data = [];
+
+		$this->load->view('includes/header', $data);
+		$this->load->view('pages/telephone');
+		$this->load->view('includes/footer');
+
+	}
+	public function register() {
+
+		$data = [];
+
+		$this->load->view('includes/header', $data);
+		$this->load->view('pages/register');
+		$this->load->view('includes/footer');
+
+	}
 
 	public function contact_us() {
 

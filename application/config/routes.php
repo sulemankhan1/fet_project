@@ -12,3 +12,7 @@ $route['faculty'] = 'pages/faculty';
 $route['contact'] = 'pages/contact_us';
 $route['news'] = 'pages/news';
 $route['news/(:any)'] = 'pages/single_news/$1';
+$route['timetable'] = 'pages/timetable';
+$route['login'] = 'pages/login';
+$route['register'] = 'pages/register';
+$route['about'] = 'pages/about';
