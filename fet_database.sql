@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2021 at 06:07 AM
+-- Generation Time: Apr 23, 2021 at 10:37 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -956,6 +956,14 @@ CREATE TABLE `students` (
   `current_semester` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `students`
+--
+
+INSERT INTO `students` (`id`, `user_id`, `roll_number`, `program_id`, `batch_year`, `current_semester`) VALUES
+(1, 11, '', 3, '', 0),
+(2, 12, '', 3, '', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -1179,7 +1187,9 @@ INSERT INTO `users` (`id`, `campus_id`, `faculty_id`, `depart_id`, `image`, `tit
 (7, 1, 16, 0, '', 'Mr', 'kamrantaj', '', 'Kamran Taj\r\n', 'Pathan', '', NULL, '', '', 0, '', '', '', '', '', '', '', '', 0, '', 0, '', '', '', 0, '', '', 0, '2021-04-20 21:54:34', 0, NULL, 0, '', 0, NULL, NULL),
 (8, 1, 2, 3, '', 'Mr', 'abc', '8d3228f15a3ec29b07048a3a5c8756e6896e2aa0e7dbeee1b47f1c2d03ddb41a0fbf733f6fee95c2f2ca7eec08f11823dd6407a9d4cf9e38c1131deb8a3e7c1aU9W8WrXQJbAo59q7D40OV4N8TYKDaFEQ1gAN67CsRaU=', 'fullname', 'asfas', 'abc@gmail.com', '2009-11-30', 'male', '124124124124', 1, 'asfas', 'hkjhk', 'ljh', 'lkj', 'lk', 'asfasfas', 'asfasfa', '', 1, 'OTHER', 1, 'safasfafs', '112', '12313123123', 1, 'jlk', 'frontend', 0, '2021-04-21 20:17:13', 1, NULL, 0, '', 0, '2021-04-21 22:17:13', NULL),
 (9, 1, 2, 3, '', 'Mr', 'abccccc', '1600a221f4ff4a9e08866a2545c0b47c3d5728a12463a94301d10ac1f1c34e33f70e46833fcefb3e9fa237e76c917696e5c4b557488889a0b6dd2f9b24e0b43dPCrqjAOHIqQpWDgwpwyqvhjUX8PLZw/dVI6UzdpPoaI=', 'fullname', 'asfas', 'abcccc@gmail.com', '2009-11-30', 'male', '124124124124', 1, 'asfas', 'hkjhk', 'ljh', 'lkj', 'lk', 'asfasfas', 'asfasfa', '', 1, 'OTHER', 1, 'safasfafs', '112', '12313123123', 1, 'jlk', 'frontend', 0, '2021-04-21 20:18:04', 1, NULL, 0, '', 0, '2021-04-21 22:18:04', NULL),
-(10, 4, 3, 2, '', 'Ms', 'qqqqqw', 'e9586b0bd557b8352cc4d14fc15e28761f5035c5bd931fdd19d6f317a58a4b69dc024a4cc66824668f7230c07ff34da4713561235e1c410ccd52e31872ecd106S9KVQxPX9iQHSRjW4Qh2e+CocF/YKsbMnpDeSivURMk=', 'asfasf22', 'a22', 'qwqwq@gmail.vom', '2021-03-30', 'male', 'asfsag', 1, 'fggf', 'fggfg', 'fgf', 'gf', 'gf', 'dsgs', 'sdgfdsg', '124124', 1, 'TEACHER', 5, 'dsgdsg', '4', '4', 1, 'gfgf', 'frontend', 0, '2021-04-22 09:15:05', 1, NULL, 0, '', 0, '2021-04-22 11:15:05', '2021-04-22 21:38:42');
+(10, 4, 3, 2, '', 'Ms', 'qqqqqw', 'e9586b0bd557b8352cc4d14fc15e28761f5035c5bd931fdd19d6f317a58a4b69dc024a4cc66824668f7230c07ff34da4713561235e1c410ccd52e31872ecd106S9KVQxPX9iQHSRjW4Qh2e+CocF/YKsbMnpDeSivURMk=', 'asfasf22', 'a22', 'qwqwq@gmail.vom', '2021-03-30', 'male', 'asfsag', 1, 'fggf', 'fggfg', 'fgf', 'gf', 'gf', 'dsgs', 'sdgfdsg', '124124', 1, 'TEACHER', 5, 'dsgdsg', '4', '4', 1, 'gfgf', 'frontend', 0, '2021-04-22 09:15:05', 1, NULL, 0, '', 0, '2021-04-22 11:15:05', '2021-04-22 21:38:42'),
+(11, 3, 1, 3, '', 'Mr', 'asfa', 'a4ce8fd4a0aec10bdbb85aca197bdbb77c30f3e217d2048761588fb2cb20c9646889019ee743a096ff64d4c880b3af87907d368bb6f22048c4f208ea2bc4e9c6Fjkrfk4DfpJc3QnENuw/G78qTa9VP88+jtIfzTgzn1k=', 'asfasf', '', 'asf2as@gmail.com', NULL, 'male', '', 0, '', '', '', '', '', '', '', '', 0, 'STUDENT', 6, '', '', '', 0, '', 'frontend', 0, '2021-04-23 19:50:17', 1, NULL, 0, '', 0, '2021-04-23 21:50:17', NULL),
+(12, 1, 1, 2, '', 'Mr', 'tester', '9c22a666a080354ecb378e3c47861e7affcc2952ef20c4f9c930d417dc4f561c18fe9ed08788758d2b33c7f24dbb97ecdb2de9d09c77f71c1f12e926c1ae25754CDR0JJbz4Z3smAEFStP4JqfidYwnJRXuxUNfSH8xy4=', 'tester', '', 'tester@Gmail.com', NULL, 'male', '', 0, '', '', '', '', '', '', '', '', 0, 'STUDENT', 6, '', '', '', 0, '', 'frontend', 0, '2021-04-23 20:15:45', 1, NULL, 0, '', 0, '2021-04-23 22:15:45', NULL);
 
 --
 -- Indexes for dumped tables
@@ -1394,7 +1404,7 @@ ALTER TABLE `slider_setting`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `subjects`
@@ -1430,7 +1440,7 @@ ALTER TABLE `timetable_details`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

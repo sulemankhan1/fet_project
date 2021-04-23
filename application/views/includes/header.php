@@ -87,8 +87,27 @@
             <div class="col-md-6 mt-4 mb-4">
               <div class="widget">
                 <ul class="list-inline pull-right flip sm-pull-none sm-text-center list-bordered">
-                  <li class="bg-theme-colored text-white mb-xs-5"><i class="fa fa-sign-in-alt"></i><a class="text-white" href="<?=site_url('login')?>"> Sign In </a></li>
-                  <li class="bg-theme-colored3 text-white mb-xs-5"><i class="fa fa-registered"></i> <a class="text-white" href="<?=site_url('register')?>">Register</a></li>
+
+                  <?php  if($this->session->userdata('user_id') == ''){?>
+
+                    <li class="bg-theme-colored text-white mb-xs-5"><i class="fa fa-sign-in-alt"></i><a class="text-white" href="<?=site_url('login')?>"> Sign In </a></li>
+                    <li class="bg-theme-colored3 text-white mb-xs-5"><i class="fa fa-registered"></i> <a class="text-white" href="<?=site_url('register')?>">Register</a></li>
+                    
+                  <?php }else{ ?>
+                    <!-- <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Dropdown</a>
+  </li> -->
+                    <li class="nav-item dropdown bg-theme-colored text-white mb-xs-5">
+                      <i class="fa fa-sign-in-alt"></i>
+                      <a class="nav-link dropdown-toggle text-white" href="<?=site_url('login')?>" data-toggle="dropdown" href="#"> My Account </a>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="<?=site_url('admin/edit_profile')?>">Edit Profile</a>
+                        <a class="dropdown-item" href="<?=site_url('admin/view_profile/'.hashids_encrypt($this->session->userdata('user_id')))?>">View Profile</a>
+                        <a class="dropdown-item" href="<?=site_url('logout')?>">Logout</a>
+                      </div>
+                    </li>
+                  <?php } ?>
+
                 </ul>
               </div>
             </div>

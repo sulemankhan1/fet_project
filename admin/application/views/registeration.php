@@ -273,7 +273,7 @@ $alert_msg=$this->session->userdata('alert_msg');
 
                                 <?php foreach($roles as $key => $v) : ?>
 
-                                <?php if($v->name != 'Superadmin'): ?>
+                                <?php if($v->slug != 'SUPERADMIN'): ?>
 
                                 <input type="radio" class="role_id" name="role_id" value="<?=$v->id?>" role-name="<?=$v->slug?>" <?=(@$this->input->post('role_id') == $v->id?'checked':'')?>>
                                 <label for="basicInput"><?=$v->name?></label>

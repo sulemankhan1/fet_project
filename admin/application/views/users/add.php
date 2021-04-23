@@ -204,7 +204,7 @@
                             <?php if(@$roles) { ?>
                               <?php foreach($roles as $key => $v) : ?>
 
-                              <?php if($v->name != 'Superadmin'): ?>
+                              <?php if($v->slug != 'SUPERADMIN'): ?>
 
                               <input type="radio" id="<?=$v->slug?>" class="role_id" name="role_id" value="<?=$v->id?>" role-name="<?=$v->slug?>" <?=(@$this->input->post('role_id') == $v->id?'checked':'')?>>
                               <label for="<?=$v->slug?>"><?=$v->name?></label>

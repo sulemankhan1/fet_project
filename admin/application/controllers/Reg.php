@@ -196,10 +196,20 @@ class Reg extends CI_Controller
 
 
 
-          $this->session->set_flashdata(array('response' => 'success', 'msg' => "Registration has been done Successfully wait for approving your account "));
+            if ($account_active == 1) 
+            {
+            
+              $this->session->set_flashdata(array('response' => 'success', 'msg' => "Registration has been done Successfully"));
+            
+            }
+            else
+            {
+              
+              $this->session->set_flashdata(array('response' => 'success', 'msg' => "Registration has been done Successfully wait for approving your account "));
+
+            }
 
           redirect('login');
-
 
         }
         else{

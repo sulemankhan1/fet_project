@@ -247,7 +247,7 @@
 
                                 <?php foreach($roles as $key => $v) : ?>
 
-                                <?php if($v->name != 'Superadmin'): ?>
+                                <?php if($v->slug != 'SUPERADMIN'): ?>
 
                                     <?php if(@$this->input->post('role_id') != ''): ?>
 

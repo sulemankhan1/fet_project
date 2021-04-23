@@ -1,4 +1,5 @@
- <!-- Start main-content -->
+ 
+  <!-- Start main-content -->
   <div class="main-content">
 
     <!-- Section: inner-header -->
@@ -21,21 +22,45 @@
         <div class="row">
           <div class="col-md-6 col-md-push-3">
             <div class="border-1px p-30 mb-0">
-              <form>
+              <form method="post" action="<?=site_url('save_login')?>">
                 <div class="row">
+                 
+                  <?php if($this->session->flashdata('response') == 'success') { ?>
+
+               	    <div class="col-sm-12">
+                      <div class="alert alert-success alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <?=$this->session->flashdata('msg')?>
+                      </div>
+                    </div>
+
+                  <?php } ?>
+                  <?php if($this->session->flashdata('response') == 'danger') { ?>
+
+                    <div class="col-sm-12">
+                      <div class="alert alert-danger alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <?=$this->session->flashdata('msg')?>
+                      </div>
+                    </div>
+
+                  <?php } ?>
+
                	  <div class="col-sm-12">
                     <div class="form-group">
-                      <label>Email <small>*</small></label>
-                      <input name="form_email" class="form-control required email" type="email" placeholder="Enter Email">
+                      <label>Username <small>*</small></label>
+                      <input name="username" class="form-control required username" type="username" placeholder="Enter Username" value="<?=@$this->input->post('username')?>">
                     </div>
+                    <span class="text-danger"><?=form_error('username')?></span>
                   </div>
                 </div>
                 <div class="row">               
                   <div class="col-sm-12">
                     <div class="form-group">
                       <label>Password <small>*</small></label>
-                       <input name="password" class="form-control" type="text" placeholder="password">
+                       <input name="password" class="form-control" type="password" placeholder="password" value="<?=@$this->input->post('password')?>">
                     </div>
+                    <span class="text-danger"><?=form_error('password')?></span>
                   </div>
                 </div>
                 <div class="row">               
@@ -53,7 +78,6 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <input name="form_botcheck" class="form-control" type="hidden" value="" />
                   <button type="submit" class="hvr-glow btn btn-block btn-dark btn-theme-colored btn-sm mt-20 pt-10 pb-10" data-loading-text="Please wait...">Login</button>
                 </div>
               </form>
@@ -65,3 +89,4 @@
      <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
   </div>  
   <!-- end main-content -->
+  
