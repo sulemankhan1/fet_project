@@ -34,7 +34,7 @@
       },
       "columnDefs":[
           {
-           "targets":[0,7],
+           "targets":[0,9],
            "orderable":false,
           },
       ],
@@ -59,6 +59,7 @@
         $('.additional_info').hide();
         $('.additional_info_student').hide();
         $('.additional_info_teacher').hide();
+        $('.additional_info_other').hide();
         
       }
 
@@ -67,34 +68,35 @@
 
           $('.type').val(role_name);
 
-          if(role_name == 'Teacher')
+          if(role_name == 'TEACHER')
           {
               hide_roles_field();
               $('.additional_info').show();
               $('.additional_info_teacher').show();
           }
-          else if(role_name == 'Student')
+          else if(role_name == 'STUDENT')
           {
               hide_roles_field();
               $('.additional_info').show();
               $('.additional_info_student').show();
           }
-          else if(role_name == 'Faculty')
+          else if(role_name == 'FACULTY')
           {
               hide_roles_field();
               $('.additional_info').show();
               // $('.additional_info_student').show();
           }
-          else if(role_name == 'Admin')
+          else if(role_name == 'ADMIN')
           {
               hide_roles_field();
               $('.additional_info').show();
               // $('.additional_info_student').show();
           }
-          else if(role_name == 'Other')
+          else if(role_name == 'OTHER')
           {
               hide_roles_field();
               $('.additional_info').show();
+              $('.additional_info_other').show();
               // $('.additional_info_student').show();
           }
           else

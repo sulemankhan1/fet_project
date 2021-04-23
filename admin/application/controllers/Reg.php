@@ -57,13 +57,13 @@ class Reg extends CI_Controller
       $this->form_validation->set_rules('depart_id', 'Department', 'required');
       $this->form_validation->set_rules('last_degree', 'Last degree', 'required');
       
-      if($p['type'] == 'Teacher'){
+      if($p['type'] == 'TEACHER'){
 
         $this->form_validation->set_rules('designation', 'Designation', 'required');
         $this->form_validation->set_rules('speciality', 'Speciality', 'required');
 
       }
-      else if($p['type'] == 'Student')
+      else if($p['type'] == 'STUDENT')
       {
 
         $this->form_validation->set_rules('program_id', 'Program', 'required');
@@ -72,7 +72,7 @@ class Reg extends CI_Controller
         $this->form_validation->set_rules('current_semester_no', 'Current semester no', 'required');
 
       }
-      else if($p['type'] == 'Other')
+      else if($p['type'] == 'OTHER')
       {
 
         $this->form_validation->set_rules('job_title', 'Job Title', 'required');
@@ -147,7 +147,7 @@ class Reg extends CI_Controller
 
           $ins_id = $this->bm->insertRow('users', $data);
           
-          if ($p['type'] == 'Teacher')
+          if ($p['type'] == 'TEACHER')
           {
 
             
@@ -163,7 +163,7 @@ class Reg extends CI_Controller
             
           }
           
-          elseif ($p['type'] == 'Student')
+          elseif ($p['type'] == 'STUDENT')
           {
             
             $info = [

@@ -27,7 +27,7 @@ class Users extends CI_Controller
 
       'active_menu' => 'create_user',
 
-      // 'roles' => $this->bm->getAll('roles', 'id', 'desc'),
+      'roles' => $this->bm->getAll('roles', 'id', 'desc'),
 
     ];
 
@@ -49,7 +49,7 @@ class Users extends CI_Controller
       $this->form_validation->set_rules('password', 'Password', 'required');
       $this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]');
       $this->form_validation->set_rules('full_name', 'Full name', 'required');
-      $this->form_validation->set_rules('surname', 'Surename', 'required');
+      $this->form_validation->set_rules('surename', 'Surename', 'required');
       $this->form_validation->set_rules('dob', 'Date of birth', 'required');
       $this->form_validation->set_rules('gender', 'Gender', 'required');
       $this->form_validation->set_rules('cnic', 'Cnic / B-form', 'required');
@@ -68,22 +68,29 @@ class Users extends CI_Controller
       $this->form_validation->set_rules('campus_id', 'Campus', 'required');
       $this->form_validation->set_rules('faculty_id', 'Faculty', 'required');
       $this->form_validation->set_rules('depart_id', 'Department', 'required');
+      $this->form_validation->set_rules('last_degree', 'Last degree', 'required');
 
-      if($p['type'] == 'Teacher'){
+      if($p['type'] == 'TEACHER'){
 
         $this->form_validation->set_rules('designation', 'Designation', 'required');
         $this->form_validation->set_rules('speciality', 'Speciality', 'required');
-        $this->form_validation->set_rules('last_degree', 'Last degree', 'required');
 
       }
-      else if($p['type'] == 'Student')
+      else if($p['type'] == 'STUDENT')
       {
 
+        $this->form_validation->set_rules('program_id', 'Program', 'required');
         $this->form_validation->set_rules('roll_no', 'Roll no', 'required');
         $this->form_validation->set_rules('batch_year', 'Batch year', 'required');
         $this->form_validation->set_rules('current_semester_no', 'Current semester no', 'required');
 
       }
+      else if($p['type'] == 'OTHER')
+      {
+
+        $this->form_validation->set_rules('job_title', 'Job Title', 'required');
+      }
+
 
 		    if($this->form_validation->run())
 		    {
@@ -98,7 +105,7 @@ class Users extends CI_Controller
               $img = $this->bm->uploadFile($image , 'uploads/users');
           }
 
-          $account_activity = $this->bm->getWhere('general_setting', 'name', 'ACCOUNT_ACTIVITY');
+          $account_activity = $this->bm->getWhere('settings', 'name', 'ACCOUNT_ACTIVITY');
 
           if($account_activity->value == 'pending')
           {
@@ -118,11 +125,14 @@ class Users extends CI_Controller
           $data = [
 
               'image' => $img,
+              'campus_id' => $p['campus_id'],
+              'faculty_id' => $p['faculty_id'],
+              'depart_id' => $p['depart_id'],
               'title' => $p['title'],
               'username' => $p['username'],
               'password' => $this->encryption->encrypt($p['password']),
               'full_name' => $p['full_name'],
-              'surname' => $p['surname'],
+              'surename' => $p['surename'],
               'email' => $p['email'],
               'dob' => $p['dob'],
               'gender' => $p['gender'],
@@ -132,6 +142,7 @@ class Users extends CI_Controller
               'nationality' => $p['nationality'],
               'province' => $p['province'],
               'district' => $p['district'],
+              'zip_code' => $p['zip_code'],
               'city' => $p['city'],
               'home_address' => $p['home_address'],
               'permanent_address' => $p['permanent_address'],
@@ -139,35 +150,69 @@ class Users extends CI_Controller
               'bio' => $p['bio'],
               'phone_no_code' => $p['phone_no_code'],
               'phone_no' => $p['phone_no'],
+              'last_qualification' => $p['last_degree'],
               'type' => $p['type'],
               'role_id' => $p['role_id'],
               'show_phone_no_public' => (@$p['show_phone_no_to_public'] == ''?0:1),
-              'account_activity' => $account_active,
-              'is_pending' => $pending
+              'account_active' => $account_active,
+              'is_pending' => $pending,
+              'created_at' => date('Y-m-d H:i:s')
+
 
           ];
 
           $ins_id = $this->bm->insertRow('users', $data);
 
-          $info = [
+          if ($p['type'] == 'TEACHER')
+          {
 
-            'user_id' => $ins_id,
-            'campus_id' => $p['campus_id'],
-            'faculty_id' => $p['faculty_id'],
-            'depart_id' => $p['depart_id'],
-            'batch_year' => $p['batch_year'],
-            'current_semester_no' => $p['current_semester_no'],
-            'designation' => $p['designation'],
-            'speciality' => $p['speciality'],
-            'last_degree' => $p['last_degree']
+            
+            $info = [
+              
+              'user_id' => $ins_id,
+              'designation' => $p['designation'],
+              'speciality' => $p['speciality']
+              
+            ];
+            
+            $this->bm->insertRow('teachers',$info);
+            
+          }
+          
+          elseif ($p['type'] == 'STUDENT')
+          {
+            
+            $info = [
+              
+              'user_id' => $ins_id,
+              'program_id' => $p['program_id'],
+              'roll_number' => $p['roll_no'],
+              'batch_year' => $p['batch_year'],
+              'current_semester_no' => $p['current_semester_no']
+              
+            ];
+            
+            $this->bm->insertRow('students',$info);
+            
+          }
 
-          ];
+          else
+          {
+            
+            $info = [
+              
+              'user_id' => $ins_id,
+              'job_title' => $p['job_title']
+              
+            ];
+            
+            $this->bm->insertRow('other_users',$info);
 
-          $this->bm->insertRow('users_info',$info);
+          }
 
           $this->session->set_flashdata(array('response' => 'success', 'msg' => "User created Successfully "));
 
-          redirect('view_users/active');
+          redirect('view_users');
 
 
         }
@@ -242,7 +287,7 @@ class Users extends CI_Controller
       }
 
       $this->form_validation->set_rules('full_name', 'Full name', 'required');
-      $this->form_validation->set_rules('surname', 'Surename', 'required');
+      $this->form_validation->set_rules('surename', 'Surename', 'required');
       $this->form_validation->set_rules('dob', 'Date of birth', 'required');
       $this->form_validation->set_rules('gender', 'Gender', 'required');
       $this->form_validation->set_rules('cnic', 'Cnic / B-form', 'required');
@@ -261,22 +306,29 @@ class Users extends CI_Controller
       $this->form_validation->set_rules('campus_id', 'Campus', 'required');
       $this->form_validation->set_rules('faculty_id', 'Faculty', 'required');
       $this->form_validation->set_rules('depart_id', 'Department', 'required');
+      $this->form_validation->set_rules('last_degree', 'Last degree', 'required');
 
-      if($p['type'] == 'Teacher'){
+      if($p['type'] == 'TEACHER'){
 
         $this->form_validation->set_rules('designation', 'Designation', 'required');
         $this->form_validation->set_rules('speciality', 'Speciality', 'required');
-        $this->form_validation->set_rules('last_degree', 'Last degree', 'required');
 
       }
-      else if($p['type'] == 'Student')
+      else if($p['type'] == 'STUDENT')
       {
 
+        $this->form_validation->set_rules('program_id', 'Program', 'required');
         $this->form_validation->set_rules('roll_no', 'Roll no', 'required');
         $this->form_validation->set_rules('batch_year', 'Batch year', 'required');
         $this->form_validation->set_rules('current_semester_no', 'Current semester no', 'required');
 
       }
+      else if($p['type'] == 'OTHER')
+      {
+
+        $this->form_validation->set_rules('job_title', 'Job Title', 'required');
+      }
+
 
 		    if($this->form_validation->run())
 		    {
@@ -295,65 +347,104 @@ class Users extends CI_Controller
 
           $data = [
 
-              'image' => $img,
-              'title' => $p['title'],
-              'username' => $p['username'],
-              'password' => $this->encryption->encrypt($p['password']),
-              'full_name' => $p['full_name'],
-              'surname' => $p['surname'],
-              'email' => $p['email'],
-              'dob' => $p['dob'],
-              'gender' => $p['gender'],
-              'cnic' => $p['cnic'],
-              'show_cnic_public' => (@$p['show_cnic_to_public'] == ''?0:1),
-              'father_name' => $p['father_name'],
-              'nationality' => $p['nationality'],
-              'province' => $p['province'],
-              'district' => $p['district'],
-              'city' => $p['city'],
-              'home_address' => $p['home_address'],
-              'permanent_address' => $p['permanent_address'],
-              'show_address_public' => (@$p['show_address_to_public'] == ''?0:1),
-              'bio' => $p['bio'],
-              'phone_no_code' => $p['phone_no_code'],
-              'phone_no' => $p['phone_no'],
-              'type' => $p['type'],
-              'role_id' => $p['role_id'],
-              'show_phone_no_public' => (@$p['show_phone_no_to_public'] == ''?0:1),
-
-          ];
-
-          $this->bm->updateRow('users', $data,'id',$p['id']);
-
-          $info = [
-
+            'image' => $img,
             'campus_id' => $p['campus_id'],
             'faculty_id' => $p['faculty_id'],
             'depart_id' => $p['depart_id'],
-            'batch_year' => $p['batch_year'],
-            'current_semester_no' => $p['current_semester_no'],
-            'designation' => $p['designation'],
-            'speciality' => $p['speciality'],
-            'last_degree' => $p['last_degree']
+            'title' => $p['title'],
+            'username' => $p['username'],
+            'password' => $this->encryption->encrypt($p['password']),
+            'full_name' => $p['full_name'],
+            'surename' => $p['surename'],
+            'email' => $p['email'],
+            'dob' => $p['dob'],
+            'gender' => $p['gender'],
+            'cnic' => $p['cnic'],
+            'show_cnic_public' => (@$p['show_cnic_to_public'] == ''?0:1),
+            'father_name' => $p['father_name'],
+            'nationality' => $p['nationality'],
+            'province' => $p['province'],
+            'district' => $p['district'],
+            'zip_code' => $p['zip_code'],
+            'city' => $p['city'],
+            'home_address' => $p['home_address'],
+            'permanent_address' => $p['permanent_address'],
+            'show_address_public' => (@$p['show_address_to_public'] == ''?0:1),
+            'bio' => $p['bio'],
+            'phone_no_code' => $p['phone_no_code'],
+            'phone_no' => $p['phone_no'],
+            'last_qualification' => $p['last_degree'],
+            'type' => $p['type'],
+            'role_id' => $p['role_id'],
+            'show_phone_no_public' => (@$p['show_phone_no_to_public'] == ''?0:1),
+            'updated_at' => date('Y-m-d H:i:s')
 
-          ];
 
-          $this->bm->updateRow('users_info', $info,'user_id',$p['id']);
+        ];
+
+          $this->bm->updateRow('users', $data,'id',$p['id']);
+
+          if ($p['type'] == 'TEACHER')
+          {
+
+            
+            $info = [
+              
+              'designation' => $p['designation'],
+              'speciality' => $p['speciality']
+              
+            ];
+            
+            $this->bm->updateRow('teachers', $info,'user_id',$p['id']);
+
+            
+          }
+          
+          elseif ($p['type'] == 'STUDENT')
+          {
+            
+            $info = [
+              
+              'program_id' => $p['program_id'],
+              'roll_number' => $p['roll_no'],
+              'batch_year' => $p['batch_year'],
+              'current_semester_no' => $p['current_semester_no']
+              
+            ];
+                        
+            $this->bm->updateRow('students', $info,'user_id',$p['id']);
+
+            
+          }
+
+          else
+          {
+            
+            $info = [
+              
+              'job_title' => $p['job_title']
+              
+            ];
+            
+            $this->bm->updateRow('other_users', $info,'user_id',$p['id']);
+
+          }
+
 
           $this->session->set_flashdata(array('response' => 'success', 'msg' => "User updated Successfully "));
 
-          if($p['account_active'] == 1)
-          {
+          // if($p['account_active'] == 1)
+          // {
 
-            redirect('view_users/active');
+            redirect('view_users');
 
-          }
-          else
-          {
+          // }
+          // else
+          // {
 
-            redirect('view_users/deactive');
+          //   redirect('view_users/deactive');
 
-          }
+          // }
 
 
         }
@@ -491,11 +582,11 @@ class Users extends CI_Controller
 
       case 'deactive':
 
-        $update = ['account_active' => 1, 'is_pending' => 0];
+        $update = ['account_active' => 0, 'is_pending' => 0];
 
         $this->bm->updateRow('users' , $update , 'id' ,$id);
 
-        $this->session->set_flashdata(array('response' => 'success', 'msg' => 'User active Successfully' ));
+        $this->session->set_flashdata(array('response' => 'success', 'msg' => 'User deactive Successfully' ));
 
         redirect('view_users');
 
@@ -503,11 +594,11 @@ class Users extends CI_Controller
         break;
       case 'active':
 
-        $update = ['account_active' => 0, 'is_pending' => 0];
+        $update = ['account_active' => 1, 'is_pending' => 0];
 
         $this->bm->updateRow('users' , $update , 'id' ,$id);
 
-        $this->session->set_flashdata(array('response' => 'success', 'msg' => 'User deactive Successfully' ));
+        $this->session->set_flashdata(array('response' => 'success', 'msg' => 'User active Successfully' ));
 
         redirect('view_users');
 
@@ -537,21 +628,21 @@ class Users extends CI_Controller
 
       $user  = $this->bm->getById('isers',$id);
 
-      $this->bm->updateRow('users' ,['is_deleted' => 1], 'id' ,$id);
+      $this->bm->updateRow('users' ,['is_archived' => 1], 'id' ,$id);
 
       $this->session->set_flashdata(array('response' => 'success', 'msg' => 'User deleted Successfully'));
 
-      if ($user->account_active == 1)
+      if ($user->is_pending == 1)
       {
 
-          redirect('view_users/active');
+          redirect('view_users/pending');
 
       }
 
       else
       {
 
-          redirect('view_users/deactive');
+          redirect('view_users');
 
       }
 

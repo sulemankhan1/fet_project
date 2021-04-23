@@ -162,9 +162,9 @@ $alert_msg=$this->session->userdata('alert_msg');
                               <label for="basicInput">Gender *</label>
                               <br>
                                 <input type="radio" id="maleRadio" name="gender" value="male" <?=(@$this->input->post('gender') == 'male'?'checked':'')?>>
-                                <label for="#maleRadio">Male</label>
+                                <label for="maleRadio">Male</label>
                                 <input type="radio" id="femaleRadio" name="gender" value="female" <?=(@$this->input->post('gender') == 'female'?'checked':'')?>>
-                                <label for="#femaleRadio">Female</label>
+                                <label for="femaleRadio">Female</label>
                             </fieldset>
                             <span class="text-danger"><?=form_error('gender')?></span>
 
@@ -177,8 +177,8 @@ $alert_msg=$this->session->userdata('alert_msg');
                                     <label for="basicInput">Cnic / B-Form *</label>
                                   </div>
                                   <div class="col-lg-6 text-right">
-                                    <input type="checkbox" name="show_cnic_to_public" value="1" <?=(@$this->input->post('show_cnic_to_public') == '1'?'checked':'')?>>
-                                    <label for="basicInput">Show Public</label>
+                                    <input type="checkbox" id="cnicPublic" name="show_cnic_to_public" value="1" <?=(@$this->input->post('show_cnic_to_public') == '1'?'checked':'')?>>
+                                    <label for="cnicPublic">Show Public</label>
                                   </div>
                                 </div>
                                 <input type="text" class="form-control"  name="cnic" value="<?=@$this->input->post('cnic')?>">
@@ -249,8 +249,8 @@ $alert_msg=$this->session->userdata('alert_msg');
                                     <label for="basicInput">Phone No *</label>
                                   </div>
                                   <div class="col-lg-6 text-right">
-                                    <input type="checkbox" name="show_phone_no_to_public" value="1" <?=(@$this->input->post('show_phone_no_to_public') == '1'?'checked':'')?>>
-                                    <label for="basicInput">Show Public</label>
+                                    <input type="checkbox" id="phonenoPublic" name="show_phone_no_to_public" value="1" <?=(@$this->input->post('show_phone_no_to_public') == '1'?'checked':'')?>>
+                                    <label for="phonenoPublic">Show Public</label>
                                   </div>
                                 </div>
                                 <div class="row">
@@ -275,7 +275,7 @@ $alert_msg=$this->session->userdata('alert_msg');
 
                                 <?php if($v->name != 'Superadmin'): ?>
 
-                                <input type="radio" class="role_id" name="role_id" value="<?=$v->id?>" role-name="<?=$v->name?>" <?=(@$this->input->post('role_id') == $v->id?'checked':'')?>>
+                                <input type="radio" class="role_id" name="role_id" value="<?=$v->id?>" role-name="<?=$v->slug?>" <?=(@$this->input->post('role_id') == $v->id?'checked':'')?>>
                                 <label for="basicInput"><?=$v->name?></label>
 
                                 <?php endif ?>
@@ -300,8 +300,8 @@ $alert_msg=$this->session->userdata('alert_msg');
                                     <label for="basicInput">Home Address *</label>
                                   </div>
                                   <div class="col-lg-6 text-right">
-                                    <input type="checkbox" name="show_address_to_public" value="1" <?=(@$this->input->post('show_address_to_public') == '1'?'checked':'')?>>
-                                    <label for="basicInput">Show Public</label>
+                                    <input type="checkbox" id="addressPublic" name="show_address_to_public" value="1" <?=(@$this->input->post('show_address_to_public') == '1'?'checked':'')?>>
+                                    <label for="addressPublic">Show Public</label>
                                   </div>
                                 </div>
                                 <textarea class="form-control" name="home_address" id="" cols="30" rows="4"><?=@$this->input->post('home_address')?></textarea>
@@ -398,7 +398,9 @@ $alert_msg=$this->session->userdata('alert_msg');
                                         <option value="5">5</option>
                                     </select>
                                 </fieldset>
+                                <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
                                 <span class="text-danger"><?=form_error('program_id')?></span>
+                                <?php } ?>
 
                               </div>
 
@@ -407,7 +409,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                                         <label for="basicInput">Roll No *</label>
                                         <input type="text" class="form-control"  name="roll_no" value="<?=@$this->input->post('roll_no')?>">
                                     </fieldset>
-                                      <?php if(@$this->input->post('type') == 'Student'){ ?>
+                                      <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
                                         <span class="text-danger"><?=form_error('roll_no')?></span>
                                       <?php } ?>
 
@@ -417,7 +419,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                                         <label for="basicInput">Batch Year *</label>
                                         <input type="text" class="form-control"  name="batch_year" value="<?=@$this->input->post('batch_year')?>">
                                     </fieldset>
-                                    <?php if(@$this->input->post('type') == 'Student'){ ?>
+                                    <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
                                       <span class="text-danger"><?=form_error('batch_year')?></span>
                                     <?php } ?>
 
@@ -427,7 +429,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                                         <label for="basicInput">Current Semester No# *</label>
                                         <input type="number" class="form-control"  name="current_semester_no" value="<?=@$this->input->post('current_semester_no')?>">
                                     </fieldset>
-                                    <?php if(@$this->input->post('type') == 'Student'){ ?>
+                                    <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
                                       <span class="text-danger"><?=form_error('current_semester_no')?></span>
                                     <?php } ?>
 
@@ -444,7 +446,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                                           <label for="basicInput">Designation *</label>
                                           <input type="text" class="form-control"  name="designation" value="<?=@$this->input->post('designation')?>">
                                       </fieldset>
-                                      <?php if(@$this->input->post('type') == 'Teacher'){ ?>
+                                      <?php if(@$this->input->post('type') == 'TEACHER'){ ?>
                                         <span class="text-danger"><?=form_error('designation')?></span>
                                       <?php } ?>
 
@@ -454,7 +456,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                                           <label for="basicInput">Speciality *</label>
                                           <input type="text" class="form-control"  name="speciality" value="<?=@$this->input->post('speciality')?>">
                                       </fieldset>
-                                      <?php if(@$this->input->post('type') == 'Teacher'){ ?>
+                                      <?php if(@$this->input->post('type') == 'TEACHER'){ ?>
                                         <span class="text-danger"><?=form_error('speciality')?></span>
                                       <?php } ?>
 
@@ -465,7 +467,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                                           <label for="basicInput">Job Title *</label>
                                           <input type="text" class="form-control"  name="job_title" value="<?=@$this->input->post('job_title')?>">
                                       </fieldset>
-                                      <?php if(@$this->input->post('type') == 'Other'){ ?>
+                                      <?php if(@$this->input->post('type') == 'OTHER'){ ?>
                                         <span class="text-danger"><?=form_error('job_title')?></span>
                                       <?php } ?>
 
@@ -537,6 +539,8 @@ $alert_msg=$this->session->userdata('alert_msg');
         $('.additional_info').hide();
         $('.additional_info_student').hide();
         $('.additional_info_teacher').hide();
+        $('.additional_info_other').hide();
+
         
       }
 
@@ -545,31 +549,31 @@ $alert_msg=$this->session->userdata('alert_msg');
 
           $('.type').val(role_name);
 
-          if(role_name == 'Teacher')
+          if(role_name == 'TECAHER')
           {
               hide_roles_field();
               $('.additional_info').show();
               $('.additional_info_teacher').show();
           }
-          else if(role_name == 'Student')
+          else if(role_name == 'STUDENT')
           {
               hide_roles_field();
               $('.additional_info').show();
               $('.additional_info_student').show();
           }
-          else if(role_name == 'Faculty')
+          else if(role_name == 'FACULTY')
           {
               hide_roles_field();
               $('.additional_info').show();
               // $('.additional_info_student').show();
           }
-          else if(role_name == 'Admin')
+          else if(role_name == 'ADMIN')
           {
               hide_roles_field();
               $('.additional_info').show();
               // $('.additional_info_student').show();
           }
-          else if(role_name == 'Other')
+          else if(role_name == 'OTHER')
           {
               hide_roles_field();
               $('.additional_info').show();
