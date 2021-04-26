@@ -161,7 +161,7 @@ $notifications = $this->notifications->getAllForUser();
 
                 <a href="<?=site_url('edit_profile')?>" class="dropdown-item"><i class="icon-pencil mr-2"></i><span> Edit Profile</span></a>
                 <a href="<?=site_url('change_password')?>" class="dropdown-item"><i class="icon-pencil mr-2"></i><span> Change Password</span></a>
-                <a href="<?=site_url('view_profile/'.$this->session->userdata('user_id'))?>" class="dropdown-item"><i class="ft-eye mr-2"></i><span> View Profile</span></a>
+                <a href="<?=site_url('view_profile/'.hashids_encrypt($this->session->userdata('user_id')))?>" class="dropdown-item"><i class="ft-eye mr-2"></i><span> View Profile</span></a>
                 <a href="<?=site_url('Auth/logout')?>" class="dropdown-item"><i class="ft-power mr-2"></i><span> Logout</span></a>
 
               </div>

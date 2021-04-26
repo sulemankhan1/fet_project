@@ -710,9 +710,9 @@
             </div>
           </div>
         </div>
-        <div class="section-content text-center">
-          <div class="row mb-30">
-            <div class="col-sm-6 col-md-3 mb-sm-30">
+         <!--Carousel start-->
+          <div class="owl-carousel text-center">
+            <div class="item">
               <div class="team-member bg-light pt-10 pb-15">
                 <div class="thumb"><img class="img-fullwidth" src="assets/images/team/1.png" alt="">
                 </div>
@@ -732,8 +732,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-6 col-md-3 mb-sm-30">
-              <div class="team-member bg-light pt-10 pb-15">
+            <div class="item">
+             <div class="team-member bg-light pt-10 pb-15">
                 <div class="thumb"><img class="img-fullwidth" src="assets/images/team/2.png" alt="">
                 </div>
                 <div class="info">
@@ -752,7 +752,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-6 col-md-3 mb-sm-30">
+            <div class="item">
               <div class="team-member bg-light pt-10 pb-15">
                 <div class="thumb"><img class="img-fullwidth" src="assets/images/team/3.png" alt="">
                 </div>
@@ -772,7 +772,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-6 col-md-3 mb-sm-30">
+            <div class="item">
               <div class="team-member bg-light pt-10 pb-15">
                 <div class="thumb"><img class="img-fullwidth" src="assets/images/team/4.png" alt="">
                 </div>
@@ -793,7 +793,7 @@
               </div>
             </div>
           </div>
-        </div>
+        <!--Carousel end-->
       </div>
     </section>
 
@@ -873,3 +873,27 @@
   <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
 </div>
 <!-- end wrapper -->
+<script type="text/javascript">
+    $('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    autoplay:true,
+    nav:true,
+    navText: [
+        '',
+        ''
+    ],
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:5
+        }
+    }
+})
+
+  </script>

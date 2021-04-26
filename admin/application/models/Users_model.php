@@ -3,13 +3,13 @@
 class Users_model extends CI_Model
 {
 
-  var $user_order_column = array(null, "u.title","u.username", "u.email", "u.full_name","u.cnic","u.phone_number","u.gender","u.type",null);
+  var $user_order_column = array(null, "u.title","u.username", "u.email", "u.full_name","u.cnic","u.phone_no","u.gender","u.type",null);
   function make_users_query()
   {
 
 			$this->db->select('u.*');
 			$this->db->from('users u');
-			$this->db->join('users_info ui','ui.user_id=u.id','left');
+			// $this->db->join('users_info ui','ui.user_id=u.id','left');
 
 			if(@$_POST["search"]["value"] != '')
 			{
@@ -40,7 +40,7 @@ class Users_model extends CI_Model
 					 $this->db->order_by('u.id', 'DESC');
 			}
 
-			$this->db->where('u.is_deleted',0);
+			$this->db->where('u.is_archived',0);
 			$this->db->where('u.type!=','Superadmin');
 
 
@@ -109,9 +109,9 @@ class Users_model extends CI_Model
 
 	  $this->db->select('u.*');
 	  $this->db->from('users u');
-		$this->db->join('users_info ui','ui.user_id=u.id','left');
-		$this->db->where('u.is_deleted',0);
-		$this->db->where('u.type!=','Superadmin');
+		// $this->db->join('users_info ui','ui.user_id=u.id','left');
+		$this->db->where('u.is_archived',0);
+		$this->db->where('u.type!=','SUPERADMIN');
 		
 		if($status == 'pending')
 		{
@@ -136,9 +136,12 @@ class Users_model extends CI_Model
 	public function getUsersDetails($id)
 	{
 
-		$this->db->select('*,r.name as role_name');
+		$this->db->select('u.id as uid,u.*,st.*,tch.*,ou.*,r.name as role_name');
 		$this->db->from('users u');
-		$this->db->join('users_info ui','ui.user_id=u.id','left');
+
+		$this->db->join('students st','st.user_id=u.id','left');
+		$this->db->join('teachers tch','tch.user_id=u.id','left');
+		$this->db->join('other_users ou','ou.user_id=u.id','left');
 		$this->db->join('roles r','r.id=u.role_id','left');
 
 		$this->db->where('u.id',$id);
@@ -150,10 +153,12 @@ class Users_model extends CI_Model
 	public function getUserToEdit($id)
 	{
 
-		$this->db->select('u.id as uid,u.*,ui.*');
+		$this->db->select('u.id as uid,u.*,st.*,tch.*,ou.*');
 		$this->db->from('users u');
 
-		$this->db->join('users_info ui','ui.user_id=u.id','left');
+		$this->db->join('students st','st.user_id=u.id','left');
+		$this->db->join('teachers tch','tch.user_id=u.id','left');
+		$this->db->join('other_users ou','ou.user_id=u.id','left');
 
 		 $this->db->where('u.id',$id);
 
@@ -194,25 +199,6 @@ class Users_model extends CI_Model
 		 $this->db->where('u.user_status_type !=',1);
 
 		 return $this->db->get()->row();
-	}
-
-	public function erase($user_id){
-
-		$this->db->delete('users', array('user_id' => $user_id));
-	}
-	public function CheckUserNameSame($username)
-	{
-	 $this->db->select('*');
-    $this->db->from('users');
-    $this->db->where('username',$username);
- 	$usernamedb  =$this->db->get()->row()->username;
- 	   if ($usernamedb != $username) {
-      echo json_encode(array("status"=>"not_match_username"));
-  }else{
-      echo json_encode(array("status"=>"match_username"));
-  }
-
-
 	}
 
 

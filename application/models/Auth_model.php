@@ -63,50 +63,7 @@ class Auth_model extends CI_Model
 
         return $result;
 
-	}
-
-	public function is_email_valid($email)
-	{
-
-		$this->db->select('u.*');
-		$this->db->from('users u');
-		$this->db->join('users_info ui','u.id=ui.user_id','left');
-		$this->db->where('u.email',$email);
-		$user_data = $this->db->get()->row();
-
-		if (!empty($user_data->username))
-		{
-
-			if($user_data->account_active == 0)
-			{
-
-				$result['valid'] = false;
-				$result['error'] = 'Your account is deactive wait for activation your account!';
-
-			}
-
-			else
-			{
-
-					$result['valid'] = true;
-					$result['user_data'] = $user_data;
-
-			}
-
-
-		}
-		else
-		{
-
-			$result['valid'] = false;
-			$result['error'] = 'Invalid email';
-
-		}
-
-		return $result;
-
-	}
-
+    }
 
 
 }

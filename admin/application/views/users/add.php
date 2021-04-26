@@ -75,10 +75,10 @@
 
                       <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                           <fieldset class="form-group">
-                              <label for="basicInput">Surname *</label>
-                              <input type="text" class="form-control"  name="surname" value="<?=@$this->input->post('surname')?>">
+                              <label for="basicInput">Surename *</label>
+                              <input type="text" class="form-control"  name="surename" value="<?=@$this->input->post('surename')?>">
                           </fieldset>
-                          <span class="text-danger"><?=form_error('surname')?></span>
+                          <span class="text-danger"><?=form_error('surename')?></span>
 
                       </div>
                       <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
@@ -94,10 +94,10 @@
                           <fieldset class="form-group">
                             <label for="basicInput">Gender *</label>
                             <br>
-                              <input type="radio" name="gender" value="male" <?=(@$this->input->post('gender') == 'male'?'checked':'')?>>
-                              <label for="basicInput">Male</label>
-                              <input type="radio" name="gender" value="female" <?=(@$this->input->post('gender') == 'female'?'checked':'')?>>
-                              <label for="basicInput">Female</label>
+                              <input type="radio" id="maleGender" name="gender" value="male" <?=(@$this->input->post('gender') == 'male'?'checked':'')?>>
+                              <label for="maleGender">Male</label>
+                              <input type="radio" id="femaleGender" name="gender" value="female" <?=(@$this->input->post('gender') == 'female'?'checked':'')?>>
+                              <label for="femaleGender">Female</label>
                           </fieldset>
                           <span class="text-danger"><?=form_error('gender')?></span>
 
@@ -110,15 +110,15 @@
                                   <label for="basicInput">Cnic / B-Form *</label>
                                 </div>
                                 <div class="col-lg-6 text-right">
-                                  <input type="checkbox" name="show_cnic_to_public" value="1" <?=(@$this->input->post('show_cnic_to_public') == '1'?'checked':'')?>>
-                                  <label for="basicInput">Show Public</label>
+                                  <input type="checkbox" id="cnicPublic" value="1" <?=(@$this->input->post('show_cnic_to_public') == '1'?'checked':'')?>>
+                                  <label for="cnicPublic">Show Public</label>
                                 </div>
                               </div>
                               <input type="text" class="form-control"  name="cnic" value="<?=@$this->input->post('cnic')?>">
                           </fieldset>
                           <span class="text-danger"><?=form_error('cnic')?></span>
                       </div>
-                      <div class="col-xl-3 col-lg-3 col-md-3 mb-1">
+                      <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                           <fieldset class="form-group">
                               <label for="basicInput">Father Name *</label>
                               <input type="text" class="form-control"  name="father_name" value="<?=@$this->input->post('father_name')?>">
@@ -149,13 +149,20 @@
                           <span class="text-danger"><?=form_error('district')?></span>
 
                       </div>
-                      <div class="col-xl-3 col-lg-3 col-md-3 mb-1">
+                      <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                           <fieldset class="form-group">
                               <label for="basicInput">City *</label>
                               <input type="text" class="form-control"  name="city" value="<?=@$this->input->post('city')?>">
                           </fieldset>
                           <span class="text-danger"><?=form_error('city')?></span>
 
+                      </div>
+                      <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
+                            <fieldset class="form-group">
+                                <label for="basicInput">Last Degree *</label>
+                                <input type="text" class="form-control"  name="last_degree" value="<?=@$this->input->post('last_degree')?>">
+                            </fieldset>
+                              <span class="text-danger"><?=form_error('last_degree')?></span>
                       </div>
                       <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                           <fieldset class="form-group">
@@ -172,8 +179,8 @@
                                   <label for="basicInput">Phone No *</label>
                                 </div>
                                 <div class="col-lg-6 text-right">
-                                  <input type="checkbox" name="show_phone_no_to_public" value="1" <?=(@$this->input->post('show_phone_no_to_public') == '1'?'checked':'')?>>
-                                  <label for="basicInput">Show Public</label>
+                                  <input type="checkbox" id="phonenoPublic" name="show_phone_no_to_public" value="1" <?=(@$this->input->post('show_phone_no_to_public') == '1'?'checked':'')?>>
+                                  <label for="phonenoPublic">Show Public</label>
                                 </div>
                               </div>
                               <div class="row">
@@ -189,28 +196,28 @@
                           <span class="text-danger"><?=form_error('phone_no')?></span>
 
                       </div>
-                      <!-- <div class="col-xl-4 col-lg-4 col-md-4 mb-1">
+                      <div class="col-xl-4 col-lg-4 col-md-4 mb-1">
                           <fieldset class="form-group">
                             <label for="basicInput">Role *</label>
-                            <br> -->
+                            <br>
 
                             <?php if(@$roles) { ?>
                               <?php foreach($roles as $key => $v) : ?>
 
-                              <?php if($v->name != 'Superadmin'): ?>
+                              <?php if($v->slug != 'SUPERADMIN'): ?>
 
-                              <input type="radio" class="role_id" name="role_id" value="<?=$v->id?>" role-name="<?=$v->name?>" <?=(@$this->input->post('role_id') == $v->id?'checked':'')?>>
-                              <label for="basicInput"><?=$v->name?></label>
+                              <input type="radio" id="<?=$v->slug?>" class="role_id" name="role_id" value="<?=$v->id?>" role-name="<?=$v->slug?>" <?=(@$this->input->post('role_id') == $v->id?'checked':'')?>>
+                              <label for="<?=$v->slug?>"><?=$v->name?></label>
 
                               <?php endif ?>
 
                               <?php endforeach ?>
                             <?php } ?>
 
-                          <!-- </fieldset>
+                          </fieldset>
                           <span class="text-danger"><?=form_error('role_id')?></span>
 
-                      </div> -->
+                      </div>
                       <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                           <fieldset class="form-group">
                             <label for="basicInput">Image </label>
@@ -225,8 +232,8 @@
                                   <label for="basicInput">Home Address *</label>
                                 </div>
                                 <div class="col-lg-6 text-right">
-                                  <input type="checkbox" name="show_address_to_public" value="1" <?=(@$this->input->post('show_address_to_public') == '1'?'checked':'')?>>
-                                  <label for="basicInput">Show Public</label>
+                                  <input type="checkbox" id="addressPublic" name="show_address_to_public" value="1" <?=(@$this->input->post('show_address_to_public') == '1'?'checked':'')?>>
+                                  <label for="addressPublic">Show Public</label>
                                 </div>
                               </div>
                               <textarea class="form-control" name="home_address" id="" cols="30" rows="4"><?=@$this->input->post('home_address')?></textarea>
@@ -311,12 +318,30 @@
                               <!-- additional_info_student_start -->
                               <!-- <div class="additional_info_student"> -->
 
+                              <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_student">
+                                <fieldset class="form-group">
+                                    <label for="basicInput">Select Program *</label>
+                                    <select class="form-control"  name="program_id">
+                                        <option value="">select program</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </fieldset>
+                                <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
+                                <span class="text-danger"><?=form_error('program_id')?></span>
+                                <?php } ?>
+
+                              </div>
+
                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_student">
                                     <fieldset class="form-group">
                                         <label for="basicInput">Roll No *</label>
                                         <input type="text" class="form-control"  name="roll_no" value="<?=@$this->input->post('roll_no')?>">
                                     </fieldset>
-                                      <?php if(@$this->input->post('type') == 'Student'){ ?>
+                                      <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
                                         <span class="text-danger"><?=form_error('roll_no')?></span>
                                       <?php } ?>
 
@@ -326,7 +351,7 @@
                                         <label for="basicInput">Batch Year *</label>
                                         <input type="text" class="form-control"  name="batch_year" value="<?=@$this->input->post('batch_year')?>">
                                     </fieldset>
-                                    <?php if(@$this->input->post('type') == 'Student'){ ?>
+                                    <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
                                       <span class="text-danger"><?=form_error('batch_year')?></span>
                                     <?php } ?>
 
@@ -336,7 +361,7 @@
                                         <label for="basicInput">Current Semester No# *</label>
                                         <input type="number" class="form-control"  name="current_semester_no" value="<?=@$this->input->post('current_semester_no')?>">
                                     </fieldset>
-                                    <?php if(@$this->input->post('type') == 'Student'){ ?>
+                                    <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
                                       <span class="text-danger"><?=form_error('current_semester_no')?></span>
                                     <?php } ?>
 
@@ -353,7 +378,7 @@
                                           <label for="basicInput">Designation *</label>
                                           <input type="text" class="form-control"  name="designation" value="<?=@$this->input->post('designation')?>">
                                       </fieldset>
-                                      <?php if(@$this->input->post('type') == 'Teacher'){ ?>
+                                      <?php if(@$this->input->post('type') == 'TEACHER'){ ?>
                                         <span class="text-danger"><?=form_error('designation')?></span>
                                       <?php } ?>
 
@@ -363,21 +388,23 @@
                                           <label for="basicInput">Speciality *</label>
                                           <input type="text" class="form-control"  name="speciality" value="<?=@$this->input->post('speciality')?>">
                                       </fieldset>
-                                      <?php if(@$this->input->post('type') == 'Teacher'){ ?>
+                                      <?php if(@$this->input->post('type') == 'TEACHER'){ ?>
                                         <span class="text-danger"><?=form_error('speciality')?></span>
                                       <?php } ?>
 
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_teacher">
+
+                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_other">
                                       <fieldset class="form-group">
-                                          <label for="basicInput">Last Degree *</label>
-                                          <input type="text" class="form-control"  name="last_degree" value="<?=@$this->input->post('last_degree')?>">
+                                          <label for="basicInput">Job Title *</label>
+                                          <input type="text" class="form-control"  name="job_title" value="<?=@$this->input->post('job_title')?>">
                                       </fieldset>
-                                      <?php if(@$this->input->post('type') == 'Teacher'){ ?>
-                                        <span class="text-danger"><?=form_error('last_degree')?></span>
+                                      <?php if(@$this->input->post('type') == 'OTHER'){ ?>
+                                        <span class="text-danger"><?=form_error('job_title')?></span>
                                       <?php } ?>
 
                                 </div>
+                                
 
                               <!-- </div> -->
                               <!-- additional_info_teacher_end -->

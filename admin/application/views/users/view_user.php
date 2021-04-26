@@ -171,6 +171,15 @@
                 <ul class="no-list-style">
 
                   <li class="mb-2">
+                    <span class="text-bold-500 primary"><a>Last Qualification:</a></span>
+                    <span class="d-block overflow-hidden"><?=@$user->last_qualification?></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 col-lg-4">
+                <ul class="no-list-style">
+
+                  <li class="mb-2">
                     <span class="text-bold-500 primary"><a>Zip Code:</a></span>
                     <span class="d-block overflow-hidden"><?=@$user->zip_code?></span>
                   </li>
@@ -293,7 +302,7 @@
                   </ul>
                 </div>
 
-                <?php if(@$user->type == 'Student'): ?>
+                <?php if(@$user->type == 'STUDENT'): ?>
                 
                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                   <ul class="no-list-style">
@@ -320,7 +329,7 @@
 
                 <?php endif; ?>
                 
-                <?php if(@$user->type == 'Teacher'): ?>
+                <?php if(@$user->type == 'TEACHER'): ?>
                 
                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                   <ul class="no-list-style">
@@ -344,18 +353,21 @@
 
                   </ul>
                 </div>
+              
+                <?php endif; ?>
+                <?php if(@$user->type == 'OTHER'): ?>
+
                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                   <ul class="no-list-style">
 
                     <li class="mb-2">
-                      <span class="text-bold-500 primary"><a> Last Degree:</a></span>
-                      <a class="d-block overflow-hidden"><?=@$user->last_degree?></a>
+                      <span class="text-bold-500 primary"><a>Job Title:</a></span>
+                      <a class="d-block overflow-hidden"><?=@$user->job_title?></a>
                     </li>
 
 
                   </ul>
                 </div>
-              
                 <?php endif; ?>
 
 
