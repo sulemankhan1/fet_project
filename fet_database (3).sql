@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2021 at 10:37 PM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 7.4.16
+-- Generation Time: Apr 26, 2021 at 10:22 PM
+-- Server version: 10.4.16-MariaDB
+-- PHP Version: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `fet`
+-- Database: `fet_database`
 --
 
 -- --------------------------------------------------------
@@ -1090,21 +1090,35 @@ INSERT INTO `teachers` (`id`, `user_id`, `designation`, `speciality`) VALUES
 CREATE TABLE `timetable` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
+  `type` enum('image','custom') NOT NULL,
+  `image` text NOT NULL,
   `for_campus` enum('all','specific') NOT NULL,
   `campus_id` int(50) NOT NULL,
   `depart_id` int(50) NOT NULL,
   `program_id` int(50) NOT NULL,
   `faculty_id` int(50) NOT NULL,
   `user_id` int(50) NOT NULL,
-  `semester` int(10) NOT NULL,
+  `semester` varchar(10) NOT NULL,
+  `class_group` varchar(255) NOT NULL,
   `datetime_added` timestamp NOT NULL DEFAULT current_timestamp(),
-  `datettime_updated` datetime NOT NULL,
+  `datetime_updated` datetime NOT NULL,
   `is_deleted` tinyint(1) NOT NULL,
   `evening_morning` enum('morning','evening') NOT NULL,
+  `part` int(2) NOT NULL,
   `year` varchar(10) NOT NULL,
   `remarks` text NOT NULL,
-  `is_archive` tinyint(1) NOT NULL
+  `published` tinyint(1) NOT NULL,
+  `is_archived` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `timetable`
+--
+
+INSERT INTO `timetable` (`id`, `title`, `type`, `image`, `for_campus`, `campus_id`, `depart_id`, `program_id`, `faculty_id`, `user_id`, `semester`, `class_group`, `datetime_added`, `datetime_updated`, `is_deleted`, `evening_morning`, `part`, `year`, `remarks`, `published`, `is_archived`) VALUES
+(1, '', 'image', '1734855654SWE04e.jpg', 'all', 1, 248, 0, 16, 1, '0', 'Group (A)', '2021-04-21 21:57:48', '0000-00-00 00:00:00', 0, 'evening', 1, '2021', '', 0, 0),
+(2, '', 'image', '683872100SWE04e.jpg', 'all', 1, 248, 0, 16, 1, '0', 'Group (A)', '2021-04-21 21:59:08', '0000-00-00 00:00:00', 0, 'evening', 4, '2021', '', 0, 0),
+(3, '', 'custom', '', 'all', 1, 248, 0, 16, 1, '0', '', '2021-04-21 22:04:11', '0000-00-00 00:00:00', 0, 'evening', 4, '2021', '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1428,7 +1442,7 @@ ALTER TABLE `teachers`
 -- AUTO_INCREMENT for table `timetable`
 --
 ALTER TABLE `timetable`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `timetable_details`
