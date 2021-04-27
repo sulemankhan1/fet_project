@@ -51,7 +51,6 @@ class Settings extends CI_Controller {
           if($logo['name'] != "") {
             $img = $this->bm->uploadFile($logo, 'uploads/sidebar_logo');
             $array['value'] = $img;
-            $this->session->set_userdata('logo', $img);
           }
 
           if ($array['value'] != '') {
@@ -64,7 +63,6 @@ class Settings extends CI_Controller {
           if($p['sidebar_img'] != "") {
             $sidebar_img_name = $this->bm->uploadFile($sidebar_img, 'uploads');
             $array['value'] = $sidebar_img_name;
-            $this->session->set_userdata('sidebar_img', $sidebar_img_name);
           }
     
           if ($array['value'] != '') {
@@ -79,8 +77,6 @@ class Settings extends CI_Controller {
 
             $this->bm->updateRow('settings',$array,'name','NAME');
 
-            $this->session->set_userdata('footer', $p['name']);
-
           }
 
           $array['value'] = $p['footer'];
@@ -89,9 +85,25 @@ class Settings extends CI_Controller {
 
             $this->bm->updateRow('settings',$array,'name','FOOTER');
 
-            $this->session->set_userdata('footer', $p['footer']);
-
           }
+
+          $setting_update = [
+
+              'LOGO' => $img,
+              
+              'SIDEBAR_IMG' => $sidebar_img_name,
+
+              'NAME' => $p['name'],
+
+              'FOOTER' => $p['footer']
+
+          ];
+
+          $settings=$this->session->userdata['settings']; 
+    
+          $settings =array_replace($settings,$setting_update);
+    
+          $this->session->set_userdata('settings', $settings); 
           
           break;
 
@@ -149,17 +161,24 @@ class Settings extends CI_Controller {
 
     }
 
-    public function update_sidebar_clr() {
-
+    public function update_sidebar_clr() 
+    {
 
       $sidebar_color = $this->input->post('sidebar_clr');
-
+      
       $arr = [
         'value' => $sidebar_color
       ];
-
+      
       $this->bm->updateRow('settings',$arr, 'name', 'SIDEBAR_COLOR');
-      $this->session->set_userdata('sidebar_color',$sidebar_color);
+      
+      $settings=$this->session->userdata['settings']; 
+      
+      $setting_update = ['SIDEBAR_COLOR' => $sidebar_color];
+
+      $settings =array_replace($settings,$setting_update);
+
+      $this->session->set_userdata('settings', $settings);   
 
     }
 

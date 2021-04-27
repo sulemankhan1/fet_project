@@ -553,41 +553,130 @@
              <div class="p-30 bg-theme-colored mt-xs-30 mt-sm-30">
                 <h3 class="text-white mt-0 mb-10">Create Your Account!</h3>
                 <!-- Appilication Form Start-->
-                <form id="reservation_form" name="reservation_form" class="reservation-form mt-20" method="post" action="http://html.kodesolution.live/f/edupoints/v3/demo/includes/reservation.php">
+                <form id="" name="" class=" mt-20" method="post" action="<?=site_url('save_reg')?>">
                   <div class="row registration_form">
                     <div class="col-sm-12">
                       <div class="form-group mb-20">
-                        <input type="radio" name="account_type" value="Student" id="ca_student" checked> <label for="ca_student"> Student</label>
-                        <input type="radio" name="account_type" value="Student" id="ca_teacher"> <label for="ca_teacher"> Teacher</label>
-                        <input type="radio" name="account_type" value="Student" id="ca_faculty"> <label for="ca_faculty"> Faculty</label>
-                        <input type="radio" name="account_type" value="Student" id="ca_other"> <label for="ca_other"> Other</label>
+                        <?php foreach($roles as $key => $v) : ?>
+
+                        <?php if($v->slug != 'SUPERADMIN' && $v->slug != 'ADMIN'): ?>
+
+
+                            <input type="radio" id="<?=$v->slug?>" class="role_id" name="role_id" value="<?=$v->id?>" role-name="<?=$v->slug?>" <?=(@$this->input->post('role_id') == $v->id?'checked':'')?>>
+                            <label for="<?=$v->slug?>"><?=$v->name?></label>
+
+                        <?php endif ?>
+
+                        <?php endforeach ?>
+
                       </div>
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group mb-20">
-                        <input placeholder="Enter Roll Number" type="text" id="reservation_name" name="reservation_name" required="" class="form-control">
+                        <input type="hidden" name="type" class="type">
+                        <input type="hidden" name="page_name"  value="home">
+                        <select class="form-control"  name="title">
+                          <option value="">choose title</option>
+                          <option value="Mr" <?=(@$this->input->post('title') == 'Mr'?'selected':'')?>>Mr</option>
+                          <option value="Ms" <?=(@$this->input->post('title') == 'Ms'?'selected':'')?>>Ms</option>
+                          <option value="Mrs" <?=(@$this->input->post('title') == 'Mrs'?'selected':'')?>>Mrs</option>
+                          <option value="Dr" <?=(@$this->input->post('title') == 'Dr'?'selected':'')?>>Dr</option>
+                          <option value="Prof" <?=(@$this->input->post('title') == 'Prof'?'selected':'')?>>Prof</option>
+                        </select>
+                        <span class="text-white"><?=form_error('title')?></span>
                       </div>
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group mb-20">
-                        <input placeholder="Enter Full Name" type="text" id="reservation_name" name="reservation_name" required="" class="form-control">
+                      <input type="text" class="form-control" placeholder="Full Name" name="full_name" value="<?=@$this->input->post('full_name')?>">
+                      <span class="text-white"><?=form_error('full_name')?></span>
                       </div>
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group mb-20">
-                        <input placeholder="Email" type="text" id="reservation_email" name="reservation_email" class="form-control" required="">
+                        <input type="email" class="form-control" placeholder="Email" name="email" value="<?=@$this->input->post('email')?>">
+                        <span class="text-white"><?=form_error('email')?></span>
                       </div>
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group mb-20">
-                        <input placeholder="Password" type="password" id="reservation_name" name="reservation_name" required="" class="form-control">
+                        <input name="username" class="form-control" type="text" placeholder="Username" name="username" value="<?=@$this->input->post('username')?>">
+                        <span class="text-white"><?=form_error('username')?></span>
                       </div>
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group mb-20">
-                        <input placeholder="Confirm Password" type="password" id="reservation_name" name="reservation_name" required="" class="form-control">
+                        <input type="password" class="form-control" placeholder="Password" name="password" value="<?=@$this->input->post('password')?>">
+                        <span class="text-white"><?=form_error('password')?></span>
                       </div>
                     </div>
+                    <div class="col-sm-12">
+                      <div class="form-group mb-20">
+                        <input type="password" class="form-control" placeholder="Re enter Password" name="re_enter_password" value="<?=@$this->input->post('re_enter_password')?>">
+                        <span class="text-white"><?=form_error('re_enter_password')?></span>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group mb-20">
+                        <select class="form-control" name="campus_id">
+                          <option value="">choose campus</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                        </select>
+                        <span class="text-white"><?=form_error('campus_id')?></span>
+
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group mb-20">
+                        <select class="form-control" name="faculty_id">
+                          <option value="">choose faculty</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                        </select>
+                        <span class="text-white"><?=form_error('faculty_id')?></span>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group mb-20">
+                        <select class="form-control" name="depart_id">
+                          <option value="">choose department</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                        </select>
+                        <span class="text-white"><?=form_error('depart_id')?></span>
+                      </div>
+                    </div>
+                    <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
+              
+                    <div class="col-sm-12 info_student" style="display:block;">
+                    
+                    <?php }else { ?>
+                      
+                    <div class="col-sm-12 info_student" style="display:none;">
+
+                    <?php } ?>
+                      <div class="form-group mb-20">
+                        <select class="form-control" name="program_id">
+                          <option value="">choose program</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                        </select>
+                        <span class="text-white"><?=form_error('depart_id')?></span>
+                      </div>
+                    </div>
+
+                    
+                    
+
                     <!-- <div class="col-sm-6">
                       <div class="form-group mb-20">
                         <input name="Date" class="form-control required date-picker" type="text" placeholder="Date" aria-required="true">
@@ -896,4 +985,32 @@
     }
 })
 
+  $('input[name=role_id]').change(function(){
+
+
+    let role_name = $(this).attr('role-name');
+    check_role(role_name);
+
+  })
+
+  function check_role(role_name)
+  {
+
+    $('.type').val(role_name);
+
+    if(role_name == 'STUDENT')
+    {
+
+        $('.info_student').hide();
+        $('.info_student').show();
+
+    }
+    else
+    {
+      
+      $('.info_student').hide();      
+
+    }
+
+  }
   </script>

@@ -25,6 +25,7 @@ class Pages extends CI_Controller
 			'headlines' => $this->nm->getHeadlines(10),
 			'latest_news' => $this->nm->getLatestNews(4),
 			'notices' => $this->nm->getNotices(5),
+			'roles' => $this->bm->getAll('roles', 'id', 'desc')
 		);
 
 
@@ -541,14 +542,26 @@ class Pages extends CI_Controller
 
 			}
   
-			redirect('login');
+				
+				redirect('login');
   
   
 		}
 		else
 		{
 
-			$this->register();
+			if($p['page_name'] == 'home')
+			{
+
+				$this->index();
+				
+			}
+			else
+			{
+				
+				$this->register();
+
+			}
 
 		}
 	}

@@ -30,6 +30,7 @@
                 <div class="form-group">
                     <label>Title <small>*</small></label>
                     <input type="hidden" name="type" class="type">
+                    <input type="hidden" name="page_name"  value="register">
                     <select class="form-control"  name="title">
                       <option value="">choose</option>
                       <option value="Mr" <?=(@$this->input->post('title') == 'Mr'?'selected':'')?>>Mr</option>
@@ -73,7 +74,7 @@
               </div>
               <div class="col-sm-6">
                 <label>Re-enter Password <small>*</small></label>
-                <input type="password" class="form-control" placeholder="Password" name="re_enter_password" value="<?=@$this->input->post('re_enter_password')?>">
+                <input type="password" class="form-control" placeholder="Re enter Password" name="re_enter_password" value="<?=@$this->input->post('re_enter_password')?>">
                 <span class="text-danger"><?=form_error('re_enter_password')?></span>
               </div>
             </div>

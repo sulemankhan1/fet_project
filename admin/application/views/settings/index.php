@@ -394,6 +394,7 @@
   </section>
 
 
+
 <!-- EditSliderModal -->
 <div class="modal fade" id="EditSliderModal" tabindex="0" role="dialog" aria-labelledby="statusModalTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
