@@ -3,9 +3,9 @@
 class Users_model extends CI_Model
 {
 
-  var $user_order_column = array(null, "u.title","u.username", "u.email", "u.full_name","u.cnic","u.phone_no","u.gender","u.type",null);
-  function make_users_query()
-  {
+  	var $user_order_column = array(null, "u.title","u.username", "u.email", "u.full_name","u.cnic","u.phone_no","u.gender","u.type",null);
+  	function make_users_query()
+  	{
 
 			$this->db->select('u.*');
 			$this->db->from('users u');
@@ -44,11 +44,11 @@ class Users_model extends CI_Model
 			$this->db->where('u.type!=','Superadmin');
 
 
-  }
+  	}
 
 
-  function get_user_data_length($status)
-  {
+  	function get_user_data_length($status)
+  	{
 
        $this->make_users_query();
 
@@ -78,10 +78,10 @@ class Users_model extends CI_Model
       
 
 
-  }
+  	}
 
-  function get_user_filtered_data($status)
-  {
+  	function get_user_filtered_data($status)
+  	{
 
        $this->make_users_query();
 
@@ -102,10 +102,10 @@ class Users_model extends CI_Model
 
        return $query->num_rows();
 
-  }
+  	}
 
-  function get_users_count($status)
-  {
+  	function get_users_count($status)
+  	{
 
 	  $this->db->select('u.*');
 	  $this->db->from('users u');
@@ -128,9 +128,9 @@ class Users_model extends CI_Model
 
 		
 
-    return $this->db->count_all_results();
+    	return $this->db->count_all_results();
 
-  }
+  	}
 
 
 	public function getUsersDetails($id)

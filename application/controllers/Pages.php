@@ -34,13 +34,242 @@ class Pages extends CI_Controller
 
 	}
 
-	public function view_profile() {
+	
+	public function edit_profile($user_id)
+	{
 
-		$data = [];
+		$id = hashids_decrypt($user_id);
+
+		$this->load->model('Users_model');
+
+		$data = [
+
+		'title' => 'Edit Profile',
+
+		'edit' => $this->Users_model->getUserToEdit($id)
+
+		];	
+
+		$this->load->view('includes/header', $data);
+		$this->load->view('pages/edit_profile');
+		$this->load->view('includes/footer');
+
+
+	}
+
+	public function update_profile() 
+  	{
+
+    	$p = $this->input->post();
+
+      	$this->form_validation->set_rules('title', 'Title', 'required');
+
+		if($p['username'] != $p['username_old'])
+		{
+
+			$this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
+
+		}
+		else
+		{
+
+			$this->form_validation->set_rules('username', 'Username', 'required');
+
+		}
+
+		$this->form_validation->set_rules('password', 'Password', 'required');
+
+		if($p['email'] != $p['email_old'])
+		{
+
+			$this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]');
+
+		}
+		else
+		{
+
+			$this->form_validation->set_rules('email', 'Email', 'required');
+
+		}
+
+		$this->form_validation->set_rules('full_name', 'Full name', 'required');
+		$this->form_validation->set_rules('surename', 'Surename', 'required');
+		$this->form_validation->set_rules('dob', 'Date of birth', 'required');
+		$this->form_validation->set_rules('gender', 'Gender', 'required');
+		$this->form_validation->set_rules('cnic', 'Cnic / B-form', 'required');
+		$this->form_validation->set_rules('father_name', 'Father name', 'required');
+		$this->form_validation->set_rules('nationality', 'Nationality', 'required');
+		$this->form_validation->set_rules('province', 'Province', 'required');
+		$this->form_validation->set_rules('district', 'District', 'required');
+		$this->form_validation->set_rules('city', 'City', 'required');
+		$this->form_validation->set_rules('zip_code', 'Zip code', 'required');
+		$this->form_validation->set_rules('home_address', 'Home address', 'required');
+		$this->form_validation->set_rules('permanent_address', 'Permanent address', 'required');
+		$this->form_validation->set_rules('bio', 'Bio', 'required');
+		$this->form_validation->set_rules('phone_no_code', 'Code', 'required');
+		$this->form_validation->set_rules('phone_no', 'Phone no', 'required');
+		$this->form_validation->set_rules('role_id', 'role', 'required');
+		$this->form_validation->set_rules('campus_id', 'Campus', 'required');
+		$this->form_validation->set_rules('faculty_id', 'Faculty', 'required');
+		$this->form_validation->set_rules('depart_id', 'Department', 'required');
+		$this->form_validation->set_rules('last_degree', 'Last degree', 'required');
+
+		if($p['type'] == 'TEACHER'){
+
+			$this->form_validation->set_rules('designation', 'Designation', 'required');
+			$this->form_validation->set_rules('speciality', 'Speciality', 'required');
+
+		}
+		else if($p['type'] == 'STUDENT')
+		{
+
+			$this->form_validation->set_rules('program_id', 'Program', 'required');
+			$this->form_validation->set_rules('roll_no', 'Roll no', 'required');
+			$this->form_validation->set_rules('batch_year', 'Batch year', 'required');
+			$this->form_validation->set_rules('current_semester_no', 'Current semester no', 'required');
+
+		}
+		else if($p['type'] == 'OTHER')
+		{
+
+			$this->form_validation->set_rules('job_title', 'Job Title', 'required');
+		}
+
+
+		if($this->form_validation->run())
+		{
+
+			$p = $this->input->post();
+
+			$image = $_FILES['image'];
+
+			$img = $p['image_old'];
+
+			if($image['name'] != '')
+			{
+				$img = $this->bm->uploadFile($image , './admin/uploads/users');
+			}
+
+          	$data = [
+
+				'image' => $img,
+				'campus_id' => $p['campus_id'],
+				'faculty_id' => $p['faculty_id'],
+				'depart_id' => $p['depart_id'],
+				'title' => $p['title'],
+				'username' => $p['username'],
+				'password' => $this->encryption->encrypt($p['password']),
+				'full_name' => $p['full_name'],
+				'surename' => $p['surename'],
+				'email' => $p['email'],
+				'dob' => $p['dob'],
+				'gender' => $p['gender'],
+				'cnic' => $p['cnic'],
+				'show_cnic_public' => (@$p['show_cnic_to_public'] == ''?0:1),
+				'father_name' => $p['father_name'],
+				'nationality' => $p['nationality'],
+				'province' => $p['province'],
+				'district' => $p['district'],
+				'zip_code' => $p['zip_code'],
+				'city' => $p['city'],
+				'home_address' => $p['home_address'],
+				'permanent_address' => $p['permanent_address'],
+				'show_address_public' => (@$p['show_address_to_public'] == ''?0:1),
+				'bio' => $p['bio'],
+				'phone_no_code' => $p['phone_no_code'],
+				'phone_no' => $p['phone_no'],
+				'last_qualification' => $p['last_degree'],
+				'type' => $p['type'],
+				'role_id' => $p['role_id'],
+				'show_phone_no_public' => (@$p['show_phone_no_to_public'] == ''?0:1),
+				'updated_at' => date('Y-m-d H:i:s')
+
+
+			];
+
+          	$this->bm->updateRow('users', $data,'id',$p['id']);
+
+			if ($p['type'] == 'TEACHER')
+			{
+
+            
+				$info = [
+				
+				'designation' => $p['designation'],
+				'speciality' => $p['speciality']
+				
+				];
+				
+				$this->bm->updateRow('teachers', $info,'user_id',$p['id']);
+
+				
+			}
+			
+			elseif ($p['type'] == 'STUDENT')
+			{
+            
+				$info = [
+				
+				'program_id' => $p['program_id'],
+				'roll_number' => $p['roll_no'],
+				'batch_year' => $p['batch_year'],
+				'current_semester' => $p['current_semester_no']
+				
+				];
+							
+				$this->bm->updateRow('students', $info,'user_id',$p['id']);
+
+				
+			}
+
+			else
+			{
+				
+				$info = [
+				
+				'job_title' => $p['job_title']
+				
+				];
+				
+				$this->bm->updateRow('other_users', $info,'user_id',$p['id']);
+
+			}
+
+
+          	$this->session->set_flashdata(array('response' => 'success', 'msg' => "Profile updated Successfully "));
+
+			redirect('edit_profile/'.hashids_encrypt($p['id']));
+
+        }
+        else
+        {
+          
+          $this->edit_profile(hashids_encrypt($p['id']));
+          
+        }
+        
+  	}
+
+
+	public function view_profile($user_id) 
+	{
+		
+		$id = hashids_decrypt($user_id);
+		
+		$this->load->model('Users_model');
+
+		$data = [
+
+			'title' => 'View Profile',
+			
+			'user' => $this->Users_model->getUsersDetails($id)
+
+		];
 
 		$this->load->view('includes/header', $data);
 		$this->load->view('pages/profile');
 		$this->load->view('includes/footer');
+
 	}
 
 	public function timetable() {

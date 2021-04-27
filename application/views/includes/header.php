@@ -101,8 +101,8 @@
                       <i class="fa fa-sign-in-alt"></i>
                       <a class="nav-link dropdown-toggle text-white" href="<?=site_url('login')?>" data-toggle="dropdown" href="#"> My Account </a>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="<?=site_url('admin/edit_profile')?>">Edit Profile</a>
-                        <a class="dropdown-item" href="<?=site_url('admin/view_profile/'.hashids_encrypt($this->session->userdata('user_id')))?>">View Profile</a>
+                        <a class="dropdown-item" href="<?=site_url('edit_profile/'.hashids_encrypt($this->session->userdata('user_id')))?>">Edit Profile</a>
+                        <a class="dropdown-item" href="<?=site_url('view_profile/'.hashids_encrypt($this->session->userdata('user_id')))?>">View Profile</a>
                         <a class="dropdown-item" href="<?=site_url('logout')?>">Logout</a>
                       </div>
                     </li>

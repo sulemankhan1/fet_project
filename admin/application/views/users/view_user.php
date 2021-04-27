@@ -304,6 +304,17 @@
 
                 <?php if(@$user->type == 'STUDENT'): ?>
                 
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <ul class="no-list-style">
+
+                    <li class="mb-2">
+                      <span class="text-bold-500 primary"><a> Program:</a></span>
+                      <a class="d-block overflow-hidden"><?=@$user->program_id?></a>
+                    </li>
+
+
+                  </ul>
+                </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                   <ul class="no-list-style">
 
@@ -320,7 +331,7 @@
 
                     <li class="mb-2">
                       <span class="text-bold-500 primary"><a> Current Semester No:</a></span>
-                      <a class="d-block overflow-hidden"><?=@$user->current_semester_no?></a>
+                      <a class="d-block overflow-hidden"><?=@$user->current_semester?></a>
                     </li>
 
 

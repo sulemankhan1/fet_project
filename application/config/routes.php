@@ -6,7 +6,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 
-$route['view_profile'] = 'pages/view_profile';
+$route['view_profile/(:any)'] = 'pages/view_profile/$1';
 $route['timetable'] = 'pages/timetable';
 $route['faculty'] = 'pages/faculty';
 $route['contact'] = 'pages/contact_us';
@@ -15,6 +15,8 @@ $route['news/(:any)'] = 'pages/single_news/$1';
 $route['timetable'] = 'pages/timetable';
 $route['login'] = 'pages/login';
 $route['save_login'] = 'pages/save_login';
+$route['edit_profile/(:any)'] = 'pages/edit_profile/$1';
+$route['update_profile'] = 'pages/update_profile';
 $route['logout'] = 'pages/logout';
 $route['register'] = 'pages/register';
 $route['save_reg'] = 'pages/save_reg';

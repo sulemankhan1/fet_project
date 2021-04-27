@@ -15,7 +15,8 @@ class Auth_model extends CI_Model
 		$this->db->from('users');
 		// $this->db->join('users_info','users.id=users_info.user_id','left');
 		$this->db->where('users.username',$username);
-		// $this->db->where('users.type','Superadmin');
+		$this->db->where('users.type!=','SUPERADMIN');
+		$this->db->where('users.type!=','ADMIN');
 		$user_data = $this->db->get()->row();
 
 

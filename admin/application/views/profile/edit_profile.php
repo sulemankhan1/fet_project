@@ -351,12 +351,30 @@
                               <!-- additional_info_student_start -->
                               <!-- <div class="additional_info_student"> -->
 
-                                <?php $student_display = 'none'; if($edit->type == 'STUDENT'){ $student_display = 'block'; }?>
+                              <?php $student_display = 'none';$teacher_display = 'none';$other_display = 'none'; 
+                                if($edit->type == 'STUDENT'){ $student_display = 'block'; }?>
 
                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_student" style="display:<?=$student_display?>">
                                     <fieldset class="form-group">
+                                        <label for="basicInput">Select Program *</label>
+                                        <select class="form-control"  name="program_id">
+                                            <option value="">select program</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </fieldset>
+                                    <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
+                                    <span class="text-danger"><?=form_error('program_id')?></span>
+                                    <?php } ?>
+
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_student" style="display:<?=$student_display?>">
+                                    <fieldset class="form-group">
                                         <label for="basicInput">Roll No *</label>
-                                        <input type="text" class="form-control"  name="roll_no" value="<?=(@$this->input->post('roll_no') == ''?@$edit->roll_no:$this->input->post('roll_no'))?>">
+                                        <input type="text" class="form-control"  name="roll_no" value="<?=(@$this->input->post('roll_no') == ''?@$edit->roll_number:$this->input->post('roll_no'))?>">
                                     </fieldset>
                                       <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
                                         <span class="text-danger"><?=form_error('roll_no')?></span>
@@ -376,7 +394,7 @@
                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_student" style="display:<?=$student_display?>">
                                     <fieldset class="form-group">
                                         <label for="basicInput">Current Semester No# *</label>
-                                        <input type="number" class="form-control"  name="current_semester_no" value="<?=(@$this->input->post('current_semester_no') == ''?@$edit->current_semester_no:$this->input->post('current_semester_no'))?>">
+                                        <input type="number" class="form-control"  name="current_semester_no" value="<?=(@$this->input->post('current_semester_no') == ''?@$edit->current_semester:$this->input->post('current_semester_no'))?>">
                                     </fieldset>
                                     <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
                                       <span class="text-danger"><?=form_error('current_semester_no')?></span>
@@ -389,7 +407,7 @@
 
                               <!-- additional_info_teacher_start -->
                               <!-- <div class="additional_info_teacher"> -->
-                                <?php $teacher_display = 'none'; if($edit->type == 'TEACHER'){ $teacher_display = 'block'; }?>
+                                <?php if($edit->type == 'TEACHER'){ $teacher_display = 'block'; }?>
                                 
                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_teacher" style="display:<?=$teacher_display?>">
                                       <fieldset class="form-group">
@@ -411,7 +429,9 @@
                                       <?php } ?>
 
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_other">
+                                <?php if($edit->type == 'OTHER'){ $other_display = 'block'; }?>
+
+                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_other" style="display:<?=$other_display?>">
                                       <fieldset class="form-group">
                                           <label for="basicInput">Job Title *</label>
                                           <input type="text" class="form-control"  name="job_title" value="<?=@$this->input->post('job_title')?>">

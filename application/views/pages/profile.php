@@ -8,7 +8,7 @@
         <div class="section-content">
           <div class="row">
             <div class="col-md-12 text-center">
-              <h2 class="title">Teacher Profile</h2>
+              <h2 class="title"><?= ucfirst($user->role_name) ?> Profile</h2>
             </div>
           </div>
         </div>
@@ -23,30 +23,60 @@
             <div class="panel panel-default shadowed">
               <div class="panel-body text-center">
                 <div class="profile-pic-container">
-                  <img src="<?=base_url('assets/images/team/2.png')?>" class="teacher-profile-pic">
+                
+                  <?php if (@getimagesize('admin/uploads/users/'.$user->image)){ ?>
+
+                    <img src="<?=base_url('admin/uploads/users/'.$user->image)?>" class="teacher-profile-pic">
+
+                  <?php }else{ ?>
+
+                    <img src="<?=base_url('assets/images/team/2.png')?>" class="teacher-profile-pic">
+
+                  <?php } ?>
+
                 </div>
-                <h3>Sir Kamran Taj</h3>
+                <h3><?=$user->title?> <?=$user->full_name?></h3>
                 <p><span class="badge badge-secondary">Professor</span> </p>
                 <hr>
 
                 <div class="barr">
                   <div class="barr-left"><i class='icon-envelope'></i></div>
                   <div class="barr-right">
-                    kamrantaj243@gmail.com
+                  <?=$user->email?>
                   </div>
                 </div>
+                <?php if($user->show_phone_no_public == 1){ ?>
                 <div class="barr">
                   <div class="barr-left"><i class='icon-call-out'></i></div>
                   <div class="barr-right">
-                    0312221123412
+                  <?=$user->phone_no_code?><?=$user->phone_no?>
                   </div>
                 </div>
+                <?php } ?>
+                <?php if($user->show_address_public == 1){ ?>
                 <div class="barr">
                   <div class="barr-left"><i class='icon-pointer'></i></div>
                   <div class="barr-right">
-                    Lab # 2 Room 2 Right corridor FET Building
+                  <?=$user->permanent_address?>
                   </div>
                 </div>
+                <?php } ?>
+                <div class="barr">
+                  <div class="barr-left"><i class='icon-user'></i></div>
+                  <div class="barr-right">
+                  <?=$user->gender?>
+                  </div>
+                </div>
+                <?php if($user->show_cnic_public == 1){ ?>
+                <div class="barr">
+                  <div class="barr-left"><i class='icon-user'></i></div>
+                  <div class="barr-right">
+                  <?=$user->cnic?>
+                  </div>
+                </div>
+                <?php } ?>
+               
+               
                 <hr>
                 <div class="bg-theme-colored text-white mb-xs-5 btn"><i class="icon-bubbles"></i><a class="text-white" data-toggle="modal" data-target="#contact-teaher-modal" href="#"> Message </a></div>
               </div>
@@ -55,13 +85,65 @@
           <div class="col-md-9">
             <div class="panel panel-default shadowed">
               <div class="panel-heading">
+                <h3><i class="icon-notebook"></i> Details</h3>
+              </div>
+              <div class="panel-body">
+                <!-- <p><strong>Note: </strong> Following Content is Automatically Generated based on Current Semester's Timetable</p> -->
+                <div class="row">
+                  <div class="col-md-12">
+                    <!-- <h3>Subjects</h3> -->
+                    <ul class="teacher-subject-list">
+                      <li><i class="icon-paper-plane"></i> Surename : <?=$user->surename?></li>
+                      <li><i class="icon-paper-plane"></i> Date of birth : <?=$user->dob?></li>
+                      <li><i class="icon-paper-plane"></i> Father Name : <?=$user->father_name?></li>
+                      <li><i class="icon-paper-plane"></i> Nationality : <?=$user->nationality?></li>
+                      <li><i class="icon-paper-plane"></i> Province : <?=$user->province?></li>
+                      <li><i class="icon-paper-plane"></i> District : <?=$user->district?></li>
+                      <li><i class="icon-paper-plane"></i> City : <?=$user->city?></li>
+                      <li><i class="icon-paper-plane"></i> Last Qualification : <?=$user->last_qualification?></li>
+                      <li><i class="icon-paper-plane"></i> Zipcode : <?=$user->zip_code?></li>
+                      <li><i class="icon-paper-plane"></i> Bio : <?=$user->bio?></li>
+                      <li><i class="icon-paper-plane"></i> Campus : <?=$user->campus_id?></li>
+                      <li><i class="icon-paper-plane"></i> Faculty : <?=$user->faculty_id?></li>
+                      <li><i class="icon-paper-plane"></i> Department : <?=$user->depart_id?></li>
+
+                      <?php if(@$user->type == 'STUDENT'): ?>
+
+                      <li><i class="icon-paper-plane"></i> Program : <?=$user->program_id?></li>
+                      <li><i class="icon-paper-plane"></i> Batch : <?=$user->batch_year?></li>
+                      <li><i class="icon-paper-plane"></i> Current Semester No : <?=$user->current_semester?></li>
+
+                      <?php endif; ?>
+
+                      <?php if(@$user->type == 'TEACHER'): ?>
+
+                      <li><i class="icon-paper-plane"></i> Designation : <?=$user->designation?></li>
+                      <li><i class="icon-paper-plane"></i> Speciality : <?=$user->spciality?></li>
+                      
+                      <?php endif; ?>
+
+                      <?php if(@$user->type == 'OTHER'): ?>
+
+                      <li><i class="icon-paper-plane"></i> Job Title : <?=$user->job_title?></li>>
+                      
+                      <?php endif; ?>
+
+                    </ul>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            
+            <!-- <div class="panel panel-default shadowed">
+              <div class="panel-heading">
                 <h3><i class="icon-info"></i> About</h3>
               </div>
               <div class="panel-body">
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
               </div>
-            </div>
-            <div class="panel panel-default shadowed">
+            </div> -->
+            <!-- <div class="panel panel-default shadowed">
               <div class="panel-heading">
                 <h3><i class="icon-notebook"></i> Teaching Responsibilities</h3>
               </div>
@@ -95,16 +177,16 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
-            <div class="panel panel-default shadowed">
+            <!-- <div class="panel panel-default shadowed">
               <div class="panel-heading">
                 <h3><i class="icon-calendar"></i> Teacher Timetable</h3>
               </div>
               <div class="panel-body">
                 <img src="<?=base_url('assets/images/SWE04e.jpg')?>" alt="">
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

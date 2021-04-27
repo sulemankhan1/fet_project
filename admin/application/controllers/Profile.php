@@ -292,7 +292,7 @@ class Profile extends CI_Controller
               'program_id' => $p['program_id'],
               'roll_number' => $p['roll_no'],
               'batch_year' => $p['batch_year'],
-              'current_semester_no' => $p['current_semester_no']
+              'current_semester' => $p['current_semester_no']
               
             ];
                         
