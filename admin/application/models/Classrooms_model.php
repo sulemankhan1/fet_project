@@ -10,6 +10,7 @@ class Classrooms_model extends CI_Model {
 
     return $this->db->get()->result();
   }
+  
   public function getSubject($id) {
     $this->db->select("s.*, c.name campus_name, d.name depart_name, f.name faculty_name");
     $this->db->from("subjects s");

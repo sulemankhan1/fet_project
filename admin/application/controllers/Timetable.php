@@ -13,7 +13,6 @@ class Timetable extends CI_Controller
       if (empty($this->session->userdata('username'))) {
           redirect('login');
       }
-
     }
 
     public function index() {
@@ -21,7 +20,9 @@ class Timetable extends CI_Controller
       $data = array(
         'title' => 'Timetable',
         'active_menu' => 'view_timetables',
+        'records' => $this->tm->getRecords(),
       );
+
 
       $this->load->view('header',$data);
       $this->load->view('sidebar');
@@ -57,7 +58,7 @@ class Timetable extends CI_Controller
             unlink($data['OLD_IMAGE_PATH']);
           }
 
-          $image_path = 'uploads/notifications_images/';
+          $image_path = 'uploads/timetables/';
           $image_path .= $this->bm->uploadFile($_FILES['IMAGE_PATH'], $image_path);
 
         } elseif($_FILES['IMAGE_PATH']['name'] == "" && isset($data['OLD_IMAGE_PATH'])) {
@@ -69,7 +70,7 @@ class Timetable extends CI_Controller
 
 
         $data['IMAGE_PATH'] = $image_path;
-        $data['PUBLISHER_ID'] = $this->session->userdata('USER_ID');
+        $data['user_id'] = $this->session->userdata('user_id');
 
         if($data['NOTIFICATION_ID'] == "") {
           $this->bm->insertRow('news_notifications', $data);
