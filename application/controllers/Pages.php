@@ -19,15 +19,17 @@ class Pages extends CI_Controller
 	public function index()
 	{
 
+		$this->load->model('Users_model');
+
 		$data = array(
 			'title' => 'Home',
 			'sliders' => $this->bm->getAll('slider_setting','id','desc'),
 			'headlines' => $this->nm->getHeadlines(10),
 			'latest_news' => $this->nm->getLatestNews(4),
 			'notices' => $this->nm->getNotices(5),
-			'roles' => $this->bm->getAll('roles', 'id', 'desc')
+			'roles' => $this->bm->getAll('roles', 'id', 'desc'),
+			'faculty_members' => $this->Users_model->getFacultyAndTeachers()
 		);
-
 
 		$this->load->view('includes/header', $data);
 		$this->load->view('pages/homepage');
@@ -639,5 +641,145 @@ class Pages extends CI_Controller
 		$this->load->view('includes/footer');
 
 	}
+
+	public function subscribe()
+	{
+		
+		$p = $this->input->post();
+
+		$this->form_validation->set_rules('email', 'Email', 'required');
+
+
+		if($this->form_validation->run())
+		{
+
+			$this->bm->insertRow('subscribers',['email' => $p['email']]);
+
+			$this->session->set_flashdata(array('response' => 'success', 'msg' => "Subscribe Successfully"));
+			
+			redirect('/');
+
+
+		}
+		else
+		{
+			$this->index();
+		}
+		
+	}
+
+	public function forgot_password()
+	{
+		
+		$data = [
+		
+		];
+			
+		$this->load->view('includes/header', $data);
+		$this->load->view('pages/forgot_password');
+		$this->load->view('includes/footer');
+			
+
+	}
+
+	public function check_email()
+	{
+
+		$p = $this->input->post();
+
+		$this->form_validation->set_rules('email', 'Email', 'required');
+
+
+		if($this->form_validation->run())
+		{
+
+			$user = $this->bm->getWhere('users', 'email', $p['email']);
+
+			if(!empty($user))
+			{
+
+				$token = rand(10000,99999);
+
+				$token = hashids_encrypt($token);
+
+
+				$mail = [
+
+					'title' => 'Forget Password',
+
+					'logo' => $this->bm->getWhere('settings', 'name', 'LOGO'),
+
+					'name' => $this->bm->getWhere('settings', 'name', 'NAME'),
+
+					'footer' => $this->bm->getWhere('settings', 'name', 'FOOTER'),
+
+					'msg' => 'Hi,'.$user->full_name.'<br>To change your password click below:<br><a href="'.site_url('change_password/'.$token).'">Change Password</a>'
+
+				];
+
+				$html_content = $this->load->view('mail_template',$mail,true);
+
+				// for live send email use this array
+				$emailConfig = [
+
+					'protocol' => 'smtp',
+					'smtp_host' => 'alphinex.com',
+					'smtp_port' => 587,
+					'smtp_user' => 'fardeen@alphinex.com',
+					'smtp_pass' => 'X8X=}-?HiKV?',
+					'mailtype' => 'html',
+					'charset' => 'iso-8859-1'
+				];
+
+
+				$this->load->library('email' , $emailConfig);
+
+				$from = 'system@'.$_SERVER['HTTP_HOST'];
+				$to = $user->email;
+
+				$this->email->set_newline("\r\n");
+				$this->email->from($from,$name->value);
+				$this->email->to($to);
+				$this->email->subject('Forget Password');
+				$this->email->message($html_content);
+				$this->email->set_mailtype("html");
+				if(!$this->email->send())
+				{
+
+					$this->session->set_flashdata(array('response' => 'success', 'msg' => 'Connection error try again..!' ));
+
+				}
+				else
+				{
+
+					$this->session->set_flashdata(array('response' => 'success', 'msg' => 'Password reset link has sent to your email' ));
+
+					$this->bm->insertRow('password_reset',['token' => $token],'user_id',$user->id);
+
+				}
+
+				
+			}
+			else
+			{
+				
+				$this->session->set_flashdata(array('response' => 'danger', 'msg' => "Invalid email try again"));
+
+			}
+			
+			redirect('forgot_password');
+
+
+		}
+		else
+		{
+			$this->forgot_password();
+		}
+
+
+		
+	}
+
+
 
 }

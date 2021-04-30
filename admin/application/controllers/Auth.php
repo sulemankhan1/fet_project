@@ -112,25 +112,25 @@ class Auth extends CI_Controller {
 
 				$token = rand(10000,99999);
 
-
 				$token = hashids_encrypt($token);
+
+				$name = $this->bm->getWhere('settings', 'name', 'NAME');
 
 				$mail = [
 
 					'title' => 'Forget Password',
 
-					'logo' => $this->bm->getWhere('admin_panel_setting', 'name', 'LOGO'),
+					'logo' => $this->bm->getWhere('settings', 'name', 'LOGO'),
 
-					'name' => $this->bm->getWhere('admin_panel_setting', 'name', 'NAME'),
+					'name' => $name,
 
-					'footer' => $this->bm->getWhere('admin_panel_setting', 'name', 'FOOTER'),
+					'footer' => $this->bm->getWhere('settings', 'name', 'FOOTER'),
 
-					'msg' => 'Hi,'.$user->username.'<br>To change your password click below:<br><a href="'.site_url('change_password/'.$token).'">Change Password</a>'
+					'msg' => 'Hi,'.$user->full_name.'<br>To change your password click below:<br><a href="'.site_url('change_password/'.$token).'">Change Password</a>'
 
 				];
 
-
-				$html_content = $this->load->view('mail_template',$email,true);
+				$html_content = $this->load->view('mail_template',$mail,true);
 
 				// for live send email use this array
 				$emailConfig = [

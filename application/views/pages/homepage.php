@@ -801,86 +801,38 @@
         </div>
          <!--Carousel start-->
           <div class="owl-carousel text-center">
+              
+            
+            <?php foreach($faculty_members as $key => $v): ?>
+            
+            <?php $card_color = 'bg-theme-colored2'; if($key%2 == 0){ $card_color = 'bg-theme-colored3'; }?>
+            
             <div class="item">
               <div class="team-member bg-light pt-10 pb-15">
-                <div class="thumb"><img class="img-fullwidth" src="assets/images/team/1.png" alt="">
+                <div class="thumb"><img class="img-fullwidth" src="<?= base_url('admin/uploads/users/'.$v->image)?>" alt="">
                 </div>
                 <div class="info">
-                  <div class="pt-10 pb-10 bg-theme-colored2">
-                    <h4 class="mt-0 mb-0 text-white">Jone doe</h4>
-                    <h6 class="mt-0 mb-0 text-white">Manager</h6>
+                  <div class="pt-10 pb-10 <?=$card_color?>">
+                    <h4 class="mt-0 mb-0 text-white"><?= $v->full_name ?></h4>
+                    <h6 class="mt-0 mb-0 text-white"><?= $v->role_name ?></h6>
                   </div>
                   <div class="p-15 pb-0">
-                    <p title="Teacher Hours"><i class="icon-hourglass"></i>10:00 AM to 2:00 PM</p>
+                    <!-- <p title="Teacher Hours"><i class="icon-hourglass"></i>10:00 AM to 2:00 PM</p>
                       <span class="subject-tag">English</span>
                       <span class="subject-tag">English</span>
                       <span class="subject-tag">English</span>
-                    </p>
+                    </p> -->
                   </div>
-                  <button class="btn hvr-float-shadow bg-theme-colored2"><a href="<?=site_url('view_profile')?>" class="mt-0 mb-0 text-white">View Profile</a></button>
+                  <button class="btn hvr-float-shadow <?=$card_color?>">
+                    <a href="<?=site_url('view_profile/'.hashids_encrypt($v->uid))?>" class="mt-0 mb-0 text-white">View Profile</a>
+                  </button>
                 </div>
               </div>
             </div>
-            <div class="item">
-             <div class="team-member bg-light pt-10 pb-15">
-                <div class="thumb"><img class="img-fullwidth" src="assets/images/team/2.png" alt="">
-                </div>
-                <div class="info">
-                  <div class="pt-10 pb-10 bg-theme-colored">
-                    <h4 class="mt-0 mb-0 text-white">Jone doe</h4>
-                    <h6 class="mt-0 mb-0 text-white">Manager</h6>
-                  </div>
-                  <div class="p-15 pb-0">
-                    <p title="Teacher Hours"><i class="icon-hourglass"></i>10:00 AM to 2:00 PM</p>
-                      <span class="subject-tag">English</span>
-                      <span class="subject-tag">English</span>
-                      <span class="subject-tag">English</span>
-                    </p>
-                  </div>
-                  <button class="btn hvr-float-shadow bg-theme-colored"><a href="<?=site_url('view_profile')?>" class="mt-0 mb-0 text-white">View Profile</a></button>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="team-member bg-light pt-10 pb-15">
-                <div class="thumb"><img class="img-fullwidth" src="assets/images/team/3.png" alt="">
-                </div>
-                <div class="info">
-                  <div class="pt-10 pb-10 bg-theme-colored3">
-                    <h4 class="mt-0 mb-0 text-white">Jone doe</h4>
-                    <h6 class="mt-0 mb-0 text-white">Manager</h6>
-                  </div>
-                  <div class="p-15 pb-0">
-                    <p title="Teacher Hours"><i class="icon-hourglass"></i>10:00 AM to 2:00 PM</p>
-                      <span class="subject-tag">English</span>
-                      <span class="subject-tag">English</span>
-                      <span class="subject-tag">English</span>
-                    </p>
-                  </div>
-                  <button class="btn hvr-float-shadow bg-theme-colored3"><a href="<?=site_url('view_profile')?>" class="mt-0 mb-0 text-white">View Profile</a></button>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="team-member bg-light pt-10 pb-15">
-                <div class="thumb"><img class="img-fullwidth" src="assets/images/team/4.png" alt="">
-                </div>
-                <div class="info">
-                  <div class="pt-10 pb-10 bg-theme-colored">
-                    <h4 class="mt-0 mb-0 text-white">Jone doe</h4>
-                    <h6 class="mt-0 mb-0 text-white">Manager</h6>
-                  </div>
-                  <div class="p-15 pb-0">
-                    <p title="Teacher Hours"><i class="icon-hourglass"></i>10:00 AM to 2:00 PM</p>
-                      <span class="subject-tag">English</span>
-                      <span class="subject-tag">English</span>
-                      <span class="subject-tag">English</span>
-                    </p>
-                  </div>
-                  <button class="btn hvr-float-shadow bg-theme-colored"><a href="<?=site_url('view_profile')?>" class="mt-0 mb-0 text-white">View Profile</a></button>
-                </div>
-              </div>
-            </div>
+            
+            <?php endforeach ?>
+            
+            
           </div>
         <!--Carousel end-->
       </div>
@@ -894,15 +846,27 @@
           <div class="col-md-6 col-md-offset-3">
             <h2 class="mt-0 text-white">Stay updated by Email</h2>
             <p class="text-white">Enter your Email and you will get updates for Notifications, Circulars, Notices etc. You can change emails settings by logging in to your account with same email</p>
+            
+            <?php if($this->session->flashdata('response') == 'success') { ?>
 
-            <form id="mailchimp-subscription-form3" class="newsletter-form mt-30">
+            <div class="alert alert-success alert-dismissible">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <?=$this->session->flashdata('msg')?>
+            </div>
+
+            <?php } ?>
+            
+            <form id="mailchimp-subscription-form3" class="newsletter-form mt-30" action="<?= site_url('subscribe') ?>" method="post">
               <label for="mce-EMAIL"></label>
               <div class="input-group">
-                <input type="email" id="mce-EMAIL" data-height="50px" class="form-control input-lg" placeholder="Your Email" name="EMAIL" value="">
+                <input type="email" id="mce-EMAIL" data-height="50px" class="form-control input-lg" placeholder="Your Email" name="email" value="">
                 <span class="input-group-btn">
                   <button type="submit" class="btn btn-colored btn-theme-colored btn-lg m-0" data-height="50px"><i class="far fa-paper-plane font-20" aria-hidden="true"></i>
                   </button>
                 </span>
+              </div><br>
+              <div class="row col-lg-12 text-left">
+                <?= form_error('email') ?>
               </div>
             </form>
           </div>

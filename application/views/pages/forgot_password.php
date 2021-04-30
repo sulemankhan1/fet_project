@@ -9,7 +9,7 @@
         <div class="section-content">
           <div class="row">
             <div class="col-md-12 text-center">
-              <h2 class="title">Login</h2>
+              <h2 class="title">Forgot Password</h2>
             </div>
           </div>
         </div>
@@ -22,7 +22,7 @@
         <div class="row">
           <div class="col-md-6 col-md-push-3">
             <div class="border-1px p-30 mb-0">
-              <form method="post" action="<?=site_url('save_login')?>">
+              <form method="post" action="<?=site_url('check_email')?>">
                 <div class="row">
                  
                   <?php if($this->session->flashdata('response') == 'success') { ?>
@@ -48,37 +48,22 @@
 
                	  <div class="col-sm-12">
                     <div class="form-group">
-                      <label>Username <small>*</small></label>
-                      <input name="username" class="form-control required username" type="username" placeholder="Enter Username" value="<?=@$this->input->post('username')?>">
+                      <label>Email <small>*</small></label>
+                      <input name="email" class="form-control required email" type="email" placeholder="Enter Email" value="<?=@$this->input->post('email')?>">
                     </div>
-                    <span class="text-danger"><?=form_error('username')?></span>
+                    <span class="text-danger"><?=form_error('email')?></span>
                   </div>
                 </div>
-                <div class="row">               
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <label>Password <small>*</small></label>
-                       <input name="password" class="form-control" type="password" placeholder="password" value="<?=@$this->input->post('password')?>">
-                    </div>
-                    <span class="text-danger"><?=form_error('password')?></span>
-                  </div>
-                </div>
-                <div class="row">               
-                  <div class="col-sm-6">
-                    <div class="checkbox">
-                		<label for="form_checkbox">
-                  		<input id="form_checkbox" name="form_checkbox" type="checkbox">
-                 		 Remember me </label>
-              		</div>
-                  </div>
+                <div class="row">
+                    <div class="col-sm-6"></div>
                   <div class="col-sm-6">
                   	<div class="clear text-center pt-10">
-                		<a class="text-theme-colored font-weight-600 font-12" href="<?=site_url('forgot_password')?>">Forgot Your Password?</a>
+                      <a class="text-theme-colored font-weight-600 font-12" href="<?=site_url('login')?>">Sigin?</a>
               		</div>
                   </div>
                 </div>
                 <div class="form-group">
-                  <button type="submit" class="hvr-glow btn btn-block btn-dark btn-theme-colored btn-sm mt-20 pt-10 pb-10" data-loading-text="Please wait...">Login</button>
+                  <button type="submit" class="hvr-glow btn btn-block btn-dark btn-theme-colored btn-sm mt-20 pt-10 pb-10" data-loading-text="Please wait..." name="foget_password">Forgot password</button>
                 </div>
               </form>
             </div>
