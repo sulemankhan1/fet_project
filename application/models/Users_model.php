@@ -36,4 +36,28 @@ class Users_model extends CI_Model
 
 	}
 
+
+	public function getFacultyAndTeachers()
+	{
+
+		$this->db->select('u.id as uid,u.*,tch.*,ou.*,r.name as role_name');
+		$this->db->from('users u');
+
+		$this->db->join('teachers tch','tch.user_id=u.id','left');
+		$this->db->join('other_users ou','ou.user_id=u.id','left');
+		$this->db->join('roles r','r.id=u.role_id','left');
+
+		$this->db->order_by('u.id','desc');
+
+		$this->db->where('u.type','FACULTY');
+		$this->db->or_where('u.type','TEACHER');
+
+		$this->db->limit(10);
+
+		return $this->db->get()->result();
+
+	}
+	
+
+
 }

@@ -21,3 +21,9 @@ $route['logout'] = 'pages/logout';
 $route['register'] = 'pages/register';
 $route['save_reg'] = 'pages/save_reg';
 $route['about'] = 'pages/about';
+$route['subscribe'] = 'pages/subscribe';
+
+
+// forget password
+$route['forgot_password'] = 'pages/forgot_password';
+$route['check_email'] = 'pages/check_email';

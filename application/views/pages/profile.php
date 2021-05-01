@@ -118,7 +118,7 @@
                       <?php if(@$user->type == 'TEACHER'): ?>
 
                       <li><i class="icon-paper-plane"></i> Designation : <?=$user->designation?></li>
-                      <li><i class="icon-paper-plane"></i> Speciality : <?=$user->spciality?></li>
+                      <li><i class="icon-paper-plane"></i> Speciality : <?=$user->speciality?></li>
                       
                       <?php endif; ?>
 
