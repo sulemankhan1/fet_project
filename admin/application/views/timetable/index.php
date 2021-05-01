@@ -8,7 +8,7 @@
               <div class="card">
                 <div class="card-header">
                   <h4 class="card-title"><i class="ft-book"></i> Manage Timetables</h4>
-                  <a href="<?=site_url('create_timetable')?>" class="btn btn-sm btn-primary pull-right"> <i class="fa fa-plus"></i> Add New Timetable</a>
+                  <a href="<?=site_url('new_timetable')?>" class="btn btn-sm btn-primary pull-right"> <i class="fa fa-plus"></i> Add New Timetable</a>
                 </div>
                 <div class="card-content">
                   <div style="padding-left: 1%;">

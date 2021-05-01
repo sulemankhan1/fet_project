@@ -13,6 +13,7 @@ class Timetable extends CI_Controller
       if (empty($this->session->userdata('username'))) {
           redirect('login');
       }
+      date_default_timezone_set('asia/karachi');
     }
 
     public function index() {
@@ -189,16 +190,82 @@ class Timetable extends CI_Controller
     public function customize_timetable($id) {
       $id = hashids_decrypt($id);
 
+      $record = $this->tm->getRecord($id);
+
+      if(empty($record)) {
+        echo "404 Please go back!";
+        exit;
+      }
+      // $record->evening_morning = 'morning';
       $data = array(
         'title' => 'Customize Timetable',
         // 'active_menu' => 'add_timetable',
         'menu_collapsed' => true,
+        'record' => $record,
+        'morning_start_time' => '08:00 am',
+        'morning_end_time' => '01:00 pm',
+        'evening_start_time' => '02:00 pm',
+        'evening_end_time' => '07:00 pm',
+        'class_duration' => 45,
+        'teachers' => $this->tm->getTeachers($record),
+        'subjects' => $this->tm->getSubjects($record),
+        'class_rooms' => $this->tm->getClassRooms($record),
       );
+      // echo "<pre>";
+      // print_r($record);
+      // die();
 
       $this->load->view('header',$data);
       $this->load->view('sidebar');
       $this->load->view('timetable/customize');
       $this->load->view('footer');
+    }
+
+    public function getTimetSettings($evening_morning) {
+
+      $morning_start_time = '08:00 am';
+      $morning_end_time = '01:00 pm';
+      $evening_start_time = '02:00 pm';
+      $evening_end_time = '07:00 pm';
+      $class_duration = 45;
+
+      if($evening_morning == 'morning') {
+        $start_time = $morning_start_time; // day start time
+        $end_time = $morning_end_time; // day end time
+      } else {
+        $start_time = $evening_start_time; // day start time
+        $end_time = $evening_end_time; // day end time
+      }
+
+      // preparing an array to be stored in localstorage and sent to frontend
+      $data = array();
+      while(date('H', strtotime($start_time)) < date('H', strtotime($end_time))) {
+        $arr = [];
+        // current class end time
+        $class_end_time = date('h:i a', strtotime($start_time." +$class_duration minutes"));
+
+        $arr['time_from'] = $start_time;
+        $arr['time_to'] = ((date('H:i', strtotime($class_end_time)) > (date('H:i', strtotime($end_time))))?$end_time:$class_end_time);
+        $arr['teacher_id'] = 0;
+        $arr['subject_id'] = 0;
+        $arr['classroom_id'] = 0;
+
+        $start_time = $class_end_time;
+        $data[] = $arr;
+      }
+
+      // expanding daily classes for each day of week
+      $new_data = array();
+      $week_days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+      $day_index_counter = 0;
+      foreach($week_days as $day) {
+        foreach($data as $row) {
+          $row['day'] = $day;
+          $new_data[] = $row;
+        }
+      }
+
+      echo json_encode($new_data);
     }
 
 }

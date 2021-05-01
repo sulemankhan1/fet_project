@@ -27,4 +27,56 @@ class Timetable_model extends CI_Model {
       $this->db->join('users u', 'u.id = t.user_id', 'LEFT');
       return $this->db->get()->result();
     }
+    public function getRecord($id) {
+
+      $this->db->select('t.*, c.name campus_name, d.name depart_name, f.name faculty_name, CONCAT(u.title," ", u.full_name) username');
+      $this->db->from('timetable t');
+      $this->db->where('t.is_archived', 0);
+      $this->db->join('campus c', 'c.id = t.campus_id', 'LEFT');
+      $this->db->join('departments d', 'd.id = t.depart_id', 'LEFT');
+      $this->db->join('faculties f', 'f.id = t.faculty_id', 'LEFT');
+      $this->db->join('users u', 'u.id = t.user_id', 'LEFT');
+      $this->db->where('t.id', $id);
+      return $this->db->get()->row();
+    }
+
+    public function getTeachers($timetable_record) {
+      $this->db->select('*');
+      $this->db->from('users u');
+      $this->db->where('u.campus_id', $timetable_record->campus_id);
+      $this->db->where('u.faculty_id', $timetable_record->faculty_id);
+      $this->db->where('u.depart_id', $timetable_record->depart_id);
+      $this->db->where('u.type', 'TEACHER');
+      $this->db->where('u.account_verified', 1);
+      $this->db->where('u.account_active', 1);
+      $this->db->where('u.is_archived', 0);
+      return $this->db->get()->result();
+    }
+
+    public function getSubjects($timetable_record) {
+      /* TESTING REQUIRED FOR THE FOLLOWING
+      * what if the campus is general but faculty is specific
+      * what if only department is specific then it should fetch only that
+      department subjects
+      */
+      $this->db->select('*');
+      $this->db->from('subjects s');
+      $this->db->where('s.for_campus', 'general');
+      $this->db->where('s.campus_id', $timetable_record->campus_id);
+      $this->db->where('s.for_faculty', 'general');
+      $this->db->where('s.faculty_id', $timetable_record->faculty_id);
+      $this->db->where('s.for_depart', 'general');
+      $this->db->where('s.depart_id', $timetable_record->depart_id);
+      $this->db->where('s.is_archived', 0);
+      return $this->db->get()->result();
+    }
+
+    public function getClassRooms($timetable_record) {
+      $this->db->select('*');
+      $this->db->from('class_rooms c');
+      $this->db->where('c.campus_id', $timetable_record->campus_id);
+      $this->db->where('c.faculty_id', $timetable_record->faculty_id);
+      $this->db->where('c.is_archived', 0);
+      return $this->db->get()->result();
+    }
 }
