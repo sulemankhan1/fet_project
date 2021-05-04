@@ -22,6 +22,7 @@ $route['register'] = 'pages/register';
 $route['save_reg'] = 'pages/save_reg';
 $route['about'] = 'pages/about';
 $route['subscribe'] = 'pages/subscribe';
+$route['genrated_timetable'] = 'pages/genrated_timetable';
 
 
 // forget password

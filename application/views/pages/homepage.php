@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css')"/>
+
+<link rel="stylesheet" type="text/css" href="assets/css/css-swiper.css">
+
 <!-- Start main-content -->
   <div class="main-content">
     <!-- Section: home -->
@@ -424,27 +428,22 @@
               <h2 class="mt-0 line-height-1 line-bottom-edu">Welcome to <span class="text-theme-colored3">Faculty of Engineering & Technology</span></h2>
               <h4 >About</h4>
               <p>Faculty of Engineering and Technology is composed of an Institute and six departments: Prof. A. H. S. Bukhari Institute of Information and Communication Technology, Department of Electronics Engineering, Department of Telecommunication Engineering, Department of Information Technology, Department of Software Engineering, Department of Telemedicine and e-Health and Department of Industrial Electronics Engineering. A. H. S Bukhari Institute of Information and Communication Technology is an independent post-graduate institute offering MS/MPhil programs in disciplines of Electronics, Telecommunications, Information Technology and Software Engineering, and PhD degree program in Information Technology. Currently, over 300 students are enrolled in all MS/ MPhil and PhD programs.</p>
-              <div class="row sm-text-center">
-                <div class="col-sm-6 col-md-6">
-                  <div class="about-thumb">
-                    <img src="assets/images/bg/UG.jpg" class="mt-5" alt="">
-                  </div>
-                  <div class="mb-15">
-                    <h4 class="font-raleway font-weight-700 mt-15"><a href="#">Graduate <span class="text-theme-colored3">Education</span></a></h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam quas, quidem totam, fuga iste et voluptatem tempora molestiae.</p>
-                    <a class="btn btn-colored btn-sm btn-circled btn-theme-colored mt-5" href="javascript:void(0)">Read more</a>
-                  </div>
-                </div>
-                <div class=" col-sm-6 col-md-6">
-                  <div class="about-thumb">
-                    <img src="assets/images/bg/UG.jpg" class="mt-5" alt="">
-                  </div>
-                  <div class="mb-15">
-                    <h4 class="font-raleway font-weight-700 mt-15"><a href="#">Master's <span class="text-theme-colored3">Degree</span></a></h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam quas, quidem totam, fuga iste et voluptatem tempora molestiae.</p>
-                    <a class="btn btn-colored btn-sm btn-circled btn-theme-colored mt-5" href="javascript:void(0)">Read more</a>
-                  </div>
-                </div>
+
+              <div class="row mt-50">
+                <div class="col-md-12 col-sm-12">
+                   <div class="container">
+                        <h2 class="mt-0 line-height-1 line-bottom-edu">Gallery</h2>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="owl-carousel-3col" data-dots="true" data-nav="true">
+                              <div class="item"><img src="assets/images/team/1.jpg" alt=""></div>
+                               <div class="item"><img src="assets/images/team/1.jpg" alt=""></div>
+                                <div class="item"><img src="assets/images/team/1.jpg" alt=""></div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>   
               </div>
             </div>
             <div class="col-sm-5 col-md-4">
@@ -926,6 +925,8 @@
   <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
 </div>
 <!-- end wrapper -->
+
+ 
 <script type="text/javascript">
     $('.owl-carousel').owlCarousel({
     loop:true,

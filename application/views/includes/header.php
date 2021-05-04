@@ -15,6 +15,7 @@
 <!-- Favicon and Touch Icons -->
 <link rel="shortcut icon" href="assets/images/FET-logo.png">
 
+
 <!-- Stylesheet -->
 <link href="<?=base_url('assets/css/bootstrap.min.css')?>" rel="stylesheet" type="text/css">
 <link href="<?=base_url('assets/css/jquery-ui.min.css')?>" rel="stylesheet" type="text/css">
@@ -145,7 +146,14 @@
             <li>
               <a href="javascript:void(0)">programs</a>
               <ul class="dropdown">
-                <li><a href="">Bachelors</a></li>
+                <li><a href="">Bachelors</a>
+                  <ul class="dropdown">
+                    <li><a href="javascript:void(0)">Software Engineering</a></li>
+                    <li><a href="javascript:void(0)">Information Technology</a></li>
+                    <li><a href="javascript:void(0)">Telecommunication</a></li>
+                    <li><a href="javascript:void(0)">Electronics</a></li>
+                  </ul>
+                </li>
                 <li><a href="">Masters</a></li>
                 <li><a href="">Ph.D</a></li>
               </ul>

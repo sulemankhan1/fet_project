@@ -294,6 +294,15 @@ class Pages extends CI_Controller
 		$this->load->view('includes/footer');
 
 	}
+	public function genrated_timetable() {
+
+		$data = [];
+
+		$this->load->view('includes/header', $data);
+		$this->load->view('pages/genrated_timetable');
+		$this->load->view('includes/footer');
+
+	}
 	public function login() {
 
 		$data = [];
