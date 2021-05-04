@@ -148,10 +148,30 @@
               <ul class="dropdown">
                 <li><a href="">Bachelors</a>
                   <ul class="dropdown">
-                    <li><a href="javascript:void(0)">Software Engineering</a></li>
-                    <li><a href="javascript:void(0)">Information Technology</a></li>
-                    <li><a href="javascript:void(0)">Telecommunication</a></li>
-                    <li><a href="javascript:void(0)">Electronics</a></li>
+                    <li><a href="javascript:void(0)">Software Engineering</a>
+                      <ul class="dropdown">
+                        <li><a href="javascript:void(0)">Course Scheme</a></li>
+                        <li><a href="javascript:void(0)">Course Content</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="javascript:void(0)">Information Technology</a>
+                       <ul class="dropdown">
+                        <li><a href="javascript:void(0)">Course Scheme</a></li>
+                        <li><a href="javascript:void(0)">Course Content</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="javascript:void(0)">Telecommunication</a>
+                       <ul class="dropdown">
+                        <li><a href="javascript:void(0)">Course Scheme</a></li>
+                        <li><a href="javascript:void(0)">Course Content</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="javascript:void(0)">Electronics</a>
+                       <ul class="dropdown">
+                        <li><a href="javascript:void(0)">Course Scheme</a></li>
+                        <li><a href="javascript:void(0)">Course Content</a></li>
+                      </ul>
+                    </li>
                   </ul>
                 </li>
                 <li><a href="">Masters</a></li>

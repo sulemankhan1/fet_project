@@ -493,29 +493,27 @@
         <div class="section-content">
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-8">
-              <h2 class="line-bottom-edu">Our Admission <span class="text-theme-colored3">Quary</span></h2>
+              <h2 class="line-bottom-edu">Our <span class="text-theme-colored3">Programs</span></h2>
               <p class="mb-20">We care for students, protect their welfare, and prepare them for the future to have a bright future and to achieve their goals of life.</p>
               <div class="row mb-30">
                 <div class="col-sm-6 col-md-6">
                   <div class="info border-1px">
-                    <h4 class="mt-0 bg-theme-colored3 text-white pt-10 pb-10 pl-10">Undergraduate Admission</h4>
+                    <h4 class="mt-0 bg-theme-colored3 text-white pt-10 pb-10 pl-10">Software Engineering</h4>
                     <div class="timetable pb-10">
                       <ul class="pr-10 pl-15">
-                        <li><i class="fa fa-check-square-o pr-10" aria-hidden="true"></i>Spring 2019 Deadline <span class="">October 1, 2017</span></li>
-                        <li><i class="fa fa-check-square-o pr-10" aria-hidden="true"></i>Fall 2019 Deadline <span class="">February 1, 2017</span></li>
-                        <li><i class="fa fa-check-square-o pr-10" aria-hidden="true"></i>Summer 2019 Deadline <span class="">May 1, 2017</span></li>
+                        <li><i class="fas fa-certificate" aria-hidden="true"></i>  PEC Certified </li>
+                        <li><i class="fas fa-certificate" aria-hidden="true"></i>  ISO 9001:2015 Certified</li>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-6">
                   <div class="info border-1px">
-                    <h4 class="mt-0 bg-theme-colored3 text-white pt-10 pb-10 pl-10">Graduate Admission</h4>
+                    <h4 class="mt-0 bg-theme-colored3 text-white pt-10 pb-10 pl-10">Information Technology</h4>
                     <div class="timetable pb-10">
                       <ul class="pr-10 pl-15">
-                        <li><i class="fa fa-check-square-o pr-10" aria-hidden="true"></i>Spring 2019 Deadline <span class="">October 1, 2017</span></li>
-                        <li><i class="fa fa-check-square-o pr-10" aria-hidden="true"></i>Fall 2019 Deadline <span class="">February 1, 2017</span></li>
-                        <li><i class="fa fa-check-square-o pr-10" aria-hidden="true"></i>Summer 2019 Deadline <span class="">May 1, 2017</span></li>
+                         <li><i class="fas fa-certificate" aria-hidden="true"></i>  PEC Certified </li>
+                        <li><i class="fas fa-certificate" aria-hidden="true"></i>  ISO 9001:2015 Certified</li>
                       </ul>
                     </div>
                   </div>
@@ -524,24 +522,22 @@
               <div class="row">
                 <div class="col-sm-6 col-md-6">
                   <div class="info border-1px">
-                    <h4 class="mt-0 bg-theme-colored3 text-white pt-10 pb-10 pl-10">Masters's Degree</h4>
+                    <h4 class="mt-0 bg-theme-colored3 text-white pt-10 pb-10 pl-10">Telecommunication</h4>
                     <div class="timetable pb-10">
                       <ul class="pr-10 pl-15">
-                        <li><i class="fa fa-check-square-o pr-10" aria-hidden="true"></i>Spring 2019 Deadline <span class="">October 1, 2017</span></li>
-                        <li><i class="fa fa-check-square-o pr-10" aria-hidden="true"></i>Fall 2019 Deadline <span class="">February 1, 2017</span></li>
-                        <li><i class="fa fa-check-square-o pr-10" aria-hidden="true"></i>Summer 2019 Deadline <span class="">May 1, 2017</span></li>
+                        <li><i class="fas fa-certificate" aria-hidden="true"></i>  PEC Certified </li>
+                        <li><i class="fas fa-certificate" aria-hidden="true"></i>  ISO 9001:2015 Certified</li>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-6">
                   <div class="info border-1px">
-                    <h4 class="mt-0 bg-theme-colored3 text-white pt-10 pb-10 pl-10">Doctoral Degrees</h4>
+                    <h4 class="mt-0 bg-theme-colored3 text-white pt-10 pb-10 pl-10">Electronics</h4>
                     <div class="timetable pb-10">
                       <ul class="pr-10 pl-15">
-                        <li><i class="fa fa-check-square-o pr-10" aria-hidden="true"></i>Spring 2019 Deadline <span class="">October 1, 2017</span></li>
-                        <li><i class="fa fa-check-square-o pr-10" aria-hidden="true"></i>Fall 2019 Deadline <span class="">February 1, 2017</span></li>
-                        <li><i class="fa fa-check-square-o pr-10" aria-hidden="true"></i>Summer 2019 Deadline <span class="">May 1, 2017</span></li>
+                         <li><i class="fas fa-certificate" aria-hidden="true"></i>  PEC Certified </li>
+                        <li><i class="fas fa-certificate" aria-hidden="true"></i>  ISO 9001:2015 Certified</li>
                       </ul>
                     </div>
                   </div>

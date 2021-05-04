@@ -274,13 +274,22 @@ class Pages extends CI_Controller
 		$this->load->view('includes/footer');
 
 	}
-
+	
 	public function timetable() {
 
 		$data = [];
 
 		$this->load->view('includes/header', $data);
 		$this->load->view('pages/timetable');
+		$this->load->view('includes/footer');
+
+	}
+	public function all_programs() {
+
+		$data = [];
+
+		$this->load->view('includes/header', $data);
+		$this->load->view('pages/all_programs');
 		$this->load->view('includes/footer');
 
 	}
