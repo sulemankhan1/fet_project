@@ -14,6 +14,7 @@ class Timetable extends CI_Controller
           redirect('login');
       }
       date_default_timezone_set('asia/karachi');
+
     }
 
     public function index() {
@@ -47,62 +48,67 @@ class Timetable extends CI_Controller
       $this->load->view('footer');
     }
 
-    public function save() {
-      if($this->input->post()) {
-        $data = $this->input->post();
-
-        if($_FILES['IMAGE_PATH']['name'] != "")  {
-          // image is changed
-          // delete old image
-          if(isset($data['OLD_IMAGE_PATH']) && file_exists($data['OLD_IMAGE_PATH'])) {
-            // if on edit remove old image from server
-            unlink($data['OLD_IMAGE_PATH']);
-          }
-
-          $image_path = 'uploads/timetables/';
-          $image_path .= $this->bm->uploadFile($_FILES['IMAGE_PATH'], $image_path);
-
-        } elseif($_FILES['IMAGE_PATH']['name'] == "" && isset($data['OLD_IMAGE_PATH'])) {
-          // image is not changed use old image (for edit only)
-          $image_path = $data['OLD_IMAGE_PATH'];
-        } else {
-          $image_path = "";
-        }
-
-
-        $data['IMAGE_PATH'] = $image_path;
-        $data['user_id'] = $this->session->userdata('user_id');
-
-        if($data['NOTIFICATION_ID'] == "") {
-          $this->bm->insertRow('news_notifications', $data);
-          $msg = 'Notification Added Successfully';
-        } else {
-          // remove old image from array
-          unset($data['OLD_IMAGE_PATH']);
-          $this->bm->updateRow('news_notifications', $data, 'NOTIFICATION_ID', $data['NOTIFICATION_ID']);
-          $msg = 'Notification Updated Successfully';
-        }
-
-
-        $this->session->set_flashdata(array('type' => 'success', 'msg' => $msg));
-    		redirect('view_notifications');
-      }
-    }
+    // public function save() {
+    //   if($this->input->post()) {
+    //     $data = $this->input->post();
+    //
+    //     if($_FILES['IMAGE_PATH']['name'] != "")  {
+    //       // image is changed
+    //       // delete old image
+    //       if(isset($data['OLD_IMAGE_PATH']) && file_exists($data['OLD_IMAGE_PATH'])) {
+    //         // if on edit remove old image from server
+    //         unlink($data['OLD_IMAGE_PATH']);
+    //       }
+    //
+    //       $image_path = 'uploads/timetables/';
+    //       $image_path .= $this->bm->uploadFile($_FILES['IMAGE_PATH'], $image_path);
+    //
+    //     } elseif($_FILES['IMAGE_PATH']['name'] == "" && isset($data['OLD_IMAGE_PATH'])) {
+    //       // image is not changed use old image (for edit only)
+    //       $image_path = $data['OLD_IMAGE_PATH'];
+    //     } else {
+    //       $image_path = "";
+    //     }
+    //
+    //
+    //     $data['IMAGE_PATH'] = $image_path;
+    //     $data['user_id'] = $this->session->userdata('user_id');
+    //
+    //     if($data['NOTIFICATION_ID'] == "") {
+    //       $this->bm->insertRow('news_notifications', $data);
+    //       $msg = 'Notification Added Successfully';
+    //     } else {
+    //       // remove old image from array
+    //       unset($data['OLD_IMAGE_PATH']);
+    //       $this->bm->updateRow('news_notifications', $data, 'NOTIFICATION_ID', $data['NOTIFICATION_ID']);
+    //       $msg = 'Notification Updated Successfully';
+    //     }
+    //
+    //
+    //     $this->session->set_flashdata(array('type' => 'success', 'msg' => $msg));
+    // 		redirect('view_notifications');
+    //   }
+    // }
 
     public function edit($id) {
       $id = hashids_decrypt($id);
 
       $data = array(
-        'title' => 'Add New Notification',
-        'active_menu' => 'add_notification',
-        'faculties' => $this->bm->getAll('faculty', 'FAC_ID'),
-        'notification_types' => $this->bm->getAll('notification_type', 'NOTIFY_TYPE_ID', 'ASC'),
-        'record' => $this->nm->getNotification($id),
+        'title' => 'Update Timetable',
+        'active_menu' => 'view_timetables',
+        // 'menu_collapsed' => true,
+        'campuses' => $this->bm->getWhereRows('campus', 'is_archived', 0),
+        'faculties' => $this->bm->getWhereRows('faculties', 'is_archived', 0),
+        'record' => $this->bm->getById('timetable', $id),
       );
+      // echo "<pre>";
+      // print_r($data['record']);
+      // die();
+
 
       $this->load->view('header',$data);
       $this->load->view('sidebar');
-      $this->load->view('notifications/new_notification');
+      $this->load->view('timetable/new_timetable');
       $this->load->view('footer');
     }
 
@@ -118,13 +124,14 @@ class Timetable extends CI_Controller
     public function create() {
       if($this->input->post()) {
         $data = $this->input->post();
+        $id = isset($data['id']) && $data['id'] != "" ? $data['id'] : '';
         $data['type'] = $data['tt_type'];
         unset($data['tt_type']);
         $data['evening_morning'] = $data['tt_for'];
         unset($data['tt_for']);
 
         // for backend validation if error found where to redirect
-        $redirect_url = isset($data['id']) && $data['id'] != "" ? 'edit_timetable/'.hashids_encrypt($data['id']) : 'new_timetable';
+        $redirect_url = isset($data['id']) && $data['id'] != "" ? 'edit_timetable/'.hashids_encrypt($id) : 'new_timetable';
 
         // Validation
         // fields validation
@@ -142,32 +149,50 @@ class Timetable extends CI_Controller
         redirect($redirect_url);
       }
         // check if a timetable for same class Already exist
-        if(@$data['id'] == "" && $this->tm->alreadyExist($data) > 0) {
+        if(@$data['id'] == "" && $this->tm->alreadyExist($data, $id) > 0) {
           $this->session->set_flashdata(array('type' => 'error',
           'msg' => 'Timetable for Same Class Already Exist. Please consider editing that Timetable!', 'data' => $data));
           redirect($redirect_url);
         }
 
+        unset($data['old_image']);
         // check type
         if($data['type'] == 'image') {
           // if image then upload image
 
-          // validate image given
-          if($_FILES['tt_image']['name'] == "") {
+          // validate image given (for add tiemtable only)
+          if($id == "" && $_FILES['tt_image']['name'] == "") {
             $this->session->set_flashdata(array('type' => 'error',
             'msg' => 'Image Not provided. please fill Form again!', 'data' => $data));
             redirect($redirect_url);
           }
 
           // ***** IMAGE MEME TYPE NEEDS TO BE CHECKED HERE *****
-          $directory = 'uploads/timetables/';
-          $data['image'] = $this->bm->uploadFile($_FILES['tt_image'], $directory);
+          if($_FILES['tt_image']['name'] != "") {
+            $directory = 'uploads/timetables/';
+            $data['image'] = $this->bm->uploadFile($_FILES['tt_image'], $directory);
+            // DELETE OLD IMAGE FROM DIRECTORY
+          } else {
+            // image not set then select old image
+            $data['image'] = $data['old_image'];
+          }
+
+          $data['user_id'] = $this->session->user_id;
+
 
           if(isset($data['id']) && $data['id'] != "") {
             // edit
+            unset($data['id']);
+
+            $this->bm->updateRow('timetable', $data, 'id', $id);
+            $this->session->set_flashdata(array('type' => 'success',
+            'msg' => 'Timetable has been Added!'));
+            redirect('view_timetables');
           } else {
             // add
+            $data['published'] = 1;
             $this->bm->insertRow('timetable', $data);
+
             $this->session->set_flashdata(array('type' => 'success',
             'msg' => 'Timetable has been Added!'));
             redirect('view_timetables');
@@ -178,11 +203,14 @@ class Timetable extends CI_Controller
 
           if(isset($data['id']) && $data['id'] != "") {
             // edit
+            unset($data['id']);
+            $this->bm->updateRow('timetable', $data, 'id', $id);
           } else {
             // add
             $id = $this->bm->insertRow('timetable', $data);
-            redirect('customize_timetable/'.hashids_encrypt($id));
           }
+
+          redirect('customize_timetable/'.hashids_encrypt($id));
         }
       }
     }
@@ -191,6 +219,8 @@ class Timetable extends CI_Controller
       $id = hashids_decrypt($id);
 
       $record = $this->tm->getRecord($id);
+      $detail_records = $this->tm->getDetailRecords($id);
+
 
       if(empty($record)) {
         echo "404 Please go back!";
@@ -210,10 +240,10 @@ class Timetable extends CI_Controller
         'teachers' => $this->tm->getTeachers($record),
         'subjects' => $this->tm->getSubjects($record),
         'class_rooms' => $this->tm->getClassRooms($record),
+        'id' => $id,
+        'detail_records' => $detail_records,
       );
-      // echo "<pre>";
-      // print_r($record);
-      // die();
+
 
       $this->load->view('header',$data);
       $this->load->view('sidebar');
@@ -221,7 +251,7 @@ class Timetable extends CI_Controller
       $this->load->view('footer');
     }
 
-    public function getTimetSettings($evening_morning) {
+    public function getTimetSettings($evening_morning, $timetable_id = "") {
 
       $morning_start_time = '08:00 am';
       $morning_end_time = '01:00 pm';
@@ -265,7 +295,64 @@ class Timetable extends CI_Controller
         }
       }
 
-      echo json_encode($new_data);
+      if($timetable_id != "") {
+        $detail_records = $this->tm->getDetailRecords($timetable_id);
+        $records = array();
+        foreach($new_data as $rec) {
+          foreach($detail_records as $d_rec) {
+            if($rec['time_from'] == $d_rec->time_from &&
+            $rec['time_to'] == $d_rec->time_to &&
+            $rec['day'] == $d_rec->day) {
+              $rec['teacher_id'] = $d_rec->teacher_id;
+              $rec['subject_id'] = $d_rec->subject_id;
+              $rec['classroom_id'] = $d_rec->classroom_id;
+            }
+          }
+          $records[] = $rec;
+        }
+      }
+
+      echo json_encode($records);
+    }
+
+    public function finish() {
+      if($this->input->post()) {
+        $data = $this->input->post();
+
+        $data['timetable_data'] = json_decode($data['timetable_data']);
+        $timetable_id = $data['timetable_id'];
+        // echo "<pre>";
+        // print_r($data);
+        // die();
+
+
+        // filtering data to remove empty cells
+        $timetable_details = array();
+        foreach($data['timetable_data'] as $row) {
+          if($row->teacher_id != 0 || $row->subject_id != 0 || $row->classroom_id != 0) {
+            $row->timetable_id = $data['timetable_id'];
+            $timetable_details[] = $row;
+          }
+        }
+        if(empty($timetable_details)) {
+          echo json_encode(array('error' => true));
+        }
+
+        if(!empty($timetable_details)) {
+          // save bach
+          if($timetable_id != "") {
+            $this->bm->delete('timetable_details', 'timetable_id', $timetable_id);
+          }
+          $this->bm->insertRows('timetable_details', $timetable_details);
+
+          if($data['draft'] == "") {
+            // publish timetable
+            $this->bm->updateRow('timetable', array('published' => 1), 'id', $data['timetable_id']);
+          }
+
+          echo json_encode(array('location' => site_url('view_timetables')));
+        }
+      }
     }
 
 }

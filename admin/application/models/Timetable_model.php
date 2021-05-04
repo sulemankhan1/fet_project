@@ -3,7 +3,7 @@
 class Timetable_model extends CI_Model {
 
 
-    public function alreadyExist($data) {
+    public function alreadyExist($data, $current_editing_rec_id = "") {
       $this->db->select('*');
       $this->db->from('timetable t');
       $this->db->where('t.is_archived', 0);
@@ -13,6 +13,9 @@ class Timetable_model extends CI_Model {
       $this->db->where('t.part', $data['part']);
       $this->db->where('t.semester', $data['semester']);
       $this->db->where('t.class_group', $data['class_group']);
+      if($current_editing_rec_id != "") {
+        $this->db->where('t.id !=', $current_editing_rec_id);
+      }
       return $this->db->get()->num_rows();
     }
 
@@ -25,6 +28,16 @@ class Timetable_model extends CI_Model {
       $this->db->join('departments d', 'd.id = t.depart_id', 'LEFT');
       $this->db->join('faculties f', 'f.id = t.faculty_id', 'LEFT');
       $this->db->join('users u', 'u.id = t.user_id', 'LEFT');
+      return $this->db->get()->result();
+    }
+    public function getDetailRecords($timetable_id) {
+
+      $this->db->select('td.*, u.title as user_title, u.full_name as user_fullname, s.subject_title, c.name class_name, s.course_code');
+      $this->db->from('timetable_details td');
+      $this->db->where('td.timetable_id', $timetable_id);
+      $this->db->join('users u', 'u.id = td.teacher_id', 'LEFT');
+      $this->db->join('subjects s', 's.id = td.subject_id', 'LEFT');
+      $this->db->join('class_rooms c', 'c.id = td.classroom_id', 'LEFT');
       return $this->db->get()->result();
     }
     public function getRecord($id) {
