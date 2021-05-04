@@ -34,8 +34,8 @@
                         <thead>
                           <tr>
                             <th>S.No</th>
-                            <th>Image</th>
-                            <th>Title</th>
+                            <!-- <th>Image</th> -->
+                            <!-- <th>Title</th> -->
                             <th>Campus</th>
                             <th>Faculty</th>
                             <th>Depart</th>
@@ -55,7 +55,7 @@
                           <?php $sno=1; foreach ($records as $record): ?>
                             <tr>
                               <td><?=$sno?></td>
-                              <td>
+                              <!-- <td>
                                 <?php if(@getimagesize('uploads/timetables/'.$record->image)) { ?>
                                   <a href="<?=base_url('uploads/timetables/'.$record->image)?>" target="_blank">
                                     <img src="<?=base_url('uploads/timetables/'.$record->image)?>" width="150" class="img-thumbnail">
@@ -63,8 +63,8 @@
                                 <?php } else { ?>
                                   <img src="<?=base_url('app-assets/images/no-image-available.png')?>" width="150" class="img-thumbnail">
                                 <?php } ?>
-                              </td>
-                              <td><?=$record->title?></td>
+                              </td> -->
+                              <!-- <td><?=$record->title?></td> -->
                               <td><?=($record->campus_name == "")?"For All":$record->campus_name?></td>
                               <td><?=($record->faculty_name == "")?"For All":$record->faculty_name?></td>
                               <td><?=($record->depart_name == "")?"For All":$record->depart_name?></td>
@@ -72,15 +72,20 @@
                               <td><?=$record->class_group?></td>
                               <td><?=$record->part?></td>
                               <td><?=$record->year?></td>
-                              <td><span class="badge badge-primary"><?=$record->evening_morning?></span> </td>
+                              <td><?=$record->evening_morning?> </td>
+                              <td><span class="badge badge-<?=($record->published == 0)?"secondary":"success"?>"><?=($record->published == 0)?"Draft":"Published"?></span> </td>
                               <td><span class="circled <?=($record->published)?'green-circle':'grey-circle'?>">A</span> </td>
                               <td><?=$record->username?></td>
                               <td><?=date('d M Y h:i a', strtotime($record->datetime_added))?></td>
                               <td><?=date('d M Y h:i a', strtotime($record->datetime_updated))?></td>
                               <td>
-                                <!-- <a href="#" class="btn-sm btn-link" title="View"><i class="ft-eye"></i></a> -->
-                                <a href="<?=site_url('edit_record/'.hashids_encrypt($record->id))?>" class="btn-sm btn-link" title="Edit"><i class="ft-edit"></i></a>
-                                <a href="<?=site_url('delete_record/'.hashids_encrypt($record->id))?>" class="btn-sm btn-link" title="Delete" onclick="return confirm('Are you sure you want to Delete this Subject? This Action Cannot be reverted.')"><i class="ft-trash"></i></a>
+                                <a href="<?=site_url('edit_timetable/'.hashids_encrypt($record->id))?>" class="btn-sm btn-link" title="Edit"><i class="ft-edit"></i></a>
+                                <a href="<?=site_url('delete_timetable/'.hashids_encrypt($record->id))?>" class="btn-sm btn-link" title="Delete" onclick="return confirm('Are you sure you want to Delete this Subject? This Action Cannot be reverted.')"><i class="ft-trash"></i></a>
+                                <?php if($record->type == "custom") { ?>
+                                  <a href="<?=site_url('customize_timetable/'.hashids_encrypt($record->id))?>" class="btn-sm btn-link" title="view"><i class="icon-settings"></i></a>
+                                <?php } else { ?>
+                                  <a href="<?=base_url('uploads/timetables/'.$record->image)?>" class="btn-sm btn-link" title="view" target="_blank"><i class="ft-eye"></i></a>
+                                <?php } ?>
                               </td>
                             </tr>
                           <?php $sno++; endforeach; ?>

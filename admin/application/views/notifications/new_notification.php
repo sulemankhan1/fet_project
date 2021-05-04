@@ -262,10 +262,6 @@ $('document').ready(function() {
     let faculty_id = $('input[name=faculty_id]').val();
     let dept_id = $('input[name=depart_id]').val();
     let prog_id = $('input[name=program_id]').val();
-    console.log(faculty_id);
-    console.log(dept_id);
-    console.log(prog_id);
-
     // if there is faculty id then fetch departments for that faculty
     if(faculty_id) {
 

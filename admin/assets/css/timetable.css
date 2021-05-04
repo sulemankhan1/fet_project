@@ -11,6 +11,22 @@
 } */
 .tt_timetable .teacher-card {
   display: block;
+  position: relative;
+}
+.remover-btn {
+  position: absolute;
+  top: 0; right: 0;
+  padding: 5px;
+  height: 100%;
+  margin: 0;
+  float: right;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+}
+.teacher-card:hover  .remover-btn {
+ display: inline-block;
 }
 .teacher-card {
   display: inline-block;
