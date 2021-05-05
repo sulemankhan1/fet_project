@@ -24,7 +24,10 @@ $route['about'] = 'pages/about';
 $route['subscribe'] = 'pages/subscribe';
 $route['genrated_timetable'] = 'pages/genrated_timetable';
 $route['all_programs'] = 'pages/all_programs';
-
+$route['software_eng'] = 'pages/software_eng';
+$route['information_tech'] = 'pages/information_tech';
+$route['electronics'] = 'pages/electronics';
+$route['telecommunication'] = 'pages/telecommunication';
 
 // forget password
 $route['forgot_password'] = 'pages/forgot_password';
