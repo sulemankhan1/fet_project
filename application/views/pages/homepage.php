@@ -78,7 +78,6 @@
                   data-splitin="none"
                   data-splitout="none"
                   data-responsive_offset="on"
-
                   style="z-index: 5; white-space: nowrap;">The mission of the Faculty of Engineerig and Technology is to provide dynamic learning<br> with quality education through rigorous teaching and research methodologies in Information <br> and Communication Technologies (ICT).
                 </div>
                 <!-- LAYER NR. 4 -->
@@ -801,12 +800,6 @@
         </div>
          <!--Carousel start-->
           <div class="owl-carousel text-center">
-
-            <?php
-            // echo "<pre>";
-            // print_r($faculty_members);
-            // die();
-             ?>
             <?php foreach($faculty_members as $key => $v): ?>
 
             <?php $card_color = 'bg-theme-colored2'; if($key%2 == 0){ $card_color = 'bg-theme-colored3'; }?>
