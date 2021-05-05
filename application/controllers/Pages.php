@@ -294,15 +294,129 @@ class Pages extends CI_Controller
 
 	}
 
-	public function faculty() {
+	public function faculty() 
+	{
 
-		$data = [];
+		$data = [
+			
+			'title' => 'Faculty',
+
+			'campus' => $this->bm->getAll('campus', 'id')
+
+		];
 
 		$this->load->view('includes/header', $data);
 		$this->load->view('pages/faculty');
 		$this->load->view('includes/footer');
 
 	}
+
+
+	public function getAllFacultyMembers($rowno=0)
+	{
+
+		$this->load->library('pagination');
+
+	   	// Row per page
+	  	$rowperpage = 20;
+	  	// Row position
+	  	if($rowno != 0){
+			$rowno = ($rowno-1) * $rowperpage;
+	  	}
+  
+  
+	  	$search = ($this->input->post('search') == ''?'':$this->input->post('search'));
+	  	$campus = ($this->input->post('campus') == ''?'':$this->input->post('campus'));
+	  	$faculty = ($this->input->post('faculty') == ''?'':$this->input->post('faculty'));
+	  	$depart = ($this->input->post('depart') == ''?'':$this->input->post('depart'));
+  
+		  
+	  	$this->load->model('Users_model');
+	  	// All records count
+	  	$allcount = $this->Users_model->getFacultyCount($search,$campus,$faculty,$depart);
+	  	// Get records
+	  	$data1['faculty'] = $this->Users_model->getFaculty($rowno,$rowperpage,$search,$campus,$faculty,$depart);
+  
+	  	// Pagination Configuration
+		$config['base_url'] = site_url().'/pages/getAllFacultyMembers';
+		$config['use_page_numbers'] = TRUE;
+		$config['total_rows'] = $allcount;
+		$config['per_page'] = $rowperpage;
+		$config['cur_tag_open'] = '<a class="btn btn-sm btn-dark text-white">';
+		$config['cur_tag_close'] = '</a>';
+		$config['next_link'] = 'Next';
+		$config['prev_link'] = 'Previous';
+		$config['attributes'] = ['class' => 'btn text-dark btn-sm'];
+		// Initialize
+	  	$this->pagination->initialize($config);
+	  	// Initialize $data Array
+	  	$data['pagination'] = $this->pagination->create_links();
+	  	$data['result'] = $this->load->view('pages/faculty_members',$data1,TRUE);
+	  	$data['row'] = $rowno;
+
+	  	echo json_encode($data);
+   
+	}
+
+	public function getAllFaculties($campus_id='')
+	{
+
+		if($campus_id != '' && $campus_id != 'all')
+		{
+	
+			// $faculties = $this->bm->getWhereRows('faculties', 'campus_id', $campus_id);
+			$faculties = [];
+			
+		}
+		else 
+		{
+			
+			$faculties = $this->bm->getAll('faculties', 'id');
+
+		}
+
+		$output .= '<option selected disabled value=""> by Faculty </option><option value="all">in all Faculties</option>';
+
+		foreach ($faculties as $key => $v) 
+		{
+			
+			$output .='<option value="'.$v->id.'">'.$v->name.'</option>';
+
+		}
+
+		echo $output;
+
+	}
+
+	public function getAllDepartments($faculty_id='')
+	{
+
+		if($faculty_id != '' && $faculty_id != 'all')
+		{
+	
+			$departments = $this->bm->getWhereRows('departments', 'fac_id', $faculty_id);
+			
+		}
+		else 
+		{
+			
+			$departments = $this->bm->getAll('departments', 'id');
+
+		}
+
+		$output .= '<option selected disabled value=""> by Department </option><option value="all">in all Programs</option>';
+
+		foreach ($departments as $key => $v) 
+		{
+			
+			$output .='<option value="'.$v->id.'">'.$v->name.'</option>';
+
+		}
+
+		echo $output;
+
+	}
+
 	public function genrated_timetable() {
 
 		$data = [];
@@ -494,37 +608,37 @@ class Pages extends CI_Controller
 		$this->form_validation->set_rules('campus_id', 'Campus', 'required');
 		$this->form_validation->set_rules('faculty_id', 'Faculty', 'required');
 		$this->form_validation->set_rules('depart_id', 'Department', 'required');
-
+		  
 		if($p['type'] == 'STUDENT')
 		{
-
+  
 		  $this->form_validation->set_rules('program_id', 'Program', 'required');
-
+  
 		}
-
+  
 		if($this->form_validation->run())
 		{
-
+  			
 			$p = $this->input->post();
 
-
+			
 			$account_activity = $this->bm->getWhere('settings', 'name', 'ACCOUNT_ACTIVITY');
-
+			
 			if($account_activity->value == 'pending')
 			{
-
+  
 			  $pending = 1;
 			  $account_active = 0;
-
+  
 			}
 			else
 			{
-
+  
 			  $pending = 0;
 			  $account_active = 1;
-
+  
 			}
-
+  
 			$data = [
 
 				'campus_id' => $p['campus_id'],
@@ -540,85 +654,74 @@ class Pages extends CI_Controller
 				'account_active' => $account_active,
 				'is_pending' => $pending,
 				'created_at' => date('Y-m-d H:i:s')
-
+  
 			];
-
+  
 			$ins_id = $this->bm->insertRow('users', $data);
-
+			
 			if ($p['type'] == 'TEACHER')
 			{
-
-
+  
+			  
 			  $info = [
-
+				
 				'user_id' => $ins_id
-
+				
 			  ];
-
+			  
 			  $this->bm->insertRow('teachers',$info);
-
+			  
 			}
-
+			
 			elseif ($p['type'] == 'STUDENT')
 			{
-
+			  
 			  $info = [
-
+				
 				'user_id' => $ins_id,
 				'program_id' => $p['program_id'],
-
+				
 			  ];
-
+			  
 			  $this->bm->insertRow('students',$info);
-
+			  
 			}
-
+  
 			else
 			{
-
+			  
 			  $info = [
-
+				
 				'user_id' => $ins_id
-
+				
 			  ];
-
+			  
 			  $this->bm->insertRow('other_users',$info);
-
+  
 			}
-
-			if ($account_active == 1)
+  
+			if ($account_active == 1) 
 			{
-
+			
 				$this->session->set_flashdata(array('response' => 'success', 'msg' => "Registration has been done Successfully"));
-
+			
 			}
 			else
 			{
-
+				
 				$this->session->set_flashdata(array('response' => 'success', 'msg' => "Registration has been done Successfully wait for approving your account "));
 
 			}
-
-
+  
+				
 				redirect('login');
-
-
+  
+  
 		}
 		else
 		{
-
-			if($p['page_name'] == 'home')
-			{
-
-				$this->index();
-
-			}
-			else
-			{
-
-				$this->register();
-
-			}
+				
+			$this->register();
 
 		}
 	}

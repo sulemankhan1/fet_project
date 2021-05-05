@@ -1,3 +1,14 @@
+<style>
+  @media (min-width: 992px) {
+
+    .main-panel .main-content {
+
+      padding-left : 250px;
+      
+    }
+
+}
+</style>
 <!--Basic User Details Starts-->
 <section id="user-profile">
   <div class="row">

@@ -589,19 +589,7 @@
                         <span class="text-white"><?=form_error('title')?></span>
                       </div>
                     </div>
-                    <div class="col-sm-12">
-                      <div class="form-group mb-20">
-                      <input type="text" class="form-control" placeholder="Full Name" name="full_name" value="<?=@$this->input->post('full_name')?>">
-                      <span class="text-white"><?=form_error('full_name')?></span>
-                      </div>
-                    </div>
-                    <div class="col-sm-12">
-                      <div class="form-group mb-20">
-                        <input type="email" class="form-control" placeholder="Email" name="email" value="<?=@$this->input->post('email')?>">
-                        <span class="text-white"><?=form_error('email')?></span>
-                      </div>
-                    </div>
-                    <div class="col-sm-12">
+		    <div class="col-sm-12">
                       <div class="form-group mb-20">
                         <input name="username" class="form-control" type="text" placeholder="Username" name="username" value="<?=@$this->input->post('username')?>">
                         <span class="text-white"><?=form_error('username')?></span>
@@ -619,63 +607,7 @@
                         <span class="text-white"><?=form_error('re_enter_password')?></span>
                       </div>
                     </div>
-                    <div class="col-sm-12">
-                      <div class="form-group mb-20">
-                        <select class="form-control" name="campus_id">
-                          <option value="">choose campus</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                        </select>
-                        <span class="text-white"><?=form_error('campus_id')?></span>
-
-                      </div>
-                    </div>
-                    <div class="col-sm-12">
-                      <div class="form-group mb-20">
-                        <select class="form-control" name="faculty_id">
-                          <option value="">choose faculty</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                        </select>
-                        <span class="text-white"><?=form_error('faculty_id')?></span>
-                      </div>
-                    </div>
-                    <div class="col-sm-12">
-                      <div class="form-group mb-20">
-                        <select class="form-control" name="depart_id">
-                          <option value="">choose department</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                        </select>
-                        <span class="text-white"><?=form_error('depart_id')?></span>
-                      </div>
-                    </div>
-                    <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
-
-                    <div class="col-sm-12 info_student" style="display:block;">
-
-                    <?php }else { ?>
-
-                    <div class="col-sm-12 info_student" style="display:none;">
-
-                    <?php } ?>
-                      <div class="form-group mb-20">
-                        <select class="form-control" name="program_id">
-                          <option value="">choose program</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                        </select>
-                        <span class="text-white"><?=form_error('depart_id')?></span>
-                      </div>
-                    </div>
+                   
 
 
 
@@ -687,7 +619,6 @@
                     </div> -->
                     <div class="col-sm-12">
                       <div class="form-group mb-0 mt-10">
-                        <input name="form_botcheck" class="form-control" type="hidden" value="">
                         <button type="submit" class="btn btn-colored btn-default text-black btn-lg btn-block" data-loading-text="Please wait...">Create Account</button>
                       </div>
                     </div>
