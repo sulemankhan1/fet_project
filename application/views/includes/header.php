@@ -93,7 +93,7 @@
 
                     <li class="bg-theme-colored text-white mb-xs-5"><i class="fa fa-sign-in-alt"></i><a class="text-white" href="<?=site_url('login')?>"> Sign In </a></li>
                     <li class="bg-theme-colored3 text-white mb-xs-5"><i class="fa fa-registered"></i> <a class="text-white" href="<?=site_url('register')?>">Register</a></li>
-                    
+
                   <?php }else{ ?>
                     <!-- <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Dropdown</a>
@@ -131,17 +131,17 @@
       <div class="header-nav-wrapper navbar-scrolltofixed bg-white">
         <div class="container-fuild">
           <nav id="menuzord-right" class="menuzord orange no-bg">
-            
-          
+
+
               <a class="menuzord-brand pull-left flip mb-15" href="index.php" id="logo-size"><img src="<?=base_url("assets/images/FET-logo.png")?>" alt="">
                 <h4 id="logo-size1">Faculty of Engineering & Technology<br><small><b>University of Sindh, Pakistan</b></small></h4>
               </a>
-           
-            
-           
+
+
+
             <ul class="menuzord-menu">
-              <li><a href="index.php">Home</a>
-               
+              <li><a href="<?=site_url('/')?>">Home</a>
+
             </li>
             <li>
               <a href="javascript:void(0)">programs</a>
@@ -178,12 +178,12 @@
                 <li><a href="">Ph.D</a></li>
               </ul>
             </li>
-             
+
               <li><a href="<?=site_url('timetable')?>">Time Table</a>
-                  
+
                 </li>
                <li><a href="<?=site_url('faculty') ?>">Faculty</a></li>
-                <li><a href="javascript:void(0)">News</a></li>
+                <li><a href="<?=site_url('news')?>">News</a></li>
                 <li><a href="javascript:void(0)">Resources  </a>
                   <ul class="dropdown">
                     <li><a href="#">FYP Resources</a></li>
@@ -192,13 +192,13 @@
                   </ul>
                 </li>
                 <li><a href="<?=site_url('about')?>">About</a></li>
-                  <li><a href="javascript:void(0)">Contact</a></li>
+                  <li><a href="<?=site_url('contact')?>">Contact</a></li>
 
                  <!--<li><a href="javascripts:void(0)">Sign In</a>-->
-                 
+
                 </li>
             </ul>
-            
+
           </nav>
         </div>
       </div>

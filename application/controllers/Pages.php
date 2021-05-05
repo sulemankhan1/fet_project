@@ -37,7 +37,7 @@ class Pages extends CI_Controller
 
 	}
 
-	
+
 	public function edit_profile($user_id)
 	{
 
@@ -51,7 +51,7 @@ class Pages extends CI_Controller
 
 		'edit' => $this->Users_model->getUserToEdit($id)
 
-		];	
+		];
 
 		$this->load->view('includes/header', $data);
 		$this->load->view('pages/edit_profile');
@@ -60,7 +60,7 @@ class Pages extends CI_Controller
 
 	}
 
-	public function update_profile() 
+	public function update_profile()
   	{
 
     	$p = $this->input->post();
@@ -195,45 +195,45 @@ class Pages extends CI_Controller
 			if ($p['type'] == 'TEACHER')
 			{
 
-            
+
 				$info = [
-				
+
 				'designation' => $p['designation'],
 				'speciality' => $p['speciality']
-				
+
 				];
-				
+
 				$this->bm->updateRow('teachers', $info,'user_id',$p['id']);
 
-				
+
 			}
-			
+
 			elseif ($p['type'] == 'STUDENT')
 			{
-            
+
 				$info = [
-				
+
 				'program_id' => $p['program_id'],
 				'roll_number' => $p['roll_no'],
 				'batch_year' => $p['batch_year'],
 				'current_semester' => $p['current_semester_no']
-				
+
 				];
-							
+
 				$this->bm->updateRow('students', $info,'user_id',$p['id']);
 
-				
+
 			}
 
 			else
 			{
-				
+
 				$info = [
-				
+
 				'job_title' => $p['job_title']
-				
+
 				];
-				
+
 				$this->bm->updateRow('other_users', $info,'user_id',$p['id']);
 
 			}
@@ -246,25 +246,25 @@ class Pages extends CI_Controller
         }
         else
         {
-          
+
           $this->edit_profile(hashids_encrypt($p['id']));
-          
+
         }
-        
+
   	}
 
 
-	public function view_profile($user_id) 
+	public function view_profile($user_id)
 	{
-		
+
 		$id = hashids_decrypt($user_id);
-		
+
 		$this->load->model('Users_model');
 
 		$data = [
 
 			'title' => 'View Profile',
-			
+
 			'user' => $this->Users_model->getUsersDetails($id)
 
 		];
@@ -274,7 +274,7 @@ class Pages extends CI_Controller
 		$this->load->view('includes/footer');
 
 	}
-	
+
 	public function timetable() {
 
 		$data = [];
@@ -324,27 +324,27 @@ class Pages extends CI_Controller
 
 	public function save_login()
 	{
-		
+
 		$p = $this->input->post();
 
 		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
-		  
-  
+
+
 		if($this->form_validation->run())
 		{
 
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
-	
-	
+
+
 			$data = [
 				'username' => $username,
 				'password' => $password
 			];
-	
+
 			$this->load->model('Auth_model');
-			
+
 			$res = $this->Auth_model->login_verify($data);
 
 				// get and update settings
@@ -357,7 +357,7 @@ class Pages extends CI_Controller
 				}
 			}
 
-			if ($res['valid']) 
+			if ($res['valid'])
 			{
 
 				$user_data = [
@@ -368,9 +368,9 @@ class Pages extends CI_Controller
 					'settings' => $new_settings,
 				];
 
-				if(empty($res['user_data']->username)) 
+				if(empty($res['user_data']->username))
 				{
-					
+
 					$this->session->set_flashdata(array('response' => 'danger', 'msg' => "You are not authorized to login please ask your admin"));
 
 					redirect('login');
@@ -381,29 +381,29 @@ class Pages extends CI_Controller
 
  				redirect('/');
 
-			} 
-			else 
+			}
+			else
 			{
-				
+
 				$this->session->set_flashdata(array('response' => 'danger', 'msg' => $res['error'] ));
           		redirect('login');
-				  
+
 			}
-			
+
 		}
 		else
 		{
-			
+
 			$this->login();
-			
+
 		}
-		
-		
+
+
 	}
-	
+
 	public function logout()
 	{
-		
+
 		session_destroy();
 		redirect('login');
 
@@ -430,7 +430,7 @@ class Pages extends CI_Controller
 	public function register() {
 
 		$data = [
-			
+
 			'title' => 'Register',
 
 			'roles' => $this->bm->getAll('roles', 'id', 'desc')
@@ -457,37 +457,37 @@ class Pages extends CI_Controller
 		$this->form_validation->set_rules('campus_id', 'Campus', 'required');
 		$this->form_validation->set_rules('faculty_id', 'Faculty', 'required');
 		$this->form_validation->set_rules('depart_id', 'Department', 'required');
-		  
+
 		if($p['type'] == 'STUDENT')
 		{
-  
+
 		  $this->form_validation->set_rules('program_id', 'Program', 'required');
-  
+
 		}
-  
+
 		if($this->form_validation->run())
 		{
-  			
+
 			$p = $this->input->post();
 
-			
+
 			$account_activity = $this->bm->getWhere('settings', 'name', 'ACCOUNT_ACTIVITY');
-			
+
 			if($account_activity->value == 'pending')
 			{
-  
+
 			  $pending = 1;
 			  $account_active = 0;
-  
+
 			}
 			else
 			{
-  
+
 			  $pending = 0;
 			  $account_active = 1;
-  
+
 			}
-  
+
 			$data = [
 
 				'campus_id' => $p['campus_id'],
@@ -503,69 +503,69 @@ class Pages extends CI_Controller
 				'account_active' => $account_active,
 				'is_pending' => $pending,
 				'created_at' => date('Y-m-d H:i:s')
-  
+
 			];
-  
+
 			$ins_id = $this->bm->insertRow('users', $data);
-			
+
 			if ($p['type'] == 'TEACHER')
 			{
-  
-			  
+
+
 			  $info = [
-				
+
 				'user_id' => $ins_id
-				
+
 			  ];
-			  
+
 			  $this->bm->insertRow('teachers',$info);
-			  
+
 			}
-			
+
 			elseif ($p['type'] == 'STUDENT')
 			{
-			  
+
 			  $info = [
-				
+
 				'user_id' => $ins_id,
 				'program_id' => $p['program_id'],
-				
+
 			  ];
-			  
+
 			  $this->bm->insertRow('students',$info);
-			  
+
 			}
-  
+
 			else
 			{
-			  
+
 			  $info = [
-				
+
 				'user_id' => $ins_id
-				
+
 			  ];
-			  
+
 			  $this->bm->insertRow('other_users',$info);
-  
+
 			}
-  
-			if ($account_active == 1) 
+
+			if ($account_active == 1)
 			{
-			
+
 				$this->session->set_flashdata(array('response' => 'success', 'msg' => "Registration has been done Successfully"));
-			
+
 			}
 			else
 			{
-				
+
 				$this->session->set_flashdata(array('response' => 'success', 'msg' => "Registration has been done Successfully wait for approving your account "));
 
 			}
-  
-				
+
+
 				redirect('login');
-  
-  
+
+
 		}
 		else
 		{
@@ -574,11 +574,11 @@ class Pages extends CI_Controller
 			{
 
 				$this->index();
-				
+
 			}
 			else
 			{
-				
+
 				$this->register();
 
 			}
@@ -662,7 +662,7 @@ class Pages extends CI_Controller
 
 	public function subscribe()
 	{
-		
+
 		$p = $this->input->post();
 
 		$this->form_validation->set_rules('email', 'Email', 'required');
@@ -674,7 +674,7 @@ class Pages extends CI_Controller
 			$this->bm->insertRow('subscribers',['email' => $p['email']]);
 
 			$this->session->set_flashdata(array('response' => 'success', 'msg' => "Subscribe Successfully"));
-			
+
 			redirect('/');
 
 
@@ -683,20 +683,20 @@ class Pages extends CI_Controller
 		{
 			$this->index();
 		}
-		
+
 	}
 
 	public function forgot_password()
 	{
-		
+
 		$data = [
-		
+
 		];
-			
+
 		$this->load->view('includes/header', $data);
 		$this->load->view('pages/forgot_password');
 		$this->load->view('includes/footer');
-			
+
 
 	}
 
@@ -776,15 +776,15 @@ class Pages extends CI_Controller
 
 				}
 
-				
+
 			}
 			else
 			{
-				
+
 				$this->session->set_flashdata(array('response' => 'danger', 'msg' => "Invalid email try again"));
 
 			}
-			
+
 			redirect('forgot_password');
 
 
@@ -795,7 +795,7 @@ class Pages extends CI_Controller
 		}
 
 
-		
+
 	}
 
 

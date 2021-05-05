@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2021 at 08:09 PM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 7.4.16
+-- Generation Time: May 05, 2021 at 05:22 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.1.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `fet`
+-- Database: `fet_database`
 --
 
 -- --------------------------------------------------------
@@ -54,7 +55,7 @@ CREATE TABLE `class_rooms` (
   `name` varchar(255) NOT NULL,
   `barcode` varchar(255) NOT NULL,
   `room_no` varchar(255) NOT NULL,
-  `date_added` timestamp NOT NULL DEFAULT current_timestamp(),
+  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `remarks` text NOT NULL,
   `added_by` int(11) NOT NULL,
   `is_archived` tinyint(1) NOT NULL
@@ -388,7 +389,25 @@ INSERT INTO `keywords` (`id`, `keyword`, `news_id`, `type`) VALUES
 (34, ' new', 3, 'news'),
 (35, ' xyz', 2, 'news'),
 (37, ' new', 2, 'news'),
-(38, 'tesy', 2, 'news');
+(38, 'tesy', 2, 'news'),
+(39, 'usindh', 12, 'news'),
+(40, ' test', 12, 'news'),
+(41, ' university of sindh', 12, 'news'),
+(42, 'usindh', 13, 'news'),
+(43, ' test', 13, 'news'),
+(44, ' university of sindh', 13, 'news'),
+(45, 'usindh', 14, 'news'),
+(46, ' test', 14, 'news'),
+(47, ' university of sindh', 14, 'news'),
+(48, 'usindh', 15, 'news'),
+(49, ' test', 15, 'news'),
+(50, ' university of sindh', 15, 'news'),
+(51, 'usindh', 16, 'news'),
+(52, ' test', 16, 'news'),
+(53, ' university of sindh', 16, 'news'),
+(57, 'usindh', 17, 'news'),
+(58, ' test', 17, 'news'),
+(59, ' university of sindh', 17, 'news');
 
 -- --------------------------------------------------------
 
@@ -402,9 +421,9 @@ CREATE TABLE `news_notifications` (
   `depart_id` varchar(100) NOT NULL,
   `notify_type_id` int(11) NOT NULL,
   `notification_for` varchar(255) NOT NULL,
-  `title` text DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `date_time` timestamp NULL DEFAULT current_timestamp(),
+  `title` text,
+  `description` text,
+  `date_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `image` varchar(255) DEFAULT NULL,
   `publisher_id` int(11) DEFAULT NULL,
   `user_type_id` varchar(256) DEFAULT NULL,
@@ -419,10 +438,12 @@ CREATE TABLE `news_notifications` (
 --
 
 INSERT INTO `news_notifications` (`id`, `faculty_id`, `depart_id`, `notify_type_id`, `notification_for`, `title`, `description`, `date_time`, `image`, `publisher_id`, `user_type_id`, `program_id`, `remarks`, `in_draft`, `is_archieved`) VALUES
-(2, 'all', 'all', 4, 'university_faculty', 'updated title', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2021-04-08 16:32:55', 'uploads/notifications_images/70438808horizon_zero_dawn_2017_video_game-wallpaper-3554x1999.jpg', 1, NULL, 'all', 'asdfasdf updated ', 0, 0),
-(3, '', '', 13, 'everyone', 'test student notice', '<p>asdf asdf asdf asdf asdf asdf asf asdfasdfas dfasdf asdfa sdfasdfasdf asdf asdf asdf asdf asdf asdf asdfa sdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdfas dfas dfa sdfasdf </p>\r\n', '2021-04-08 17:20:49', '', 1, NULL, NULL, '', 0, 0),
-(4, '', '', 13, 'everyone', 'another test notice Lorem ipsum dolor sit amet\r\nanother test notice Lorem ipsum dolor sit amet\r\n\r\n\r\n', '', '2021-04-08 17:21:05', 'uploads/notifications_images/136198974assassins_creed_valhalla_6-wallpaper-3554x1999.jpg', 1, NULL, NULL, '', 0, 0),
-(5, '', '', 1, 'everyone', 'abc xyz', '<p>abc</p>\r\n', '2021-04-11 22:10:16', '', 1, NULL, NULL, '', 0, 0);
+(12, '', '', 1, 'everyone', ' usindh.edu.pk University of Sindh Jamshoro – ISO 9001:2015 Certified', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n', '2021-05-05 14:55:04', 'uploads/notifications_images/11102631524-slider.jpg', 1, NULL, NULL, 'asdfasdfasfd', 0, 0),
+(13, '', '', 13, 'everyone', 'Lorem ipsum dolor sit amet, consectetur', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n', '2021-05-05 14:55:33', 'uploads/notifications_images/10351606423-slider.jpg', 1, NULL, NULL, 'asdfasdfasfd', 0, 0),
+(14, '', '', 13, 'everyone', 'New students admissinos', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n', '2021-05-05 14:56:02', 'uploads/notifications_images/765732228download.jpg', 1, NULL, NULL, 'asdfasdfasfd', 0, 0),
+(15, '', '', 13, 'everyone', 'New students out', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n', '2021-05-05 14:56:42', 'uploads/notifications_images/1589259594IMG-20191023-WA0051.jpg', 1, NULL, NULL, 'asdfasdfasfd', 0, 0),
+(16, '', '', 13, 'everyone', 'lorem ipsum dollar lorem ipsum dollar lorem ipsum dollar lorem ipsum dollar ', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n', '2021-05-05 14:57:08', 'uploads/notifications_images/1388462959EBYCCUFXsAEdXSZ.jpg', 1, NULL, NULL, 'asdfasdfasfd', 0, 0),
+(17, '', '', 1, 'everyone', 'LMS launched for new students', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n', '2021-05-05 14:58:29', 'uploads/notifications_images/1891242103lms.jpg', 1, NULL, NULL, 'asdfasdfasfd', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -485,7 +506,7 @@ CREATE TABLE `password_reset` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `token` int(11) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT current_timestamp()
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -930,7 +951,7 @@ CREATE TABLE `slider_setting` (
   `description` varchar(255) NOT NULL,
   `description_color` varchar(50) DEFAULT NULL,
   `description_link` varchar(255) DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT 1
+  `active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -1010,7 +1031,7 @@ INSERT INTO `subjects` (`id`, `course_code`, `subject_title`, `subject_desc`, `f
 CREATE TABLE `subscribers` (
   `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -1019,7 +1040,8 @@ CREATE TABLE `subscribers` (
 
 INSERT INTO `subscribers` (`id`, `email`, `created_at`) VALUES
 (1, 'admin@gmail.com', '2021-04-30 13:25:40'),
-(2, 'safsa@gmail.com', '2021-04-30 13:26:23');
+(2, 'safsa@gmail.com', '2021-04-30 13:26:23'),
+(3, 'test@email.com', '2021-05-05 15:21:59');
 
 -- --------------------------------------------------------
 
@@ -1033,7 +1055,7 @@ CREATE TABLE `sys_notifications` (
   `msg` text NOT NULL,
   `redirect_link` text NOT NULL,
   `is_seen` tinyint(1) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT current_timestamp()
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1120,7 +1142,7 @@ CREATE TABLE `timetable` (
   `user_id` int(50) NOT NULL,
   `semester` varchar(10) NOT NULL,
   `class_group` varchar(255) NOT NULL,
-  `datetime_added` timestamp NOT NULL DEFAULT current_timestamp(),
+  `datetime_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `datetime_updated` datetime NOT NULL,
   `is_deleted` tinyint(1) NOT NULL,
   `evening_morning` enum('morning','evening') NOT NULL,
@@ -1178,7 +1200,7 @@ CREATE TABLE `users` (
   `dob` date DEFAULT NULL,
   `gender` enum('male','female') NOT NULL,
   `cnic` varchar(20) NOT NULL,
-  `show_cnic_public` tinyint(1) NOT NULL DEFAULT 0,
+  `show_cnic_public` tinyint(1) NOT NULL DEFAULT '0',
   `father_name` varchar(150) NOT NULL,
   `nationality` varchar(50) NOT NULL,
   `province` varchar(50) NOT NULL,
@@ -1193,16 +1215,16 @@ CREATE TABLE `users` (
   `bio` varchar(255) NOT NULL,
   `phone_no_code` varchar(11) NOT NULL,
   `phone_no` varchar(50) NOT NULL,
-  `show_phone_no_public` tinyint(1) NOT NULL DEFAULT 0,
+  `show_phone_no_public` tinyint(1) NOT NULL DEFAULT '0',
   `last_qualification` varchar(255) NOT NULL,
   `registered_from` enum('frontend','backend') NOT NULL,
-  `account_verified` tinyint(1) NOT NULL DEFAULT 0,
-  `reg_datetime` timestamp NULL DEFAULT current_timestamp(),
-  `account_active` tinyint(1) NOT NULL DEFAULT 0,
+  `account_verified` tinyint(1) NOT NULL DEFAULT '0',
+  `reg_datetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `account_active` tinyint(1) NOT NULL DEFAULT '0',
   `deactivated_on` timestamp NULL DEFAULT NULL,
   `is_pending` tinyint(1) NOT NULL,
   `remarks` text NOT NULL,
-  `is_archived` tinyint(1) NOT NULL DEFAULT 0,
+  `is_archived` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -1212,18 +1234,18 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `campus_id`, `faculty_id`, `depart_id`, `image`, `title`, `username`, `password`, `full_name`, `surename`, `email`, `dob`, `gender`, `cnic`, `show_cnic_public`, `father_name`, `nationality`, `province`, `district`, `city`, `home_address`, `permanent_address`, `zip_code`, `show_address_public`, `type`, `role_id`, `bio`, `phone_no_code`, `phone_no`, `show_phone_no_public`, `last_qualification`, `registered_from`, `account_verified`, `reg_datetime`, `account_active`, `deactivated_on`, `is_pending`, `remarks`, `is_archived`, `created_at`, `updated_at`) VALUES
-(1, 0, 0, 0, '1245787577america.png', 'Mr', 'admin', 'f108554c12f282f9c53deb6720a2421de173e9c22ed3f812823e542d467f56942b9a5e7a8e7e7cc21cb800fa008fe8b07449d0cb041c64d3dd00a0160fca577dlooK+Uy14iqUkpt1Xud8+WNv50xosreNcYkhaJP9PoA=', 'admin', '', 'admin@gmail.com', NULL, 'male', '', 1, '', '', '', '', '', '', '', '', 0, 'SUPERADMIN', 2, '', '0', '', 1, '', 'frontend', 1, '2021-04-01 11:16:53', 1, NULL, 0, '', 0, NULL, NULL),
-(2, 0, 0, 0, '', 'Ms', 'username2', '0', 'asfasf', 'surename', 'asfas@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, '', 'frontend', 0, '2021-04-01 20:16:30', 0, NULL, 0, '', 0, NULL, NULL),
-(3, 0, 0, 0, '', 'Ms', 'username3', '0', 'asfasf', 'surename', 'asfa1s@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, '', 'frontend', 0, '2021-04-01 20:17:06', 0, NULL, 0, '', 0, NULL, NULL),
+(1, 0, 0, 0, '5.jpg', 'Mr', 'admin', 'f108554c12f282f9c53deb6720a2421de173e9c22ed3f812823e542d467f56942b9a5e7a8e7e7cc21cb800fa008fe8b07449d0cb041c64d3dd00a0160fca577dlooK+Uy14iqUkpt1Xud8+WNv50xosreNcYkhaJP9PoA=', 'admin', '', 'admin@gmail.com', NULL, 'male', '', 1, '', '', '', '', '', '', '', '', 0, 'SUPERADMIN', 2, '', '0', '', 1, '', 'frontend', 1, '2021-04-01 11:16:53', 1, NULL, 0, '', 0, NULL, NULL),
+(2, 0, 0, 0, '1.png', 'Ms', 'username2', '0', 'asfasf', 'surename', 'asfas@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, '', 'frontend', 0, '2021-04-01 20:16:30', 0, NULL, 0, '', 0, NULL, NULL),
+(3, 0, 0, 0, '2.png', 'Ms', 'username3', '0', 'asfasf', 'surename', 'asfa1s@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, '', 'frontend', 0, '2021-04-01 20:17:06', 0, NULL, 0, '', 0, NULL, NULL),
 (4, 0, 0, 0, '1245787577america.png', 'Mr', 'username4', '0', 'hkj@Gmail.com', 'asfas', 'kj', '2019-11-29', 'female', 'safgasfasf', 0, 'asfasf', 'safasf', 'sadfasf', 'wfdsafasf', 'gkj', 'asfa', 'safasf', '', 0, '', 6, 'sdgdsgasdg', '92', '92', 0, '', 'frontend', 0, '2021-04-01 20:35:11', 0, NULL, 0, '', 0, NULL, NULL),
-(5, 0, 0, 0, '', 'Ms', 'username5', '60d6286756664a00529f479cf4a587f37ff85d5414368c79bde505d47261a01c308d09d4f35e2002ddf6052bf62cc773a8a8c5af6f2ebb1b4a5b02669108fef2b8R2B1KUAsge1//C+qsLOVcFWIw5sQYu2XvKOnUdG9s=', '11', 'sdfsd', 'sdfsdf@gmail.com', '2021-04-07', 'male', '444342134', 1, 'asfasfasf', 'afsas', 'a', 'asf', 'asf', 'safaf', 'asfsafasf', '', 0, 'OTHER', 1, 'asfasfas', '323', '32232223', 0, '', 'frontend', 0, '2021-04-02 04:52:31', 0, NULL, 0, '', 0, NULL, NULL),
-(6, 0, 0, 0, '361688680romanian.png', 'Ms', 'username6', '042ac6ebade10f1e9db85dc627e817685c004ed27215d7e01543f3f636f569e8e968f535cea6f8620ea5e3f7c32788b7c063a431cf4220492ddab3633a8f00e67Ez1aKJObhYcSHHOwGCeLUZ7GeYuc2rcX+aHNhoy3j0=', '1', '1', '1', '0001-01-10', 'female', '1111', 1, '111', '111', '111', '11', '111', '111', '111', '324', 1, 'TEACHER', 5, '111', '11', '11', 1, '', 'frontend', 0, '2021-04-02 07:50:35', 1, NULL, 0, '', 0, NULL, NULL),
-(7, 1, 16, 0, '', 'Mr', 'kamrantaj', '', 'Kamran Taj\r\n', 'Pathan', '', NULL, '', '', 0, '', '', '', '', '', '', '', '', 0, '', 0, '', '', '', 0, '', '', 0, '2021-04-20 21:54:34', 0, NULL, 0, '', 0, NULL, NULL),
-(8, 1, 2, 3, '', 'Mr', 'abc', '8d3228f15a3ec29b07048a3a5c8756e6896e2aa0e7dbeee1b47f1c2d03ddb41a0fbf733f6fee95c2f2ca7eec08f11823dd6407a9d4cf9e38c1131deb8a3e7c1aU9W8WrXQJbAo59q7D40OV4N8TYKDaFEQ1gAN67CsRaU=', 'fullname', 'asfas', 'abc@gmail.com', '2009-11-30', 'male', '124124124124', 1, 'asfas', 'hkjhk', 'ljh', 'lkj', 'lk', 'asfasfas', 'asfasfa', '', 1, 'OTHER', 1, 'safasfafs', '112', '12313123123', 1, 'jlk', 'frontend', 0, '2021-04-21 20:17:13', 1, NULL, 0, '', 0, '2021-04-21 22:17:13', NULL),
-(9, 1, 2, 3, '361688680romanian.png', 'Mr', 'abccccc', '1600a221f4ff4a9e08866a2545c0b47c3d5728a12463a94301d10ac1f1c34e33f70e46833fcefb3e9fa237e76c917696e5c4b557488889a0b6dd2f9b24e0b43dPCrqjAOHIqQpWDgwpwyqvhjUX8PLZw/dVI6UzdpPoaI=', 'fullname', 'asfas', 'abcccc@gmail.com', '2009-11-30', 'male', '124124124124', 1, 'asfas', 'hkjhk', 'ljh', 'lkj', 'lk', 'asfasfas', 'asfasfa', '', 1, 'FACULTY', 4, 'safasfafs', '112', '12313123123', 1, 'jlk', 'frontend', 0, '2021-04-21 20:18:04', 1, NULL, 0, '', 0, '2021-04-21 22:18:04', NULL),
-(10, 4, 3, 2, '361688680romanian.png', 'Ms', 'qqqqqw', 'e9586b0bd557b8352cc4d14fc15e28761f5035c5bd931fdd19d6f317a58a4b69dc024a4cc66824668f7230c07ff34da4713561235e1c410ccd52e31872ecd106S9KVQxPX9iQHSRjW4Qh2e+CocF/YKsbMnpDeSivURMk=', 'asfasf22', 'a22', 'qwqwq@gmail.vom', '2021-03-30', 'male', 'asfsag', 1, 'fggf', 'fggfg', 'fgf', 'gf', 'gf', 'dsgs', 'sdgfdsg', '124124', 1, 'TEACHER', 5, 'dsgdsg', '4', '4', 1, 'gfgf', 'frontend', 0, '2021-04-22 09:15:05', 1, NULL, 0, '', 0, '2021-04-22 11:15:05', '2021-04-22 21:38:42'),
+(5, 0, 0, 0, '4.jpg', 'Ms', 'username5', '60d6286756664a00529f479cf4a587f37ff85d5414368c79bde505d47261a01c308d09d4f35e2002ddf6052bf62cc773a8a8c5af6f2ebb1b4a5b02669108fef2b8R2B1KUAsge1//C+qsLOVcFWIw5sQYu2XvKOnUdG9s=', '11', 'sdfsd', 'sdfsdf@gmail.com', '2021-04-07', 'male', '444342134', 1, 'asfasfasf', 'afsas', 'a', 'asf', 'asf', 'safaf', 'asfsafasf', '', 0, 'OTHER', 1, 'asfasfas', '323', '32232223', 0, '', 'frontend', 0, '2021-04-02 04:52:31', 0, NULL, 0, '', 0, NULL, NULL),
+(6, 0, 0, 0, '3.jpg', 'Ms', 'username6', '042ac6ebade10f1e9db85dc627e817685c004ed27215d7e01543f3f636f569e8e968f535cea6f8620ea5e3f7c32788b7c063a431cf4220492ddab3633a8f00e67Ez1aKJObhYcSHHOwGCeLUZ7GeYuc2rcX+aHNhoy3j0=', '1', '1', '1', '0001-01-10', 'female', '1111', 1, '111', '111', '111', '11', '111', '111', '111', '324', 1, 'TEACHER', 5, '111', '11', '11', 1, '', 'frontend', 0, '2021-04-02 07:50:35', 1, NULL, 0, '', 0, NULL, NULL),
+(7, 1, 16, 0, '4.png', 'Mr', 'kamrantaj', '', 'Kamran Taj\r\n', 'Pathan', '', NULL, '', '', 0, '', '', '', '', '', '', '', '', 0, '', 0, '', '', '', 0, '', '', 0, '2021-04-20 21:54:34', 0, NULL, 0, '', 0, NULL, NULL),
+(8, 1, 2, 3, '5.png', 'Mr', 'abc', '8d3228f15a3ec29b07048a3a5c8756e6896e2aa0e7dbeee1b47f1c2d03ddb41a0fbf733f6fee95c2f2ca7eec08f11823dd6407a9d4cf9e38c1131deb8a3e7c1aU9W8WrXQJbAo59q7D40OV4N8TYKDaFEQ1gAN67CsRaU=', 'fullname', 'asfas', 'abc@gmail.com', '2009-11-30', 'male', '124124124124', 1, 'asfas', 'hkjhk', 'ljh', 'lkj', 'lk', 'asfasfas', 'asfasfa', '', 1, 'OTHER', 1, 'safasfafs', '112', '12313123123', 1, 'jlk', 'frontend', 0, '2021-04-21 20:17:13', 1, NULL, 0, '', 0, '2021-04-21 22:17:13', NULL),
+(9, 1, 2, 3, '2.jpg', 'Mr', 'abccccc', '1600a221f4ff4a9e08866a2545c0b47c3d5728a12463a94301d10ac1f1c34e33f70e46833fcefb3e9fa237e76c917696e5c4b557488889a0b6dd2f9b24e0b43dPCrqjAOHIqQpWDgwpwyqvhjUX8PLZw/dVI6UzdpPoaI=', 'fullname', 'asfas', 'abcccc@gmail.com', '2009-11-30', 'male', '124124124124', 1, 'asfas', 'hkjhk', 'ljh', 'lkj', 'lk', 'asfasfas', 'asfasfa', '', 1, 'FACULTY', 4, 'safasfafs', '112', '12313123123', 1, 'jlk', 'frontend', 0, '2021-04-21 20:18:04', 1, NULL, 0, '', 0, '2021-04-21 22:18:04', NULL),
+(10, 4, 3, 2, '1.jpg', 'Ms', 'qqqqqw', 'e9586b0bd557b8352cc4d14fc15e28761f5035c5bd931fdd19d6f317a58a4b69dc024a4cc66824668f7230c07ff34da4713561235e1c410ccd52e31872ecd106S9KVQxPX9iQHSRjW4Qh2e+CocF/YKsbMnpDeSivURMk=', 'asfasf22', 'a22', 'qwqwq@gmail.vom', '2021-03-30', 'male', 'asfsag', 1, 'fggf', 'fggfg', 'fgf', 'gf', 'gf', 'dsgs', 'sdgfdsg', '124124', 1, 'TEACHER', 5, 'dsgdsg', '4', '4', 1, 'gfgf', 'frontend', 0, '2021-04-22 09:15:05', 1, NULL, 0, '', 0, '2021-04-22 11:15:05', '2021-04-22 21:38:42'),
 (11, 3, 1, 3, '', 'Mr', 'asfa', 'a4ce8fd4a0aec10bdbb85aca197bdbb77c30f3e217d2048761588fb2cb20c9646889019ee743a096ff64d4c880b3af87907d368bb6f22048c4f208ea2bc4e9c6Fjkrfk4DfpJc3QnENuw/G78qTa9VP88+jtIfzTgzn1k=', 'asfasf', '', 'asf2as@gmail.com', NULL, 'male', '', 0, '', '', '', '', '', '', '', '', 0, 'STUDENT', 6, '', '', '', 0, '', 'frontend', 0, '2021-04-23 19:50:17', 1, NULL, 0, '', 0, '2021-04-23 21:50:17', NULL),
-(12, 1, 1, 2, '', 'Mr', 'tester', '9c22a666a080354ecb378e3c47861e7affcc2952ef20c4f9c930d417dc4f561c18fe9ed08788758d2b33c7f24dbb97ecdb2de9d09c77f71c1f12e926c1ae25754CDR0JJbz4Z3smAEFStP4JqfidYwnJRXuxUNfSH8xy4=', 'tester', '', 'tester@Gmail.com', NULL, 'male', '', 0, '', '', '', '', '', '', '', '', 0, 'STUDENT', 6, '', '', '', 0, '', 'frontend', 0, '2021-04-23 20:15:45', 1, NULL, 0, '', 0, '2021-04-23 22:15:45', NULL);
+(12, 1, 1, 2, '1.jpg', 'Mr', 'tester', '9c22a666a080354ecb378e3c47861e7affcc2952ef20c4f9c930d417dc4f561c18fe9ed08788758d2b33c7f24dbb97ecdb2de9d09c77f71c1f12e926c1ae25754CDR0JJbz4Z3smAEFStP4JqfidYwnJRXuxUNfSH8xy4=', 'tester', '', 'tester@Gmail.com', NULL, 'male', '', 0, '', '', '', '', '', '', '', '', 0, 'STUDENT', 6, '', '', '', 0, '', 'frontend', 0, '2021-04-23 20:15:45', 1, NULL, 0, '', 0, '2021-04-23 22:15:45', NULL);
 
 --
 -- Indexes for dumped tables
@@ -1390,13 +1412,13 @@ ALTER TABLE `faculties`
 -- AUTO_INCREMENT for table `keywords`
 --
 ALTER TABLE `keywords`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `news_notifications`
 --
 ALTER TABLE `news_notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `notification_type`
@@ -1456,7 +1478,7 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `subscribers`
 --
 ALTER TABLE `subscribers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `sys_notifications`

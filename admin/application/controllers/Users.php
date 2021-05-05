@@ -166,46 +166,46 @@ class Users extends CI_Controller
           if ($p['type'] == 'TEACHER')
           {
 
-            
+
             $info = [
-              
+
               'user_id' => $ins_id,
               'designation' => $p['designation'],
               'speciality' => $p['speciality']
-              
+
             ];
-            
+
             $this->bm->insertRow('teachers',$info);
-            
+
           }
-          
+
           elseif ($p['type'] == 'STUDENT')
           {
-            
+
             $info = [
-              
+
               'user_id' => $ins_id,
               'program_id' => $p['program_id'],
               'roll_number' => $p['roll_no'],
               'batch_year' => $p['batch_year'],
               'current_semester' => $p['current_semester_no']
-              
+
             ];
-            
+
             $this->bm->insertRow('students',$info);
-            
+
           }
 
           else
           {
-            
+
             $info = [
-              
+
               'user_id' => $ins_id,
               'job_title' => $p['job_title']
-              
+
             ];
-            
+
             $this->bm->insertRow('other_users',$info);
 
           }
@@ -235,7 +235,7 @@ class Users extends CI_Controller
 
       'title' => 'Edit User',
 
-      'active_menu' => 'create_user',
+      'active_menu' => 'view_users',
 
       'edit' => $this->Users_model->getUserToEdit($id),
 
@@ -387,45 +387,45 @@ class Users extends CI_Controller
           if ($p['type'] == 'TEACHER')
           {
 
-            
+
             $info = [
-              
+
               'designation' => $p['designation'],
               'speciality' => $p['speciality']
-              
+
             ];
-            
+
             $this->bm->updateRow('teachers', $info,'user_id',$p['id']);
 
-            
+
           }
-          
+
           elseif ($p['type'] == 'STUDENT')
           {
-            
+
             $info = [
-              
+
               'program_id' => $p['program_id'],
               'roll_number' => $p['roll_no'],
               'batch_year' => $p['batch_year'],
               'current_semester' => $p['current_semester_no']
-              
+
             ];
-                        
+
             $this->bm->updateRow('students', $info,'user_id',$p['id']);
 
-            
+
           }
 
           else
           {
-            
+
             $info = [
-              
+
               'job_title' => $p['job_title']
-              
+
             ];
-            
+
             $this->bm->updateRow('other_users', $info,'user_id',$p['id']);
 
           }

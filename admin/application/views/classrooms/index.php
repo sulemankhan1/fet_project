@@ -56,7 +56,7 @@
                               </td>
                             </tr>
                           <?php $sno++; endforeach; ?>
-                          <?php if(empty($subjects)): ?>
+                          <?php if(empty($records)): ?>
                             <tr>
                               <td colspan="99" class="text-center">No Class Rooms Found</td>
                             </tr>

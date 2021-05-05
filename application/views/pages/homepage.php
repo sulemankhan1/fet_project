@@ -427,7 +427,9 @@
             <div class="col-sm-7 col-md-8">
               <h2 class="mt-0 line-height-1 line-bottom-edu">Welcome to <span class="text-theme-colored3">Faculty of Engineering & Technology</span></h2>
               <h4 >About</h4>
-              <p>Faculty of Engineering and Technology is composed of an Institute and six departments: Prof. A. H. S. Bukhari Institute of Information and Communication Technology, Department of Electronics Engineering, Department of Telecommunication Engineering, Department of Information Technology, Department of Software Engineering, Department of Telemedicine and e-Health and Department of Industrial Electronics Engineering. A. H. S Bukhari Institute of Information and Communication Technology is an independent post-graduate institute offering MS/MPhil programs in disciplines of Electronics, Telecommunications, Information Technology and Software Engineering, and PhD degree program in Information Technology. Currently, over 300 students are enrolled in all MS/ MPhil and PhD programs.</p>
+              <!-- <p>Faculty of Engineering and Technology is composed of an Institute and six departments: Prof. A. H. S. Bukhari Institute of Information and Communication Technology, Department of Electronics Engineering, Department of Telecommunication Engineering, Department of Information Technology, Department of Software Engineering, Department of Telemedicine and e-Health and Department of Industrial Electronics Engineering. A. H. S Bukhari Institute of Information and Communication Technology is an independent post-graduate institute offering MS/MPhil programs in disciplines of Electronics, Telecommunications, Information Technology and Software Engineering, and PhD degree program in Information Technology. Currently, over 300 students are enrolled in all MS/ MPhil and PhD programs.</p> -->
+              <p>Faculty of Engineering and Technology is composed of an Institute and six departments: Prof. A. H. S. Bukhari Institute of Information and Communication Technology, Department of Electronics Engineering, Department of Telecommunication Engineering, Department of Information Technology, Department of Software Engineering, Department of Telemedicine and e-Health and Department of Industrial Electronics Engineering. A. H. S Bukhari Institute of Information and Communication Technology is an independent post-graduate institute offering MS/MPhil programs in disciplines of Electronics, Telecommunications, Information Technology and Software Engineering, and PhD degree program in Information Technology. Currently, over 300 students are enrolled in all MS/ MPhil and PhD programs. Department of Electronics Engineering and Department of Telecommunication Engineering offers a 4-year 8-semester undergraduate program, namely BS Electronics Engineering and BS Telecommunication Engineering and both these programs are accredited with Pakistan Engineering Council (PEC). Department of Information Technology and Department of Software Engineering offers a 4-year 8-semester undergraduate program, BS Information Technology and BS Software Engineering respectively and both programs are accredited with the National Computing Education Accreditation Council (NCEAC). Both BS Information Technology and BS Software Engineering programs are offered in morning as well as in evening.</p>
+              <p>Faculty of Engineering and Technology has an excellent infrastructure in terms of highly qualified faculty members (there are around as many as 20 PhD faculty members and most of them have earned their degrees from educationally advanced countries), well-equipped state-of-the-art laboratories catering the needs of practical component of all undergraduate and graduate program courses, spacious class rooms, multimedia facilities, computerized internal library with  bundant and latest editions of books, journals and magazines. The Faculty of Engineering and Technology infrastructure also provides access to digital libraries including IEEE, ACM, Elsevier, and Springer Link subscription, and it has also its own Research Journal named University of Sindh Journal of Information and Communication Technology (USJICT). Realizing the tremendous potential of technology entrepreneurship, FET has adopted a proactive role for supporting entrepreneurship through establishment of Technology Incubation Center and Industry Liaison Desk.</p>
 
               <div class="row mt-50">
                 <div class="col-md-12 col-sm-12">
@@ -436,14 +438,16 @@
                         <div class="row">
                           <div class="col-md-12">
                             <div class="owl-carousel-3col" data-dots="true" data-nav="true">
-                              <div class="item"><img src="assets/images/team/1.jpg" alt=""></div>
-                               <div class="item"><img src="assets/images/team/1.jpg" alt=""></div>
-                                <div class="item"><img src="assets/images/team/1.jpg" alt=""></div>
+                              <div class="item"><img src="<?=base_url('assets/images/gallery/1.jpg')?>" alt=""></div>
+                               <div class="item"><img src="<?=base_url('assets/images/gallery/2.jpg')?>" alt=""></div>
+                                <div class="item"><img src="<?=base_url('assets/images/gallery/3.jpg')?>" alt=""></div>
+                                <div class="item"><img src="<?=base_url('assets/images/gallery/4.jpg')?>" alt=""></div>
+                                <div class="item"><img src="<?=base_url('assets/images/gallery/5.jpg')?>" alt=""></div>
                             </div>
                           </div>
                         </div>
                     </div>
-                  </div>   
+                  </div>
               </div>
             </div>
             <div class="col-sm-5 col-md-4">
@@ -543,6 +547,7 @@
                   </div>
                 </div>
               </div>
+              <a href="#" class="btn  mb-xs-5"> <i class="fa fa-chevron-right"></i> View All Programs</a>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
              <div class="p-30 bg-theme-colored mt-xs-30 mt-sm-30">
@@ -649,11 +654,11 @@
                       </div>
                     </div>
                     <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
-              
+
                     <div class="col-sm-12 info_student" style="display:block;">
-                    
+
                     <?php }else { ?>
-                      
+
                     <div class="col-sm-12 info_student" style="display:none;">
 
                     <?php } ?>
@@ -669,8 +674,8 @@
                       </div>
                     </div>
 
-                    
-                    
+
+
 
                     <!-- <div class="col-sm-6">
                       <div class="form-group mb-20">
@@ -796,12 +801,16 @@
         </div>
          <!--Carousel start-->
           <div class="owl-carousel text-center">
-              
-            
+
+            <?php
+            // echo "<pre>";
+            // print_r($faculty_members);
+            // die();
+             ?>
             <?php foreach($faculty_members as $key => $v): ?>
-            
+
             <?php $card_color = 'bg-theme-colored2'; if($key%2 == 0){ $card_color = 'bg-theme-colored3'; }?>
-            
+
             <div class="item">
               <div class="team-member bg-light pt-10 pb-15">
                 <div class="thumb"><img class="img-fullwidth" src="<?= base_url('admin/uploads/users/'.$v->image)?>" alt="">
@@ -824,10 +833,10 @@
                 </div>
               </div>
             </div>
-            
+
             <?php endforeach ?>
-            
-            
+
+
           </div>
         <!--Carousel end-->
       </div>
@@ -841,7 +850,7 @@
           <div class="col-md-6 col-md-offset-3">
             <h2 class="mt-0 text-white">Stay updated by Email</h2>
             <p class="text-white">Enter your Email and you will get updates for Notifications, Circulars, Notices etc. You can change emails settings by logging in to your account with same email</p>
-            
+
             <?php if($this->session->flashdata('response') == 'success') { ?>
 
             <div class="alert alert-success alert-dismissible">
@@ -850,7 +859,7 @@
             </div>
 
             <?php } ?>
-            
+
             <form id="mailchimp-subscription-form3" class="newsletter-form mt-30" action="<?= site_url('subscribe') ?>" method="post">
               <label for="mce-EMAIL"></label>
               <div class="input-group">
@@ -922,7 +931,7 @@
 </div>
 <!-- end wrapper -->
 
- 
+
 <script type="text/javascript">
     $('.owl-carousel').owlCarousel({
     loop:true,
@@ -968,8 +977,8 @@
     }
     else
     {
-      
-      $('.info_student').hide();      
+
+      $('.info_student').hide();
 
     }
 
