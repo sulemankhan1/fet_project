@@ -1,7 +1,19 @@
 <style type="text/css">
+  
   .change_sidebar_clr:hover{
       cursor: pointer;
   }
+
+  @media (min-width: 992px) {
+
+    .main-panel .main-content {
+
+      padding-left : 250px;
+      
+    }
+
+  }
+  
 </style>
     <section class="basic-elements">
     <div class="row">
