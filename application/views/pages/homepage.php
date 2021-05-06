@@ -549,7 +549,7 @@
                   </div>
                 </div>
               </div>
-              <a href="#" class="btn  mb-xs-5"> <i class="fa fa-chevron-right"></i> View All Programs</a>
+              <a href="<?=site_url('all_programs')?>" class="btn  mb-xs-5"> <i class="fa fa-chevron-right"></i> View All Programs</a>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
              <div class="p-30 bg-theme-colored mt-xs-30 mt-sm-30">
