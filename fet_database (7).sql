@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2021 at 05:22 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.1.28
+-- Generation Time: May 06, 2021 at 05:43 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `fet_database`
+-- Database: `fet`
 --
 
 -- --------------------------------------------------------
@@ -55,7 +54,7 @@ CREATE TABLE `class_rooms` (
   `name` varchar(255) NOT NULL,
   `barcode` varchar(255) NOT NULL,
   `room_no` varchar(255) NOT NULL,
-  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_added` timestamp NOT NULL DEFAULT current_timestamp(),
   `remarks` text NOT NULL,
   `added_by` int(11) NOT NULL,
   `is_archived` tinyint(1) NOT NULL
@@ -343,6 +342,7 @@ INSERT INTO `departments` (`id`, `fac_id`, `campus_id`, `name`, `is_inst`, `code
 
 CREATE TABLE `faculties` (
   `id` int(11) NOT NULL,
+  `campus_id` int(11) NOT NULL,
   `name` varchar(50) COLLATE latin1_general_ci NOT NULL,
   `remarks` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
   `is_archived` tinyint(1) NOT NULL
@@ -352,20 +352,20 @@ CREATE TABLE `faculties` (
 -- Dumping data for table `faculties`
 --
 
-INSERT INTO `faculties` (`id`, `name`, `remarks`, `is_archived`) VALUES
-(6, 'SOCIAL SCIENCES', '', 0),
-(5, 'NATURAL SCIENCES', '', 0),
-(2, 'COMMERCE & BUSINESS ADMINISTRATION', '', 0),
-(7, 'ARTS', '', 0),
-(8, 'EDUCATION', '', 0),
-(10, 'GENERAL (OTHER)', '', 0),
-(9, 'ISLAMIC STUDIES', '', 0),
-(11, 'PHARMACY', '', 0),
-(12, 'LAW', '', 0),
-(13, 'AFFILIATED COLLEGES/ INSTITUTIONS PUBLIC & PRIVATE', '', 0),
-(14, 'ANNUAL SYSTEM', '', 0),
-(15, 'ADMINISTRATIVE OFFICES', NULL, 0),
-(16, 'Faculty of Engineering and Telecommunication (FET)', NULL, 0);
+INSERT INTO `faculties` (`id`, `campus_id`, `name`, `remarks`, `is_archived`) VALUES
+(6, 1, 'SOCIAL SCIENCES', '', 0),
+(5, 1, 'NATURAL SCIENCES', '', 0),
+(2, 1, 'COMMERCE & BUSINESS ADMINISTRATION', '', 0),
+(7, 1, 'ARTS', '', 0),
+(8, 1, 'EDUCATION', '', 0),
+(10, 1, 'GENERAL (OTHER)', '', 0),
+(9, 1, 'ISLAMIC STUDIES', '', 0),
+(11, 1, 'PHARMACY', '', 0),
+(12, 1, 'LAW', '', 0),
+(13, 1, 'AFFILIATED COLLEGES/ INSTITUTIONS PUBLIC & PRIVATE', '', 0),
+(14, 1, 'ANNUAL SYSTEM', '', 0),
+(15, 1, 'ADMINISTRATIVE OFFICES', NULL, 0),
+(16, 1, 'Faculty of Engineering and Telecommunication (FET)', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -421,9 +421,9 @@ CREATE TABLE `news_notifications` (
   `depart_id` varchar(100) NOT NULL,
   `notify_type_id` int(11) NOT NULL,
   `notification_for` varchar(255) NOT NULL,
-  `title` text,
-  `description` text,
-  `date_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `title` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `date_time` timestamp NULL DEFAULT current_timestamp(),
   `image` varchar(255) DEFAULT NULL,
   `publisher_id` int(11) DEFAULT NULL,
   `user_type_id` varchar(256) DEFAULT NULL,
@@ -506,7 +506,7 @@ CREATE TABLE `password_reset` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `token` int(11) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `datetime` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -951,7 +951,7 @@ CREATE TABLE `slider_setting` (
   `description` varchar(255) NOT NULL,
   `description_color` varchar(50) DEFAULT NULL,
   `description_link` varchar(255) DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1'
+  `active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -972,7 +972,7 @@ CREATE TABLE `students` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `roll_number` varchar(25) NOT NULL,
-  `program_id` int(11) NOT NULL,
+  `program_id` varchar(100) NOT NULL,
   `batch_year` varchar(6) NOT NULL,
   `current_semester` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -982,8 +982,8 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `user_id`, `roll_number`, `program_id`, `batch_year`, `current_semester`) VALUES
-(1, 11, '', 3, '', 0),
-(2, 12, '', 3, '', 0);
+(1, 11, '', '3', '', 0),
+(2, 12, '2k20/SWE/12', 'Master', '2020', 2);
 
 -- --------------------------------------------------------
 
@@ -1031,7 +1031,7 @@ INSERT INTO `subjects` (`id`, `course_code`, `subject_title`, `subject_desc`, `f
 CREATE TABLE `subscribers` (
   `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -1055,7 +1055,7 @@ CREATE TABLE `sys_notifications` (
   `msg` text NOT NULL,
   `redirect_link` text NOT NULL,
   `is_seen` tinyint(1) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `datetime` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1142,7 +1142,7 @@ CREATE TABLE `timetable` (
   `user_id` int(50) NOT NULL,
   `semester` varchar(10) NOT NULL,
   `class_group` varchar(255) NOT NULL,
-  `datetime_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `datetime_added` timestamp NOT NULL DEFAULT current_timestamp(),
   `datetime_updated` datetime NOT NULL,
   `is_deleted` tinyint(1) NOT NULL,
   `evening_morning` enum('morning','evening') NOT NULL,
@@ -1200,7 +1200,7 @@ CREATE TABLE `users` (
   `dob` date DEFAULT NULL,
   `gender` enum('male','female') NOT NULL,
   `cnic` varchar(20) NOT NULL,
-  `show_cnic_public` tinyint(1) NOT NULL DEFAULT '0',
+  `show_cnic_public` tinyint(1) NOT NULL DEFAULT 0,
   `father_name` varchar(150) NOT NULL,
   `nationality` varchar(50) NOT NULL,
   `province` varchar(50) NOT NULL,
@@ -1215,16 +1215,16 @@ CREATE TABLE `users` (
   `bio` varchar(255) NOT NULL,
   `phone_no_code` varchar(11) NOT NULL,
   `phone_no` varchar(50) NOT NULL,
-  `show_phone_no_public` tinyint(1) NOT NULL DEFAULT '0',
+  `show_phone_no_public` tinyint(1) NOT NULL DEFAULT 0,
   `last_qualification` varchar(255) NOT NULL,
   `registered_from` enum('frontend','backend') NOT NULL,
-  `account_verified` tinyint(1) NOT NULL DEFAULT '0',
-  `reg_datetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `account_active` tinyint(1) NOT NULL DEFAULT '0',
+  `account_verified` tinyint(1) NOT NULL DEFAULT 0,
+  `reg_datetime` timestamp NULL DEFAULT current_timestamp(),
+  `account_active` tinyint(1) NOT NULL DEFAULT 0,
   `deactivated_on` timestamp NULL DEFAULT NULL,
   `is_pending` tinyint(1) NOT NULL,
   `remarks` text NOT NULL,
-  `is_archived` tinyint(1) NOT NULL DEFAULT '0',
+  `is_archived` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -1245,7 +1245,7 @@ INSERT INTO `users` (`id`, `campus_id`, `faculty_id`, `depart_id`, `image`, `tit
 (9, 1, 2, 3, '2.jpg', 'Mr', 'abccccc', '1600a221f4ff4a9e08866a2545c0b47c3d5728a12463a94301d10ac1f1c34e33f70e46833fcefb3e9fa237e76c917696e5c4b557488889a0b6dd2f9b24e0b43dPCrqjAOHIqQpWDgwpwyqvhjUX8PLZw/dVI6UzdpPoaI=', 'fullname', 'asfas', 'abcccc@gmail.com', '2009-11-30', 'male', '124124124124', 1, 'asfas', 'hkjhk', 'ljh', 'lkj', 'lk', 'asfasfas', 'asfasfa', '', 1, 'FACULTY', 4, 'safasfafs', '112', '12313123123', 1, 'jlk', 'frontend', 0, '2021-04-21 20:18:04', 1, NULL, 0, '', 0, '2021-04-21 22:18:04', NULL),
 (10, 4, 3, 2, '1.jpg', 'Ms', 'qqqqqw', 'e9586b0bd557b8352cc4d14fc15e28761f5035c5bd931fdd19d6f317a58a4b69dc024a4cc66824668f7230c07ff34da4713561235e1c410ccd52e31872ecd106S9KVQxPX9iQHSRjW4Qh2e+CocF/YKsbMnpDeSivURMk=', 'asfasf22', 'a22', 'qwqwq@gmail.vom', '2021-03-30', 'male', 'asfsag', 1, 'fggf', 'fggfg', 'fgf', 'gf', 'gf', 'dsgs', 'sdgfdsg', '124124', 1, 'TEACHER', 5, 'dsgdsg', '4', '4', 1, 'gfgf', 'frontend', 0, '2021-04-22 09:15:05', 1, NULL, 0, '', 0, '2021-04-22 11:15:05', '2021-04-22 21:38:42'),
 (11, 3, 1, 3, '', 'Mr', 'asfa', 'a4ce8fd4a0aec10bdbb85aca197bdbb77c30f3e217d2048761588fb2cb20c9646889019ee743a096ff64d4c880b3af87907d368bb6f22048c4f208ea2bc4e9c6Fjkrfk4DfpJc3QnENuw/G78qTa9VP88+jtIfzTgzn1k=', 'asfasf', '', 'asf2as@gmail.com', NULL, 'male', '', 0, '', '', '', '', '', '', '', '', 0, 'STUDENT', 6, '', '', '', 0, '', 'frontend', 0, '2021-04-23 19:50:17', 1, NULL, 0, '', 0, '2021-04-23 21:50:17', NULL),
-(12, 1, 1, 2, '1.jpg', 'Mr', 'tester', '9c22a666a080354ecb378e3c47861e7affcc2952ef20c4f9c930d417dc4f561c18fe9ed08788758d2b33c7f24dbb97ecdb2de9d09c77f71c1f12e926c1ae25754CDR0JJbz4Z3smAEFStP4JqfidYwnJRXuxUNfSH8xy4=', 'tester', '', 'tester@Gmail.com', NULL, 'male', '', 0, '', '', '', '', '', '', '', '', 0, 'STUDENT', 6, '', '', '', 0, '', 'frontend', 0, '2021-04-23 20:15:45', 1, NULL, 0, '', 0, '2021-04-23 22:15:45', NULL);
+(12, 1, 7, 46, '1.jpg', 'Mr', 'tester', 'fd31233162061a060d250c49fe3ca47f5f4ffb1022f1aad049f6107b48738ad136c132176759979e5bbda24b6c7599aeef791f804f03f4a02ea165d79a387345J82NV3I+CRFZQF37u4wlIPB4B95evh/izoJ8kyXteEo=', 'tester', 'surename', 'tester@Gmail.com', '2021-05-06', 'male', '412341234141', 0, 'fathername', 'safaf', 'asfasfa', 'dsfsdf', 'asfsafasf', 'asfafas', 'afasfas', '2141', 0, 'STUDENT', 6, 'asfasfa', '11', '33333', 0, 'degree', 'frontend', 0, '2021-04-23 20:15:45', 1, NULL, 0, '', 0, '2021-04-23 22:15:45', '2021-05-06 17:11:38');
 
 --
 -- Indexes for dumped tables

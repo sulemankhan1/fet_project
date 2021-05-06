@@ -103,9 +103,9 @@
                       <li><i class="icon-paper-plane"></i> Last Qualification : <?=$user->last_qualification?></li>
                       <li><i class="icon-paper-plane"></i> Zipcode : <?=$user->zip_code?></li>
                       <li><i class="icon-paper-plane"></i> Bio : <?=$user->bio?></li>
-                      <li><i class="icon-paper-plane"></i> Campus : <?=$user->campus_id?></li>
-                      <li><i class="icon-paper-plane"></i> Faculty : <?=$user->faculty_id?></li>
-                      <li><i class="icon-paper-plane"></i> Department : <?=$user->depart_id?></li>
+                      <li><i class="icon-paper-plane"></i> Campus : <?=$user->campus_name?></li>
+                      <li><i class="icon-paper-plane"></i> Faculty : <?=$user->faculty_name?></li>
+                      <li><i class="icon-paper-plane"></i> Department : <?=$user->depart_name?></li>
 
                       <?php if(@$user->type == 'STUDENT'): ?>
 

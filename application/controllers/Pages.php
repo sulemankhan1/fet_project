@@ -47,9 +47,15 @@ class Pages extends CI_Controller
 
 		$data = [
 
-		'title' => 'Edit Profile',
+			'title' => 'Edit Profile',
 
-		'edit' => $this->Users_model->getUserToEdit($id)
+			'edit' => $this->Users_model->getUserToEdit($id),
+
+			'campus' => $this->bm->getAll('campus', 'id'),
+
+			'faculties' => $this->bm->getAll('faculties', 'id'),
+
+			'departments' => $this->bm->getAll('departments', 'id')
 
 		];
 
@@ -358,14 +364,13 @@ class Pages extends CI_Controller
    
 	}
 
-	public function getAllFaculties($campus_id='')
+	public function getAllFaculties($campus_id='',$type='')
 	{
 
 		if($campus_id != '' && $campus_id != 'all')
 		{
 	
-			// $faculties = $this->bm->getWhereRows('faculties', 'campus_id', $campus_id);
-			$faculties = [];
+			$faculties = $this->bm->getWhereRows('faculties', 'campus_id', $campus_id);
 			
 		}
 		else 
@@ -375,7 +380,20 @@ class Pages extends CI_Controller
 
 		}
 
-		$output .= '<option selected disabled value=""> by Faculty </option><option value="all">in all Faculties</option>';
+		$output = '';
+		if($type == 'register')
+		{
+
+			$output .= '<option selected disabled value=""> choose </option>';
+
+		}
+		else
+		{
+
+			$output .= '<option selected disabled value=""> by Faculty </option><option value="all">in all Faculties</option>';
+
+		}
+
 
 		foreach ($faculties as $key => $v) 
 		{
@@ -388,7 +406,7 @@ class Pages extends CI_Controller
 
 	}
 
-	public function getAllDepartments($faculty_id='')
+	public function getAllDepartments($faculty_id='',$type='')
 	{
 
 		if($faculty_id != '' && $faculty_id != 'all')
@@ -404,7 +422,20 @@ class Pages extends CI_Controller
 
 		}
 
-		$output .= '<option selected disabled value=""> by Department </option><option value="all">in all Programs</option>';
+		$output = '';
+
+		if($type == 'register')
+		{
+
+			$output .= '<option selected disabled value=""> choose </option>';
+			
+		}
+		else
+		{
+			
+			$output .= '<option selected disabled value=""> by Department </option><option value="all">in all Programs</option>';
+
+		}
 
 		foreach ($departments as $key => $v) 
 		{
@@ -547,7 +578,13 @@ class Pages extends CI_Controller
 
 			'title' => 'Register',
 
-			'roles' => $this->bm->getAll('roles', 'id', 'desc')
+			'roles' => $this->bm->getAll('roles', 'id', 'desc'),
+
+			'campus' => $this->bm->getAll('campus', 'id'),
+
+			'faculties' => $this->bm->getAll('faculties', 'id'),
+
+			'departments' => $this->bm->getAll('departments', 'id')
 
 		];
 

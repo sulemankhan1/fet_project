@@ -88,6 +88,7 @@
               success:function(data)
               {
                   $('.select-by-faculty').html(data)
+                  $('.select-by-department').html('<option selected disabled value=""> by Department </option><option value="all">in all Departments</option>')
               }
 
             })

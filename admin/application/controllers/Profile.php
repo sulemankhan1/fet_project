@@ -125,7 +125,13 @@ class Profile extends CI_Controller
         'title' => 'Edit Profile',
         
         'edit' => $this->Users_model->getUserToEdit($id),
+        
+        'campus' => $this->bm->getAll('campus', 'id'),
+
+        'faculties' => $this->bm->getAll('faculties', 'id'),
   
+        'departments' => $this->bm->getAll('departments', 'id')
+
       ];
   
       $this->load->view('header',$data);
@@ -405,5 +411,90 @@ class Profile extends CI_Controller
       return true;
 
   }
+
+
+  public function getAllFaculties($campus_id='',$type='')
+	{
+
+		if($campus_id != '' && $campus_id != 'all')
+		{
+	
+			$faculties = $this->bm->getWhereRows('faculties', 'campus_id', $campus_id);
+			
+		}
+		else 
+		{
+			
+			$faculties = $this->bm->getAll('faculties', 'id');
+
+		}
+
+		$output = '';
+		if($type == 'register')
+		{
+
+			$output .= '<option selected disabled value=""> choose </option>';
+
+		}
+		else
+		{
+
+			$output .= '<option selected disabled value=""> by Faculty </option><option value="all">in all Faculties</option>';
+
+		}
+
+
+		foreach ($faculties as $key => $v) 
+		{
+			
+			$output .='<option value="'.$v->id.'">'.$v->name.'</option>';
+
+		}
+
+		echo $output;
+
+	}
+
+	public function getAllDepartments($faculty_id='',$type='')
+	{
+
+		if($faculty_id != '' && $faculty_id != 'all')
+		{
+	
+			$departments = $this->bm->getWhereRows('departments', 'fac_id', $faculty_id);
+			
+		}
+		else 
+		{
+			
+			$departments = $this->bm->getAll('departments', 'id');
+
+		}
+
+		$output = '';
+
+		if($type == 'register')
+		{
+
+			$output .= '<option selected disabled value=""> choose </option>';
+			
+		}
+		else
+		{
+			
+			$output .= '<option selected disabled value=""> by Department </option><option value="all">in all Programs</option>';
+
+		}
+
+		foreach ($departments as $key => $v) 
+		{
+			
+			$output .='<option value="'.$v->id.'">'.$v->name.'</option>';
+
+		}
+
+		echo $output;
+
+	}
 
 }

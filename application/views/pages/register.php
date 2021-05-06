@@ -82,12 +82,15 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label>Choose Campus <small>*</small></label>
-                  <select class="form-control" name="campus_id">
-                    <option value="">choose</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
+                  <select class="form-control select-by-campus" name="campus_id">
+                  <option selected disabled value=""> choose</option>
+
+                    <?php foreach($campus as $key => $v): ?>
+
+                      <option value="<?= $v->id ?>" <?=(@$this->input->post('campus_id') == $v->id?'selected':'')?>><?=$v->name?></option>
+
+                    <?php endforeach ?>
+
                   </select>
                   <span class="text-danger"><?=form_error('campus_id')?></span>
                 </div>
@@ -95,12 +98,23 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label>Choose Faculty <small>*</small></label>
-                  <select class="form-control" name="faculty_id">
-                     <option value="">choose</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
+                  <select class="form-control select-by-faculty" name="faculty_id">
+                    <option selected disabled value=""> choose</option>
+
+                    <?php if(@$this->input->post('campus_id') != ''): ?>
+
+                      <?php foreach($faculties as $key => $v): ?>
+
+                        <?php if(@$this->input->post('campus_id') == $v->campus_id): ?>
+
+                          <option value="<?= $v->id ?>" <?=(@$this->input->post('faculty_id') == $v->id?'selected':'')?>><?=$v->name?></option>
+                      
+                        <?php endif; ?>
+
+                      <?php endforeach ?>
+
+                    <?php endif; ?>
+
                   </select>
                   <span class="text-danger"><?=form_error('faculty_id')?></span>
                 </div>
@@ -108,12 +122,23 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label>Choose Department <small>*</small></label>
-                  <select class="form-control" name="depart_id">
-                     <option value="">choose</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
+                  <select class="form-control select-by-department" name="depart_id">
+                    <option selected disabled value=""> choose</option>  
+
+                    <?php if(@$this->input->post('faculty_id') != ''): ?>
+
+                      <?php foreach($departments as $key => $v): ?>
+
+                        <?php if(@$this->input->post('faculty_id') == $v->fac_id): ?>
+
+                          <option value="<?= $v->id ?>" <?=(@$this->input->post('depart_id') == $v->id?'selected':'')?>><?=$v->name?></option>
+
+                        <?php endif; ?>
+
+                      <?php endforeach ?>
+
+                    <?php endif; ?>
+
                   </select>
                   <span class="text-danger"><?=form_error('depart_id')?></span>
                 </div>
@@ -155,11 +180,12 @@
                 <div class="form-group">
                   <label>Choose Program <small>*</small></label>
                   <select class="form-control" name="program_id">
-                     <option value="">choose</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
+                      <option selected disabled value=""> choose</option>  
+                      <option value="Bachelor" <?=(@$this->input->post('program_id') == 'Bachelor'?'selected':'')?>>Bachelor</option>
+                      <option value="Master" <?=(@$this->input->post('program_id') == 'Master'?'selected':'')?>>Master</option>
+                      <option value="Mphil" <?=(@$this->input->post('program_id') == 'Mphil'?'selected':'')?>>Mphil</option>
+                      <option value="Phd" <?=(@$this->input->post('program_id') == 'Phd'?'selected':'')?>>Phd</option>
+
                   </select>
                   <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
                     
@@ -212,6 +238,41 @@
     }
 
   }
+
+  $('.select-by-campus,.select-by-faculty').change(function(){
+
+    if($(this).hasClass('select-by-campus'))
+    {
+
+      $.ajax({
+          
+          url : '<?=site_url('pages/getAllFaculties/')?>'+$(this).val()+'/register',
+          success:function(data)
+          {
+              $('.select-by-faculty').html(data)
+              $('.select-by-department').html('<option selected disabled value=""> choose </option>');
+          }
+
+        })
+
+    }
+    else if($(this).hasClass('select-by-faculty'))
+    {
+
+        $.ajax({
+
+          url : '<?=site_url('pages/getAllDepartments/')?>'+$(this).val()+'/register',
+          success:function(data)
+          {
+              $('.select-by-department').html(data)
+          }
+
+        })
+
+
+    }
+
+  })
                     
                 
 </script>

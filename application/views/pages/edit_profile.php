@@ -217,7 +217,7 @@
                         <div class="col-xl-3 col-lg-3 col-md-3 mb-1">
                             <fieldset class="form-group">
                               <label for="basicInput">Image </label>
-                              <input type="file" class="form-control" name="image">
+                              <input type="file" class="form-control edit-image" name="image">
                               <input type="hidden" name="image_old" value="<?=@$edit->image?>">                        
                             </fieldset>
 
@@ -333,13 +333,25 @@
                               <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
                                 <fieldset class="form-group">
                                     <label for="basicInput">Select Campus *</label>
-                                    <select class="form-control"  name="campus_id">
-                                        <option value="">select campus</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
+                                    <select class="form-control select-by-campus"  name="campus_id">
+                                        
+                                        <option selected disabled value=""> choose</option>
+                                        
+                                        <?php foreach($campus as $key => $v): ?>
+
+                                            <?php if(@$this->input->post('campus_id') != ''): ?>
+                                            
+                                                <option value="<?= $v->id ?>" <?=(@$this->input->post('campus_id') == $v->id?'selected':'')?>><?=$v->name?></option>
+
+                                            <?php else:?>
+
+                                                <option value="<?= $v->id ?>" <?=(@$edit->campus_id == $v->id?'selected':'')?>><?=$v->name?></option>
+
+                                            <?php endif ?>
+                                            
+
+                                        <?php endforeach ?>
+
                                     </select>
                                 </fieldset>
                                 <span class="text-danger"><?=form_error('campus_id')?></span>
@@ -348,13 +360,33 @@
                               <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
                                 <fieldset class="form-group">
                                     <label for="basicInput">Select Faculty *</label>
-                                    <select class="form-control"  name="faculty_id">
-                                        <option value="">select faculty</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
+                                    <select class="form-control select-by-faculty"  name="faculty_id">
+                                        
+                                        <option selected disabled value=""> choose</option>
+                                        
+                                        <?php foreach($faculties as $key => $v): ?>
+
+                                            <?php if(@$this->input->post('campus_id') != ''): ?>
+
+                                                <?php if(@$this->input->post('campus_id') == $v->campus_id): ?>
+
+                                                    <option value="<?= $v->id ?>" <?=(@$this->input->post('faculty_id') == $v->id?'selected':'')?>><?=$v->name?></option>
+
+                                                <?php endif; ?>
+
+                                            <?php else:?>
+                                        
+                                                <?php if(@$edit->campus_id == $v->campus_id): ?>
+
+                                                    <option value="<?= $v->id ?>" <?=(@$edit->faculty_id == $v->id?'selected':'')?>><?=$v->name?></option>
+
+                                                <?php endif; ?>
+
+                                            <?php endif; ?>
+
+
+                                        <?php endforeach ?>
+
                                     </select>
                                 </fieldset>
                                 <span class="text-danger"><?=form_error('faculty_id')?></span>
@@ -363,13 +395,34 @@
                               <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
                                 <fieldset class="form-group">
                                     <label for="basicInput">Select Department *</label>
-                                    <select class="form-control"  name="depart_id">
-                                        <option value="">select department</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
+                                    <select class="form-control select-by-department"  name="depart_id">
+                                    
+                                        <option selected disabled value=""> choose</option>  
+
+
+                                        <?php foreach($departments as $key => $v): ?>
+                                            
+                                            <?php if(@$this->input->post('faculty_id') != ''): ?>
+
+                                                <?php if(@$this->input->post('faculty_id') == $v->fac_id): ?>
+
+                                                    <option value="<?= $v->id ?>" <?=(@$this->input->post('depart_id') == $v->id?'selected':'')?>><?=$v->name?></option>
+
+                                                <?php endif; ?>
+
+                                            <?php else:?>
+
+                                                <?php if(@$edit->faculty_id == $v->fac_id): ?>
+
+                                                    <option value="<?= $v->id ?>" <?=(@$edit->depart_id == $v->id?'selected':'')?>><?=$v->name?></option>
+
+                                                <?php endif; ?>
+
+                                            <?php endif; ?>
+
+                                        <?php endforeach ?>
+
+
                                     </select>
                                 </fieldset>
                                 <span class="text-danger"><?=form_error('depart_id')?></span>
@@ -385,12 +438,24 @@
                                     <fieldset class="form-group">
                                         <label for="basicInput">Select Program *</label>
                                         <select class="form-control"  name="program_id">
-                                            <option value="">select program</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
+                                            <option selected disabled value=""> choose</option>  
+
+                                            <?php if(@$this->input->post('program_id') != ''):?>
+                                                
+                                                <option value="Bachelor" <?=(@$this->input->post('program_id') == 'Bachelor'?'selected':'')?>>Bachelor</option>
+                                                <option value="Master" <?=(@$this->input->post('program_id') == 'Master'?'selected':'')?>>Master</option>
+                                                <option value="Mphil" <?=(@$this->input->post('program_id') == 'Mphil'?'selected':'')?>>Mphil</option>
+                                                <option value="Phd" <?=(@$this->input->post('program_id') == 'Phd'?'selected':'')?>>Phd</option>
+
+                                            <?php else: ?>
+
+                                                <option value="Bachelor" <?=(@$edit->program_id == 'Bachelor'?'selected':'')?>>Bachelor</option>
+                                                <option value="Master" <?=(@$edit->program_id == 'Master'?'selected':'')?>>Master</option>
+                                                <option value="Mphil" <?=(@$edit->program_id == 'Mphil'?'selected':'')?>>Mphil</option>
+                                                <option value="Phd" <?=(@$edit->program_id == 'Phd'?'selected':'')?>>Phd</option>
+
+                                            <?php endif ?>
+
                                         </select>
                                     </fieldset>
                                     <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
@@ -497,3 +562,60 @@
     </section>
   </div>
 </div>
+
+<script>
+
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    
+    reader.onload = function(e) {
+      $('.teacher-profile-pic').attr('src', e.target.result);
+    }
+    
+    reader.readAsDataURL(input.files[0]); // convert to base64 string
+  }
+}
+
+$(".edit-image").change(function() {
+
+  readURL(this);
+
+})
+
+    $('.select-by-campus,.select-by-faculty').change(function(){
+
+        if($(this).hasClass('select-by-campus'))
+        {
+
+        $.ajax({
+            
+            url : '<?=site_url('pages/getAllFaculties/')?>'+$(this).val()+'/register',
+            success:function(data)
+            {
+                $('.select-by-faculty').html(data)
+                $('.select-by-department').html('<option selected disabled value=""> choose </option>');
+            }
+
+            })
+
+        }
+        else if($(this).hasClass('select-by-faculty'))
+        {
+
+            $.ajax({
+
+            url : '<?=site_url('pages/getAllDepartments/')?>'+$(this).val()+'/register',
+            success:function(data)
+            {
+                $('.select-by-department').html(data)
+            }
+
+            })
+
+
+        }
+
+    })
+
+</script>

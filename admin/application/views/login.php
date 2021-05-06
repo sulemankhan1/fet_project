@@ -126,7 +126,7 @@ $alert_msg=$this->session->userdata('alert_msg');
                   <a href="<?=site_url('forget_password')?>" style="margin-left:-16px!important;"><i class="ft-user-x"></i> Forget Password?</a>
                 </div>
                 <div class="col-md-12 mb-2 mr-2" >
-                  <a href="<?=site_url('create_new_account')?>" style="margin-left:-16px!important;"><i class="ft-user-plus"></i> Create New Account</a>
+                  <!-- <a href="<?=site_url('create_new_account')?>" style="margin-left:-16px!important;"><i class="ft-user-plus"></i> Create New Account</a> -->
                 </div>
 
                 </div>

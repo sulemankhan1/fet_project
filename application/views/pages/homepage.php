@@ -574,22 +574,7 @@
 
                       </div>
                     </div>
-                    <div class="col-sm-12">
-                      <div class="form-group mb-20">
-                        <input type="hidden" name="type" class="type">
-                        <input type="hidden" name="page_name"  value="home">
-                        <select class="form-control"  name="title">
-                          <option value="">choose title</option>
-                          <option value="Mr" <?=(@$this->input->post('title') == 'Mr'?'selected':'')?>>Mr</option>
-                          <option value="Ms" <?=(@$this->input->post('title') == 'Ms'?'selected':'')?>>Ms</option>
-                          <option value="Mrs" <?=(@$this->input->post('title') == 'Mrs'?'selected':'')?>>Mrs</option>
-                          <option value="Dr" <?=(@$this->input->post('title') == 'Dr'?'selected':'')?>>Dr</option>
-                          <option value="Prof" <?=(@$this->input->post('title') == 'Prof'?'selected':'')?>>Prof</option>
-                        </select>
-                        <span class="text-white"><?=form_error('title')?></span>
-                      </div>
-                    </div>
-		    <div class="col-sm-12">
+		                <div class="col-sm-12">
                       <div class="form-group mb-20">
                         <input name="username" class="form-control" type="text" placeholder="Username" name="username" value="<?=@$this->input->post('username')?>">
                         <span class="text-white"><?=form_error('username')?></span>

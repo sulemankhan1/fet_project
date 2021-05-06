@@ -61,6 +61,16 @@
 
 <link rel="stylesheet" href="<?=base_url('assets/css/Titlestyle.css')?>">
 
+<style>
+  
+  .open>.dropdown-menu {
+    
+    display: inline-grid;
+
+  }
+
+</style>
+
 </head>
 <body class="">
   <div id="wrapper" class="clearfix">
@@ -97,16 +107,17 @@
                   <?php }else{ ?>
                     <!-- <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Dropdown</a>
-  </li> -->
+  </li> --> 
                     <li class="nav-item dropdown bg-theme-colored text-white mb-xs-5">
-                      <i class="fa fa-sign-in-alt"></i>
+                      <i class="fa fa-user"></i>
                       <a class="nav-link dropdown-toggle text-white" href="<?=site_url('login')?>" data-toggle="dropdown" href="#"> My Account </a>
-                      <div class="dropdown-menu">
+                      <div class="dropdown-menu" style="padding-left: 7px;">
                         <a class="dropdown-item" href="<?=site_url('edit_profile/'.hashids_encrypt($this->session->userdata('user_id')))?>">Edit Profile</a>
                         <a class="dropdown-item" href="<?=site_url('view_profile/'.hashids_encrypt($this->session->userdata('user_id')))?>">View Profile</a>
                         <a class="dropdown-item" href="<?=site_url('logout')?>">Logout</a>
                       </div>
                     </li>
+
                   <?php } ?>
 
                 </ul>
