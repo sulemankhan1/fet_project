@@ -457,12 +457,49 @@ class Pages extends CI_Controller
 		$this->load->view('includes/footer');
 
 	}
+	public function information_tech() {
+
+		$data = [];
+
+		$this->load->view('includes/header', $data);
+		$this->load->view('pages/information_tech');
+		$this->load->view('includes/footer');
+
+	}
+	public function electronics() {
+
+		$data = [];
+
+		$this->load->view('includes/header', $data);
+		$this->load->view('pages/electronics');
+		$this->load->view('includes/footer');
+
+	}
+	public function telecommunication() {
+
+		$data = [];
+
+		$this->load->view('includes/header', $data);
+		$this->load->view('pages/telecommunication');
+		$this->load->view('includes/footer');
+
+	}
 	public function login() {
 
 		$data = [];
 
 		$this->load->view('includes/header', $data);
 		$this->load->view('pages/login');
+		$this->load->view('includes/footer');
+
+	}
+
+	public function software_eng() {
+
+		$data = [];
+
+		$this->load->view('includes/header', $data);
+		$this->load->view('pages/software_eng');
 		$this->load->view('includes/footer');
 
 	}

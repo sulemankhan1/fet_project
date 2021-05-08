@@ -19,7 +19,7 @@
 
   <!-- Section:  -->
   	<div class="row mt-50">
-  		<h2 class="title text-center text-theme-colored3 wow fadeInLeftBig"><u>Software Enigneering</u></h2>
+  		<h2 class="text-center text-theme-colored3 wow fadeInLeftBig"><u>Software Enigneering</u></h2>
       <div class="col-md-5">
          <img class="wow zoomIn" data-wow-duration="1.5s" data-wow-offset="10" src="assets/images/bg/01.jpg" alt=""> 
        </div>
@@ -32,7 +32,7 @@
     </div>
 
 	<div class="row mt-30">
-		<h2 class="title text-center text-theme-colored3 wow fadeInRightBig"><u>Information Technology</u></h2>
+		<h2 class="text-center text-theme-colored3 wow fadeInRightBig"><u>Information Technology</u></h2>
       <div class="text-justify col-md-7 p-30 pl-20">
         <p class="wow fadeInUp show-read-more">
         	Department of Information Technology has a highly qualified faculty most of whom have earned their Ph.D degree from international universities of high stature. The Department is also equipped with state-of-the-art hardware and software laboratories catering the needs of practical component of the courses. The curriculum of BS Information Technology Programmemes includes, in addition to fundamental core Information technology courses, a number of advanced courses focusing on new emerging computing paradigms such as Mobile and Pervasive Computing<span id="dots1">...</span><span id="more1" style="display: none;">, Cloud Computing, Information security, smart technologies, human computer interface design (HCI), management of large scale IT infrastructure projects etc. in line with HEC guidelines. BS Information Technology Programmemes has recently been accredited with the National Computing Education Accreditation Council (NCEAC) and the Programmemes is offered in morning as well as in evening.
@@ -46,7 +46,7 @@
     </div>
 
     <div class="row mt-30">
-    	<h2 class="title text-center text-theme-colored3 wow fadeInLeftBig"><u>Electronics</u></h2>
+    	<h2 class="text-center text-theme-colored3 wow fadeInLeftBig"><u>Electronics</u></h2>
       <div class="col-md-5">
          <img class="wow zoomIn" data-wow-duration="1.5s" data-wow-offset="10" src="assets/images/bg/01.jpg" alt=""> 
        </div>
@@ -59,7 +59,7 @@
     </div>
 
     <div class="row mt-30 mb-50">
-    	<h2 class="title text-center text-theme-colored3 wow fadeInRightBig"><u>Telecommunictaion</u></h2>
+    	<h2 class="text-center text-theme-colored3 wow fadeInRightBig"><u>Telecommunictaion</u></h2>
       <div class="text-justify col-md-7 p-30 pl-20">
         <p class="wow fadeInUp">
         	To produce intellectual graduates with eclectic vision in the field of telecommunication to keep pace with the current trends and envisage future prospects in terms of both the professional and research practices.<span id="dots3">...</span><span id="more3" style="display: none;"></span>

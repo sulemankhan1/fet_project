@@ -81,7 +81,6 @@
                   data-splitin="none"
                   data-splitout="none"
                   data-responsive_offset="on"
-
                   style="z-index: 5; white-space: nowrap;">The mission of the Faculty of Engineerig and Technology is to provide dynamic learning<br> with quality education through rigorous teaching and research methodologies in Information <br> and Communication Technologies (ICT).
                 </div>
                 <!-- LAYER NR. 4 -->
@@ -550,7 +549,7 @@
                   </div>
                 </div>
               </div>
-              <a href="#" class="btn  mb-xs-5"> <i class="fa fa-chevron-right"></i> View All Programs</a>
+              <a href="<?=site_url('all_programs')?>" class="btn  mb-xs-5"> <i class="fa fa-chevron-right"></i> View All Programs</a>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
              <div class="p-30 bg-theme-colored mt-xs-30 mt-sm-30">
@@ -720,12 +719,6 @@
         </div>
          <!--Carousel start-->
           <div class="owl-carousel text-center">
-
-            <?php
-            // echo "<pre>";
-            // print_r($faculty_members);
-            // die();
-             ?>
             <?php foreach($faculty_members as $key => $v): ?>
 
             <?php $card_color = 'bg-theme-colored2'; if($key%2 == 0){ $card_color = 'bg-theme-colored3'; }?>

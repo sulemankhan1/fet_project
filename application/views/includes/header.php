@@ -159,29 +159,17 @@
               <ul class="dropdown">
                 <li><a href="">Bachelors</a>
                   <ul class="dropdown">
-                    <li><a href="javascript:void(0)">Software Engineering</a>
-                      <ul class="dropdown">
-                        <li><a href="javascript:void(0)">Course Scheme</a></li>
-                        <li><a href="javascript:void(0)">Course Content</a></li>
-                      </ul>
+                    <li><a href="<?=site_url('software_eng')?>">Software Engineering</a>
+                      
                     </li>
-                    <li><a href="javascript:void(0)">Information Technology</a>
-                       <ul class="dropdown">
-                        <li><a href="javascript:void(0)">Course Scheme</a></li>
-                        <li><a href="javascript:void(0)">Course Content</a></li>
-                      </ul>
+                    <li><a href="<?=site_url('information_tech')?>">Information Technology</a>
+                       
                     </li>
-                    <li><a href="javascript:void(0)">Telecommunication</a>
-                       <ul class="dropdown">
-                        <li><a href="javascript:void(0)">Course Scheme</a></li>
-                        <li><a href="javascript:void(0)">Course Content</a></li>
-                      </ul>
+                    <li><a href="<?=site_url('telecommunication')?>">Telecommunication</a>
+                       
                     </li>
-                    <li><a href="javascript:void(0)">Electronics</a>
-                       <ul class="dropdown">
-                        <li><a href="javascript:void(0)">Course Scheme</a></li>
-                        <li><a href="javascript:void(0)">Course Content</a></li>
-                      </ul>
+                    <li><a href="<?=site_url('electronics')?>">Electronics</a>
+                       
                     </li>
                   </ul>
                 </li>
@@ -195,11 +183,11 @@
                 </li>
                <li><a href="<?=site_url('faculty') ?>">Faculty</a></li>
                 <li><a href="<?=site_url('news')?>">News</a></li>
-                <li><a href="javascript:void(0)">Resources  </a>
+                <li><a href="javascript:void(0)">Resources</a>
                   <ul class="dropdown">
                     <li><a href="#">FYP Resources</a></li>
                     <li><a href="<?=site_url('telephone')?>">Telephone</a></li>
-                    <li><a href="#">Sight Map</a></li>
+                    <li><a href="#">Site Map</a></li>
                   </ul>
                 </li>
                 <li><a href="<?=site_url('about')?>">About</a></li>
