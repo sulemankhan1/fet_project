@@ -137,7 +137,8 @@ class Profile extends CI_Controller
       $this->load->view('header',$data);
       $this->load->view('sidebar');
       $this->load->view('profile/edit_profile');
-      $this->load->view('footer');  
+      $this->load->view('footer');
+      $this->load->view('users/script');
       
   }
   

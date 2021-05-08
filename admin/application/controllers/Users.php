@@ -29,6 +29,8 @@ class Users extends CI_Controller
 
       'roles' => $this->bm->getAll('roles', 'id', 'desc'),
 
+      'campus' => $this->bm->getAll('campus', 'id')
+
     ];
 
     $this->load->view('header',$data);
@@ -240,6 +242,13 @@ class Users extends CI_Controller
       'edit' => $this->Users_model->getUserToEdit($id),
 
       'roles' => $this->bm->getAll('roles', 'id', 'desc'),
+
+      'campus' => $this->bm->getAll('campus', 'id'),
+
+      'faculties' => $this->bm->getAll('faculties', 'id'),
+
+      'departments' => $this->bm->getAll('departments', 'id')
+
 
     ];
 

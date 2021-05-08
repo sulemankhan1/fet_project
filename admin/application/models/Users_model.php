@@ -135,10 +135,13 @@ class Users_model extends CI_Model
 
 	public function getUsersDetails($id)
 	{
-
-		$this->db->select('u.id as uid,u.*,st.*,tch.*,ou.*,r.name as role_name');
+		
+		$this->db->select('u.id as uid,u.*,st.*,tch.*,ou.*,cp.name as campus_name,ft.name as faculty_name,dt.name as depart_name,r.name as role_name');
 		$this->db->from('users u');
 
+		$this->db->join('campus cp','cp.id=u.campus_id','left');
+		$this->db->join('faculties ft','ft.id=u.faculty_id','left');
+		$this->db->join('departments dt','dt.id=u.depart_id','left');
 		$this->db->join('students st','st.user_id=u.id','left');
 		$this->db->join('teachers tch','tch.user_id=u.id','left');
 		$this->db->join('other_users ou','ou.user_id=u.id','left');

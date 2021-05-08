@@ -284,7 +284,7 @@
 
                     <li class="mb-2">
                       <span class="text-bold-500 primary"><a> Campus:</a></span>
-                      <a class="d-block overflow-hidden"><?=@$user->campus_id?></a>
+                      <a class="d-block overflow-hidden"><?=@$user->campus_name?></a>
                     </li>
 
 
@@ -295,7 +295,7 @@
 
                     <li class="mb-2">
                       <span class="text-bold-500 primary"><a> Faculty:</a></span>
-                      <a class="d-block overflow-hidden"><?=@$user->faculty_id?></a>
+                      <a class="d-block overflow-hidden"><?=@$user->faculty_name?></a>
                     </li>
 
 
@@ -306,7 +306,7 @@
 
                     <li class="mb-2">
                       <span class="text-bold-500 primary"><a> Department:</a></span>
-                      <a class="d-block overflow-hidden"><?=@$user->depart_id?></a>
+                      <a class="d-block overflow-hidden"><?=@$user->depart_name?></a>
                     </li>
 
 

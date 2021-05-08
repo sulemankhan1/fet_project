@@ -273,13 +273,25 @@
                               <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
                                 <fieldset class="form-group">
                                     <label for="basicInput">Select Campus *</label>
-                                    <select class="form-control"  name="campus_id">
-                                        <option value="">select campus</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
+                                    <select class="form-control select-by-campus"  name="campus_id">
+                                        
+                                        <option selected disabled value=""> choose</option>
+                                        
+                                        <?php foreach($campus as $key => $v): ?>
+
+                                            <?php if(@$this->input->post('campus_id') != ''): ?>
+                                            
+                                                <option value="<?= $v->id ?>" <?=(@$this->input->post('campus_id') == $v->id?'selected':'')?>><?=$v->name?></option>
+
+                                            <?php else:?>
+
+                                                <option value="<?= $v->id ?>" <?=(@$edit->campus_id == $v->id?'selected':'')?>><?=$v->name?></option>
+
+                                            <?php endif ?>
+                                            
+
+                                        <?php endforeach ?>
+
                                     </select>
                                 </fieldset>
                                 <span class="text-danger"><?=form_error('campus_id')?></span>
@@ -288,13 +300,8 @@
                               <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
                                 <fieldset class="form-group">
                                     <label for="basicInput">Select Faculty *</label>
-                                    <select class="form-control"  name="faculty_id">
-                                        <option value="">select faculty</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
+                                    <select class="form-control select-by-faculty"  name="faculty_id">
+                                      <option selected disabled value=""> choose</option>  
                                     </select>
                                 </fieldset>
                                 <span class="text-danger"><?=form_error('faculty_id')?></span>
@@ -303,13 +310,8 @@
                               <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
                                 <fieldset class="form-group">
                                     <label for="basicInput">Select Department *</label>
-                                    <select class="form-control"  name="depart_id">
-                                        <option value="">select department</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
+                                    <select class="form-control select-by-department"  name="depart_id">
+                                      <option selected disabled value=""> choose</option>  
                                     </select>
                                 </fieldset>
                                 <span class="text-danger"><?=form_error('depart_id')?></span>
@@ -322,12 +324,14 @@
                                 <fieldset class="form-group">
                                     <label for="basicInput">Select Program *</label>
                                     <select class="form-control"  name="program_id">
-                                        <option value="">select program</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
+
+                                      <option selected disabled value=""> choose</option> 
+
+                                      <option value="Bachelor" <?=(@$this->input->post('program_id') == 'Bachelor'?'selected':'')?>>Bachelor</option>
+                                      <option value="Master" <?=(@$this->input->post('program_id') == 'Master'?'selected':'')?>>Master</option>
+                                      <option value="Mphil" <?=(@$this->input->post('program_id') == 'Mphil'?'selected':'')?>>Mphil</option>
+                                      <option value="Phd" <?=(@$this->input->post('program_id') == 'Phd'?'selected':'')?>>Phd</option>
+                                      
                                     </select>
                                 </fieldset>
                                 <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
