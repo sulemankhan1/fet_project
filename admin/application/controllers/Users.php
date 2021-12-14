@@ -230,26 +230,15 @@ class Users extends CI_Controller
   {
 
     $this->load->model('Users_model');
-
     $id = hashids_decrypt($id);
-
     $data = [
-
       'title' => 'Edit User',
-
       'active_menu' => 'view_users',
-
       'edit' => $this->Users_model->getUserToEdit($id),
-
       'roles' => $this->bm->getAll('roles', 'id', 'desc'),
-
-      'campus' => $this->bm->getAll('campus', 'id'),
-
-      'faculties' => $this->bm->getAll('faculties', 'id'),
-
+      'campuses' => $this->bm->getWhereRows('campus', 'is_archived', 0),
+      'faculties' => $this->bm->getWhereRows('faculties', 'is_archived', 0),
       'departments' => $this->bm->getAll('departments', 'id')
-
-
     ];
 
     $this->load->view('header',$data);

@@ -1,19 +1,13 @@
 <style type="text/css">
-  
   .change_sidebar_clr:hover{
       cursor: pointer;
   }
-
   @media (min-width: 992px) {
-
     .main-panel .main-content {
-
       padding-left : 250px;
-      
-    }
+   }
+ }
 
-  }
-  
 </style>
     <section class="basic-elements">
     <div class="row">
@@ -39,7 +33,7 @@
                       <div class="col-xl-12 col-lg-12">
                         <div class="card" style="">
                           <div class="card-header">
-                           
+
                           </div>
                           <div class="card-content">
                             <div class="card-body">
@@ -57,7 +51,7 @@
                               <div class="tab-content px-1 pt-1">
 
                                 <div role="tabpanel" class="tab-pane active" id="tab_admin_panel" aria-expanded="true" aria-labelledby="base-tab1">
-                                   
+
                                     <div class="col-xl-12 col-lg-12">
                                       <div class="card" style="">
                                         <div class="card-content">
@@ -69,10 +63,10 @@
                                             </ul>
                                             <div class="tab-content px-1 pt-1">
                                               <div role="tabpanel" class="tab-pane active" id="tab_general_setting" aria-expanded="true" aria-labelledby="base-tab1">
-                                                
+
                                                 <form class="form" action="<?=site_url('save_settings');?>" method="post" enctype="multipart/form-data">
                                                 <input type="hidden" name="type" value="general_setting">
-                                                
+
                                                 <div class="row">
                                                   <div class="col-md-4 mt-3">
                                                       <fieldset class="form-group">
@@ -107,10 +101,10 @@
                                                           <input type="file" class="form-control" name="sidebar_img">
                                                       </fieldset>
                                                   </div>
-                                                
+
                                                   <div class="col-md-4 mt-3">
                                                           <label for="basicInput"> Change Sidebar Color</label>
-                                                                
+
                                                     <div class="cz-bg-color sb-color-options">
                                                       <div class="row p-1">
                                                         <div class="col change_sidebar_clr"><span style="width:20px; height:20px;" data-bg-color="pomegranate" class="gradient-pomegranate d-block rounded-circle"></span></div>
@@ -135,7 +129,7 @@
 
                                                   <div class="col-md-6 mt-3">
                                                     <fieldset class="form-group">
-                                                        <label for="basicInput"> Name</label>
+                                                        <label for="basicInput"> System Name</label>
                                                         <input type="text" class="form-control" name="name" value="<?=@$name->value?>">
                                                     </fieldset>
                                                   </div>
@@ -153,14 +147,14 @@
                                                 </form>
 
                                               </div>
-                                             
+
 
                                             </div>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
-                                    
+
                                 </div>
 
                                 <div class="tab-pane" id="tab_website" aria-labelledby="base-tab2">
@@ -174,16 +168,16 @@
                                               </li>
                                               <li class="nav-item">
                                                 <a class="nav-link" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab_view_home_page_slider" aria-expanded="true">View Sliders</a>
-                                              </li>                                              
+                                              </li>
                                             </ul>
                                             <div class="tab-content px-1 pt-1">
                                               <div role="tabpanel" class="tab-pane active" id="tab_add_home_page_slider" aria-expanded="true" aria-labelledby="base-tab1">
-                                                
+
                                                 <form class="form" action="<?=site_url('save_settings');?>" method="post" enctype="multipart/form-data">
 
                                                   <div class="row float-right">
                                                     <div class="col-md-12">
-                                                        
+
                                                         <fieldset class="form-group">
                                                             <label for="basicInput"> Slider Image</label>
                                                             <input type="hidden" name="type" value="slider">
@@ -243,13 +237,13 @@
 
                                               </div>
                                               <div class="tab-pane" id="tab_view_home_page_slider" aria-labelledby="base-tab2">
-                                                    
+
                                                 <div class="row" id="view_sliders_">
-                                                  
+
                                                 </div>
 
-                                              </div>                                                                                        
-                                             
+                                              </div>
+
 
                                             </div>
                                           </div>
@@ -269,16 +263,16 @@
                                               </li>
                                               <li class="nav-item">
                                                 <a class="nav-link" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab_view_home_page_slider" aria-expanded="true">View Sliders</a>
-                                              </li>                                              
+                                              </li>
                                             </ul>
                                             <div class="tab-content px-1 pt-1">
                                               <div role="tabpanel" class="tab-pane active" id="tab_add_home_page_slider" aria-expanded="true" aria-labelledby="base-tab1">
-                                                
+
                                                 <form class="form" action="<?=site_url('save_settings');?>" method="post" enctype="multipart/form-data">
 
                                                   <div class="row float-right">
                                                     <div class="col-md-12">
-                                                        
+
                                                         <fieldset class="form-group">
                                                             <label for="basicInput"> Slider Image</label>
                                                             <input type="hidden" name="type" value="slider">
@@ -338,13 +332,13 @@
 
                                               </div>
                                               <div class="tab-pane" id="tab_view_home_page_slider" aria-labelledby="base-tab2">
-                                                    
+
                                                 <div class="row" id="view_sliders_">
-                                                  
+
                                                 </div>
 
-                                              </div>                                                                                        
-                                             
+                                              </div>
+
 
                                             </div>
                                           </div>
@@ -352,15 +346,15 @@
                                       </div>
                                     </div>
                                 </div>
-                                
+
                                 <div role="tabpanel" class="tab-pane" id="tab_main_general_setting" aria-expanded="true" aria-labelledby="base-tab1">
-                                              
-                                                        
+
+
                                   <form class="form mt-3" action="<?=site_url('save_settings');?>" method="post">
                                     <div class="row">
 
                                       <div class="col-md-6">
-                                          
+
                                           <fieldset class="form-group">
                                               <label for="basicInput"> When user registered it will direct :</label><br>
                                               <input type="hidden" name="type" value="main_general_setting">
@@ -375,16 +369,16 @@
                                     <div class="row">
 
                                       <div class="col-md-12">
-                                        <button type="Submit" class="btn btn-raised btn-primary float-right"> 
+                                        <button type="Submit" class="btn btn-raised btn-primary float-right">
                                           <i class="ft-check position-right"></i>  Save
                                         </button>
                                       </div>
                                     </div>
 
                                   </form>
-                                                      
+
                                 </div>
-                                
+
 
                               </div>
                             </div>
@@ -394,9 +388,9 @@
                       <!-- tabs end -->
                     </div>
 
-                     
 
-                      
+
+
                   </div>
             </div>
           </div>
@@ -423,7 +417,7 @@
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-success">Submit</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
           </form>
     </div>
@@ -435,7 +429,7 @@
   <hr>
   <div class="row float-right">
     <div class="col-md-12">
-        
+
         <fieldset class="form-group">
             <label for="basicInput"> Slider Image</label>
             <input type="hidden" name="type" value="slider">
@@ -515,12 +509,12 @@
   }
 
   function get_sliders() {
-    
+
       $.ajax({
-        
+
         url : '<?=site_url('settings/get_sliders')?>',
         success :function (data) {
-          
+
             $('#view_sliders_').html(data);
         }
 

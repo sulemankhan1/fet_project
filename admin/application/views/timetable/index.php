@@ -74,9 +74,11 @@
                               <td><?=$record->year?></td>
                               <td><?=$record->evening_morning?> </td>
                               <td><span class="badge badge-<?=($record->published == 0)?"secondary":"success"?>"><?=($record->published == 0)?"Draft":"Published"?></span> </td>
-                              <td><span class="circled <?=($record->published)?'green-circle':'grey-circle'?>">A</span> </td>
+                              <!-- <td><span class="circled <?=($record->published)?'green-circle':'grey-circle'?>">A</span> </td> -->
                               <td><?=$record->username?></td>
+                              <!-- <td><?=$record->datetime_added?></td> -->
                               <td><?=date('d M Y h:i a', strtotime($record->datetime_added))?></td>
+                              <!-- <td><?=$record->datetime_updated?></td> -->
                               <td><?=date('d M Y h:i a', strtotime($record->datetime_updated))?></td>
                               <td>
                                 <a href="<?=site_url('edit_timetable/'.hashids_encrypt($record->id))?>" class="btn-sm btn-link" title="Edit"><i class="ft-edit"></i></a>

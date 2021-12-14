@@ -53,14 +53,14 @@
 
       })
 
-      function hide_roles_field() 
+      function hide_roles_field()
       {
 
         $('.additional_info').hide();
         $('.additional_info_student').hide();
         $('.additional_info_teacher').hide();
         $('.additional_info_other').hide();
-        
+
       }
 
       function check_role(role_name)
@@ -101,7 +101,7 @@
           }
           else
           {
-            
+
             hide_roles_field();
 
           }
@@ -112,14 +112,14 @@
  });
 
 
- 
+
 $('.select-by-campus,.select-by-faculty').change(function(){
 
   if($(this).hasClass('select-by-campus'))
   {
 
   $.ajax({
-      
+
       url : '<?=site_url('profile/getAllFaculties/')?>'+$(this).val()+'/register',
       success:function(data)
       {

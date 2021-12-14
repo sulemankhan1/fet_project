@@ -107,7 +107,7 @@
                             <span class="text-danger"><?=form_error('dob')?></span>
 
                         </div>
-                        
+
                         <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                             <fieldset class="form-group">
                               <label for="basicInput">Gender *</label>
@@ -135,15 +135,15 @@
                                     <label for="basicInput">Cnic / B-Form *</label>
                                   </div>
                                   <div class="col-lg-6 text-right">
-    
+
                                     <?php if(@$this->input->post('show_cnic_to_public') != ''): ?>
-    
+
                                         <input type="checkbox" id="cnicPublic" name="show_cnic_to_public" value="1" <?=(@$this->input->post('show_cnic_to_public') == '1'?'checked':'')?>>
-    
+
                                     <?php else: ?>
-    
+
                                         <input type="checkbox" id="cnicPublic" name="show_cnic_to_public" value="1" <?=(@$edit->show_cnic_public == '1'?'checked':'')?>>
-        
+
                                     <?php endif; ?>
 
                                     <label for="cnicPublic">Show Public</label>
@@ -166,7 +166,7 @@
                                 <input type="text" class="form-control"  name="nationality" value="<?=(@$this->input->post('nationality') == ''?@$edit->nationality:$this->input->post('nationality'))?>">
                             </fieldset>
                             <span class="text-danger"><?=form_error('nationality')?></span>
-                            
+
                         </div>
                         <div class="col-xl-2 col-lg-2 col-md-2 mb-1">
                             <fieldset class="form-group">
@@ -214,15 +214,15 @@
                                     <label for="basicInput">Phone No *</label>
                                   </div>
                                   <div class="col-lg-6 text-right">
-                                  
+
                                     <?php if(@$this->input->post('show_phone_no_to_public') != ''): ?>
-                                    
+
                                         <input type="checkbox" id="phonenoPublic" name="show_phone_no_to_public" value="1" <?=(@$this->input->post('show_phone_no_to_public') == '1'?'checked':'')?>>
-                                    
+
                                     <?php else: ?>
-                                    
+
                                         <input type="checkbox" id="phonenoPublic" name="show_phone_no_to_public" value="1" <?=(@$edit->show_phone_no_public == '1'?'checked':'')?>>
-                                    
+
                                     <?php endif; ?>
                                     <label for="phonenoPublic">Show Public</label>
                                   </div>
@@ -252,7 +252,7 @@
                                     <?php if(@$this->input->post('role_id') != ''): ?>
 
                                         <input type="radio" id="<?=$v->slug?>" class="role_id" name="role_id" value="<?=$v->id?>" role-name="<?=$v->slug?>" <?=(@$this->input->post('role_id') == $v->id?'checked':'')?>>
-                                    
+
                                     <?php else:?>
 
                                         <input type="radio" id="<?=$v->slug?>" class="role_id" name="role_id" value="<?=$v->id?>" role-name="<?=$v->slug?>" <?=(@$edit->role_id == $v->id?'checked':'')?>>
@@ -264,7 +264,7 @@
                                 <?php endif ?>
 
                                 <?php endforeach ?>
-                                
+
                             </fieldset>
                             <span class="text-danger"><?=form_error('role_id')?></span>
 
@@ -273,7 +273,7 @@
                             <fieldset class="form-group">
                               <label for="basicInput">Image </label>
                               <input type="file" class="form-control" name="image">
-                              <input type="hidden" name="image_old" value="<?=@$edit->image?>">                        
+                              <input type="hidden" name="image_old" value="<?=@$edit->image?>">
                             </fieldset>
 
                         </div>
@@ -284,15 +284,15 @@
                                     <label for="basicInput">Home Address *</label>
                                   </div>
                                   <div class="col-lg-6 text-right">
-                                  
+
                                         <?php if(@$this->input->post('show_address_to_public') != ''): ?>
 
                                             <input type="checkbox" id="addressPublic" name="show_address_to_public" value="1" <?=(@$this->input->post('show_address_to_public') == '1'?'checked':'')?>>
-                                        
+
                                         <?php else:?>
-                                        
+
                                             <input type="checkbox" id="addressPublic" name="show_address_to_public" value="1" <?=(@$edit->show_address_public == '1'?'checked':'')?>>
-                                        
+
                                         <?php endif ?>
                                     <label for="addressPublic">Show Public</label>
                                   </div>
@@ -322,11 +322,11 @@
 
                       </div>
                       <div class="row">
-                      
+
                         <div class="col-lg-12 additional_info">
-                                
+
                             <div class="row">
-                              
+
                               <div class="col-lg-12">
                                   <h3> Additional Information</h3>
                                   <hr>
@@ -334,25 +334,12 @@
                               <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
                                 <fieldset class="form-group">
                                     <label for="basicInput">Select Campus *</label>
-                                    <select class="form-control select-by-campus"  name="campus_id">
-                                        
-                                        <option selected disabled value=""> choose</option>
-                                        
-                                        <?php foreach($campus as $key => $v): ?>
-
-                                            <?php if(@$this->input->post('campus_id') != ''): ?>
-                                            
-                                                <option value="<?= $v->id ?>" <?=(@$this->input->post('campus_id') == $v->id?'selected':'')?>><?=$v->name?></option>
-
-                                            <?php else:?>
-
-                                                <option value="<?= $v->id ?>" <?=(@$edit->campus_id == $v->id?'selected':'')?>><?=$v->name?></option>
-
-                                            <?php endif ?>
-                                            
-
-                                        <?php endforeach ?>
-
+                                    <select class="form-control" name="campus_id">
+                                      <?php if(!empty($campuses)) { ?>
+                                        <?php foreach($campuses as $campus) { ?>
+                                          <option value="<?=$campus->id?>" <?=(@$edit->campus_id == $campus->id)?'selected': ''?>><?=ucfirst($campus->name)?></option>
+                                        <?php } ?>
+                                      <?php } ?>
                                     </select>
                                 </fieldset>
                                 <span class="text-danger"><?=form_error('campus_id')?></span>
@@ -361,33 +348,14 @@
                               <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
                                 <fieldset class="form-group">
                                     <label for="basicInput">Select Faculty *</label>
-                                    <select class="form-control select-by-faculty"  name="faculty_id">
-                                        
-                                        <option selected disabled value=""> choose</option>
-                                        
-                                        <?php foreach($faculties as $key => $v): ?>
-
-                                            <?php if(@$this->input->post('campus_id') != ''): ?>
-
-                                                <?php if(@$this->input->post('campus_id') == $v->campus_id): ?>
-
-                                                    <option value="<?= $v->id ?>" <?=(@$this->input->post('faculty_id') == $v->id?'selected':'')?>><?=$v->name?></option>
-
-                                                <?php endif; ?>
-
-                                            <?php else:?>
-                                        
-                                                <?php if(@$edit->campus_id == $v->campus_id): ?>
-
-                                                    <option value="<?= $v->id ?>" <?=(@$edit->faculty_id == $v->id?'selected':'')?>><?=$v->name?></option>
-
-                                                <?php endif; ?>
-
-                                            <?php endif; ?>
-
-
-                                        <?php endforeach ?>
-
+                                    <select class="form-control" name="faculty_id">
+                                      <option value=""> -- Select -- </option>
+                                      <option value="all">All / General</option>
+                                      <?php if(!empty($faculties)) { ?>
+                                        <?php foreach($faculties as $faculty) { ?>
+                                          <option value="<?=$faculty->id?>" <?=(@$edit->faculty_id == $faculty->id)?'selected': ''?>><?=ucfirst($faculty->name)?></option>
+                                        <?php } ?>
+                                      <?php } ?>
                                     </select>
                                 </fieldset>
                                 <span class="text-danger"><?=form_error('faculty_id')?></span>
@@ -396,12 +364,12 @@
                               <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
                                 <fieldset class="form-group">
                                     <label for="basicInput">Select Department *</label>
-                                    <select class="form-control select-by-department"  name="depart_id">
-                                        
-                                      <option selected disabled value=""> choose</option>  
+                                    <!-- <select class="form-control select-by-department"  name="depart_id">
+
+                                      <option selected disabled value=""> choose</option>
 
                                       <?php foreach($departments as $key => $v): ?>
-                                          
+
                                           <?php if(@$this->input->post('faculty_id') != ''): ?>
 
                                               <?php if(@$this->input->post('faculty_id') == $v->fac_id): ?>
@@ -422,6 +390,9 @@
 
                                       <?php endforeach ?>
 
+                                    </select> -->
+                                    <select class="form-control" name="depart_id">
+                                      <option value=""> Select Faculty First </option>
                                     </select>
                                 </fieldset>
                                 <span class="text-danger"><?=form_error('depart_id')?></span>
@@ -431,16 +402,16 @@
                               <!-- <div class="additional_info_student"> -->
 
                                 <?php $student_display = 'none'; if($edit->type == 'STUDENT'){ $student_display = 'block'; }?>
-                                
+
                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_student" style="display:<?=$student_display?>">
                                   <fieldset class="form-group">
                                       <label for="basicInput">Select Program *</label>
                                       <select class="form-control"  name="program_id">
-                                          
-                                          <option selected disabled value=""> choose</option> 
+
+                                          <option selected disabled value=""> choose</option>
 
                                           <?php if(@$this->input->post('program_id') != ''):?>
-                                              
+
                                               <option value="Bachelor" <?=(@$this->input->post('program_id') == 'Bachelor'?'selected':'')?>>Bachelor</option>
                                               <option value="Master" <?=(@$this->input->post('program_id') == 'Master'?'selected':'')?>>Master</option>
                                               <option value="Mphil" <?=(@$this->input->post('program_id') == 'Mphil'?'selected':'')?>>Mphil</option>
@@ -499,7 +470,7 @@
                               <!-- additional_info_teacher_start -->
                               <!-- <div class="additional_info_teacher"> -->
                                 <?php $teacher_display = 'none'; if($edit->type == 'TEACHER'){ $teacher_display = 'block'; }?>
-                                
+
                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_teacher" style="display:<?=$teacher_display?>">
                                       <fieldset class="form-group">
                                           <label for="basicInput">Designation *</label>
@@ -535,18 +506,18 @@
 
                               <!-- </div> -->
                               <!-- additional_info_teacher_end -->
-                              
-                            </div>                          
+
+                            </div>
 
                         </div>
 
                       </div>
-                         
+
                   </div>
                   <div class="fg-actions d-flex justify-content-between">
                     <div class="recover-pass">
                       <button type="submit" class="btn btn-primary text-decoration-none text-white">
-                        Submit
+                        Save
                       </button>
                     </div>
                   </div>
@@ -560,3 +531,32 @@
     </section>
   </div>
 </div>
+<input type="hidden" name="faculty_id" value="<?=@$edit->faculty_id?>">
+<input type="hidden" name="depart_id" value="<?=@$edit->depart_id?>">
+<script type="text/javascript">
+$('document').ready(function() {
+  // for edit take faculty id
+    let faculty_id = $('input[name=faculty_id]').val();
+    let dept_id = $('input[name=depart_id]').val();
+    // if there is faculty id then fetch departments for that faculty
+    if(faculty_id) {
+      getDepartByFacId(faculty_id, dept_id);
+    }
+})
+$(document).on('change','select[name=faculty_id]',function(){
+  let id = $(this).val();
+  // empty department dropdown first
+  $('select[name=depart_id]').html('');
+
+  getDepartByFacId(id);
+});
+
+function getDepartByFacId(id, selected_depart_id="") {
+  $.ajax({
+    url : '<?=site_url('main/getDepartByFacId')?>/'+id+'/'+selected_depart_id,
+    success :function(data){
+        $('select[name=depart_id]').html(data);
+    }
+  })
+}
+</script>

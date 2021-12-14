@@ -25,7 +25,6 @@ class Timetable extends CI_Controller
         'records' => $this->tm->getRecords(),
       );
 
-
       $this->load->view('header',$data);
       $this->load->view('sidebar');
       $this->load->view('timetable/index');
@@ -220,8 +219,6 @@ class Timetable extends CI_Controller
 
       $record = $this->tm->getRecord($id);
       $detail_records = $this->tm->getDetailRecords($id);
-
-
       if(empty($record)) {
         echo "404 Please go back!";
         exit;
@@ -243,7 +240,6 @@ class Timetable extends CI_Controller
         'id' => $id,
         'detail_records' => $detail_records,
       );
-
 
       $this->load->view('header',$data);
       $this->load->view('sidebar');
@@ -321,10 +317,6 @@ class Timetable extends CI_Controller
 
         $data['timetable_data'] = json_decode($data['timetable_data']);
         $timetable_id = $data['timetable_id'];
-        // echo "<pre>";
-        // print_r($data);
-        // die();
-
 
         // filtering data to remove empty cells
         $timetable_details = array();

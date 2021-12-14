@@ -4,7 +4,7 @@ $notifications = $this->notifications->getAllForUser();
 
 <!-- main menu-->
 <!--.main-menu(class="#{menuColor} #{menuOpenType}", class=(menuShadow == true ? 'menu-shadow' : ''))-->
-<div data-active-color="white" data-background-color="<?=@$this->session->userdata('settings')['SIDEBAR_COLOR'];?>" data-image="<?=@base_url('uploads/sidebar_img/'.$this->session->userdata('settings')['SIDEBAR_IMG'])?>" class="app-sidebar">
+<div data-active-color="white" data-background-color="<?=@$this->session->userdata('settings')['SIDEBAR_COLOR'];?>" data-image="<?=@site_url('uploads/sidebar_img/'.$this->session->userdata('settings')['SIDEBAR_IMG'])?>" class="app-sidebar">
   <!-- main menu header-->
   <!-- Sidebar Header starts-->
   <div class="sidebar-header">

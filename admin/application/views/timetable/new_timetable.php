@@ -189,7 +189,6 @@ $('document').ready(function() {
     let dept_id = $('input[name=depart_id]').val();
     // if there is faculty id then fetch departments for that faculty
     if(faculty_id) {
-
       getDepartByFacId(faculty_id, dept_id);
     }
 })
