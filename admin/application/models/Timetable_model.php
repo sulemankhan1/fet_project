@@ -60,7 +60,7 @@ class Timetable_model extends CI_Model {
       $this->db->from('users u');
       // $this->db->where('u.campus_id', $timetable_record->campus_id);
       $this->db->where('u.faculty_id', $timetable_record->faculty_id);
-      $this->db->where('u.depart_id', $timetable_record->depart_id);
+      // $this->db->where('u.depart_id', $timetable_record->depart_id);
       $this->db->where('u.type', 'TEACHER');
       $this->db->where('u.account_verified', 1);
       $this->db->where('u.account_active', 1);

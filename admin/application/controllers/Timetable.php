@@ -31,14 +31,15 @@ class Timetable extends CI_Controller
       $this->load->view('footer');
     }
 
-    public function new() {
+    public function new($data = '') {
 
       $data = array(
         'title' => 'Add New Timetable',
-        // 'active_menu' => 'add_timetable',
+        'active_menu' => 'add_timetable',
         // 'menu_collapsed' => true,
         'campuses' => $this->bm->getWhereRows('campus', 'is_archived', 0),
         'faculties' => $this->bm->getWhereRows('faculties', 'is_archived', 0),
+        'record' => $data,
       );
 
       $this->load->view('header',$data);
@@ -124,8 +125,10 @@ class Timetable extends CI_Controller
       if($this->input->post()) {
         $data = $this->input->post();
         $id = isset($data['id']) && $data['id'] != "" ? $data['id'] : '';
+
         $data['type'] = $data['tt_type'];
         unset($data['tt_type']);
+
         $data['evening_morning'] = $data['tt_for'];
         unset($data['tt_for']);
 
@@ -147,7 +150,7 @@ class Timetable extends CI_Controller
         'msg' => 'Please Fill All Fields before Submitting. Form is being Rest'));
         redirect($redirect_url);
       }
-        // check if a timetable for same class Already exist
+        // check if a timetable for same class Already exist then redirect to form without submission
         if(@$data['id'] == "" && $this->tm->alreadyExist($data, $id) > 0) {
           $this->session->set_flashdata(array('type' => 'error',
           'msg' => 'Timetable for Same Class Already Exist. Please consider editing that Timetable!', 'data' => $data));
@@ -155,6 +158,7 @@ class Timetable extends CI_Controller
         }
 
         unset($data['old_image']);
+
         // check type
         if($data['type'] == 'image') {
           // if image then upload image
@@ -215,6 +219,7 @@ class Timetable extends CI_Controller
     }
 
     public function customize_timetable($id) {
+
       $id = hashids_decrypt($id);
 
       $record = $this->tm->getRecord($id);
@@ -223,6 +228,7 @@ class Timetable extends CI_Controller
         echo "404 Please go back!";
         exit;
       }
+
       // $record->evening_morning = 'morning';
       $data = array(
         'title' => 'Customize Timetable',
@@ -245,6 +251,8 @@ class Timetable extends CI_Controller
       $this->load->view('sidebar');
       $this->load->view('timetable/customize');
       $this->load->view('footer');
+      $this->load->view('timetable/scripts');
+
     }
 
     public function getTimetSettings($evening_morning, $timetable_id = "") {

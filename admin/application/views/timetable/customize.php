@@ -14,8 +14,8 @@ if($this->session->flashdata('data') && !isset($record)) {
  </style>
  <div class="row ">
    <div class="col-md-12">
-     <a href="javascript:void(0)" class="btn btn-success pull-right" onclick="save_timetable()"><i class="fa fa-save"></i> Save & Publish</a>
-     <a href="#" class="btn btn-secondary pull-right mr-2" onclick="save_timetable('draft')"><i class="icon-drawer"></i> Save as Draft</a>
+     <a href="javascript:void(0)" class="btn btn-success pull-right" onclick="save_timetable()"><i class="fa fa-check"></i> Save & Publish</a>
+     <a href="#" class="btn btn-secondary pull-right mr-2" onclick="save_timetable('draft')"><i class="fa fa-save"></i> Save </a>
    </div>
    <div class="col-md-12 mb-3">
      <div class="card mb-0">
@@ -95,7 +95,7 @@ if($this->session->flashdata('data') && !isset($record)) {
                            if($drow->time_from == $start_time &&
                            $drow->day == "monday" &&
                            $drow->time_to == ((date('H:i', strtotime($class_end_time)) > (date('H:i', strtotime($end_time))))?$end_time:$class_end_time)
-                         ) {
+                          ) {
                              if($drow->teacher_id != "" && $drow->teacher_id != 0) {
                                // teacher
                                ?>
@@ -465,58 +465,9 @@ if($this->session->flashdata('data') && !isset($record)) {
      </div>
    </div>
    <div class="col-md-12">
-     <a href="javascript:void(0)" class="btn btn-success pull-right" onclick="save_timetable()"><i class="fa fa-save"></i> Save & Publish</a>
-     <a href="javascript:void(0)" class="btn btn-secondary pull-right mr-2" onclick="save_timetable('draft')"><i class="icon-drawer"></i> Save as Draft</a>
+     <a href="javascript:void(0)" class="btn btn-success pull-right" onclick="save_timetable()"><i class="fa fa-check"></i> Save & Publish</a>
+     <a href="javascript:void(0)" class="btn btn-secondary pull-right mr-2" onclick="save_timetable('draft')"><i class="icon-save"></i> Save </a>
    </div>
  </div>
 
 <input type="hidden" name="timetable_id" id="timetable_id" value="<?=$id?>">
-<script src="<?=base_url('assets/js/timetable.js')?>" charset="utf-8"></script>
-<script>
-  $('document').ready(function() {
-    initiateLocalStorage();
-  })
-
-  function initiateLocalStorage() {
-    window.localStorage.timetable_data = "";
-    let evening_morning = $('#tt_evening_morning').val();
-    let timetable_id = $('#timetable_id').val();
-    $.ajax({
-      url: "<?=site_url('timetable/getTimetSettings')?>/"+evening_morning+"/"+timetable_id,
-      type: 'GET',
-      success: function(resp) {
-        // save in json format
-        window.localStorage.timetable_data = resp;
-      }
-    })
-    // console.log(JSON.parse(window.localStorage.timetable_data));
-  }
-
-
-  function save_timetable(draft = '') {
-    msg = (draft != "")?"Save as Draft?":"Are you sure you want to save and Publish the Timetable?";
-
-    let c = confirm(msg);
-    if(c == true) {
-      let timetable_id = document.querySelector('#timetable_id').value;
-      let timetable_data = window.localStorage.timetable_data;
-
-      $.ajax({
-        url: "<?=site_url('timetable/finish')?>",
-        type: 'POST',
-        data: {timetable_id, timetable_data, draft},
-        success: function(resp) {
-          let res = JSON.parse(resp);
-          if(res.error) {
-            alert("Please Create Timetable First before Submitting!");
-            return;
-          } else {
-            window.location = res.location;
-          }
-
-        }
-      })
-    }
-
-  }
-</script>

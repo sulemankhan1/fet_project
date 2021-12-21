@@ -43,11 +43,11 @@
                             <th>Class Group</th>
                             <th>Part</th>
                             <th>Year</th>
-                            <th>Morning/Evening</th>
+                            <th>Mor/Eve</th>
                             <th>Is Published</th>
                             <th>Added by</th>
                             <th>Date Added</th>
-                            <th>Last Updated</th>
+                            <!-- <th>Last Updated</th> -->
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -79,7 +79,7 @@
                               <!-- <td><?=$record->datetime_added?></td> -->
                               <td><?=date('d M Y h:i a', strtotime($record->datetime_added))?></td>
                               <!-- <td><?=$record->datetime_updated?></td> -->
-                              <td><?=date('d M Y h:i a', strtotime($record->datetime_updated))?></td>
+                              <!-- <td><?=date('d M Y h:i a', strtotime($record->datetime_updated))?></td> -->
                               <td>
                                 <a href="<?=site_url('edit_timetable/'.hashids_encrypt($record->id))?>" class="btn-sm btn-link" title="Edit"><i class="ft-edit"></i></a>
                                 <a href="<?=site_url('delete_timetable/'.hashids_encrypt($record->id))?>" class="btn-sm btn-link" title="Delete" onclick="return confirm('Are you sure you want to Delete this Subject? This Action Cannot be reverted.')"><i class="ft-trash"></i></a>
@@ -93,7 +93,7 @@
                           <?php $sno++; endforeach; ?>
                           <?php if(empty($records)): ?>
                             <tr>
-                              <td colspan="99" class="text-center">No Subjects Found</td>
+                              <td colspan="99" class="text-center">No Records Found</td>
                             </tr>
                           <?php endif; ?>
                         </tbody>

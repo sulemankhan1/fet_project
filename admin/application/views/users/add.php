@@ -274,13 +274,13 @@
                                 <fieldset class="form-group">
                                     <label for="basicInput">Select Campus *</label>
                                     <select class="form-control select-by-campus"  name="campus_id">
-                                        
+
                                         <option selected disabled value=""> choose</option>
-                                        
+
                                         <?php foreach($campus as $key => $v): ?>
 
                                             <?php if(@$this->input->post('campus_id') != ''): ?>
-                                            
+
                                                 <option value="<?= $v->id ?>" <?=(@$this->input->post('campus_id') == $v->id?'selected':'')?>><?=$v->name?></option>
 
                                             <?php else:?>
@@ -288,7 +288,7 @@
                                                 <option value="<?= $v->id ?>" <?=(@$edit->campus_id == $v->id?'selected':'')?>><?=$v->name?></option>
 
                                             <?php endif ?>
-                                            
+
 
                                         <?php endforeach ?>
 
@@ -301,7 +301,7 @@
                                 <fieldset class="form-group">
                                     <label for="basicInput">Select Faculty *</label>
                                     <select class="form-control select-by-faculty"  name="faculty_id">
-                                      <option selected disabled value=""> choose</option>  
+                                      <option selected disabled value=""> choose</option>
                                     </select>
                                 </fieldset>
                                 <span class="text-danger"><?=form_error('faculty_id')?></span>
@@ -311,7 +311,7 @@
                                 <fieldset class="form-group">
                                     <label for="basicInput">Select Department *</label>
                                     <select class="form-control select-by-department"  name="depart_id">
-                                      <option selected disabled value=""> choose</option>  
+                                      <option selected disabled value=""> choose</option>
                                     </select>
                                 </fieldset>
                                 <span class="text-danger"><?=form_error('depart_id')?></span>
@@ -325,13 +325,13 @@
                                     <label for="basicInput">Select Program *</label>
                                     <select class="form-control"  name="program_id">
 
-                                      <option selected disabled value=""> choose</option> 
+                                      <option selected disabled value=""> choose</option>
 
                                       <option value="Bachelor" <?=(@$this->input->post('program_id') == 'Bachelor'?'selected':'')?>>Bachelor</option>
                                       <option value="Master" <?=(@$this->input->post('program_id') == 'Master'?'selected':'')?>>Master</option>
                                       <option value="Mphil" <?=(@$this->input->post('program_id') == 'Mphil'?'selected':'')?>>Mphil</option>
                                       <option value="Phd" <?=(@$this->input->post('program_id') == 'Phd'?'selected':'')?>>Phd</option>
-                                      
+
                                     </select>
                                 </fieldset>
                                 <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
@@ -385,7 +385,6 @@
                                       <?php if(@$this->input->post('type') == 'TEACHER'){ ?>
                                         <span class="text-danger"><?=form_error('designation')?></span>
                                       <?php } ?>
-
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_teacher">
                                       <fieldset class="form-group">
@@ -395,9 +394,7 @@
                                       <?php if(@$this->input->post('type') == 'TEACHER'){ ?>
                                         <span class="text-danger"><?=form_error('speciality')?></span>
                                       <?php } ?>
-
                                 </div>
-
                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_other">
                                       <fieldset class="form-group">
                                           <label for="basicInput">Job Title *</label>
@@ -406,21 +403,15 @@
                                       <?php if(@$this->input->post('type') == 'OTHER'){ ?>
                                         <span class="text-danger"><?=form_error('job_title')?></span>
                                       <?php } ?>
-
                                 </div>
-                                
-
                               <!-- </div> -->
                               <!-- additional_info_teacher_end -->
-
                             </div>
-
                         </div>
-
                       </div>
-
                   </div>
                   <div class="fg-actions d-flex justify-content-between">
+                    <p><i>* User Added from this section will be <span class="text-success">Verified</span> Automatically</i></p>
                     <div class="recover-pass">
                       <button type="submit" class="btn btn-primary text-decoration-none text-white">
                         Submit
@@ -428,7 +419,6 @@
                     </div>
                   </div>
                 </form>
-
                 </div>
             </div>
           </div>

@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Profile extends CI_Controller 
+class Profile extends CI_Controller
 {
 
-  function __construct() 
+  function __construct()
   {
 
       parent::__construct();
@@ -18,15 +18,15 @@ class Profile extends CI_Controller
   }
 
 
-  
-  
+
+
   public function notification_settings()
   {
       $this->session->set_flashdata(array('edit_profile_tab' => 'email_notification', 'msg' => 'password updated' ));
       $id = $this->input->post('id');
 
       $data = [];
-      
+
       $notification_settings_id = $this->input->post('notification_settings_id');
 
       $notf_gen_maintanance = $this->input->post('notf_gen_maintanance', TRUE);
@@ -34,13 +34,13 @@ class Profile extends CI_Controller
 
       $notf_ret_maintanance = $this->input->post('notf_ret_maintanance', TRUE);
       $data['notf_ret_maintanance'] = ($notf_ret_maintanance == "")?0:1;
-      
+
       $notf_rej_maintanance = $this->input->post('notf_rej_maintanance', TRUE);
       $data['notf_rej_maintanance'] = ($notf_rej_maintanance == "")?0:1;
-      
+
       $notf_returned_maintanance = $this->input->post('notf_returned_maintanance', TRUE);
       $data['notf_returned_maintanance'] = ($notf_returned_maintanance == "")?0:1;
-      
+
       $notf_compl_maintainance = $this->input->post('notf_compl_maintainance', TRUE);
       $data['notf_compl_maintainance'] = ($notf_compl_maintainance == "")?0:1;
 
@@ -50,7 +50,7 @@ class Profile extends CI_Controller
       $data['notf_compl_sys_maint'] = ($notf_compl_sys_maint == "")?0:1;
 
       }
-      
+
       if ($this->session->userdata('user_st') == 4) {
 
         $notf_gen_usage_req = $this->input->post('notf_gen_usage_req', TRUE);
@@ -69,7 +69,7 @@ class Profile extends CI_Controller
 
       $notf_gen_chem_inv_req = $this->input->post('notf_gen_chem_inv_req', TRUE);
       $data['notf_gen_chem_inv_req'] = ($notf_gen_chem_inv_req == "")?0:1;
-      
+
       $notf_acc_chem_inv_req = $this->input->post('notf_acc_chem_inv_req', TRUE);
       $data['notf_acc_chem_inv_req'] = ($notf_acc_chem_inv_req == "")?0:1;
 
@@ -78,30 +78,30 @@ class Profile extends CI_Controller
 
       $notf_returned_chem_inv_req = $this->input->post('notf_returned_chem_inv_req', TRUE);
       $data['notf_returned_chem_inv_req'] = ($notf_returned_chem_inv_req == "")?0:1;
-      
+
       $notf_resubmit_chem_inv_req = $this->input->post('notf_resubmit_chem_inv_req', TRUE);
       $data['notf_resubmit_chem_inv_req'] = ($notf_resubmit_chem_inv_req == "")?0:1;
-      
+
       $notf_gen_animal_inv_req = $this->input->post('notf_gen_animal_inv_req', TRUE);
       $data['notf_gen_animal_inv_req'] = ($notf_gen_animal_inv_req == "")?0:1;
 
       $notf_acc_animal_inv_req = $this->input->post('notf_acc_animal_inv_req', TRUE);
       $data['notf_acc_animal_inv_req'] = ($notf_acc_animal_inv_req == "")?0:1;
-      
+
       $notf_rej_animal_inv_req = $this->input->post('notf_rej_animal_inv_req', TRUE);
       $data['notf_rej_animal_inv_req'] = ($notf_rej_animal_inv_req == "")?0:1;
-      
+
       $notf_returned_animal_inv_req = $this->input->post('notf_returned_animal_inv_req', TRUE);
       $data['notf_returned_animal_inv_req'] = ($notf_returned_animal_inv_req == "")?0:1;
 
-      
+
       $notf_resubmit_animal_inv_req = $this->input->post('notf_resubmit_animal_inv_req', TRUE);
       $data['notf_resubmit_animal_inv_req'] = ($notf_resubmit_animal_inv_req == "")?0:1;
-      
+
       $data['email_notification'] = $this->input->post('email_noti');
       $data['user_id'] = $this->session->userdata('user_id');
 
-      
+
       if($notification_settings_id == "") {
         $this->bm->insertRow('notification_settings', $data);
       } else {
@@ -110,7 +110,7 @@ class Profile extends CI_Controller
       $this->session->set_flashdata(array('response' => 'success', 'msg' => 'Notification settings updated'));
       redirect('edit_profile');
   }
-  
+
 
 
   public function edit_profile()
@@ -121,28 +121,28 @@ class Profile extends CI_Controller
       $this->load->model('Users_model');
 
       $data = [
-        
+
         'title' => 'Edit Profile',
-        
+
         'edit' => $this->Users_model->getUserToEdit($id),
-        
+
         'campus' => $this->bm->getAll('campus', 'id'),
 
         'faculties' => $this->bm->getAll('faculties', 'id'),
-  
+
         'departments' => $this->bm->getAll('departments', 'id')
 
       ];
-  
+
       $this->load->view('header',$data);
       $this->load->view('sidebar');
       $this->load->view('profile/edit_profile');
       $this->load->view('footer');
       $this->load->view('users/script');
-      
+
   }
-  
-  public function update_profile() 
+
+  public function update_profile()
   {
 
     $p = $this->input->post();
@@ -278,45 +278,45 @@ class Profile extends CI_Controller
           if ($p['type'] == 'TEACHER')
           {
 
-            
+
             $info = [
-              
+
               'designation' => $p['designation'],
               'speciality' => $p['speciality']
-              
+
             ];
-            
+
             $this->bm->updateRow('teachers', $info,'user_id',$p['id']);
 
-            
+
           }
-          
+
           elseif ($p['type'] == 'STUDENT')
           {
-            
+
             $info = [
-              
+
               'program_id' => $p['program_id'],
               'roll_number' => $p['roll_no'],
               'batch_year' => $p['batch_year'],
               'current_semester' => $p['current_semester_no']
-              
+
             ];
-                        
+
             $this->bm->updateRow('students', $info,'user_id',$p['id']);
 
-            
+
           }
 
           else
           {
-            
+
             $info = [
-              
+
               'job_title' => $p['job_title']
-              
+
             ];
-            
+
             $this->bm->updateRow('other_users', $info,'user_id',$p['id']);
 
           }
@@ -341,19 +341,19 @@ class Profile extends CI_Controller
         }
         else
         {
-          
+
           $this->edit_profile();
-          
+
         }
-        
+
   }
 
   public function change_password()
-  {      
+  {
       $data = [
 
         'title' => 'Change Password'
-        
+
       ];
 
       $this->load->view('header',$data);
@@ -362,17 +362,17 @@ class Profile extends CI_Controller
       $this->load->view('footer');
 
   }
-  
+
   public function update_password()
   {
       $this->form_validation->set_rules('old_password', 'Old password', 'callback_password_check');
       $this->form_validation->set_rules('new_password', 'New password', 'required');
       $this->form_validation->set_rules('confirm_password', 'Confirm password', 'required|matches[new_password]');
 
-      if($this->form_validation->run()) 
+      if($this->form_validation->run())
       {
 
-        
+
         $id = $this->session->userdata('user_id');
 
         $newpass = $this->input->post('new_password');
@@ -384,7 +384,7 @@ class Profile extends CI_Controller
         redirect('change_password');
 
       }
-      else 
+      else
       {
 
         $this->change_password();
@@ -401,7 +401,7 @@ class Profile extends CI_Controller
 
       $user = $this->bm->getById('users',$id);
 
-      if($this->encryption->decrypt($user->password) !== $oldpass) 
+      if($this->encryption->decrypt($user->password) !== $oldpass)
       {
 
         $this->form_validation->set_message('password_check', 'The {field} does not match');
@@ -419,13 +419,13 @@ class Profile extends CI_Controller
 
 		if($campus_id != '' && $campus_id != 'all')
 		{
-	
+
 			$faculties = $this->bm->getWhereRows('faculties', 'campus_id', $campus_id);
-			
+
 		}
-		else 
+		else
 		{
-			
+
 			$faculties = $this->bm->getAll('faculties', 'id');
 
 		}
@@ -445,9 +445,9 @@ class Profile extends CI_Controller
 		}
 
 
-		foreach ($faculties as $key => $v) 
+		foreach ($faculties as $key => $v)
 		{
-			
+
 			$output .='<option value="'.$v->id.'">'.$v->name.'</option>';
 
 		}
@@ -461,13 +461,13 @@ class Profile extends CI_Controller
 
 		if($faculty_id != '' && $faculty_id != 'all')
 		{
-	
+
 			$departments = $this->bm->getWhereRows('departments', 'fac_id', $faculty_id);
-			
+
 		}
-		else 
+		else
 		{
-			
+
 			$departments = $this->bm->getAll('departments', 'id');
 
 		}
@@ -478,18 +478,18 @@ class Profile extends CI_Controller
 		{
 
 			$output .= '<option selected disabled value=""> choose </option>';
-			
+
 		}
 		else
 		{
-			
+
 			$output .= '<option selected disabled value=""> by Department </option><option value="all">in all Programs</option>';
 
 		}
 
-		foreach ($departments as $key => $v) 
+		foreach ($departments as $key => $v)
 		{
-			
+
 			$output .='<option value="'.$v->id.'">'.$v->name.'</option>';
 
 		}

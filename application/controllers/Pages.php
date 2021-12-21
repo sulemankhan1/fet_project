@@ -14,6 +14,7 @@ class Pages extends CI_Controller
 		parent::__construct();
 		$this->load->model('news_model', 'nm');
 		$this->load->model('pages_model', 'pm');
+		$this->load->model('timetable_model', 'tm');
 	}
 
 	public function index()
@@ -283,7 +284,9 @@ class Pages extends CI_Controller
 
 	public function timetable() {
 
-		$data = [];
+		$data = array(
+			'timetables' => $this->tm->getRecords(),
+		);
 
 		$this->load->view('includes/header', $data);
 		$this->load->view('pages/timetable');
@@ -300,11 +303,11 @@ class Pages extends CI_Controller
 
 	}
 
-	public function faculty() 
+	public function faculty()
 	{
 
 		$data = [
-			
+
 			'title' => 'Faculty',
 
 			'campus' => $this->bm->getAll('campus', 'id')
@@ -329,20 +332,20 @@ class Pages extends CI_Controller
 	  	if($rowno != 0){
 			$rowno = ($rowno-1) * $rowperpage;
 	  	}
-  
-  
+
+
 	  	$search = ($this->input->post('search') == ''?'':$this->input->post('search'));
 	  	$campus = ($this->input->post('campus') == ''?'':$this->input->post('campus'));
 	  	$faculty = ($this->input->post('faculty') == ''?'':$this->input->post('faculty'));
 	  	$depart = ($this->input->post('depart') == ''?'':$this->input->post('depart'));
-  
-		  
+
+
 	  	$this->load->model('Users_model');
 	  	// All records count
 	  	$allcount = $this->Users_model->getFacultyCount($search,$campus,$faculty,$depart);
 	  	// Get records
 	  	$data1['faculty'] = $this->Users_model->getFaculty($rowno,$rowperpage,$search,$campus,$faculty,$depart);
-  
+
 	  	// Pagination Configuration
 		$config['base_url'] = site_url().'/pages/getAllFacultyMembers';
 		$config['use_page_numbers'] = TRUE;
@@ -361,7 +364,7 @@ class Pages extends CI_Controller
 	  	$data['row'] = $rowno;
 
 	  	echo json_encode($data);
-   
+
 	}
 
 	public function getAllFaculties($campus_id='',$type='')
@@ -369,13 +372,13 @@ class Pages extends CI_Controller
 
 		if($campus_id != '' && $campus_id != 'all')
 		{
-	
+
 			$faculties = $this->bm->getWhereRows('faculties', 'campus_id', $campus_id);
-			
+
 		}
-		else 
+		else
 		{
-			
+
 			$faculties = $this->bm->getAll('faculties', 'id');
 
 		}
@@ -395,9 +398,9 @@ class Pages extends CI_Controller
 		}
 
 
-		foreach ($faculties as $key => $v) 
+		foreach ($faculties as $key => $v)
 		{
-			
+
 			$output .='<option value="'.$v->id.'">'.$v->name.'</option>';
 
 		}
@@ -411,13 +414,13 @@ class Pages extends CI_Controller
 
 		if($faculty_id != '' && $faculty_id != 'all')
 		{
-	
+
 			$departments = $this->bm->getWhereRows('departments', 'fac_id', $faculty_id);
-			
+
 		}
-		else 
+		else
 		{
-			
+
 			$departments = $this->bm->getAll('departments', 'id');
 
 		}
@@ -428,18 +431,18 @@ class Pages extends CI_Controller
 		{
 
 			$output .= '<option selected disabled value=""> choose </option>';
-			
+
 		}
 		else
 		{
-			
+
 			$output .= '<option selected disabled value=""> by Department </option><option value="all">in all Programs</option>';
 
 		}
 
-		foreach ($departments as $key => $v) 
+		foreach ($departments as $key => $v)
 		{
-			
+
 			$output .='<option value="'.$v->id.'">'.$v->name.'</option>';
 
 		}
@@ -645,37 +648,37 @@ class Pages extends CI_Controller
 		$this->form_validation->set_rules('campus_id', 'Campus', 'required');
 		$this->form_validation->set_rules('faculty_id', 'Faculty', 'required');
 		$this->form_validation->set_rules('depart_id', 'Department', 'required');
-		  
+
 		if($p['type'] == 'STUDENT')
 		{
-  
+
 		  $this->form_validation->set_rules('program_id', 'Program', 'required');
-  
+
 		}
-  
+
 		if($this->form_validation->run())
 		{
-  			
+
 			$p = $this->input->post();
 
-			
+
 			$account_activity = $this->bm->getWhere('settings', 'name', 'ACCOUNT_ACTIVITY');
-			
+
 			if($account_activity->value == 'pending')
 			{
-  
+
 			  $pending = 1;
 			  $account_active = 0;
-  
+
 			}
 			else
 			{
-  
+
 			  $pending = 0;
 			  $account_active = 1;
-  
+
 			}
-  
+
 			$data = [
 
 				'campus_id' => $p['campus_id'],
@@ -691,73 +694,73 @@ class Pages extends CI_Controller
 				'account_active' => $account_active,
 				'is_pending' => $pending,
 				'created_at' => date('Y-m-d H:i:s')
-  
+
 			];
-  
+
 			$ins_id = $this->bm->insertRow('users', $data);
-			
+
 			if ($p['type'] == 'TEACHER')
 			{
-  
-			  
+
+
 			  $info = [
-				
+
 				'user_id' => $ins_id
-				
+
 			  ];
-			  
+
 			  $this->bm->insertRow('teachers',$info);
-			  
+
 			}
-			
+
 			elseif ($p['type'] == 'STUDENT')
 			{
-			  
+
 			  $info = [
-				
+
 				'user_id' => $ins_id,
 				'program_id' => $p['program_id'],
-				
+
 			  ];
-			  
+
 			  $this->bm->insertRow('students',$info);
-			  
+
 			}
-  
+
 			else
 			{
-			  
+
 			  $info = [
-				
+
 				'user_id' => $ins_id
-				
+
 			  ];
-			  
+
 			  $this->bm->insertRow('other_users',$info);
-  
+
 			}
-  
-			if ($account_active == 1) 
+
+			if ($account_active == 1)
 			{
-			
+
 				$this->session->set_flashdata(array('response' => 'success', 'msg' => "Registration has been done Successfully"));
-			
+
 			}
 			else
 			{
-				
+
 				$this->session->set_flashdata(array('response' => 'success', 'msg' => "Registration has been done Successfully wait for approving your account "));
 
 			}
-  
-				
+
+
 				redirect('login');
-  
-  
+
+
 		}
 		else
 		{
-				
+
 			$this->register();
 
 		}
@@ -975,6 +978,16 @@ class Pages extends CI_Controller
 
 	}
 
+	public function fetch_timetable() {
 
+		$id = $this->input->post('id');
+		$timetable_record = $this->bm->getById('timetable', $id);
+		if(!empty($timetable_record) && $timetable_record->type == "image") {
+			echo json_encode(array('type' => 'success', 'data' => array('type' => $timetable_record->type, 'src' =>$timetable_record->image)));
+			die();
+		}
+
+		echo json_encode(array('type' => "error"));
+	}
 
 }

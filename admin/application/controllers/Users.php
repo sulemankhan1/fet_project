@@ -24,12 +24,10 @@ class Users extends CI_Controller
     $data = [
 
       'title' => 'Create User',
-
       'active_menu' => 'create_user',
-
       'roles' => $this->bm->getAll('roles', 'id', 'desc'),
-
-      'campus' => $this->bm->getAll('campus', 'id')
+      'campus' => $this->bm->getAll('campus', 'id'),
+      'faculties' => $this->bm->getWhereRows('faculties', 'is_archived', 0),
 
     ];
 
@@ -158,7 +156,8 @@ class Users extends CI_Controller
               'show_phone_no_public' => (@$p['show_phone_no_to_public'] == ''?0:1),
               'account_active' => $account_active,
               'is_pending' => $pending,
-              'created_at' => date('Y-m-d H:i:s')
+              'created_at' => date('Y-m-d H:i:s'),
+              'account_verified' => 1,
 
 
           ];
@@ -217,8 +216,7 @@ class Users extends CI_Controller
           redirect('view_users');
 
 
-        }
-        else{
+        } else {
 
           $this->create_user();
 

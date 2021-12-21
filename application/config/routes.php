@@ -28,6 +28,7 @@ $route['software_eng'] = 'pages/software_eng';
 $route['information_tech'] = 'pages/information_tech';
 $route['electronics'] = 'pages/electronics';
 $route['telecommunication'] = 'pages/telecommunication';
+$route['fetch_timetable'] = 'pages/fetch_timetable';
 
 // forget password
 $route['forgot_password'] = 'pages/forgot_password';

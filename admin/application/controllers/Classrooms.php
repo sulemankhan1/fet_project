@@ -46,12 +46,11 @@ class Classrooms extends CI_Controller
       if($this->input->post()) {
         $data = $this->input->post();
 
-
         // for backend validation if error found where to redirect
         $redirect_url = isset($data['id']) && $data['id'] != "" ? 'edit_classroom/'.hashids_encrypt($data['id']) : 'add_classroom';
 
 
-        echo $this->cm->classRoomAlreadyExist($data['room_no']);
+        
         // check if a classroom with same name exists (only for add)
         if(@$data['id'] == "" && $this->cm->classRoomAlreadyExist($data['room_no']) > 0) {
           $this->session->set_flashdata(array('type' => 'error', 'msg' => 'A Class Room with the Same Room No. Already Exist!', 'data' => $data));
@@ -83,6 +82,7 @@ class Classrooms extends CI_Controller
     		redirect('manage/classrooms');
       }
     }
+
     public function edit($id) {
 
       $id = hashids_decrypt($id);

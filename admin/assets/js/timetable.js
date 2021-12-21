@@ -16,6 +16,24 @@ draggables.forEach(draggable => {
 
   draggable.addEventListener('dragend', () => {
     draggable.classList.remove('dragging');
+    let draggable_type = $(draggable).attr('data-dtype');
+    const copy = $(draggable).clone();
+    cloned_item = copy;
+
+    // const teacher_name = draggable.querySelector('.teacher-name');
+
+    // teacher_name.classList.add('draggable');
+    // switch (draggable_type) {
+    //   case 'teacher':
+    //     $('#teachers_container').append(cloned_item);
+    //     break;
+    //   case 'subject':
+    //     $('#subjects_container').append(cloned_item);
+    //     break;
+    //   case 'classroom':
+    //     $('#classrooms_container').append(cloned_item);
+    //     break;
+    // }
 
     // add remove button on drop
     $(draggable).append('<span class="remover-btn" onclick="remove_item(this)"> <i class="fa fa-close"></i> </span>');
@@ -31,12 +49,7 @@ droppables.forEach(droppable => {
 
     const afterElement = getDragAfterElement(droppable, e.clientY)
     const draggable = document.querySelector('.dragging');
-    const copy = document.querySelector('.dragging').cloneNode(true);
-    cloned_item = copy;
 
-    // const teacher_name = draggable.querySelector('.teacher-name');
-
-    // teacher_name.classList.add('draggable');
     if (afterElement == null) {
       droppable.appendChild(draggable)
     } else {
