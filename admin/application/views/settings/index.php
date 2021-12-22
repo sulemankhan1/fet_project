@@ -41,7 +41,7 @@
               </ul>
               <div class="tab-content px-1">
                 <!-- ADMIN PANEL SETTINGS PANEL STARTS -->
-                <div role="tabpanel" class="tab-pane" id="tabVerticalLeft21" aria-expanded="true" aria-labelledby="baseVerticalLeft2-tab1">
+                <div role="tabpanel" class="tab-pane active" id="tabVerticalLeft21" aria-expanded="true" aria-labelledby="baseVerticalLeft2-tab1">
                   <div class="col-md-12">
                     <form class="form" action="<?=site_url('save_settings');?>" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="type" value="general_setting">
@@ -127,7 +127,7 @@
                 </div>
                 <!-- ADMIN PANEL SETTINGS PANEL ENDS -->
                 <!-- WEBSITE SETTINGS PANEL STARTS -->
-                <div class="tab-pane active" id="tabVerticalLeft22" aria-labelledby="baseVerticalLeft2-tab2">
+                <div class="tab-pane" id="tabVerticalLeft22" aria-labelledby="baseVerticalLeft2-tab2">
                   <div class="col-md-12">
                     <h4 class="card-title mt-2">Homepage Slider Settings</h4>
                     <a href="javascript:void(0)" class="btn btn-primary float-right" onclick="add_new_slide()">Add New Slide</a>

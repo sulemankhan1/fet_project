@@ -1,8 +1,6 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css')"/>
 
 
-
-
 <link rel="stylesheet" type="text/css" href="assets/css/css-swiper.css">
 
 <!-- Start main-content -->
@@ -591,7 +589,7 @@
                         <span class="text-white"><?=form_error('re_enter_password')?></span>
                       </div>
                     </div>
-                   
+
 
 
 
