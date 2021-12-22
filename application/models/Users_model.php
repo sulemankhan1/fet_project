@@ -50,7 +50,7 @@ class Users_model extends CI_Model
 		$this->db->join('other_users ou','ou.user_id=u.id','left');
 		$this->db->join('roles r','r.id=u.role_id','left');
 
-		$this->db->order_by('u.id','desc');
+		$this->db->order_by('u.id');
 
 		$this->db->where('u.type','FACULTY');
 		$this->db->or_where('u.type','TEACHER');
@@ -78,88 +78,73 @@ class Users_model extends CI_Model
 		{
 
 		$this->db->like('u.full_name',$search);
-		
+
 		}
 
 		if(!empty($campus) && $campus != 'all')
 		{
 
 			$this->db->where('u.campus_id',$campus);
-		
+
 		}
 
 		if(!empty($faculty) && $faculty != 'all')
 		{
 
 			$this->db->where('u.faculty_id',$faculty);
-		
+
 		}
 
 		if(!empty($depart) && $depart != 'all')
 		{
 
 			$this->db->where('u.depart_id',$depart);
-		
+
 		}
 
 		$res = $this->db->get()->result_array();
 
 		return count($res);
 
-  	} 
+  	}
 
 
   	function getFaculty($rowno,$rowperpage,$search,$campus,$faculty,$depart)
   	{
-
+			// echo "<pre>";
+			// print_r($search);
+			// print_r($campus);
+			// print_r($faculty);
+			// print_r($depart);
+			// die();
 		$this->db->select('u.id as uid,u.*,ou.*,r.name as role_name');
 		$this->db->from('users u');
 
 		$this->db->join('other_users ou','ou.user_id=u.id','left');
 		$this->db->join('roles r','r.id=u.role_id','left');
-
-		$this->db->order_by('u.id','desc');
-
-		$this->db->where('u.type','FACULTY');
+		$this->db->where_in('u.type',['FACULTY', 'TEACHER']);
 
 		if(!empty($search))
 		{
-
-		$this->db->like('u.full_name',$search);
-		
+			$this->db->like('u.full_name',$search);
 		}
 
 		if(!empty($campus) && $campus != 'all')
 		{
-
 			$this->db->where('u.campus_id',$campus);
-		
 		}
 
 		if(!empty($faculty) && $faculty != 'all')
 		{
-
 			$this->db->where('u.faculty_id',$faculty);
-		
 		}
 
-		if(!empty($depart) && $depart != 'all')
-		{
+  	$this->db->order_by('u.id','desc');
 
-			$this->db->where('u.depart_id',$depart);
-		
-		}
-
-      	$this->db->order_by('u.id','desc');
-      
-      	$this->db->limit($rowperpage, $rowno);
-
-		  
-      	return $this->db->get()->result();
-
-
+  	$this->db->limit($rowperpage, $rowno);
+  	return $this->db->get()->result();
   	}
-	
+
 
 
 }

@@ -1,0 +1,52 @@
+.sc_container {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  height: 500px;
+}
+.sc_box {
+  display: inline-block;
+  width: 100%;
+  height: 160px;
+  background: yellow;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+}
+.bbox {
+  margin: 10px;
+}
+.px-1 {
+  padding: 0 !important;
+}
+.tab-pane {
+  border: 1px solid #DDDDDD;
+}
+.sc_box .settings_container {
+  position: relative;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: none;
+
+}
+.sc_box .centered_s {
+  padding-top: 30%;
+  padding-left: 40px;
+  text-align: center;
+  font-size: 13px;
+  color: #fff !important;
+}
+.sc_box > .button_box {
+  background: red;
+}
+.sc_box:hover > .settings_container {
+  display: block;
+}
+#add_form_box {
+  display:none;
+}
+#EditSliderModal {
+  /* max-width: 850px;
+    margin: 2rem auto; */
+}

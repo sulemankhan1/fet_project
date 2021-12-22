@@ -622,11 +622,12 @@ class Users extends CI_Controller
 
       $id = hashids_decrypt($id);
 
-      $user  = $this->bm->getById('isers',$id);
+      $user  = $this->bm->getById('users',$id);
 
-      $this->bm->updateRow('users' ,['is_archived' => 1], 'id' ,$id);
+      // $this->bm->updateRow('users' ,['is_archived' => 1], 'id' ,$id);
+      $this->bm->delete('users' , 'id' ,$id);
 
-      $this->session->set_flashdata(array('response' => 'success', 'msg' => 'User deleted Successfully'));
+      $this->session->set_flashdata(array('response' => 'success', 'msg' => 'User Deleted Successfully'));
 
       if ($user->is_pending == 1)
       {

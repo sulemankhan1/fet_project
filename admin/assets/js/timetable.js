@@ -1,6 +1,6 @@
 const draggables = document.querySelectorAll('.draggable');
 const droppables = document.querySelectorAll('.droppable');
-
+test = true;
 draggables.forEach(draggable => {
 
   draggable.addEventListener('dragstart', () => {
@@ -25,16 +25,17 @@ draggables.forEach(draggable => {
     // teacher_name.classList.add('draggable');
     // switch (draggable_type) {
     //   case 'teacher':
-    //     $('#teachers_container').append(cloned_item);
+    //     $('#teachers_container').append(cloned_item[0]);
     //     break;
     //   case 'subject':
-    //     $('#subjects_container').append(cloned_item);
+    //     $('#subjects_container').append(cloned_item[0]);
     //     break;
     //   case 'classroom':
-    //     $('#classrooms_container').append(cloned_item);
+    //     $('#classrooms_container').append(cloned_item[0]);
     //     break;
     // }
-
+    test = true;
+    console.log(test);
     // add remove button on drop
     $(draggable).append('<span class="remover-btn" onclick="remove_item(this)"> <i class="fa fa-close"></i> </span>');
 
@@ -49,12 +50,23 @@ droppables.forEach(droppable => {
 
     const afterElement = getDragAfterElement(droppable, e.clientY)
     const draggable = document.querySelector('.dragging');
+    // var nodeCopy = document.getElementById(draggable).cloneNode(true);
 
-    if (afterElement == null) {
-      droppable.appendChild(draggable)
-    } else {
-      droppable.insertBefore(draggable, afterElement)
+
+    if(test) {
+      var nodeCopy = $(draggable).clone();
+      nodeCopy.id = "newId";
+    //   console.log(nodeCopy);
+      // console.log(nodeCopy);
+      if (afterElement == null) {
+        droppable.appendChild(draggable)
+        $('#teachers_container').append(nodeCopy);
+      } else {
+        droppable.insertBefore(draggable, afterElement)
+      }
+      test = false;
     }
+
   })
 })
 

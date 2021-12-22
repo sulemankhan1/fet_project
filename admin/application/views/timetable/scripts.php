@@ -1,6 +1,24 @@
 <script src="<?=base_url('assets/js/timetable.js')?>" charset="utf-8"></script>
+
 <script>
   $('document').ready(function() {
+
+
+    // fetch teachers list via ajax
+    // let timetable_id = $('#timetable_id').val();
+    // $.ajax({
+    //   url: '<?=site_url('Timetable/generate_lists')?>/'+timetable_id,
+    //   type: 'GET',
+    //   success: function(res) {
+    //     // $('#teachers_container').append(res);
+    //     // document.getElementById('teachers_container').insertAdjacentHTML('afterbegin',res);
+    //
+    //     var elemDiv = document.createElement('div');
+    //     elemDiv.innerHTML = res;
+    //     document.getElementById('teachers_container').insertBefore(elemDiv, document.getElementById('teachers_container').firstChild);
+    //   }
+    // })
+
     initiateLocalStorage();
   })
 

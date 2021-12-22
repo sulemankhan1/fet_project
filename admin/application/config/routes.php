@@ -75,7 +75,7 @@ $route['notification_settings'] = 'profile/notification_settings';
 //setting
 $route['settings'] = 'settings/index';
 $route['save_settings'] = 'settings/save_settings';
-$route['delete_setting/(:any)/slider_setting'] = 'settings/delete_setting/$1/$2';
+$route['delete_setting/(:any)/(:any)'] = 'settings/delete_setting/$1/$2';
 $route['update_slider'] = 'settings/update_slider';
 $route['change_status/(:any)/(:any)'] = 'settings/change_slider_status/$1/$2';
 

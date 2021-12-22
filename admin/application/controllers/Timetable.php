@@ -221,7 +221,6 @@ class Timetable extends CI_Controller
     public function customize_timetable($id) {
 
       $id = hashids_decrypt($id);
-
       $record = $this->tm->getRecord($id);
       $detail_records = $this->tm->getDetailRecords($id);
       if(empty($record)) {
@@ -354,5 +353,6 @@ class Timetable extends CI_Controller
         }
       }
     }
+
 
 }

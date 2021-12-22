@@ -15,6 +15,7 @@ class Pages extends CI_Controller
 		$this->load->model('news_model', 'nm');
 		$this->load->model('pages_model', 'pm');
 		$this->load->model('timetable_model', 'tm');
+		$this->load->model('users_model', 'um');
 	}
 
 	public function index()
@@ -305,13 +306,21 @@ class Pages extends CI_Controller
 
 	public function faculty()
 	{
+		$search_query = $this->input->get('teacher_name');
+		$teachers = array();
+		// if searched filter teachers and faculty
+		if($search_query != "") {
+			$teachers = $this->um->getFacultyAndTeachers();
+		} else {
+			// otherwise show all
+			$teachers = $this->um->getFacultyAndTeachers();
+		}
 
 		$data = [
-
 			'title' => 'Faculty',
-
-			'campus' => $this->bm->getAll('campus', 'id')
-
+			'campus' => $this->bm->getAll('campus', 'id'),
+			'search_query' => $search_query,
+			'teachers' => $teachers,
 		];
 
 		$this->load->view('includes/header', $data);

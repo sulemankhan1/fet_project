@@ -5,9 +5,9 @@ class Settings extends CI_Controller {
     function __construct() {
         parent::__construct();
 
-        // if (empty($this->session->userdata('username'))) {
-        //     redirect('login');
-        // }
+        if (empty($this->session->userdata('username'))) {
+            redirect('login');
+        }
 
     }
 
@@ -203,16 +203,11 @@ class Settings extends CI_Controller {
       $id = hashids_decrypt($id);
 
       switch ($type) {
-
         case 'slider_setting':
-
           $this->bm->delete('slider_setting','id',$id);
-
-          $this->session->set_flashdata(array('response' => 'success', 'msg' => 'Slider Setting Deleted Successfully' ));
+          $this->session->set_flashdata(array('response' => 'success', 'msg' => 'Slider Deleted Successfully' ));
           redirect('settings');
-
           break;
-
       }
 
 
@@ -233,18 +228,21 @@ class Settings extends CI_Controller {
     {
 
       $p = $this->input->post();
-
       $slider_image = $_FILES['slider_image'];
 
       if($slider_image['name'] != "") {
-
         $img = $this->bm->uploadFile($slider_image, 'uploads/slider_image');
-        $arr['image'] = $img;
 
+        // delete old image
+        if(file_exists('uploads/slider_image/'.$p['old_img'])) {
+          unlink('uploads/slider_image/'.$p['old_img']);
+        }
+      } else {
+        $img = $p['old_img'];
       }
 
       $arr = [
-
+        'image' => $img,
         'title' => $p['title'],
         'title_color' => $p['title_color'],
         'title_link' => $p['title_link'],
@@ -263,26 +261,20 @@ class Settings extends CI_Controller {
 
     public function change_slider_status($id,$type)
     {
-
       $arr = [];
-
       if ($type == 1) {
-
         $arr = [
           'active' => 0
         ];
-
       }
       else{
-
         $arr = [
           'active' => 1
         ];
-
       }
 
       $id = hashids_decrypt($id);
-
+      
       $this->bm->updateRow('slider_setting',$arr,'id',$id);
 
       $this->session->set_flashdata(array('response' => 'success', 'msg' => 'Slider Setting Updated Successfully' ));

@@ -62,9 +62,9 @@
 <link rel="stylesheet" href="<?=base_url('assets/css/Titlestyle.css')?>">
 
 <style>
-  
+
   .open>.dropdown-menu {
-    
+
     display: inline-grid;
 
   }
@@ -107,7 +107,7 @@
                   <?php }else{ ?>
                     <!-- <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Dropdown</a>
-  </li> --> 
+  </li> -->
                     <li class="nav-item dropdown bg-theme-colored text-white mb-xs-5">
                       <i class="fa fa-user"></i>
                       <a class="nav-link dropdown-toggle text-white" href="<?=site_url('login')?>" data-toggle="dropdown" href="#"> My Account </a>
@@ -144,7 +144,7 @@
           <nav id="menuzord-right" class="menuzord orange no-bg">
 
 
-              <a class="menuzord-brand pull-left flip mb-15" href="index.php" id="logo-size"><img src="<?=base_url("assets/images/FET-logo.png")?>" alt="">
+              <a class="menuzord-brand pull-left flip mb-15" href="<?=site_url('/')?>" id="logo-size"><img src="<?=base_url("assets/images/FET-logo.png")?>" alt="">
                 <h4 id="logo-size1">Faculty of Engineering & Technology<br><small><b>University of Sindh, Pakistan</b></small></h4>
               </a>
 
@@ -160,16 +160,16 @@
                 <li><a href="">Bachelors</a>
                   <ul class="dropdown">
                     <li><a href="<?=site_url('software_eng')?>">Software Engineering</a>
-                      
+
                     </li>
                     <li><a href="<?=site_url('information_tech')?>">Information Technology</a>
-                       
+
                     </li>
                     <li><a href="<?=site_url('telecommunication')?>">Telecommunication</a>
-                       
+
                     </li>
                     <li><a href="<?=site_url('electronics')?>">Electronics</a>
-                       
+
                     </li>
                   </ul>
                 </li>

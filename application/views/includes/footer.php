@@ -10,7 +10,7 @@
       <div class="row border-bottom-black">
         <div class="col-sm-6 col-md-4">
           <div class="widget dark pull-left ">
-            <a href="index.html"><img width="" height="" id="logo" src="<?=base_url('assets/images/FET-logo1.png')?>" alt=""></a>
+            <a href="<?=site_url('/')?>"><img width="" height="" id="logo" src="<?=base_url('assets/images/FET-logo1.png')?>" alt=""></a>
             <div class="pull-center logoname">
               <h4 style="color: white">Faculty of Engineering & Technology</h4>
               <h5 style="color: white"> University of Sindh, Pakistan</h5>

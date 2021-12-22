@@ -4,7 +4,7 @@
     .main-panel .main-content {
 
       padding-left : 250px;
-      
+
     }
 
 }
@@ -21,7 +21,7 @@
           <div class="col-md-10 text-center">
               <a class="profile-image">
 
-                <?php if (@getimagesize(base_url('uploads/users/'.@$user->image))): ?>
+                <?php if (@getimagesize('uploads/users/'.@$user->image)): ?>
 
                   <img src="<?=base_url('uploads/users/'.@$user->image)?>" width="200" class="text align-middle img-border width-100" />
 
@@ -45,7 +45,7 @@
               <p class="grey font-small-2">(<?=@$user->role_name?>)</p>
             </div>
             <div class="col-lg-3 col-md-3">
-             
+
             </div>
           </div>
         </div>
@@ -65,7 +65,7 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="card">
-        
+
         <div class="card-content">
           <div class="card-body">
             <hr>
@@ -250,7 +250,7 @@
                   </li>
                 </ul>
               </div>
-              
+
               <div class="col-12 col-md-6 col-lg-4">
                 <ul class="no-list-style">
 
@@ -277,7 +277,7 @@
           <div class="card-body">
             <div class="row">
 
-              
+
 
                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                   <ul class="no-list-style">
@@ -314,7 +314,7 @@
                 </div>
 
                 <?php if(@$user->type == 'STUDENT'): ?>
-                
+
                   <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                   <ul class="no-list-style">
 
@@ -350,9 +350,9 @@
                 </div>
 
                 <?php endif; ?>
-                
+
                 <?php if(@$user->type == 'TEACHER'): ?>
-                
+
                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                   <ul class="no-list-style">
 
@@ -375,7 +375,7 @@
 
                   </ul>
                 </div>
-              
+
                 <?php endif; ?>
                 <?php if(@$user->type == 'OTHER'): ?>
 
