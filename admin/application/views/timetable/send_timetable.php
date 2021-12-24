@@ -75,7 +75,7 @@
                                         <?php if (@getimagesize('uploads/users/'.@$student->image)){ ?>
                                           <img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle" src="<?=base_url('uploads/users/'.@$student->image)?>">
                                         <?php } else{ ?>
-                                          <img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle" src="<?=base_url('app-assets/images/no-image-available.png')?>">
+                                          <img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle" src="<?=base_url('uploads/users/default.png')?>">
                                         <?php } ?>
                                       </a>
                                       <div class="media-body">

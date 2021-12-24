@@ -28,18 +28,18 @@
                   </div>
                 <?php } ?>
                 <input type="hidden" class="status" value="<?=$status?>">
-                
+
                 <div class="table-responsive">
                   <table class="table table-striped table-bordered table-hover table-checkable order-column display checkboxeshere" id="DataTable" style="width:100%">
                       <thead>
                           <tr>
-                              
+
 
                               <th width="100px">SNo.</th>
-                              <th>Title </th>
+                              <th>Image </th>
+                              <th>Full Name </th>
                               <th>Username </th>
                               <th>Email </th>
-                              <th>Full Name </th>
                               <th>Cnic </th>
                               <th>Phone Number</th>
                               <th>Gender </th>
@@ -65,5 +65,3 @@
         </div>
 
       </div>
-
-  

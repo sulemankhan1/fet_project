@@ -507,10 +507,17 @@ class Users extends CI_Controller
 
         $sub_array = array();
         $sub_array[] = $sno; $buttons = "";
-        $sub_array[] = $v->title;
+        // $sub_array[] = $v->title;
+        if (@getimagesize('uploads/users/'.@$v->image)){
+          $img = base_url('uploads/users/'.@$v->image);
+        } else {
+          $img = base_url('uploads/users/default.png');
+        }
+        $sub_array[] = "<img class='media-object d-flex mr-3 bg-primary height-50 rounded-circle' src='".$img."' />";
+
+        $sub_array[] = $v->full_name;
         $sub_array[] = $v->username;
         $sub_array[] = $v->email;
-        $sub_array[] = $v->full_name;
         $sub_array[] = $v->cnic;
         $sub_array[] = $v->phone_no;
         $sub_array[] = $v->gender;
