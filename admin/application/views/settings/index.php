@@ -43,6 +43,7 @@
                 <!-- ADMIN PANEL SETTINGS PANEL STARTS -->
                 <div role="tabpanel" class="tab-pane active" id="tabVerticalLeft21" aria-expanded="true" aria-labelledby="baseVerticalLeft2-tab1">
                   <div class="col-md-12">
+                    <h4 class="card-title mt-2">Admin panel Settings</h4>
                     <form class="form" action="<?=site_url('save_settings');?>" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="type" value="general_setting">
                     <div class="row">
@@ -186,7 +187,7 @@
 
                       <div class="col-md-12">
                         <div class="float-left">
-                          <p>*Add Multiple Slides at once by using Add More Option</p>
+                          <p><i>*Add Multiple Slides at once by using Add More Option</i></p>
                         </div>
                         <button type="Submit" class="btn btn-raised btn-primary float-right"> <i class="ft-check position-right"></i>  Save</button>
                         <button type="button" class="btn btn-raised btn-default float-right mr-2 add-more-slider"> <i class="ft-plus circle"></i>  Add more</button>

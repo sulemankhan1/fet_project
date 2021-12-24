@@ -85,10 +85,10 @@
   margin-bottom: 10px;
 }
 .teacher-searchbar input {
-  width: 80%;
+  width: 90%;
   display: inline-block;
 }
-.teacher-searchbar a {
+.teacher-searchbar .ft-search{
   display: inline-block;
   font-size: 25px;
 }

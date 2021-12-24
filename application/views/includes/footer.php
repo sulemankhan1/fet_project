@@ -62,9 +62,12 @@
           <div class="widget dark">
             <h5 class="widget-title">Useful Links</h5>
             <ul class="list-border">
-              <li><a href="javascript:void(0)">FAQ</a></li>
-              <li><a href="javascript:void(0)">Sitemap</a></li>
-              <li><a href="admin">Admin Login</a></li>
+              <li><a href="javascript:void(0)">Timetable</a></li>
+              <li><a href="<?=site_url('faculty') ?>">Faculty Members / Teachers</a></li>
+              <li><a href="<?=site_url('news')?>">News</a></li>
+              <li><a href="<?=site_url('about')?>">About</a></li>
+              <li><a href="<?=site_url('contact')?>">Contact</a></li>
+              <li><a href="<?=site_url('admin')?>">Admin Login</a></li>
             </ul>
           </div>
         </div>

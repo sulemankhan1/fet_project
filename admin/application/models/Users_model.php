@@ -56,7 +56,7 @@ class Users_model extends CI_Model
 		{
 
 			$this->db->where('u.is_pending', 1);
-			
+
 		}
 		else
 		{
@@ -75,7 +75,7 @@ class Users_model extends CI_Model
 
        $query = $this->db->get();
        return $query->result();
-      
+
 
 
   	}
@@ -89,7 +89,7 @@ class Users_model extends CI_Model
 		{
 
 			$this->db->where('u.is_pending', 1);
-			
+
 		}
 		else
 		{
@@ -97,7 +97,7 @@ class Users_model extends CI_Model
 			$this->db->where('u.is_pending', 0);
 
 		}
-		
+
        $query = $this->db->get();
 
        return $query->num_rows();
@@ -112,21 +112,21 @@ class Users_model extends CI_Model
 		// $this->db->join('users_info ui','ui.user_id=u.id','left');
 		$this->db->where('u.is_archived',0);
 		$this->db->where('u.type!=','SUPERADMIN');
-		
+
 		if($status == 'pending')
 		{
 
 			$this->db->where('u.is_pending', 1);
-			
+
 		}
 		else
 		{
-			
+
 			$this->db->where('u.is_pending', 0);
 
 		}
 
-		
+
 
     	return $this->db->count_all_results();
 
@@ -135,7 +135,7 @@ class Users_model extends CI_Model
 
 	public function getUsersDetails($id)
 	{
-		
+
 		$this->db->select('u.id as uid,u.*,st.*,tch.*,ou.*,cp.name as campus_name,ft.name as faculty_name,dt.name as depart_name,r.name as role_name');
 		$this->db->from('users u');
 

@@ -156,8 +156,8 @@ class Timetable extends CI_Controller
           'msg' => 'Timetable for Same Class Already Exist. Please consider editing that Timetable!', 'data' => $data));
           redirect($redirect_url);
         }
-
-        unset($data['old_image']);
+        //
+        // unset($data['old_image']);
 
         // check type
         if($data['type'] == 'image') {
@@ -179,9 +179,9 @@ class Timetable extends CI_Controller
             // image not set then select old image
             $data['image'] = $data['old_image'];
           }
+          unset($data['old_image']);
 
           $data['user_id'] = $this->session->user_id;
-
 
           if(isset($data['id']) && $data['id'] != "") {
             // edit
@@ -203,6 +203,7 @@ class Timetable extends CI_Controller
 
         } elseif($data['type'] == 'custom') {
           // if custom then save data and redirect
+          unset($data['old_image']);
 
           if(isset($data['id']) && $data['id'] != "") {
             // edit
@@ -321,8 +322,8 @@ class Timetable extends CI_Controller
     public function finish() {
       if($this->input->post()) {
         $data = $this->input->post();
-
         $data['timetable_data'] = json_decode($data['timetable_data']);
+
         $timetable_id = $data['timetable_id'];
 
         // filtering data to remove empty cells
@@ -353,6 +354,86 @@ class Timetable extends CI_Controller
         }
       }
     }
+    public function change_status($id,$type)
+    {
+      if ($type == 1) {
+        $arr = [
+          'published' => 0
+        ];
+      } else {
+        $arr = [
+          'published' => 1
+        ];
+      }
 
+      $id = hashids_decrypt($id);
+
+      $this->bm->updateRow('timetable',$arr,'id',$id);
+
+      $this->session->set_flashdata(array('response' => 'success', 'msg' => 'Timetable Updated Successfully' ));
+      redirect('view_timetables');
+
+    }
+
+    public function send_timetable($id) {
+      $id = hashids_decrypt($id);
+      $record = $this->tm->getRecord($id);
+
+      switch ($record->part) {
+        case 1: // part 1
+          $batch_year = date('Y'); // current year
+          break;
+        case 2: //part 2
+          $batch_year = date('Y', strtotime('-1 year')); // current year
+          break;
+        case 3: //part 3
+          $batch_year = date('Y', strtotime('-2 year')); // current year
+          break;
+        case 4: //part 4
+          $batch_year = date('Y', strtotime('-3 year')); // current year
+          break;
+
+        default:
+          $batch_year = date('Y'); // by default current year
+          break;
+      }
+
+      $data = array(
+        'title' => 'Timetable',
+        'active_menu' => 'view_timetables',
+        'record' => $record,
+        'students' => $this->tm->getStudents($record, $batch_year),
+      );
+
+      $this->load->view('header',$data);
+      $this->load->view('sidebar');
+      $this->load->view('timetable/send_timetable');
+      $this->load->view('footer');
+    }
+
+    public function send() {
+      if($this->input->post()) {
+        $emails = $this->input->post('users_emails');
+        //Validate Emails
+        $emails_list = array();
+        foreach($emails as $email) {
+          if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $emails_list[] = $email;
+          }
+        }
+
+
+        $this->load->library('email');
+        $this->email->from('system@sulemanibrahim.com', 'FET FMS');
+        $this->email->to(implode(", ", $emails_list));
+
+        $this->email->subject('Your Class Timetable has been Updated');
+        $this->email->message('Hello Student Your class Timetable has been changed please find your New Timetable here.');
+
+        // $this->email->send();
+        $this->session->set_flashdata(array('type' => 'success', 'msg' => 'Emails Sent to '.count($emails_list).' Students Successfully!'));
+        redirect('view_timetables');
+      }
+    }
 
 }

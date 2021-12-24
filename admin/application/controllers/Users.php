@@ -123,7 +123,6 @@ class Users extends CI_Controller
           }
 
           $data = [
-
               'image' => $img,
               'campus_id' => $p['campus_id'],
               'faculty_id' => $p['faculty_id'],
@@ -157,7 +156,8 @@ class Users extends CI_Controller
               'account_active' => $account_active,
               'is_pending' => $pending,
               'created_at' => date('Y-m-d H:i:s'),
-              'account_verified' => 1,
+              // 'account_verified' => 1,
+              'account_active' => 1,
 
 
           ];
@@ -518,35 +518,21 @@ class Users extends CI_Controller
 
 
         $buttons .= "<a href='".site_url('edit_user/'.hashids_encrypt(@$v->id))."' class='btn small-btn' ><i class='icon-pencil'></i> Edit</a>";
-        if ($status != 'pending')
-        {
+        if ($status != 'pending') {
 
-          if($v->account_active == 1)
-          {
-
-            $buttons .= "<a href='".site_url('change_user_status/deactive/'.hashids_encrypt(@$v->id))."' class='btn small-btn' onclick=\"return confirm('Are you sure you want to deactive this user?')\" ><i class='ft-x'></i> Deactive</a>";
-
-          }
-          else
-          {
-
-            $buttons .= "<a href='".site_url('change_user_status/active/'.hashids_encrypt(@$v->id))."' class='btn small-btn' onclick=\"return confirm('Are you sure you want to active this user?')\" ><i class='ft-check'></i> Active</a>";
-
+          if($v->account_active == 1) {
+            $buttons .= "<a href='".site_url('change_user_status/deactive/'.hashids_encrypt(@$v->id))."' class='btn small-btn' onclick=\"return confirm('Are you sure you want to deactivate this user?')\" ><i class='ft-x'></i> Deactivate</a>";
+          } else {
+            $buttons .= "<a href='".site_url('change_user_status/active/'.hashids_encrypt(@$v->id))."' class='btn small-btn' onclick=\"return confirm('Are you sure you want to active this user?')\" ><i class='ft-check'></i> Activate</a>";
           }
 
-        }
-        else
-        {
-
-          $buttons .= "<a href='".site_url('change_user_status/pending'.hashids_encrypt(@$v->id))."' class='btn small-btn' onclick=\"return confirm('Are you sure you want to active this user?')\" ><i class='ft-check'></i> Active</a>";
-
+        } else {
+          $buttons .= "<a href='".site_url('change_user_status/pending/'.hashids_encrypt(@$v->id))."' class='btn small-btn' onclick=\"return confirm('Are you sure you want to active this user?')\" ><i class='ft-check'></i> Activate</a>";
         }
 
         $buttons .= "<a href='".site_url('delete_user/'.hashids_encrypt(@$v->id))."' class='btn small-btn' onclick=\"return confirm('Are you sure you want to delete?')\" ><i class='icon-trash'></i> Delete</a>";
 
-
         $buttons .="<a href='".site_url('view_user/'.hashids_encrypt(@$v->id))."'  class='btn small-btn'><i class='icon-eye'></i> View</a>";
-
 
         $sub_array[] = $buttons;
         $data[] = $sub_array;
@@ -555,14 +541,11 @@ class Users extends CI_Controller
 
 
       $output = [
-
        'draw'    => intval($_POST["draw"]),
        'recordsTotal'  => $all_data,
        'recordsFiltered' => $filter_data,
        'data'    =>  $data
-
      ];
-
       echo json_encode($output);
 
   }
@@ -575,45 +558,25 @@ class Users extends CI_Controller
     $user = $this->bm->getById('users', $id);
 
     switch ($type) {
-
       case 'deactive':
-
         $update = ['account_active' => 0, 'is_pending' => 0];
-
         $this->bm->updateRow('users' , $update , 'id' ,$id);
-
-        $this->session->set_flashdata(array('response' => 'success', 'msg' => 'User deactive Successfully' ));
-
+        $this->session->set_flashdata(array('response' => 'success', 'msg' => 'User deactivated Successfully' ));
         redirect('view_users');
-
-
         break;
       case 'active':
-
         $update = ['account_active' => 1, 'is_pending' => 0];
-
         $this->bm->updateRow('users' , $update , 'id' ,$id);
-
         $this->session->set_flashdata(array('response' => 'success', 'msg' => 'User active Successfully' ));
-
         redirect('view_users');
-
         break;
       case 'pending':
-
         $update = ['account_active' => 1, 'is_pending' => 0];
-
         $this->bm->updateRow('users' , $update , 'id' ,$id);
-
         $this->session->set_flashdata(array('response' => 'success', 'msg' => 'User active Successfully' ));
-
         redirect('view_users/pending');
-
-
         break;
-
     }
-
 
   }
 
@@ -621,26 +584,16 @@ class Users extends CI_Controller
   {
 
       $id = hashids_decrypt($id);
-
       $user  = $this->bm->getById('users',$id);
 
       // $this->bm->updateRow('users' ,['is_archived' => 1], 'id' ,$id);
       $this->bm->delete('users' , 'id' ,$id);
-
       $this->session->set_flashdata(array('response' => 'success', 'msg' => 'User Deleted Successfully'));
 
-      if ($user->is_pending == 1)
-      {
-
+      if ($user->is_pending == 1) {
           redirect('view_users/pending');
-
-      }
-
-      else
-      {
-
+      } else {
           redirect('view_users');
-
       }
 
   }
@@ -653,11 +606,8 @@ class Users extends CI_Controller
     $this->load->model('Users_model');
 
     $data = [
-
       'title' => 'View User',
-
       'user' => $this->Users_model->getUsersDetails($id)
-
     ];
 
     $this->load->view('header',$data);

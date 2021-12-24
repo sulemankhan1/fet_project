@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2021 at 09:33 PM
+-- Generation Time: Dec 24, 2021 at 09:42 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.28
 
@@ -515,7 +515,11 @@ CREATE TABLE `other_users` (
 --
 
 INSERT INTO `other_users` (`id`, `user_id`, `job_title`, `is_archived`) VALUES
-(1, 9, 'job', 0);
+(1, 9, 'job', 0),
+(2, 23, '', 0),
+(3, 25, '', 0),
+(4, 27, '', 0),
+(5, 28, '', 0);
 
 -- --------------------------------------------------------
 
@@ -952,10 +956,10 @@ CREATE TABLE `settings` (
 INSERT INTO `settings` (`id`, `name`, `value`, `type`) VALUES
 (1, 'LOGO', '3171742951607980111_126.png', 'admin_panel'),
 (2, 'SIDEBAR_IMG', '6532263421607980111_126.png', 'admin_panel'),
-(3, 'SIDEBAR_COLOR', 'white', 'admin_panel'),
+(3, 'SIDEBAR_COLOR', 'man-of-steel', 'admin_panel'),
 (4, 'NAME', 'F.E.T FMS', 'admin_panel'),
 (5, 'FOOTER', 'University Of Sindh', 'admin_panel'),
-(6, 'ACCOUNT_ACTIVITY', 'active', 'general');
+(6, 'ACCOUNT_ACTIVITY', 'pending', 'general');
 
 -- --------------------------------------------------------
 
@@ -980,9 +984,8 @@ CREATE TABLE `slider_setting` (
 --
 
 INSERT INTO `slider_setting` (`id`, `image`, `title`, `title_color`, `title_link`, `description`, `description_color`, `description_link`, `active`) VALUES
-(2, '58365367512.jpg', 'title1', '#e8e8e8', 'http://localhost/fet_project/settings', 'description1TEST', '#e3e3e3', '212', 0),
-(3, '113060252811.jpg', 'test', '#ff0000', 'http://localhost/fet_project/admin/settings', 'asdfasdfasdf', '#4c00ff', 'http://localhost/fet_project/admin/settings', 1),
-(4, '74596545113.jpg', 'asdfasdfasdf TEST', '#000000', 'aasdfasd', 'asdfasdf', '#ff0000', 'fasdf', 1);
+(5, '10756836601.jpg', 'Our Best Study Institute', '#ffffff', '', 'The Mission of Faculty of Engineering and Teachnology (F.E.T) is to provide dynamic learning with Quality Education through rigious teaching and research methodologies in Information and Communication Technology (ICT).', '#ffffff', '', 1),
+(6, '159951692103.jpg', 'Welcome to F.E.T', '#ffffff', '', 'F.E.T is a highly recommended Faculty of University of Sindh.', '#ffffff', '', 1);
 
 -- --------------------------------------------------------
 
@@ -1004,8 +1007,13 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `user_id`, `roll_number`, `program_id`, `batch_year`, `current_semester`) VALUES
-(1, 11, '', 3, '', 0),
-(2, 12, '', 3, '', 0);
+(1, 11, '2k18/swee/60', 3, '', 0),
+(2, 12, '', 3, '', 0),
+(3, 22, '', 0, '', 0),
+(4, 24, '', 0, '', 0),
+(8, 29, '2k18/swee/43', 0, '2018', 8),
+(9, 30, '2k18/swee/1', 0, '2018', 8),
+(10, 31, '2k18/swee/2', 0, '2018', 8);
 
 -- --------------------------------------------------------
 
@@ -1068,7 +1076,8 @@ CREATE TABLE `subscribers` (
 INSERT INTO `subscribers` (`id`, `email`, `created_at`) VALUES
 (1, 'admin@gmail.com', '2021-04-30 13:25:40'),
 (2, 'safsa@gmail.com', '2021-04-30 13:26:23'),
-(3, 'test@email.com', '2021-05-05 15:21:59');
+(3, 'test@email.com', '2021-05-05 15:21:59'),
+(4, 'test@edmail.com', '2021-12-24 12:44:06');
 
 -- --------------------------------------------------------
 
@@ -1194,7 +1203,7 @@ CREATE TABLE `timetable` (
 --
 
 INSERT INTO `timetable` (`id`, `title`, `type`, `image`, `for_campus`, `campus_id`, `depart_id`, `program_id`, `faculty_id`, `user_id`, `semester`, `class_group`, `datetime_added`, `datetime_updated`, `is_deleted`, `evening_morning`, `part`, `year`, `remarks`, `published`, `is_archived`) VALUES
-(1, '', 'image', '1641086813267527957_3159722894275797_8456461656411040339_n.jpg', 'all', 1, 248, 0, 16, 1, 'second', '', '2021-12-20 12:25:36', '0000-00-00 00:00:00', 0, 'evening', 1, '2021', '', 1, 0),
+(1, '', 'image', '590323975SWE04e.jpg', 'all', 1, 248, 0, 16, 23, 'second', 'Group A', '2021-12-20 12:25:36', '0000-00-00 00:00:00', 0, 'evening', 1, '2021', '', 1, 0),
 (2, '', 'custom', '', 'all', 1, 248, 0, 16, 0, 'second', '', '2021-12-20 12:26:18', '0000-00-00 00:00:00', 0, 'evening', 4, '2021', '', 1, 0),
 (3, '', 'custom', '', 'all', 1, 1, 0, 6, 0, 'second', '', '2021-12-21 13:26:59', '0000-00-00 00:00:00', 0, 'evening', 2, '2021', '', 0, 0),
 (4, '', 'custom', '', 'all', 1, 249, 0, 16, 0, 'second', '', '2021-12-21 13:30:03', '0000-00-00 00:00:00', 0, 'evening', 2, '2021', '', 0, 0);
@@ -1222,21 +1231,30 @@ CREATE TABLE `timetable_details` (
 --
 
 INSERT INTO `timetable_details` (`id`, `campus_id`, `timetable_id`, `teacher_id`, `subject_id`, `day`, `time_from`, `time_to`, `classroom_id`) VALUES
-(23, 0, 2, 6, 4, 'monday', '02:00 pm', '02:45 pm', 7),
-(24, 0, 2, 20, 5, 'monday', '03:30 pm', '04:15 pm', 8),
-(25, 0, 2, 19, 7, 'tuesday', '02:45 pm', '03:30 pm', 9),
-(26, 0, 2, 14, 0, 'tuesday', '05:00 pm', '05:45 pm', 14),
-(27, 0, 2, 10, 10, 'wednesday', '02:00 pm', '02:45 pm', 0),
-(28, 0, 2, 17, 0, 'wednesday', '06:30 pm', '07:00 pm', 15),
-(29, 0, 2, 6, 12, 'thursday', '02:00 pm', '02:45 pm', 17),
-(30, 0, 2, 18, 6, 'thursday', '03:30 pm', '04:15 pm', 10),
-(31, 0, 2, 16, 11, 'thursday', '05:00 pm', '05:45 pm', 11),
-(32, 0, 2, 13, 9, 'friday', '02:00 pm', '02:45 pm', 16),
-(33, 0, 2, 15, 13, 'friday', '03:30 pm', '04:15 pm', 12),
-(34, 0, 2, 21, 0, 'friday', '05:45 pm', '06:30 pm', 13),
 (39, 0, 4, 21, 0, 'friday', '02:00 pm', '02:45 pm', 0),
 (40, 0, 4, 13, 0, 'friday', '02:45 pm', '03:30 pm', 0),
-(41, 0, 4, 21, 0, 'friday', '03:30 pm', '04:15 pm', 0);
+(41, 0, 4, 21, 0, 'friday', '03:30 pm', '04:15 pm', 0),
+(574, 0, 2, 6, 4, 'monday', '02:00 pm', '02:45 pm', 7),
+(575, 0, 2, 0, 4, 'monday', '02:45 pm', '03:30 pm', 0),
+(576, 0, 2, 20, 5, 'monday', '03:30 pm', '04:15 pm', 8),
+(577, 0, 2, 19, 7, 'tuesday', '02:45 pm', '03:30 pm', 9),
+(578, 0, 2, 14, 0, 'tuesday', '05:00 pm', '05:45 pm', 14),
+(579, 0, 2, 10, 10, 'wednesday', '02:00 pm', '02:45 pm', 0),
+(580, 0, 2, 19, 0, 'wednesday', '03:30 pm', '04:15 pm', 0),
+(581, 0, 2, 17, 0, 'wednesday', '06:30 pm', '07:00 pm', 15),
+(582, 0, 2, 6, 12, 'thursday', '02:00 pm', '02:45 pm', 17),
+(583, 0, 2, 19, 0, 'thursday', '02:45 pm', '03:30 pm', 0),
+(584, 0, 2, 18, 6, 'thursday', '03:30 pm', '04:15 pm', 10),
+(585, 0, 2, 0, 4, 'thursday', '04:15 pm', '05:00 pm', 0),
+(586, 0, 2, 16, 11, 'thursday', '05:00 pm', '05:45 pm', 11),
+(587, 0, 2, 13, 9, 'friday', '02:00 pm', '02:45 pm', 16),
+(588, 0, 2, 19, 4, 'friday', '02:45 pm', '03:30 pm', 0),
+(589, 0, 2, 15, 4, 'friday', '03:30 pm', '04:15 pm', 12),
+(590, 0, 2, 20, 0, 'friday', '04:15 pm', '05:00 pm', 0),
+(591, 0, 2, 19, 0, 'friday', '05:00 pm', '05:45 pm', 0),
+(592, 0, 2, 21, 0, 'friday', '05:45 pm', '06:30 pm', 13),
+(593, 0, 2, 19, 0, 'friday', '06:30 pm', '07:00 pm', 0),
+(594, 0, 1, 13, 0, 'thursday', '02:00 pm', '02:45 pm', 0);
 
 -- --------------------------------------------------------
 
@@ -1294,12 +1312,12 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `campus_id`, `faculty_id`, `depart_id`, `image`, `title`, `username`, `password`, `full_name`, `surename`, `email`, `dob`, `gender`, `cnic`, `show_cnic_public`, `father_name`, `nationality`, `province`, `district`, `city`, `home_address`, `permanent_address`, `zip_code`, `show_address_public`, `type`, `role_id`, `bio`, `phone_no_code`, `phone_no`, `show_phone_no_public`, `last_qualification`, `registered_from`, `account_verified`, `reg_datetime`, `account_active`, `deactivated_on`, `is_pending`, `remarks`, `is_archived`, `created_at`, `updated_at`) VALUES
 (1, 0, 0, 0, '5.jpg', 'Mr', 'admin', 'f108554c12f282f9c53deb6720a2421de173e9c22ed3f812823e542d467f56942b9a5e7a8e7e7cc21cb800fa008fe8b07449d0cb041c64d3dd00a0160fca577dlooK+Uy14iqUkpt1Xud8+WNv50xosreNcYkhaJP9PoA=', 'admin', '', 'admin@gmail.com', NULL, 'male', '', 1, '', '', '', '', '', '', '', '', 0, 'SUPERADMIN', 2, '', '0', '', 1, '', 'frontend', 1, '2021-04-01 11:16:53', 1, NULL, 0, '', 0, NULL, NULL),
-(2, 0, 0, 0, '1.png', 'Ms', 'username2', '0', 'asfasf', 'surename', 'asfas@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, '', 'frontend', 0, '2021-04-01 20:16:30', 0, NULL, 0, '', 0, NULL, NULL),
-(3, 0, 0, 0, '2.png', 'Ms', 'username3', '0', 'asfasf', 'surename', 'asfa1s@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, '', 'frontend', 0, '2021-04-01 20:17:06', 0, NULL, 0, '', 0, NULL, NULL),
-(4, 0, 0, 0, '1245787577america.png', 'Mr', 'username4', '0', 'hkj@Gmail.com', 'asfas', 'kj', '2019-11-29', 'female', 'safgasfasf', 0, 'asfasf', 'safasf', 'sadfasf', 'wfdsafasf', 'gkj', 'asfa', 'safasf', '', 0, '', 6, 'sdgdsgasdg', '92', '92', 0, '', 'frontend', 0, '2021-04-01 20:35:11', 0, NULL, 0, '', 0, NULL, NULL),
-(5, 0, 0, 0, '4.jpg', 'Ms', 'username5', '60d6286756664a00529f479cf4a587f37ff85d5414368c79bde505d47261a01c308d09d4f35e2002ddf6052bf62cc773a8a8c5af6f2ebb1b4a5b02669108fef2b8R2B1KUAsge1//C+qsLOVcFWIw5sQYu2XvKOnUdG9s=', '11', 'sdfsd', 'sdfsdf@gmail.com', '2021-04-07', 'male', '444342134', 1, 'asfasfasf', 'afsas', 'a', 'asf', 'asf', 'safaf', 'asfsafasf', '', 0, 'OTHER', 1, 'asfasfas', '323', '32232223', 0, '', 'frontend', 0, '2021-04-02 04:52:31', 0, NULL, 0, '', 0, NULL, NULL),
+(2, 0, 0, 0, '1.png', 'Ms', 'username2', '0', 'asfasf', 'surename', 'asfas@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, '', 'frontend', 0, '2021-04-01 20:16:30', 1, NULL, 0, '', 0, NULL, NULL),
+(3, 0, 0, 0, '2.png', 'Ms', 'username3', '0', 'asfasf', 'surename', 'asfa1s@gmail.com', '2021-04-08', 'male', '2021-04-14', 1, 'asfasf', 'asfasfas', 'sdfsdaf', 'dsfgdsf', 'dsgfdsg', 'asfasfasfasf', 'asfa', '', 0, '', 5, 'dsfhskjfhskdjfhkdsjfh', '92', '92', 1, '', 'frontend', 0, '2021-04-01 20:17:06', 1, NULL, 0, '', 0, NULL, NULL),
+(4, 0, 0, 0, '1245787577america.png', 'Mr', 'username4', '0', 'hkj@Gmail.com', 'asfas', 'kj', '2019-11-29', 'female', 'safgasfasf', 0, 'asfasf', 'safasf', 'sadfasf', 'wfdsafasf', 'gkj', 'asfa', 'safasf', '', 0, '', 6, 'sdgdsgasdg', '92', '92', 0, '', 'frontend', 0, '2021-04-01 20:35:11', 1, NULL, 0, '', 0, NULL, NULL),
+(5, 0, 0, 0, '4.jpg', 'Ms', 'username5', '60d6286756664a00529f479cf4a587f37ff85d5414368c79bde505d47261a01c308d09d4f35e2002ddf6052bf62cc773a8a8c5af6f2ebb1b4a5b02669108fef2b8R2B1KUAsge1//C+qsLOVcFWIw5sQYu2XvKOnUdG9s=', '11', 'sdfsd', 'sdfsdf@gmail.com', '2021-04-07', 'male', '444342134', 1, 'asfasfasf', 'afsas', 'a', 'asf', 'asf', 'safaf', 'asfsafasf', '', 0, 'OTHER', 1, 'asfasfas', '323', '32232223', 0, '', 'frontend', 0, '2021-04-02 04:52:31', 1, NULL, 0, '', 0, NULL, NULL),
 (6, 1, 16, 248, '3.jpg', 'Ms', 'username6', 'c1d81c4df0a854d1e8f593ec8e5201e11bad741e50155d4ef0390a0a22c77fc8c471ed59010a8c253984b3bfb1838076f3201300a71f0ce1d950129e329d4026KsmSjP6+PaIOciQTKgKiEz9FuZW3AbrXmUrV4IRtY6w=', '1', '1', '1', '0001-01-10', 'female', '1111', 1, '111', '111', '111', '11', '111', '111', '111', '324', 1, 'TEACHER', 5, '111', '11', '11', 1, 'test', 'frontend', 1, '2021-04-02 07:50:35', 1, NULL, 0, '', 0, NULL, '2021-08-18 14:31:19'),
-(7, 1, 16, 0, '4.png', 'Mr', 'kamrantaj', '', 'Kamran Taj\r\n', 'Pathan', '', NULL, '', '', 0, '', '', '', '', '', '', '', '', 0, '', 0, '', '', '', 0, '', '', 0, '2021-04-20 21:54:34', 0, NULL, 0, '', 0, NULL, NULL),
+(7, 1, 16, 0, '4.png', 'Mr', 'kamrantaj', '', 'Kamran Taj\r\n', 'Pathan', '', NULL, '', '', 0, '', '', '', '', '', '', '', '', 0, '', 0, '', '', '', 0, '', '', 0, '2021-04-20 21:54:34', 1, NULL, 0, '', 0, NULL, NULL),
 (8, 1, 2, 3, '5.png', 'Mr', 'abc', '8d3228f15a3ec29b07048a3a5c8756e6896e2aa0e7dbeee1b47f1c2d03ddb41a0fbf733f6fee95c2f2ca7eec08f11823dd6407a9d4cf9e38c1131deb8a3e7c1aU9W8WrXQJbAo59q7D40OV4N8TYKDaFEQ1gAN67CsRaU=', 'fullname', 'asfas', 'abc@gmail.com', '2009-11-30', 'male', '124124124124', 1, 'asfas', 'hkjhk', 'ljh', 'lkj', 'lk', 'asfasfas', 'asfasfa', '', 1, 'OTHER', 1, 'safasfafs', '112', '12313123123', 1, 'jlk', 'frontend', 0, '2021-04-21 20:17:13', 1, NULL, 0, '', 0, '2021-04-21 22:17:13', NULL),
 (9, 1, 2, 3, '2.jpg', 'Mr', 'abccccc', '1600a221f4ff4a9e08866a2545c0b47c3d5728a12463a94301d10ac1f1c34e33f70e46833fcefb3e9fa237e76c917696e5c4b557488889a0b6dd2f9b24e0b43dPCrqjAOHIqQpWDgwpwyqvhjUX8PLZw/dVI6UzdpPoaI=', 'fullname', 'asfas', 'abcccc@gmail.com', '2009-11-30', 'male', '124124124124', 1, 'asfas', 'hkjhk', 'ljh', 'lkj', 'lk', 'asfasfas', 'asfasfa', '', 1, 'FACULTY', 4, 'safasfafs', '112', '12313123123', 1, 'jlk', 'frontend', 0, '2021-04-21 20:18:04', 1, NULL, 0, '', 0, '2021-04-21 22:18:04', NULL),
 (10, 1, 16, 248, '1.jpg', 'Ms', 'qqqqqw', '2be74ad0fa58d8b6be531bb75b18c26aeabb10e4f3dd4d17201e967615b85aad70e7066146c0e110a01a98c631de748e4af4993fa391ca633988df786ef07acdscyuEm96vgArmt07KgqM8ZHGA4s59BXfG0/oj4RjYyc=', 'asfasf22', 'a22', 'qwqwq@gmail.vom', '2021-03-30', 'male', 'asfsag', 1, 'fggf', 'fggfg', 'fgf', 'gf', 'gf', 'dsgs', 'sdgfdsg', '124124', 1, 'TEACHER', 5, 'dsgdsg', '4', '4', 1, 'gfgf', 'frontend', 1, '2021-04-22 09:15:05', 1, NULL, 0, '', 0, '2021-04-22 11:15:05', '2021-12-20 13:33:21'),
@@ -1313,7 +1331,14 @@ INSERT INTO `users` (`id`, `campus_id`, `faculty_id`, `depart_id`, `image`, `tit
 (18, 1, 16, 248, '1510273333michael_by_antikersg_p_photo-d4xy1bf.jpg', 'Prof', 'TEACHER 6', '838e6c42f1fc8260329f32fdb967d4a6cda287eeda38422a48846deeb3190646ee3f434005700fcf693857d25c045059e327b8f7f60b4624b3e5a3e43210d7fa1VrS36mSbalzK5aHsnnrnWYWVnK8kNHXz55iYXIDN2I=', 'TEACHER 6', 'asdf', 'teacher6', '2021-12-05', 'male', 'asdfasdf', 0, 'asdfa', 'sdf', 'asdf', 'asdfa', 'sdf', 'asdf', 'asd', '123', 0, 'TEACHER', 5, 'fasdf', '4123', '41234123', 0, 'asdfad', 'frontend', 1, '2021-12-20 15:32:27', 1, NULL, 0, '', 0, '2021-12-20 16:32:27', NULL),
 (19, 1, 16, 248, '1836271173under_the_bridge_by_antikersg_p_photo-d4x1l1k.jpg', 'Mr', 'Teacher 7', 'd9b7003433d5eef8afaa060e8076865e7348904a4760db5d205eb6f29946a6288f90c99f7d5bf7acbd577cf4c44f3a03e484811840f439ebb51fe8e20dca7ef9/ZHpj9JGftABmHkPAaGy6K3bMXfBjlQPENkSRuLzI9c=', 'Teacher 7', 'test7', 'test7@email.com', '2021-12-07', 'male', '12341', 0, 'asd', 'fasd', 'fas', 'dfas', 'dfa', 'asd', 'ASD', '1234', 0, 'TEACHER', 5, 'asd', '1234', '12341234', 0, 'sdfa', 'frontend', 1, '2021-12-20 15:39:41', 1, NULL, 0, '', 0, '2021-12-20 16:39:41', NULL),
 (20, 1, 16, 248, '', 'Mr', 'TEACHER 8', 'a670204105edab7fcc31f6db9ed612575e131c55b971221475110f45b673adfcf052790eb7e7663699de571a7e621093b9cb8010c6d92579abed10fbde67c8f3RteOKYEGUfQVx04EJy7HBRE1vBtDjpKL+V4p5NiKdwE=', 'TEACHER 8', '1asdfasd', 'test8@email.com', '2021-12-08', 'male', '2341234', 0, '1234', 'asdf', 'asd', 'f', 'asdf', 'asd', 'fa', '1', 0, 'TEACHER', 5, 'sdf', '1234', '1234', 0, 'asdf', 'frontend', 1, '2021-12-20 15:40:25', 1, NULL, 0, '', 0, '2021-12-20 16:40:25', NULL),
-(21, 1, 16, 248, '111107115corado_4_by_antikersg_p_photo-d5e2vtf.jpg', 'Mr', 'TEACHER 9', '776724c2c3284f74378323cb6043783a5a26b555a261539078b4cdccbbc3543cc0dea682924d402431d73236f795099851ddbd206807101d44616439614cb520uwmQDgnnOeA74XXww7rYJ82yYPm7Zpuz7Yf5La5wp0E=', 'TEACHER 9', 'asdfasd', 'test9@email.com', '2021-12-21', 'male', '1234123', 0, 'asd', 'fasd', 'fas', 'dfas', 'dfas', 'asdf', 'asd', '213', 0, 'TEACHER', 5, 'fasdf', '4123', '41234', 0, 'dfasdf', 'frontend', 1, '2021-12-20 15:41:10', 1, NULL, 0, '', 0, '2021-12-20 16:41:10', '2021-12-22 18:20:24');
+(21, 1, 16, 248, '111107115corado_4_by_antikersg_p_photo-d5e2vtf.jpg', 'Mr', 'TEACHER 9', '776724c2c3284f74378323cb6043783a5a26b555a261539078b4cdccbbc3543cc0dea682924d402431d73236f795099851ddbd206807101d44616439614cb520uwmQDgnnOeA74XXww7rYJ82yYPm7Zpuz7Yf5La5wp0E=', 'TEACHER 9', 'asdfasd', 'test9@email.com', '2021-12-21', 'male', '1234123', 0, 'asd', 'fasd', 'fas', 'dfas', 'dfas', 'asdf', 'asd', '213', 0, 'TEACHER', 5, 'fasdf', '4123', '41234', 0, 'dfasdf', 'frontend', 1, '2021-12-20 15:41:10', 1, NULL, 0, '', 0, '2021-12-20 16:41:10', '2021-12-22 18:20:24'),
+(23, 1, 16, 248, '1.jpeg', 'Mr', 'sulemank11', '74026f89d64636976b5a5ca0d1ebe8e75d85f49e368d2e8276d820f3b5def12b558be1538557f34a04234337775bbecc6a7b96c0da40b4a7e5f374cd63ea74abiSoEeB8bHHr2aKLHc4BGlSbe3NdcCmNkp3eFqP3vCxg=', 'suleman', '', 'sulemann@email.com', NULL, 'male', '', 0, '', '', '', '', '', '', '', '', 0, 'TEACHER', 6, '', '', '', 0, '', 'frontend', 0, '2021-12-24 12:49:48', 1, NULL, 0, '', 0, '2021-12-24 13:49:48', NULL),
+(24, 1, 16, 248, '', 'Mr', 'teststudent', '0b75c3bbf819257953f581bff8988d21045da83033db7247e1b6a531830c147e5da6ea981100a8706edcfa39a9021b82af7e81b03ba66f9340269c5a2f208b81cx+VXIlb0XoALJW0GRfPd2JolmtrzVE4Q1at1nusA3E=', 'TEST STUDENT', '', 'teststudent@email.com', NULL, 'male', '', 0, '', '', '', '', '', '', '', '', 0, 'STUDENT', 6, '', '', '', 0, '', 'frontend', 0, '2021-12-24 19:06:22', 1, NULL, 0, '', 0, '2021-12-24 20:06:22', NULL),
+(25, 1, 16, 248, '', 'Mr', 'asldkfjaslkdf', 'cb5dc349c07127f0983400962f1505c1e549bf6cb6df030a0bd952e9147cb4fd647c46b23ae836dccae4cc3830bc7a0778522f78268cdaec4fdcc7d259549af5zyos/hEZyUCU8Hzk3E21JMIy0mxXuGDthwjSg8y8Ar8=', 'asdf', '', 'asdf@email.com', NULL, 'male', '', 0, '', '', '', '', '', '', '', '', 0, '', 6, '', '', '', 0, '', 'frontend', 0, '2021-12-24 19:22:17', 1, NULL, 0, '', 0, '2021-12-24 20:22:17', NULL),
+(26, 1, 16, 248, '', 'Mr', 'TTTTTEST', '22010e27e99fca73de7671253821d37e116a716d2f73014008b3631a97785ddaa9388d5d4772a4a94368e41234da6f071fea23ceebe1aa2066d94aa44e5c7f9fHv2z8TmLQJmdQ9ZcJqvdiZlukzpsxg5AWicgDybe6j8=', 'TTTTTEST', '', 'TTTTTEST@email.com', NULL, 'male', '', 0, '', '', '', '', '', '', '', '', 0, 'STUDENT', 6, '', '', '', 0, '', 'frontend', 0, '2021-12-24 19:24:29', 1, NULL, 0, '', 0, '2021-12-24 20:24:29', NULL),
+(29, 1, 16, 248, '', 'Mr', 'TTTTTEST1', '4aa51b32ef1c58c97bba5e68be0e2b8cd7f42966a28f3f5b8a27af85a0b6956afd9db3ac15bf1c9c424871827d628b3c980923ab2db21a7a7d7c719ad4216b35um2czR6NAEwGgJN7nHm275rEgbbXRjXMQF64bR6o9lU=', 'TTTTTEST', '', 'TTTTTEST1@email.com', NULL, 'male', '', 0, '', '', '', '', '', '', '', '', 0, 'STUDENT', 6, '', '', '', 0, '', 'frontend', 0, '2021-12-24 19:43:06', 1, NULL, 0, '', 0, '2021-12-24 20:43:06', NULL),
+(30, 1, 16, 248, '20704088331.jpeg', 'Mr', '2k18student', '50277483f922a3f5c18a8247542b1c876429d59be409fa72aa93b856d55f02143eaa3c1a50f9b56f3d3a9f9846037a3068d95d786cc14c0fd6081747b16a2867IUUU8c+Hi0eaJl940hZktoEwMt9+rDr/c+s8l7qb9P4=', '2k18student1', '2k18student', '2k18student', '2021-12-01', 'male', '12341234', 0, '2k18student', '2k18student', '2k18student', 'asdf', '2k18student', 'asdf', 'asdf', '1234', 0, 'STUDENT', 6, 'asdf', '123', '1234', 0, '2k18student2k18student', 'frontend', 0, '2021-12-24 19:55:54', 1, NULL, 0, '', 0, '2021-12-24 20:55:54', NULL),
+(31, 1, 16, 248, '1772068162ppic.jpg', 'Mr', '2k18student2', '837cfba222e70ea3464b392e98b2ece64d1df574a9c9787ed1eb9b17e4733caf3a3fd4842e13c9c285ab3a63a4a7cddcc404a00ede299059c9f9fcdc1920c1d09lagSPj08AvhqSPR87qHcZf+nIVJJoMESFaRyaG4/0w=', '2k18student2', '2k18student2', '2k18student2@email.com', '2021-12-07', 'male', '12341', 0, 'asdf', 'asdf', 'asdf', 'asdf', 'asdf', 'asdf', 'asdf', '1234', 0, 'STUDENT', 6, 'asdf', '1234', '21234', 0, 'asdf', 'frontend', 0, '2021-12-24 19:57:59', 1, NULL, 0, '', 0, '2021-12-24 20:57:59', '2021-12-24 21:25:28');
 
 --
 -- Indexes for dumped tables
@@ -1498,7 +1523,7 @@ ALTER TABLE `notification_type`
 -- AUTO_INCREMENT for table `other_users`
 --
 ALTER TABLE `other_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `password_reset`
@@ -1528,13 +1553,13 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `slider_setting`
 --
 ALTER TABLE `slider_setting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `subjects`
@@ -1546,7 +1571,7 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `subscribers`
 --
 ALTER TABLE `subscribers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `sys_notifications`
@@ -1570,13 +1595,13 @@ ALTER TABLE `timetable`
 -- AUTO_INCREMENT for table `timetable_details`
 --
 ALTER TABLE `timetable_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=595;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

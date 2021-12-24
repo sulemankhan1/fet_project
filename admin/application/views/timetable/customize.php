@@ -1,4 +1,10 @@
 <link rel="stylesheet" href="<?=base_url('assets/css/timetable.css')?>">
+<style media="screen">
+  .hiddenOb {
+    display: none;
+  }
+  
+</style>
 <?php
 if($this->session->flashdata('data') && !isset($record)) {
   // convert array into object and store in record variable to show data on form
@@ -50,8 +56,9 @@ if($this->session->flashdata('data') && !isset($record)) {
      <div class="card mb-0">
        <div class="card-content ">
          <div class="card-body">
+
            <div class="">
-             <table class="table table-hovered table-stripped table-bordered tt_timetable">
+             <table class="table table-hovered table-stripped table-bordered tt_timetable" id="myTable">
                <input type="hidden" name="tt_evening_morning" id="tt_evening_morning" value="<?=$record->evening_morning?>">
                <tr>
                  <td></td>
@@ -378,8 +385,8 @@ if($this->session->flashdata('data') && !isset($record)) {
            <div class="">
              <div class="teacher-searchbar col-md-12">
                <p class="">Drag & Drop <strong>Teachers</strong> from here</p>
-               <input type="text" placeholder="Search" class="form-control round">
-               <a href="#" class="btn-default"><div class="form-control-position"><i class="ft-search"></i></div></a>
+               <input type="search" placeholder="Search" class="form-control round" onkeyup="search_teachers(this)">
+               <i class="ft-search"></i>
              </div>
              <div class="teacher-cards-container" id="teachers_container">
                <!-- <div class="teacher-card draggable" draggable="true" >
@@ -415,8 +422,8 @@ if($this->session->flashdata('data') && !isset($record)) {
            <div class="">
              <div class="teacher-searchbar col-md-12">
                <p class="">Drag & Drop <strong>Subjects</strong> from here</p>
-               <input type="text" placeholder="Search" class="form-control round">
-               <a href="#" class="btn-default"><div class="form-control-position"><i class="ft-search"></i></div></a>
+               <input type="search" placeholder="Search" class="form-control round" onkeyup="search_subjects(this)">
+               <i class="ft-search"></i>
              </div>
              <div class="teacher-cards-container" id="subjects_container">
                <?php
@@ -444,8 +451,8 @@ if($this->session->flashdata('data') && !isset($record)) {
            <div class="">
              <div class="teacher-searchbar col-md-12">
                <p class="">Drag & Drop <strong>Class Rooms</strong> from here</p>
-               <input type="text" placeholder="Search" class="form-control round">
-               <a href="#" class="btn-default"><div class="form-control-position"><i class="ft-search"></i></div></a>
+               <input type="search" placeholder="Search" class="form-control round" onkeyup="search_classrooms(this)">
+               <i class="ft-search"></i>
              </div>
              <div class="teacher-cards-container" id="classrooms_container">
                <?php
@@ -471,3 +478,47 @@ if($this->session->flashdata('data') && !isset($record)) {
  </div>
 
 <input type="hidden" name="timetable_id" id="timetable_id" value="<?=$id?>">
+<script>
+  function search_teachers(obj) {
+    $('#teachers_container .hiddenOb').removeClass('hiddenOb');
+    let query = $(obj).val();
+
+    let teachers = $('#teachers_container').find('.teacher-card');
+    $(teachers).each(function(index, teacher) {
+      let teacher_name = $(teacher).find('.teacher-name').text();
+      let position = teacher_name.toLowerCase().search(query);
+      if(position < 0) {
+        $(teacher).addClass('hiddenOb');
+      }
+    })
+  }
+  function search_subjects(obj) {
+    $('#subjects_container .hiddenOb').removeClass('hiddenOb');
+    let query = $(obj).val();
+
+    let subjects = $('#subjects_container').find('.teacher-card');
+    $(subjects).each(function(index, subject) {
+      let course_code = $(subject).find('.text-lg').text();
+      let subj_name = $(subject).find('.badge-default').text();
+
+      let p1 = course_code.toLowerCase().search(query);
+      let p2 = subj_name.toLowerCase().search(query);
+      if(p1 < 0 && p2 < 0) {
+        $(subject).addClass('hiddenOb');
+      }
+    })
+  }
+  function search_classrooms(obj) {
+    $('#classrooms_container .hiddenOb').removeClass('hiddenOb');
+    let query = $(obj).val();
+
+    let classrooms = $('#classrooms_container').find('.teacher-card');
+    $(classrooms).each(function(index, classroom) {
+      let classroom_name = $(classroom).find('.text-lg').text();
+      let position = classroom_name.toLowerCase().search(query);
+      if(position < 0) {
+        $(classroom).addClass('hiddenOb');
+      }
+    })
+  }
+</script>

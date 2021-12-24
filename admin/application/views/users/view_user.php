@@ -22,13 +22,9 @@
               <a class="profile-image">
 
                 <?php if (@getimagesize('uploads/users/'.@$user->image)): ?>
-
                   <img src="<?=base_url('uploads/users/'.@$user->image)?>" width="200" class="text align-middle img-border width-100" />
-
                     <?php else: ?>
-
                   <img src="<?=base_url('app-assets/images/no-image-available.png')?>" width="200" class="text align-middle img-border width-100" />
-
                 <?php endif; ?>
 
               </a>

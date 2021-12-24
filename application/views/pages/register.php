@@ -25,11 +25,11 @@
         </div>
         <div class="border-1px p-30 mb-0">
           <form method="post" action="<?=site_url('save_reg')?>">
-            <div class="row">                             
+            <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                     <label>Title <small>*</small></label>
-                    <input type="hidden" name="type" class="type">
+                    <input type="hidden" name="type" class="type" value="<?=@$this->input->post('type')?>">
                     <input type="hidden" name="page_name"  value="register">
                     <select class="form-control"  name="title">
                       <option value="">choose</option>
@@ -55,7 +55,7 @@
                 <label>Email <small>*</small></label>
                 <input type="email" class="form-control" placeholder="Email" name="email" value="<?=@$this->input->post('email')?>">
                 <span class="text-danger"><?=form_error('email')?></span>
-              </div>            
+              </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label>Username <small>*</small></label>
@@ -83,7 +83,7 @@
                 <div class="form-group">
                   <label>Choose Campus <small>*</small></label>
                   <select class="form-control select-by-campus" name="campus_id">
-                  <option selected disabled value=""> choose</option>
+                  <option selected value=""> choose</option>
 
                     <?php foreach($campus as $key => $v): ?>
 
@@ -108,7 +108,7 @@
                         <?php if(@$this->input->post('campus_id') == $v->campus_id): ?>
 
                           <option value="<?= $v->id ?>" <?=(@$this->input->post('faculty_id') == $v->id?'selected':'')?>><?=$v->name?></option>
-                      
+
                         <?php endif; ?>
 
                       <?php endforeach ?>
@@ -123,7 +123,7 @@
                 <div class="form-group">
                   <label>Choose Department <small>*</small></label>
                   <select class="form-control select-by-department" name="depart_id">
-                    <option selected disabled value=""> choose</option>  
+                    <option selected disabled value=""> choose</option>
 
                     <?php if(@$this->input->post('faculty_id') != ''): ?>
 
@@ -151,51 +151,73 @@
                     <?php foreach($roles as $key => $v) : ?>
 
                     <?php if($v->slug != 'SUPERADMIN' && $v->slug != 'ADMIN'): ?>
-          
-
                         <input type="radio" id="<?=$v->slug?>" class="role_id" name="role_id" value="<?=$v->id?>" role-name="<?=$v->slug?>" <?=(@$this->input->post('role_id') == $v->id?'checked':'')?>>
-
                         <label for="<?=$v->slug?>"><?=$v->name?></label>
 
                     <?php endif ?>
 
                     <?php endforeach ?>
-                                
-                </div>                
+
+                </div>
                   <span class="text-danger"><?=form_error('role_id')?></span>
               </div>
             </div>
+
             <div class="row">
-              
               <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
-              
-                <div class="col-sm-6 info_student" style="display:block;">
-              
-              <?php }else { ?>
-                
-                <div class="col-sm-6 info_student" style="display:none;">
-
+                <div class="info_student" style="display:block;">
+              <?php } else { ?>
+                <div class="info_student" style="display:none;">
               <?php } ?>
-
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Roll Number <small>*</small></label>
+                  <input type="text" class="form-control" placeholder="e.g.  2k18/Swee/60" name="roll_number" value="<?=@$this->input->post('roll_number')?>">
+                  <span class="text-danger"><?=form_error('roll_number')?></span>
+                </div>
                 <div class="form-group">
                   <label>Choose Program <small>*</small></label>
                   <select class="form-control" name="program_id">
-                      <option selected disabled value=""> choose</option>  
+                      <option selected disabled value=""> choose</option>
                       <option value="Bachelor" <?=(@$this->input->post('program_id') == 'Bachelor'?'selected':'')?>>Bachelor</option>
                       <option value="Master" <?=(@$this->input->post('program_id') == 'Master'?'selected':'')?>>Master</option>
                       <option value="Mphil" <?=(@$this->input->post('program_id') == 'Mphil'?'selected':'')?>>Mphil</option>
                       <option value="Phd" <?=(@$this->input->post('program_id') == 'Phd'?'selected':'')?>>Phd</option>
-
                   </select>
-                  <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
-                    
-                    <span class="text-danger"><?=form_error('program_id')?></span>
 
+                  <?php if(@$this->input->post('type') == 'STUDENT') { ?>
+                    <span class="text-danger"><?=form_error('program_id')?></span>
                   <?php } ?>
                 </div>
               </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Batch Year <small>*</small></label>
+                  <select class="form-control" name="batch_year">
+                      <option selected disabled value=""> choose</option>
+                      <option value="<?=date("Y")?>" <?=(@$this->input->post('batch_year') == date("Y")?'selected':'')?>><?=date("Y")?></option>
+                      <option value="<?=date("Y", strtotime('-1 Year'))?>" <?=(@$this->input->post('batch_year') == date("Y", strtotime('-1 Year'))?'selected':'')?>><?=date("Y", strtotime('-1 Year'))?></option>
+                      <option value="<?=date("Y", strtotime('-2 Year'))?>" <?=(@$this->input->post('batch_year') == date("Y", strtotime('-2 Year'))?'selected':'')?>><?=date("Y", strtotime('-2 Year'))?></option>
+                      <option value="<?=date("Y", strtotime('-3 Year'))?>" <?=(@$this->input->post('batch_year') == date("Y", strtotime('-3 Year'))?'selected':'')?>><?=date("Y", strtotime('-3 Year'))?></option>
+                      <option value="<?=date("Y", strtotime('-4 Year'))?>" <?=(@$this->input->post('batch_year') == date("Y", strtotime('-4 Year'))?'selected':'')?>><?=date("Y", strtotime('-4 Year'))?></option>
+                      <option value="<?=date("Y", strtotime('-5 Year'))?>" <?=(@$this->input->post('batch_year') == date("Y", strtotime('-5 Year'))?'selected':'')?>><?=date("Y", strtotime('-5 Year'))?></option>
+                  </select>
+                  <span class="text-danger"><?=form_error('batch_year')?></span>
+                </div>
+                <div class="form-group">
+                  <label>Current Semester <small>*</small></label>
+                  <select class="form-control" name="current_semester">
+                      <option selected disabled value=""> choose</option>
+                      <?php for($i=1; $i<=8; $i++) { ?>
+                        <option value="<?=$i?>" <?=(@$this->input->post('current_semester') == $i?'selected':'')?>><?=$i?></option>
+                      <?php } ?>
+                  </select>
+                  <span class="text-danger"><?=form_error('current_semester')?></span>
+                </div>
+              </div>
+              </div>
             </div>
-            
+
             <div class="form-group">
               <button type="submit" class="hvr-glow btn btn-block btn-dark btn-theme-colored btn-sm mt-20 pt-10 pb-10" data-loading-text="Please wait...">Register</button>
             </div>
@@ -204,9 +226,9 @@
       </div>
     </div>
   </div>
-</section> 
+</section>
  <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
-</div> 
+</div>
 <!-- end main-content -->
 
 <script>
@@ -232,8 +254,8 @@
     }
     else
     {
-      
-      $('.info_student').hide();      
+
+      $('.info_student').hide();
 
     }
 
@@ -245,7 +267,7 @@
     {
 
       $.ajax({
-          
+
           url : '<?=site_url('pages/getAllFaculties/')?>'+$(this).val()+'/register',
           success:function(data)
           {
@@ -273,6 +295,6 @@
     }
 
   })
-                    
-                
+
+
 </script>

@@ -33,6 +33,7 @@ class Pages extends CI_Controller
 			'faculty_members' => $this->Users_model->getFacultyAndTeachers()
 		);
 
+
 		$this->load->view('includes/header', $data);
 		$this->load->view('pages/homepage');
 		$this->load->view('includes/footer');
@@ -270,11 +271,8 @@ class Pages extends CI_Controller
 		$this->load->model('Users_model');
 
 		$data = [
-
 			'title' => 'View Profile',
-
 			'user' => $this->Users_model->getUsersDetails($id)
-
 		];
 
 		$this->load->view('includes/header', $data);
@@ -621,6 +619,7 @@ class Pages extends CI_Controller
 		$this->load->view('includes/footer');
 
 	}
+
 	public function register() {
 
 		$data = [
@@ -648,10 +647,16 @@ class Pages extends CI_Controller
 		$p = $this->input->post();
 
 		$this->form_validation->set_rules('title', 'Title', 'required');
-		$this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
+		$this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]', array(
+        'is_unique'     => 'This %s already exist.'
+    ));
 		$this->form_validation->set_rules('password', 'Password', 'required');
-		$this->form_validation->set_rules('re_enter_password', 'Re-enter password', 'required|matches[password]');
-		$this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]');
+		$this->form_validation->set_rules('re_enter_password', 'Re-enter password', 'required|matches[password]', array(
+        'matches'     => "Both Passwords doesn't match."
+    ));
+		$this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]', array(
+        'is_unique'     => 'This %s already exist.'
+    ));
 		$this->form_validation->set_rules('full_name', 'Full name', 'required');
 		$this->form_validation->set_rules('role_id', 'role', 'required');
 		$this->form_validation->set_rules('campus_id', 'Campus', 'required');
@@ -661,7 +666,15 @@ class Pages extends CI_Controller
 		if($p['type'] == 'STUDENT')
 		{
 
-		  $this->form_validation->set_rules('program_id', 'Program', 'required');
+		  $this->form_validation->set_rules('program_id', 'Program', 'required', array(
+				'required'     => "Please choose your %s first!"
+			));
+
+			$this->form_validation->set_rules('roll_number', 'Roll Number', 'required|is_unique[students.roll_number]', array(
+	        'is_unique'     => 'An Account with the same %s already exist.'
+	    ));
+			$this->form_validation->set_rules('batch_year', 'Batch Year', 'required');
+			$this->form_validation->set_rules('current_semester', 'Current Semester', 'required');
 
 		}
 
@@ -675,21 +688,14 @@ class Pages extends CI_Controller
 
 			if($account_activity->value == 'pending')
 			{
-
 			  $pending = 1;
 			  $account_active = 0;
-
-			}
-			else
-			{
-
+			} else {
 			  $pending = 0;
 			  $account_active = 1;
-
 			}
 
 			$data = [
-
 				'campus_id' => $p['campus_id'],
 				'faculty_id' => $p['faculty_id'],
 				'depart_id' => $p['depart_id'],
@@ -703,46 +709,35 @@ class Pages extends CI_Controller
 				'account_active' => $account_active,
 				'is_pending' => $pending,
 				'created_at' => date('Y-m-d H:i:s')
-
 			];
 
 			$ins_id = $this->bm->insertRow('users', $data);
 
+
 			if ($p['type'] == 'TEACHER')
 			{
-
-
 			  $info = [
-
-				'user_id' => $ins_id
-
+					'user_id' => $ins_id
 			  ];
 
 			  $this->bm->insertRow('teachers',$info);
-
-			}
-
-			elseif ($p['type'] == 'STUDENT')
-			{
+			} elseif ($p['type'] == 'STUDENT') {
 
 			  $info = [
-
-				'user_id' => $ins_id,
-				'program_id' => $p['program_id'],
-
+					'user_id' => $ins_id,
+					'program_id' => $p['program_id'],
+					'roll_number' => $p['roll_number'],
+					'batch_year' => $p['batch_year'],
+					'current_semester' => $p['current_semester'],
 			  ];
+
 
 			  $this->bm->insertRow('students',$info);
 
-			}
-
-			else
-			{
+			} else {
 
 			  $info = [
-
-				'user_id' => $ins_id
-
+					'user_id' => $ins_id
 			  ];
 
 			  $this->bm->insertRow('other_users',$info);
@@ -752,13 +747,13 @@ class Pages extends CI_Controller
 			if ($account_active == 1)
 			{
 
-				$this->session->set_flashdata(array('response' => 'success', 'msg' => "Registration has been done Successfully"));
+				$this->session->set_flashdata(array('response' => 'success', 'msg' => "Your Account has been Created!"));
 
 			}
 			else
 			{
 
-				$this->session->set_flashdata(array('response' => 'success', 'msg' => "Registration has been done Successfully wait for approving your account "));
+				$this->session->set_flashdata(array('response' => 'success', 'msg' => "Your Account has been Created! Please wait for your account to be approved "));
 
 			}
 
@@ -766,9 +761,7 @@ class Pages extends CI_Controller
 				redirect('login');
 
 
-		}
-		else
-		{
+		} else {
 
 			$this->register();
 
@@ -991,9 +984,31 @@ class Pages extends CI_Controller
 
 		$id = $this->input->post('id');
 		$timetable_record = $this->bm->getById('timetable', $id);
-		if(!empty($timetable_record) && $timetable_record->type == "image") {
-			echo json_encode(array('type' => 'success', 'data' => array('type' => $timetable_record->type, 'src' =>$timetable_record->image)));
-			die();
+		if(!empty($timetable_record)) {
+			if($timetable_record->type == "image") {
+				// Image Timetable
+				echo json_encode(array('type' => 'success', 'data' => array('type' => $timetable_record->type, 'src' =>$timetable_record->image)));
+				die();
+			} else {
+				// custom timetable
+
+	      $detail_records = $this->tm->getDetailRecords($id);
+
+				$data = array(
+	        'record' => $timetable_record,
+	        'morning_start_time' => '08:00 am',
+	        'morning_end_time' => '01:00 pm',
+	        'evening_start_time' => '02:00 pm',
+	        'evening_end_time' => '07:00 pm',
+	        'class_duration' => 45,
+	        'id' => $id,
+	        'detail_records' => $detail_records,
+	      );
+				$timetable = $this->load->view('pages/timetable_view', $data, true);
+				echo json_encode(array('type' => 'success', 'data' => array('type' => $timetable_record->type, 'content' => $timetable)));
+				// echo json_encode(array('type' => 'success', 'data' => array('type' => $timetable_record->type, 'content' => htmlspecialchars($timetable))));
+				die();
+			}
 		}
 
 		echo json_encode(array('type' => "error"));

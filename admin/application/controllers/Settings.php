@@ -274,7 +274,7 @@ class Settings extends CI_Controller {
       }
 
       $id = hashids_decrypt($id);
-      
+
       $this->bm->updateRow('slider_setting',$arr,'id',$id);
 
       $this->session->set_flashdata(array('response' => 'success', 'msg' => 'Slider Setting Updated Successfully' ));

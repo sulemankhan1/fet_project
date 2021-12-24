@@ -108,4 +108,20 @@ class Timetable_model extends CI_Model {
       $this->db->where('c.is_archived', 0);
       return $this->db->get()->result();
     }
+
+    public function getStudents($record, $batch_year) {
+      $this->db->select('u.*, st.*, u.id');
+  		$this->db->from('users u');
+  		$this->db->join('students st','st.user_id=u.id','left');
+
+  		$this->db->where('u.type', 'STUDENT'); // Student
+  		$this->db->where('u.is_archived', 0); // Not archived
+  		$this->db->where('u.account_active', 1);
+  		$this->db->where('u.is_pending', 0);
+  		$this->db->where('u.faculty_id', $record->faculty_id);
+  		$this->db->where('u.depart_id', $record->depart_id);
+  		$this->db->where('st.batch_year', $batch_year);
+
+  		 return $this->db->get()->result();
+    }
 }

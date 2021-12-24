@@ -23,33 +23,31 @@
             <div class="panel panel-default shadowed">
               <div class="panel-body text-center">
                 <div class="profile-pic-container">
-                
-                  <?php if (@getimagesize('admin/uploads/users/'.$user->image)){ ?>
 
+                  <?php if ($user->image != '' && file_exists('admin/uploads/users/'.$user->image)){ ?>
                     <img src="<?=base_url('admin/uploads/users/'.$user->image)?>" class="teacher-profile-pic">
-
-                  <?php }else{ ?>
-
-                    <img src="<?=base_url('assets/images/team/2.png')?>" class="teacher-profile-pic">
-
+                  <?php } else { ?>
+                    <img src="<?=base_url('admin/uploads/users/default.png')?>" class="teacher-profile-pic">
                   <?php } ?>
 
                 </div>
                 <h3><?=$user->title?> <?=$user->full_name?></h3>
-                <p><span class="badge badge-secondary">Professor</span> </p>
+                <?php if($user->role_name) {?>
+                    <p><span class="badge badge-success"><?=$user->role_name?></span> </p>
+                <?php } ?>
                 <hr>
 
                 <div class="barr">
                   <div class="barr-left"><i class='icon-envelope'></i></div>
                   <div class="barr-right">
-                  <?=$user->email?>
+                    <a href="mailto:<?=$user->email?>"><?=$user->email?$user->email:'-'?></a>
                   </div>
                 </div>
                 <?php if($user->show_phone_no_public == 1){ ?>
                 <div class="barr">
                   <div class="barr-left"><i class='icon-call-out'></i></div>
                   <div class="barr-right">
-                  <?=$user->phone_no_code?><?=$user->phone_no?>
+                  <?=$user->phone_no_code?>-<?=$user->phone_no?>
                   </div>
                 </div>
                 <?php } ?>
@@ -57,26 +55,24 @@
                 <div class="barr">
                   <div class="barr-left"><i class='icon-pointer'></i></div>
                   <div class="barr-right">
-                  <?=$user->permanent_address?>
+                  <?=$user->permanent_address?$user->permanent_address:'-'?>
                   </div>
                 </div>
                 <?php } ?>
                 <div class="barr">
                   <div class="barr-left"><i class='icon-user'></i></div>
                   <div class="barr-right">
-                  <?=$user->gender?>
+                  <?=$user->gender?$user->gender:'-'?>
                   </div>
                 </div>
                 <?php if($user->show_cnic_public == 1){ ?>
                 <div class="barr">
                   <div class="barr-left"><i class='icon-user'></i></div>
                   <div class="barr-right">
-                  <?=$user->cnic?>
+                  <?=$user->cnic?$user->cnic:'-'?>
                   </div>
                 </div>
                 <?php } ?>
-               
-               
                 <hr>
                 <div class="bg-theme-colored text-white mb-xs-5 btn"><i class="icon-bubbles"></i><a class="text-white" data-toggle="modal" data-target="#contact-teaher-modal" href="#"> Message </a></div>
               </div>
@@ -93,48 +89,48 @@
                   <div class="col-md-12">
                     <!-- <h3>Subjects</h3> -->
                     <ul class="teacher-subject-list">
-                      <li><i class="icon-paper-plane"></i> Surename : <?=$user->surename?></li>
-                      <li><i class="icon-paper-plane"></i> Date of birth : <?=$user->dob?></li>
-                      <li><i class="icon-paper-plane"></i> Father Name : <?=$user->father_name?></li>
-                      <li><i class="icon-paper-plane"></i> Nationality : <?=$user->nationality?></li>
-                      <li><i class="icon-paper-plane"></i> Province : <?=$user->province?></li>
-                      <li><i class="icon-paper-plane"></i> District : <?=$user->district?></li>
-                      <li><i class="icon-paper-plane"></i> City : <?=$user->city?></li>
-                      <li><i class="icon-paper-plane"></i> Last Qualification : <?=$user->last_qualification?></li>
-                      <li><i class="icon-paper-plane"></i> Zipcode : <?=$user->zip_code?></li>
-                      <li><i class="icon-paper-plane"></i> Bio : <?=$user->bio?></li>
-                      <li><i class="icon-paper-plane"></i> Campus : <?=$user->campus_name?></li>
-                      <li><i class="icon-paper-plane"></i> Faculty : <?=$user->faculty_name?></li>
-                      <li><i class="icon-paper-plane"></i> Department : <?=$user->depart_name?></li>
+                      <li><i class="icon-paper-plane"></i> Surename : <?=$user->surename?$user->surename:" ----- "?></li>
+                      <li><i class="icon-paper-plane"></i> Date of birth : <?=$user->dob?$user->dob:" ----- "?></li>
+                      <li><i class="icon-paper-plane"></i> Father Name : <?=$user->father_name?$user->father_name:" ----- "?></li>
+                      <li><i class="icon-paper-plane"></i> Nationality : <?=$user->nationality?$user->nationality:" ----- "?></li>
+                      <li><i class="icon-paper-plane"></i> Province : <?=$user->province?$user->province:" ----- "?></li>
+                      <li><i class="icon-paper-plane"></i> District : <?=$user->district?$user->district:" ----- "?></li>
+                      <li><i class="icon-paper-plane"></i> City : <?=$user->city?$user->city:" ----- "?></li>
+                      <li><i class="icon-paper-plane"></i> Last Qualification : <?=$user->last_qualification?$user->last_qualification:" ----- "?></li>
+                      <li><i class="icon-paper-plane"></i> Zipcode : <?=$user->zip_code?$user->zip_code:" ----- "?></li>
+                      <li><i class="icon-paper-plane"></i> Bio : <?=$user->bio?$user->bio:" ----- "?></li>
+                      <li><i class="icon-paper-plane"></i> Campus : <?=$user->campus_name?$user->campus_name:" ----- "?></li>
+                      <li><i class="icon-paper-plane"></i> Faculty : <?=$user->faculty_name?$user->faculty_name:" ----- "?></li>
+                      <li><i class="icon-paper-plane"></i> Department : <?=$user->depart_name?$user->depart_name:" ----- "?></li>
 
                       <?php if(@$user->type == 'STUDENT'): ?>
 
-                      <li><i class="icon-paper-plane"></i> Program : <?=$user->program_id?></li>
-                      <li><i class="icon-paper-plane"></i> Batch : <?=$user->batch_year?></li>
-                      <li><i class="icon-paper-plane"></i> Current Semester No : <?=$user->current_semester?></li>
+                      <li><i class="icon-paper-plane"></i> Program : <?=$user->program_id?$user->program_id:" ----- "?></li>
+                      <li><i class="icon-paper-plane"></i> Batch : <?=$user->batch_year?$user->batch_year:" ----- "?></li>
+                      <li><i class="icon-paper-plane"></i> Current Semester No : <?=$user->current_semester?$user->current_semester:" ----- "?></li>
 
                       <?php endif; ?>
 
                       <?php if(@$user->type == 'TEACHER'): ?>
 
-                      <li><i class="icon-paper-plane"></i> Designation : <?=$user->designation?></li>
-                      <li><i class="icon-paper-plane"></i> Speciality : <?=$user->speciality?></li>
-                      
+                      <li><i class="icon-paper-plane"></i> Designation : <?=$user->designation?$user->designation:" ----- "?></li>
+                      <li><i class="icon-paper-plane"></i> Speciality : <?=$user->speciality?$user->speciality:" ----- "?></li>
+
                       <?php endif; ?>
 
                       <?php if(@$user->type == 'OTHER'): ?>
 
-                      <li><i class="icon-paper-plane"></i> Job Title : <?=$user->job_title?></li>>
-                      
+                      <li><i class="icon-paper-plane"></i> Job Title : <?=$user->job_title?$user->job_title:" ----- "?></li>>
+
                       <?php endif; ?>
 
                     </ul>
                   </div>
-                  
+
                 </div>
               </div>
             </div>
-            
+
             <!-- <div class="panel panel-default shadowed">
               <div class="panel-heading">
                 <h3><i class="icon-info"></i> About</h3>

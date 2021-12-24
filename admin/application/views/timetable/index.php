@@ -36,15 +36,15 @@
                             <th>S.No</th>
                             <!-- <th>Image</th> -->
                             <!-- <th>Title</th> -->
-                            <th>Campus</th>
-                            <th>Faculty</th>
+                            <!-- <th>Campus</th>
+                            <th>Faculty</th> -->
                             <th>Depart</th>
                             <th>Semester</th>
-                            <th>Class Group</th>
+                            <th>Group</th>
                             <th>Part</th>
                             <th>Year</th>
                             <th>Mor/Eve</th>
-                            <th>Is Published</th>
+                            <th>Status</th>
                             <th>Added by</th>
                             <th>Date Added</th>
                             <!-- <th>Last Updated</th> -->
@@ -65,15 +65,19 @@
                                 <?php } ?>
                               </td> -->
                               <!-- <td><?=$record->title?></td> -->
-                              <td><?=($record->campus_name == "")?"For All":$record->campus_name?></td>
-                              <td><?=($record->faculty_name == "")?"For All":$record->faculty_name?></td>
+                              <!-- <td><?=($record->campus_name == "")?"For All":$record->campus_name?></td>
+                              <td><?=($record->faculty_name == "")?"For All":$record->faculty_name?></td> -->
                               <td><?=($record->depart_name == "")?"For All":$record->depart_name?></td>
                               <td><?=$record->semester?></td>
                               <td><?=$record->class_group?></td>
                               <td><?=$record->part?></td>
                               <td><?=$record->year?></td>
                               <td><?=$record->evening_morning?> </td>
-                              <td><span class="badge badge-<?=($record->published == 0)?"secondary":"success"?>"><?=($record->published == 0)?"Draft":"Published"?></span> </td>
+                              <td>
+                                <a href="<?=site_url('timetable/change_status/'.hashids_encrypt($record->id).'/'.$record->published)?>" onclick="return confirm('Are you sure you want to <?=$record->published?"Unpublish":"Publish"?> this Timetable?')" >
+                                  <span class="badge badge-<?=($record->published == 0)?"secondary":"success"?>"><?=($record->published == 0)?"Draft":"Published"?></span>
+                                </a>
+                              </td>
                               <!-- <td><span class="circled <?=($record->published)?'green-circle':'grey-circle'?>">A</span> </td> -->
                               <td><?=$record->username?></td>
                               <!-- <td><?=$record->datetime_added?></td> -->
@@ -81,13 +85,14 @@
                               <!-- <td><?=$record->datetime_updated?></td> -->
                               <!-- <td><?=date('d M Y h:i a', strtotime($record->datetime_updated))?></td> -->
                               <td>
-                                <a href="<?=site_url('edit_timetable/'.hashids_encrypt($record->id))?>" class="btn-sm btn-link" title="Edit"><i class="ft-edit"></i></a>
-                                <a href="<?=site_url('delete_timetable/'.hashids_encrypt($record->id))?>" class="btn-sm btn-link" title="Delete" onclick="return confirm('Are you sure you want to Delete this Subject? This Action Cannot be reverted.')"><i class="ft-trash"></i></a>
+                                <a href="<?=site_url('edit_timetable/'.hashids_encrypt($record->id))?>" class=" btn-block" title="Edit"><i class="ft-edit"></i> Edit</a>
+                                <a href="<?=site_url('delete_timetable/'.hashids_encrypt($record->id))?>" class=" btn-block" title="Delete" onclick="return confirm('Are you sure you want to Delete this Subject? This Action Cannot be reverted.')"><i class="ft-trash"></i> Delete</a>
                                 <?php if($record->type == "custom") { ?>
-                                  <a href="<?=site_url('customize_timetable/'.hashids_encrypt($record->id))?>" class="btn-sm btn-link" title="view"><i class="icon-settings"></i></a>
+                                  <a href="<?=site_url('customize_timetable/'.hashids_encrypt($record->id))?>" class=" btn-block" title="view"><i class="icon-settings"></i> Customize</a>
                                 <?php } else { ?>
-                                  <a href="<?=base_url('uploads/timetables/'.$record->image)?>" class="btn-sm btn-link" title="view" target="_blank"><i class="ft-eye"></i></a>
+                                  <a href="<?=base_url('uploads/timetables/'.$record->image)?>" class=" btn-block" title="view" target="_blank"><i class="ft-eye"></i> View</a>
                                 <?php } ?>
+                                <a href="<?=site_url('send_timetable/'.hashids_encrypt($record->id))?>" class=" btn-block" title="view"><i class="ft-navigation"></i> Send via Email to Students</a>
                               </td>
                             </tr>
                           <?php $sno++; endforeach; ?>

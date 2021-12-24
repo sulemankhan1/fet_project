@@ -17,8 +17,8 @@ draggables.forEach(draggable => {
   draggable.addEventListener('dragend', () => {
     draggable.classList.remove('dragging');
     let draggable_type = $(draggable).attr('data-dtype');
-    const copy = $(draggable).clone();
-    cloned_item = copy;
+    // const copy = $(draggable).clone();
+    // cloned_item = copy;
 
     // const teacher_name = draggable.querySelector('.teacher-name');
 
@@ -35,11 +35,16 @@ draggables.forEach(draggable => {
     //     break;
     // }
     test = true;
-    console.log(test);
+    // console.log(test);
+
+
+
     // add remove button on drop
     $(draggable).append('<span class="remover-btn" onclick="remove_item(this)"> <i class="fa fa-close"></i> </span>');
 
     update_local_storage(draggable, 'add');
+
+    // location.reload();
 
   })
 })
@@ -53,19 +58,19 @@ droppables.forEach(droppable => {
     // var nodeCopy = document.getElementById(draggable).cloneNode(true);
 
 
-    if(test) {
-      var nodeCopy = $(draggable).clone();
-      nodeCopy.id = "newId";
+    // if(test) {
+      // var nodeCopy = $(draggable).clone();
+      // nodeCopy.id = "newId";
     //   console.log(nodeCopy);
       // console.log(nodeCopy);
       if (afterElement == null) {
         droppable.appendChild(draggable)
-        $('#teachers_container').append(nodeCopy);
+        // $('#teachers_container').append(draggable);
       } else {
         droppable.insertBefore(draggable, afterElement)
       }
-      test = false;
-    }
+    //   test = false;
+    // }
 
   })
 })
@@ -150,5 +155,9 @@ function update_local_storage(obj, type) {
       }
     })
     window.localStorage.timetable_data = JSON.stringify(data);
+    // SAVING DRAFT AND RELOADING PAGE BECAUSE OF AN ISSUE THAT THE TEACHERS/SUBJECTS/CLASSES
+    // ARE NOT CLONNING SO WE ARE USING THIS SOLUTION FOR NOW BUT IT NEEDS
+    // TO BE CHANGED LATER THE PAGE SHOULD NOT REFRESH EVERY TIME.
+    save_timetable('draft', true);
   }
 }

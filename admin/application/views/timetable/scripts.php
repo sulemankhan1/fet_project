@@ -38,11 +38,17 @@
   }
 
 
-  function save_timetable(draft = '') {
+  function save_timetable(draft = '', reload=false) {
     msg = (draft != "")?"Save as Draft?":"Are you sure you want to save and Publish the Timetable?";
 
-    let c = confirm(msg);
+    if(reload == true) {
+      c = true;
+    } else {
+      let c = confirm(msg);
+    }
+
     if(c == true) {
+
       let timetable_id = document.querySelector('#timetable_id').value;
       let timetable_data = window.localStorage.timetable_data;
 
@@ -56,7 +62,13 @@
             alert("Please Create Timetable First before Submitting!");
             return;
           } else {
-            window.location = res.location;
+            window.location.reload();
+            if(reload) {
+                // location.relaod();
+            } else {
+
+              // window.location = res.location;
+            }
           }
 
         }

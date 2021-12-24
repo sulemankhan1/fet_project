@@ -28,7 +28,7 @@ class Auth_model extends CI_Model
 			{
 
 				$result['valid'] = false;
-				$result['error'] = 'Your account is in pending.Please Wait for activation your account!';
+				$result['error'] = 'Your account is in pending.Please Wait for activation of your account or contact Admin';
 
 			}
 			else if($user_data->account_active == 0)

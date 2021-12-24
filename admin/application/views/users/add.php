@@ -275,7 +275,7 @@
                                     <label for="basicInput">Select Campus *</label>
                                     <select class="form-control select-by-campus"  name="campus_id">
 
-                                        <option selected disabled value=""> choose</option>
+                                        <option selected value=""> choose</option>
 
                                         <?php foreach($campus as $key => $v): ?>
 

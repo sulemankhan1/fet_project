@@ -1,3 +1,4 @@
+<script src="<?=base_url('admin/assets/js/html2canvas.js')?>" charset="utf-8"></script>
 <!-- Start main-content -->
 <div class="main-content">
   <!-- Section: inner-header -->
@@ -19,17 +20,21 @@
   </section>
   <!-- Section:  -->
   <section>
-    <div class="container pb-sm-70">
+    <div class="container pb-sm-70"  style="padding-top: 0 !important;">
       <div class="row">
-        <div class="col-md-4">
-          <h3>Generate Timetable</h3>
+        <div class="col-md-12">
+          <!-- <h3>Generate Timetable</h3> -->
           <div class="form-group">
-            <label>Select Your Class</label>
+            <h4 class="card-title">Select your Class</h4>
             <select class="form-control bordered timetable_id" name="timetable_id" onchange="change_timetable()">
               <option value="" selected disabled> -- select -- </option>
               <?php if(!empty($timetables)) { ?>
-                <?php foreach($timetables as $record) { ?>
-                  <option value="<?=$record->id?>"><?=$record->depart_name." | Part-".$record->part." | ".$record->year ?></option>
+                <?php foreach($timetables as $record) {
+                  if(!$record->published) {
+                    continue;
+                  }
+                  ?>
+                  <option value="<?=$record->id?>"><?=$record->depart_name." | Part-".$record->part." | ".$record->year." | ".$record->evening_morning." ".$record->class_group ?></option>
                 <?php } ?>
               <?php } ?>
             </select>
@@ -47,10 +52,10 @@
             </div>
           </div> -->
         </div>
-        <div class="col-md-8 timetable_window">
+        <div class="col-md-12 timetable_window">
           <div class="preloader">
-            <p>Your Timetable will be Generated Here</p>
-            <h4>Please Choose your class from Left dropdown to Generate Timetable</h4>
+            <p>Your Timetable will be generated Here</p>
+            <h4>Please Choose your class to generate Timetable</h4>
 
           </div>
           <div class="loading_tt">
@@ -60,9 +65,8 @@
             <p id="response_txt"></p>
           </div>
         </div>
-        <div class="col-md-4">
-        </div>
         <div class="col-md-8">
+          <br><br>
           <div class="form-group">
             <label>Download</label>
             <button class="btn hvr-float-shadow btn-default" onclick="download_img()">
@@ -78,6 +82,7 @@
 
 </div>
 <input type="hidden" name="img_src__" id="img_src__" value="">
+<input type="hidden" name="timetable_type" id="timetable_type" value="">
 <!-- end main-content -->
 <script>
 function change_timetable() {
@@ -95,7 +100,9 @@ function change_timetable() {
       $('#timetable_').hide();
       $('.loading_tt').hide();
       let result = JSON.parse(res);
+
       if(result.type == 'success') {
+        $('#timetable_type').val(result.data.type);
         if(result.data.type == 'image') {
           // SHOW TIMETABLE IMAGE
           var img = document.createElement("img");
@@ -109,9 +116,10 @@ function change_timetable() {
           $('#timetable_').show();
         } else {
           // DRAW CUSTOM TIMETABLE
-
+          $('#timetable_').html(result.data.content);
           // hide image timetable
           $('#response_txt').hide();
+          $('#timetable_').show();
 
 
         }
@@ -123,16 +131,43 @@ function change_timetable() {
 }
 
 function download_img() {
-  let img_source = $('#img_src__').val();
-  if(img_source != "") {
+  let timetable_type = $('#timetable_type').val();
+  console.log(timetable_type)
 
-    const link = document.createElement('a')
-    link.href = img_source
-    link.download = 'Timetable'
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
+    if(timetable_type == 'image') {
+      let img_source = $('#img_src__').val();
+      if(img_source != "") {
+        download(img_source);
+    }
+  }  else {
+    html2canvas(document.getElementById("myTable"), {
+    onrendered: function(canvas) {
+       var img = canvas.toDataURL("image/png");
+       download(img);
+    }
+    });
+
   }
+}
+
+function download(img_source) {
+  const link = document.createElement('a')
+  link.href = img_source
+  link.download = 'Timetable'
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+}
+
+//convert table to image
+function convertToImage() {
+// var resultDiv = document.getElementById("result");
+html2canvas(document.getElementById("myTable"), {
+onrendered: function(canvas) {
+   var img = canvas.toDataURL("image/png");
+   result.innerHTML = '<img src="'+img+'"/>';
+}
+});
 }
 
 </script>
