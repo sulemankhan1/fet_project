@@ -11,11 +11,11 @@
 <div class="main-content">
   <div class="content-wrapper">
     <!--Statistics cards Starts-->
-    <div class="card gradient-green-tea">
+    <div class="card bg-primary">
       <div class="card-header">
         <div class="row p-2">
           <div class="col-md-12 text-center text-white" style="text-transform:uppercase!important;">
-            <h3><b>Welcome <?=@$this->session->username?> to <?=@$this->session->userdata('settings')['NAME']?></b></h3>
+            <h3><b>Welcome to <?=@$this->session->userdata('settings')['NAME']?></b></h3>
           </div>
         </div>
       </div>

@@ -33,7 +33,6 @@ class Notifications  {
   // returns all notifications for current user
   // if type is provided eg: seen then it will return all seen notifications
   public function getAllForUser($type="") {
-
     // get notifications for logged in user
     $this->CI->db->from('sys_notifications');
 
@@ -66,7 +65,7 @@ class Notifications  {
   private function mark_seen($notification_id) {
     $this->CI->db->set('is_seen', 1);
     $this->CI->db->where('id', $notification_id);
-    return $this->CI->db->update('notifications');
+    return $this->CI->db->update('sys_notifications');
   }
 
   public function open_notification($notification_id) {

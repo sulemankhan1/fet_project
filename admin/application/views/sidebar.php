@@ -1,5 +1,6 @@
 <?php
 $notifications = $this->notifications->getAllForUser();
+$user_type = $this->session->user_type;
  ?>
 
 <!-- main menu-->
@@ -38,26 +39,29 @@ $notifications = $this->notifications->getAllForUser();
               <a href="<?=site_url('dashboard');?>"><i class="ft-home"></i><span data-i18n="" class="menu-title" style="font-size: 14px!important;"> Dashboard</span>
               </a>
             </li>
+            <?php if($user_type == 'ADMIN' || $user_type == 'SUPERADMIN'){ ?>
+              <li class="has-sub nav-item <?=(@$active_menu=='manage_subjects' || @$active_menu=='manage_classrooms'?'open':'')?>"><a><i class="icon-rocket"></i><span data-i18n="" class="menu-title"> Manage</span></a>
+                  <ul class="menu-content" style="">
+                    <li class="<?=(@$active_menu=='manage_subjects'?'active':'')?>"><a href="<?=site_url('manage/subjects')?>" class="menu-item"> Subjects</a>
+                    </li>
+                    <li class="<?=(@$active_menu=='manage_classrooms'?'active':'')?>"><a href="<?=site_url('manage/classrooms')?>" class="menu-item"> Class Rooms</a>
+                    </li>
+                  </ul>
+              </li>
+            <?php } ?>
 
-            <li class="has-sub nav-item <?=(@$active_menu=='manage_subjects' || @$active_menu=='manage_classrooms'?'open':'')?>"><a><i class="icon-rocket"></i><span data-i18n="" class="menu-title"> Manage</span></a>
+            <?php if($user_type == 'ADMIN' || $user_type == 'SUPERADMIN'){ ?>
+              <li class="has-sub nav-item <?=(@$active_menu=='view_pending_users' || @$active_menu=='view_users'?'open':'')?>"><a><i class="ft-users"></i><span data-i18n="" class="menu-title"> Users</span></a>
                 <ul class="menu-content" style="">
-                  <li class="<?=(@$active_menu=='manage_subjects'?'active':'')?>"><a href="<?=site_url('manage/subjects')?>" class="menu-item"> Subjects</a>
+                  <li class="<?=(@$active_menu=='create_user'?'active':'')?>"><a href="<?=site_url('create_user');?>" class="menu-item">Create User</a>
                   </li>
-                  <li class="<?=(@$active_menu=='manage_classrooms'?'active':'')?>"><a href="<?=site_url('manage/classrooms')?>" class="menu-item"> Class Rooms</a>
+                  <li class="<?=(@$active_menu=='view_users'?'active':'')?>"><a href="<?=site_url('view_users');?>" class="menu-item"> View Users</a>
+                  </li>
+                  <li class="<?=(@$active_menu=='view_pending_users'?'active':'')?>"><a href="<?=site_url('view_users/pending');?>" class="menu-item"> Pending users</a>
                   </li>
                 </ul>
-            </li>
-
-            <li class="has-sub nav-item <?=(@$active_menu=='view_pending_users' || @$active_menu=='view_users'?'open':'')?>"><a><i class="ft-users"></i><span data-i18n="" class="menu-title"> Users</span></a>
-              <ul class="menu-content" style="">
-                <li class="<?=(@$active_menu=='create_user'?'active':'')?>"><a href="<?=site_url('create_user');?>" class="menu-item">Create User</a>
-                </li>
-                <li class="<?=(@$active_menu=='view_users'?'active':'')?>"><a href="<?=site_url('view_users');?>" class="menu-item"> View Users</a>
-                </li>
-                <li class="<?=(@$active_menu=='view_pending_users'?'active':'')?>"><a href="<?=site_url('view_users/pending');?>" class="menu-item"> Pending users</a>
-                </li>
-              </ul>
-            </li>
+              </li>
+            <?php } ?>
 
             <!-- <li class="has-sub nav-item <?=(@$active_menu=='add_role' || @$active_menu=='view_roles'?'open':'')?>"><a><i class="ft-shuffle"></i><span data-i18n="" class="menu-title"> Roles</span></a>
                 <ul class="menu-content" style="">
@@ -70,28 +74,44 @@ $notifications = $this->notifications->getAllForUser();
                 </ul>
             </li> -->
 
-            <li class="has-sub nav-item <?=(@$active_menu=='add_notification' || @$active_menu=='view_notifications'?'open':'')?>"><a><i class="icon-speech"></i><span data-i18n="" class="menu-title"> Notifications</span></a>
-                <ul class="menu-content" style="">
-                  <li class="<?=(@$active_menu=='add_notification'?'active':'')?>"><a href="<?=site_url('new_notification')?>" class="menu-item"> Add Notification</a>
-                  </li>
-                  <li class="<?=(@$active_menu=='view_notifications'?'active':'')?>"><a href="<?=site_url('view_notifications')?>" class="menu-item"> View Notifications</a>
-                  </li>
-                </ul>
-            </li>
 
-            <li class="has-sub nav-item <?=(@$active_menu=='add_timetable' || @$active_menu=='view_timetables'?'open':'')?>"><a><i class="icon-calendar"></i><span data-i18n="" class="menu-title"> Timetable</span></a>
-                <ul class="menu-content" style="">
-                  <li class="<?=(@$active_menu=='add_timetable'?'active':'')?>"><a href="<?=site_url('new_timetable')?>" class="menu-item"> Add Timetable</a>
-                  </li>
-                  <li class="<?=(@$active_menu=='view_timetables'?'active':'')?>"><a href="<?=site_url('view_timetables')?>" class="menu-item"> View Timetables</a>
-                  </li>
-                </ul>
-            </li>
+            <?php if($user_type == 'ADMIN' || $user_type == 'SUPERADMIN'){ ?>
+              <li class="has-sub nav-item <?=(@$active_menu=='add_notification' || @$active_menu=='view_notifications'?'open':'')?>"><a><i class="icon-speech"></i><span data-i18n="" class="menu-title"> News/Notifications</span></a>
+                  <ul class="menu-content" style="">
+                    <li class="<?=(@$active_menu=='add_notification'?'active':'')?>"><a href="<?=site_url('new_notification')?>" class="menu-item"> Add News</a>
+                    </li>
+                    <li class="<?=(@$active_menu=='view_notifications'?'active':'')?>"><a href="<?=site_url('view_notifications')?>" class="menu-item"> View All News</a>
+                    </li>
+                  </ul>
+              </li>
+            <?php } else { ?>
+              <li class=" nav-item <?=(@$active_menu=='view_notifications'?'active':'')?>">
+                <a href="<?=site_url('view_notifications');?>"><i class="icon-speech"></i><span data-i18n="" class="menu-title" style="font-size: 14px!important;"> News/Notifications</span>
+                </a>
+              </li>
+            <?php } ?>
 
-            <li class=" nav-item <?=(@$active_menu=='setting'?'active':'')?>">
-              <a href="<?=site_url('settings');?>"><i class="ft-settings"></i><span data-i18n="" class="menu-title" style="font-size: 14px!important;"> Settings</span>
-              </a>
-            </li>
+            <?php if($user_type == 'ADMIN' || $user_type == 'SUPERADMIN'){ ?>
+              <li class="has-sub nav-item <?=(@$active_menu=='add_timetable' || @$active_menu=='view_timetables'?'open':'')?>"><a><i class="icon-calendar"></i><span data-i18n="" class="menu-title"> Timetable</span></a>
+                  <ul class="menu-content" style="">
+                    <li class="<?=(@$active_menu=='add_timetable'?'active':'')?>"><a href="<?=site_url('new_timetable')?>" class="menu-item"> Add Timetable</a>
+                    </li>
+                    <li class="<?=(@$active_menu=='view_timetables'?'active':'')?>"><a href="<?=site_url('view_timetables')?>" class="menu-item"> View Timetables</a>
+                    </li>
+                  </ul>
+              </li>
+            <?php } else { ?>
+              <li class=" nav-item <?=(@$active_menu=='timetable'?'active':'')?>">
+                <a href="<?=site_url('student_timetable');?>"><i class="icon-calendar"></i><span data-i18n="" class="menu-title" style="font-size: 14px!important;"> Timetable</span>
+                </a>
+              </li>
+            <?php } ?>
+            <?php if($user_type == 'ADMIN' || $user_type == 'SUPERADMIN'){ ?>
+              <li class=" nav-item <?=(@$active_menu=='setting'?'active':'')?>">
+                <a href="<?=site_url('settings');?>"><i class="ft-settings"></i><span data-i18n="" class="menu-title" style="font-size: 14px!important;"> Settings</span>
+                </a>
+              </li>
+            <?php } ?>
 
         <br>
       </ul>
@@ -116,7 +136,7 @@ $notifications = $this->notifications->getAllForUser();
           <ul class="navbar-nav">
 
             <li class="dropdown nav-item">
-              <a href="../" class="btn btn-default" target="_blank">Open Site <i class="icon-action-redo"></i> </a>
+              <a href="<?=site_url('../')?>" class="btn btn-default" target="_blank">Open Site <i class="icon-action-redo"></i> </a>
             </li>
             <li class="dropdown nav-item">
                <a id="dropdownBasic2" href="#" data-toggle="dropdown" class="nav-link position-relative dropdown-toggle">

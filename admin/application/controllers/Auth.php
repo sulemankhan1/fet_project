@@ -9,7 +9,7 @@ class Auth extends CI_Controller {
         parent::__construct();
 
         $this->load->model('Auth_model');
-		
+
 		// echo $this->encryption->encrypt('admin');
 
 		// die();
@@ -63,6 +63,7 @@ class Auth extends CI_Controller {
 					'user_id' => $res['user_data']->id,
 					'user_img' => $res['user_data']->image ,
 					'username' => $res['user_data']->username,
+					'user_type' => $res['user_data']->type,
 					'settings' => $new_settings,
 				];
 

@@ -112,6 +112,7 @@
                       <i class="fa fa-user"></i>
                       <a class="nav-link dropdown-toggle text-white" href="<?=site_url('login')?>" data-toggle="dropdown" href="#"> My Account </a>
                       <div class="dropdown-menu" style="padding-left: 7px;">
+                        <a class="dropdown-item" href="<?=site_url('admin/dashboard')?>">Dashboard</a>
                         <a class="dropdown-item" href="<?=site_url('edit_profile/'.hashids_encrypt($this->session->userdata('user_id')))?>">Edit Profile</a>
                         <a class="dropdown-item" href="<?=site_url('view_profile/'.hashids_encrypt($this->session->userdata('user_id')))?>">View Profile</a>
                         <a class="dropdown-item" href="<?=site_url('logout')?>">Logout</a>

@@ -11,6 +11,10 @@ class Subjects extends CI_Controller
         if (empty($this->session->userdata('username'))) {
             redirect('login');
         }
+        // redirect student to dashboard
+        if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+            redirect('dashboard');
+        }
     }
 
     public function index() {

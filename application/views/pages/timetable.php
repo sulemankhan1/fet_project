@@ -132,7 +132,6 @@ function change_timetable() {
 
 function download_img() {
   let timetable_type = $('#timetable_type').val();
-  console.log(timetable_type)
 
     if(timetable_type == 'image') {
       let img_source = $('#img_src__').val();

@@ -61,7 +61,7 @@
                                   <img src="<?=base_url('app-assets/images/no-image-available.png')?>" width="150" class="img-thumbnail">
                                 <?php } ?>
                               </td>
-                              <td><?=$notification->title?></td>
+                              <td><a href="<?=site_url('../news/'.myUrlEncode($notification->title))?>" target="_blank"><?=$notification->title?></a></td>
                               <!-- <td><?=$notification->FAC_NAME?></td>
                               <td><?=$notification->DEPT_NAME?></td>
                               <td><?=$notification->PROGRAM_TITLE?></td> -->
@@ -70,9 +70,13 @@
                               <td><?=$notification->username?></td>
                               <td><?=($notification->date_time)?date('d M Y H:i a', strtotime($notification->date_time)):" - "?></td>
                               <td>
-                                <!-- <a href="#" class="btn-sm btn-link" title="View"><i class="ft-eye"></i></a> -->
-                                <a href="<?=site_url('edit_notification/'.hashids_encrypt($notification->id))?>" class="btn-sm btn-link" title="Edit"><i class="ft-edit"></i></a>
-                                <a href="<?=site_url('delete_notification/'.hashids_encrypt($notification->id))?>" class="btn-sm btn-link" title="Delete" onclick="return confirm('Are you sure you want to Delete this Notification? This Action Cannot be reverted.')"><i class="ft-trash"></i></a>
+                                <?php if($this->session->user_type == 'STUDENT') { ?>
+                                  <a href="<?=site_url('../news/'.myUrlEncode($notification->title))?>" class="btn-sm btn-link" title="view"><i class="ft-eye"></i></a>
+                                <?php } else { ?>
+                                  <!-- <a href="#" class="btn-sm btn-link" title="View"><i class="ft-eye"></i></a> -->
+                                  <a href="<?=site_url('edit_notification/'.hashids_encrypt($notification->id))?>" class="btn-sm btn-link" title="Edit"><i class="ft-edit"></i></a>
+                                  <a href="<?=site_url('delete_notification/'.hashids_encrypt($notification->id))?>" class="btn-sm btn-link" title="Delete" onclick="return confirm('Are you sure you want to Delete this Notification? This Action Cannot be reverted.')"><i class="ft-trash"></i></a>
+                                <?php } ?>
                               </td>
                             </tr>
                           <?php $sno++; endforeach; ?>

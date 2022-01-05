@@ -16,6 +16,11 @@ class Users extends CI_Controller
 
       }
 
+      // redirect student to dashboard
+      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+          redirect('dashboard');
+      }
+
   }
 
   public function create_user()
@@ -513,6 +518,7 @@ class Users extends CI_Controller
         } else {
           $img = base_url('uploads/users/default.png');
         }
+
         $sub_array[] = "<img class='media-object d-flex mr-3 bg-primary height-50 rounded-circle' src='".$img."' />";
 
         $sub_array[] = $v->full_name;

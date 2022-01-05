@@ -5,7 +5,8 @@ class Admin extends CI_Controller
     function __construct(){
         parent::__construct();
         $this->load->library('session');
-
+        // System Notifications
+        $this->load->library('notifications');
         if (empty($this->session->userdata('username'))) {
             redirect('login');
         }
@@ -22,7 +23,29 @@ class Admin extends CI_Controller
 
       $this->load->view('header',$data);
       $this->load->view('sidebar');
-      $this->load->view('dashboard/index');
+      $user_type = $this->session->user_type;
+      switch ($user_type) {
+        case 'SUPERADMIN':
+          $this->load->view('dashboard/index');
+          break;
+        case 'ADMIN':
+          $this->load->view('dashboard/index');
+          break;
+        case 'TEACHER':
+          $this->load->view('dashboard/teacher_index');
+          break;
+        case 'FACULTY':
+          $this->load->view('dashboard/index');
+          break;
+        case 'STUDENT':
+        
+          $this->load->view('dashboard/student_index');
+          break;
+        case 'OTHER':
+          // code...
+          break;
+      }
+
       $this->load->view('footer');
 
     }
@@ -60,5 +83,6 @@ class Admin extends CI_Controller
       $this->notifications->open_notification($notification_id);
 
     }
+
 
 }

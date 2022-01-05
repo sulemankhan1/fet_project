@@ -110,6 +110,7 @@ class Timetable_model extends CI_Model {
     }
 
     public function getStudents($record, $batch_year) {
+
       $this->db->select('u.*, st.*, u.id');
   		$this->db->from('users u');
   		$this->db->join('students st','st.user_id=u.id','left');
@@ -119,6 +120,7 @@ class Timetable_model extends CI_Model {
   		$this->db->where('u.account_active', 1);
   		$this->db->where('u.is_pending', 0);
   		$this->db->where('u.faculty_id', $record->faculty_id);
+
   		$this->db->where('u.depart_id', $record->depart_id);
   		$this->db->where('st.batch_year', $batch_year);
 

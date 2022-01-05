@@ -8,6 +8,9 @@ class Settings extends CI_Controller {
         if (empty($this->session->userdata('username'))) {
             redirect('login');
         }
+        if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+            redirect('dashboard');
+        }
 
     }
 

@@ -11,6 +11,10 @@ class Classrooms extends CI_Controller
         if (empty($this->session->userdata('username'))) {
             redirect('login');
         }
+        // redirect student to dashboard
+        if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+            redirect('dashboard');
+        }
     }
 
     public function index() {
@@ -50,7 +54,7 @@ class Classrooms extends CI_Controller
         $redirect_url = isset($data['id']) && $data['id'] != "" ? 'edit_classroom/'.hashids_encrypt($data['id']) : 'add_classroom';
 
 
-        
+
         // check if a classroom with same name exists (only for add)
         if(@$data['id'] == "" && $this->cm->classRoomAlreadyExist($data['room_no']) > 0) {
           $this->session->set_flashdata(array('type' => 'error', 'msg' => 'A Class Room with the Same Room No. Already Exist!', 'data' => $data));

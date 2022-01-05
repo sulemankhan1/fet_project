@@ -95,3 +95,5 @@ $route['edit_timetable/(:any)'] = 'Timetable/edit/$1';
 $route['customize_timetable/(:any)'] = 'Timetable/customize_timetable/$1';
 $route['view_timetables'] = 'Timetable/index';
 $route['send_timetable/(:any)'] = 'Timetable/send_timetable/$1';
+$route['student_timetable'] = 'Timetable/student_timetable';
+$route['fetch_timetable'] = 'Timetable/fetch_timetable';

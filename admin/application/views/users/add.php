@@ -353,7 +353,7 @@
                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-1 additional_info_student">
                                     <fieldset class="form-group">
                                         <label for="basicInput">Batch Year *</label>
-                                        <input type="text" class="form-control"  name="batch_year" value="<?=@$this->input->post('batch_year')?>">
+                                        <input type="text" class="form-control"  name="batch_year" value="<?=@$this->input->post('batch_year')?>" placeholder="2022">
                                     </fieldset>
                                     <?php if(@$this->input->post('type') == 'STUDENT'){ ?>
                                       <span class="text-danger"><?=form_error('batch_year')?></span>

@@ -9,6 +9,8 @@ class Timetable extends CI_Controller
       parent::__construct();
       $this->load->model('timetable_model', 'tm');
       $this->load->model('Basic_model', 'bm');
+      // System Notifications
+      $this->load->library('notifications');
       // validate user logged in
       if (empty($this->session->userdata('username'))) {
           redirect('login');
@@ -18,6 +20,9 @@ class Timetable extends CI_Controller
     }
 
     public function index() {
+      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+          redirect('dashboard');
+      }
 
       $data = array(
         'title' => 'Timetable',
@@ -32,7 +37,9 @@ class Timetable extends CI_Controller
     }
 
     public function new($data = '') {
-
+      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+          redirect('dashboard');
+      }
       $data = array(
         'title' => 'Add New Timetable',
         'active_menu' => 'add_timetable',
@@ -92,7 +99,9 @@ class Timetable extends CI_Controller
 
     public function edit($id) {
       $id = hashids_decrypt($id);
-
+      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+          redirect('dashboard');
+      }
       $data = array(
         'title' => 'Update Timetable',
         'active_menu' => 'view_timetables',
@@ -101,10 +110,6 @@ class Timetable extends CI_Controller
         'faculties' => $this->bm->getWhereRows('faculties', 'is_archived', 0),
         'record' => $this->bm->getById('timetable', $id),
       );
-      // echo "<pre>";
-      // print_r($data['record']);
-      // die();
-
 
       $this->load->view('header',$data);
       $this->load->view('sidebar');
@@ -113,6 +118,9 @@ class Timetable extends CI_Controller
     }
 
     public function delete($id) {
+      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+          redirect('dashboard');
+      }
       $id = hashids_decrypt($id);
       $this->bm->delete('news_notifications', 'NOTIFICATION_ID', $id);
       $this->session->set_flashdata(array('type' => 'success', 'msg' => 'Notification Deleted Successfully!'));
@@ -122,6 +130,9 @@ class Timetable extends CI_Controller
     // for submission (img based timetable)
     //and redirecting to custom timetable creation page
     public function create() {
+      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+          redirect('dashboard');
+      }
       if($this->input->post()) {
         $data = $this->input->post();
         $id = isset($data['id']) && $data['id'] != "" ? $data['id'] : '';
@@ -185,11 +196,23 @@ class Timetable extends CI_Controller
 
           if(isset($data['id']) && $data['id'] != "") {
             // edit
+            // set updated datetime
+            $data['datetime_updated'] = date('Y-m-d h:i', strtotime('now'));
+
+            // Add System Notification to class Students that timetable updated
+            $_data = json_decode(json_encode($data)); // convert to object
+            $batch_year = $this->get_batch_year($_data->part); // getting batch year
+            $students = $this->tm->getStudents($_data, $batch_year);
+
+            foreach($students as $std) {
+              $this->notifications->add('Your Class Timetable has been Changed!', 'admin/dashboard', $std->id);
+            }
+
             unset($data['id']);
 
             $this->bm->updateRow('timetable', $data, 'id', $id);
             $this->session->set_flashdata(array('type' => 'success',
-            'msg' => 'Timetable has been Added!'));
+            'msg' => 'Timetable has been Updated!'));
             redirect('view_timetables');
           } else {
             // add
@@ -208,6 +231,8 @@ class Timetable extends CI_Controller
           if(isset($data['id']) && $data['id'] != "") {
             // edit
             unset($data['id']);
+            $data['datetime_updated'] = date('Y-m-d h:i', strtotime('now'));
+
             $this->bm->updateRow('timetable', $data, 'id', $id);
           } else {
             // add
@@ -220,7 +245,9 @@ class Timetable extends CI_Controller
     }
 
     public function customize_timetable($id) {
-
+      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+          redirect('dashboard');
+      }
       $id = hashids_decrypt($id);
       $record = $this->tm->getRecord($id);
       $detail_records = $this->tm->getDetailRecords($id);
@@ -320,6 +347,7 @@ class Timetable extends CI_Controller
     }
 
     public function finish() {
+
       if($this->input->post()) {
         $data = $this->input->post();
         $data['timetable_data'] = json_decode($data['timetable_data']);
@@ -342,6 +370,9 @@ class Timetable extends CI_Controller
           // save bach
           if($timetable_id != "") {
             $this->bm->delete('timetable_details', 'timetable_id', $timetable_id);
+            // update datetime updated
+            $d['datetime_updated'] = date('Y-m-d h:i', strtotime('now'));
+            $this->bm->updateRow('timetable', $d, 'id', $data['timetable_id']);
           }
           $this->bm->insertRows('timetable_details', $timetable_details);
 
@@ -354,8 +385,11 @@ class Timetable extends CI_Controller
         }
       }
     }
-    public function change_status($id,$type)
-    {
+
+    public function change_status($id,$type) {
+      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+          redirect('dashboard');
+      }
       if ($type == 1) {
         $arr = [
           'published' => 0
@@ -376,27 +410,13 @@ class Timetable extends CI_Controller
     }
 
     public function send_timetable($id) {
+      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+          redirect('dashboard');
+      }
       $id = hashids_decrypt($id);
       $record = $this->tm->getRecord($id);
 
-      switch ($record->part) {
-        case 1: // part 1
-          $batch_year = date('Y'); // current year
-          break;
-        case 2: //part 2
-          $batch_year = date('Y', strtotime('-1 year')); // current year
-          break;
-        case 3: //part 3
-          $batch_year = date('Y', strtotime('-2 year')); // current year
-          break;
-        case 4: //part 4
-          $batch_year = date('Y', strtotime('-3 year')); // current year
-          break;
-
-        default:
-          $batch_year = date('Y'); // by default current year
-          break;
-      }
+      $batch_year = $this->get_batch_year($record->part);
 
       $data = array(
         'title' => 'Timetable',
@@ -412,6 +432,9 @@ class Timetable extends CI_Controller
     }
 
     public function send() {
+      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+          redirect('dashboard');
+      }
       if($this->input->post()) {
         $emails = $this->input->post('users_emails');
         //Validate Emails
@@ -436,4 +459,74 @@ class Timetable extends CI_Controller
       }
     }
 
+    private function get_batch_year($part) {
+      switch ($part) {
+        case 1: // part 1
+          $batch_year = date('Y'); // current year
+          break;
+        case 2: // part 2
+          $batch_year = date('Y', strtotime('-1 year')); // current year
+          break;
+        case 3: // part 3
+          $batch_year = date('Y', strtotime('-2 year')); // current year
+          break;
+        case 4: // part 4
+          $batch_year = date('Y', strtotime('-3 year')); // current year
+          break;
+        case 5: // part 5
+          $batch_year = date('Y', strtotime('-4 year')); // current year
+          break;
+
+        default:
+          $batch_year = date('Y'); // by default current year
+          break;
+      }
+
+      return $batch_year;
+    }
+    public function student_timetable() {
+      $data = array(
+        'title' => 'Timetable',
+        'active_menu' => 'timetable',
+        'timetables' => $this->tm->getRecords(),
+      );
+
+      $this->load->view('header',$data);
+      $this->load->view('sidebar');
+      $this->load->view('timetable/student_timetable');
+      $this->load->view('footer');
+    }
+
+    public function fetch_timetable() {
+  		$id = $this->input->post('id');
+  		$timetable_record = $this->bm->getById('timetable', $id);
+  		if(!empty($timetable_record)) {
+  			if($timetable_record->type == "image") {
+  				// Image Timetable
+  				echo json_encode(array('type' => 'success', 'data' => array('type' => $timetable_record->type, 'src' =>$timetable_record->image)));
+  				die();
+  			} else {
+  				// custom timetable
+
+  	      $detail_records = $this->tm->getDetailRecords($id);
+
+  				$data = array(
+  	        'record' => $timetable_record,
+  	        'morning_start_time' => '08:00 am',
+  	        'morning_end_time' => '01:00 pm',
+  	        'evening_start_time' => '02:00 pm',
+  	        'evening_end_time' => '07:00 pm',
+  	        'class_duration' => 45,
+  	        'id' => $id,
+  	        'detail_records' => $detail_records,
+  	      );
+  				$timetable = $this->load->view('timetable/timetable_view', $data, true);
+  				echo json_encode(array('type' => 'success', 'data' => array('type' => $timetable_record->type, 'content' => $timetable)));
+  				// echo json_encode(array('type' => 'success', 'data' => array('type' => $timetable_record->type, 'content' => htmlspecialchars($timetable))));
+  				die();
+  			}
+  		}
+
+  		echo json_encode(array('type' => "error"));
+  	}
 }

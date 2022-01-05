@@ -32,7 +32,10 @@ class Notification extends CI_Controller
 
     public function new()
     {
-
+      // redirect student to dashboard
+      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+          redirect('dashboard');
+      }
       $this->load->model('Main_model');
 
       $data = array(
@@ -51,6 +54,10 @@ class Notification extends CI_Controller
     }
 
     public function save() {
+      // redirect student to dashboard
+      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+          redirect('dashboard');
+      }
       if($this->input->post()) {
         $data = $this->input->post();
         // for backend validation if error found where to redirect
@@ -138,7 +145,10 @@ class Notification extends CI_Controller
     }
 
     public function edit($id) {
-
+      // redirect student to dashboard
+      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+          redirect('dashboard');
+      }
       $id = hashids_decrypt($id);
       // get notification record
       $record = $this->nm->getNotification($id);
@@ -173,6 +183,10 @@ class Notification extends CI_Controller
     }
 
     public function delete($id) {
+      // redirect student to dashboard
+      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+          redirect('dashboard');
+      }
       $id = hashids_decrypt($id);
       $this->bm->delete('news_notifications', 'id', $id);
       $this->session->set_flashdata(array('type' => 'success', 'msg' => 'Notification Deleted Successfully!'));
