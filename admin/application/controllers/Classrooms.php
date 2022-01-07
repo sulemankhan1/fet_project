@@ -12,7 +12,7 @@ class Classrooms extends CI_Controller
             redirect('login');
         }
         // redirect student to dashboard
-        if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+        if ($this->session->user_type == 'STUDENT' || $this->session->user_type == 'OTHER') {
             redirect('dashboard');
         }
     }

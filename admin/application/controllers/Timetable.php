@@ -20,7 +20,7 @@ class Timetable extends CI_Controller
     }
 
     public function index() {
-      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+      if ($this->session->user_type == 'STUDENT' || $this->session->user_type == 'OTHER') {
           redirect('dashboard');
       }
 
@@ -37,7 +37,7 @@ class Timetable extends CI_Controller
     }
 
     public function new($data = '') {
-      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+      if ($this->session->user_type == 'STUDENT' || $this->session->user_type == 'OTHER') {
           redirect('dashboard');
       }
       $data = array(
@@ -99,7 +99,7 @@ class Timetable extends CI_Controller
 
     public function edit($id) {
       $id = hashids_decrypt($id);
-      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+      if ($this->session->user_type == 'STUDENT' || $this->session->user_type == 'OTHER') {
           redirect('dashboard');
       }
       $data = array(
@@ -118,7 +118,7 @@ class Timetable extends CI_Controller
     }
 
     public function delete($id) {
-      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+      if ($this->session->user_type == 'STUDENT' || $this->session->user_type == 'OTHER') {
           redirect('dashboard');
       }
       $id = hashids_decrypt($id);
@@ -130,7 +130,7 @@ class Timetable extends CI_Controller
     // for submission (img based timetable)
     //and redirecting to custom timetable creation page
     public function create() {
-      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+      if ($this->session->user_type == 'STUDENT' || $this->session->user_type == 'OTHER') {
           redirect('dashboard');
       }
       if($this->input->post()) {
@@ -245,7 +245,7 @@ class Timetable extends CI_Controller
     }
 
     public function customize_timetable($id) {
-      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+      if ($this->session->user_type == 'STUDENT' || $this->session->user_type == 'OTHER') {
           redirect('dashboard');
       }
       $id = hashids_decrypt($id);
@@ -387,7 +387,7 @@ class Timetable extends CI_Controller
     }
 
     public function change_status($id,$type) {
-      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+      if ($this->session->user_type == 'STUDENT' || $this->session->user_type == 'OTHER') {
           redirect('dashboard');
       }
       if ($type == 1) {
@@ -410,7 +410,7 @@ class Timetable extends CI_Controller
     }
 
     public function send_timetable($id) {
-      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+      if ($this->session->user_type == 'STUDENT' || $this->session->user_type == 'OTHER') {
           redirect('dashboard');
       }
       $id = hashids_decrypt($id);
@@ -432,7 +432,7 @@ class Timetable extends CI_Controller
     }
 
     public function send() {
-      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+      if ($this->session->user_type == 'STUDENT' || $this->session->user_type == 'OTHER') {
           redirect('dashboard');
       }
       if($this->input->post()) {

@@ -1,5 +1,5 @@
 <div class="main-content">
-	
+
 	 <!-- Section: inner-header -->
      <section class="inner-header divider parallax layer-overlay overlay-white-8 teachers-top-sec" data-bg-img="<?=base_url('assets/images/bg/bg8.jpg')?>">
     <div class="container pt-30 pb-30">
@@ -19,87 +19,49 @@
   </section>
 
   <div class="container">
-  	<div class="row mt-50">
-  		<div class="col-md-12 col-sm-12">
-  			<h2 class="mt-0 line-height-1 line-bottom-edu">Welcome to <span class="text-theme-colored3">Electronics</span></h2>
-  			<p>Welcome to electronics course content and course scheme. Here you will find all course content and scheme accordingly electronics.</p>
-  		</div>
-  	</div>
+  
   	<div class="row mt-50 mb-60">
-  		<div class="col-md-6 col-sm-6">
+			<!-- Section: About  -->
+	    <section id="about">
+	      <div class="container pb-90 pb-sm-90 welcome-cont">
+	        <div class="section-content">
+	          <div class="row">
+	            <div class="col-sm-7 col-md-8">
+	              <h2 class="mt-0 line-height-1 line-bottom-edu">Welcome to <span class="text-theme-colored3">Electronics Engineering</span></h2>
+	              <h4 >About</h4>
+	              <p>The extensive applications of electronic devices and systems play a vital role in the development of the socio-economic growth of the country. It is the field where the world's best talent meets the most, creative ideas are most active, and competitiveness for inventions is fiercest. This led the University of Sindh to start B.Sc. and M.Sc. Electronics Programmemes in 1979 under the umbrella of the Institute of physics and technology (IPT). The IPT was pioneer in Sindh province to provide training and educating the individuals to harness the full potential of the discipline. Later, the IPT was bifurcated to the Institute of information technology (IIT) in 1998. The department of Electronics started to offer 4 years BS degree in Electronics in 2002. Later the nomenclature of the Institute was re-designated as Institute of Information and Communication Technology (IICT). In 2020 IICT was upgraded to the Faculty of Engineering and Technology (FET) to extend its scope in the field of engineering and technology. As a result of this the nomenclature of Department of Electronic was changed to Department of Electronics Engineering (DEE) and got accredited by the Pakistan Engineering Council (PEC). DEE also offers M.E in Electronic engineering under the shelter of DR. A. H. S. Bukhari Institute of Information and Communication Technology.
+	The infrastructure of the department meets all the criteria of conducive learnings. The classrooms are spacious, well-furnished and equipped with the multimedia facility. The state-of-the-art laboratories with latest hardware and software tools facilitate students in learning all theoretical concepts experimentally. Moreover, the library suffices the complete information resource such as; textbooks with latest editions, technology magazines and online platforms to access research articles worldwide. Based on the competence and achievements of its discipline, DEE owns a very high reputation in the Electronic research community across the country.</p>
+	              <div class="row sm-text-center mt-100 mb-100">
+	                <div class="col-sm-3 col-md-3">
+	                  <div class="thumb">
+											<img src="<?=base_url('assets/images/team/mudasir.jpg')?>" class="mt-5" alt="" id="imgprogram2" width="200">
+	                  </div>
 
-  		    <div class="card effect__random" data-id="1">
-              <div class="card__front bg-theme-colored">
-                  <div class="card__text">
-                    <div class="display-table-parent">
-                      <div class="display-table">
-                        <div class="display-table-cell">
-                          <div class="icon-box mb-0">
-                            <a href="#" class="icon mb-0">
-                              <i class="text-white far fa-file-alt font-72"></i>
-                            </a>
-                            <h3 class="icon-box-title text-white">Course Content</h3>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-               </div>
-              <div class="card__back" data-bg-color="#e0e0e0">
-                <div class="card__text">
-                  <div class="display-table-parent p-30">
-                      <div class="display-table">
-                        <div class="display-table-cell">
-                          <h4>Course Content</h4>
-                          <p>Here Course is given accordingly batch.To get course content simply click on course content and write your batch , part , semster and subject to get your course content</p>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </div>	
+	                </div>
+	                <div class=" col-sm-6 col-md-6">
+	                  <div class="mb-15">
+	                    <h4 class="font-raleway font-weight-700 mt-15"><a href="#"><span class="text-theme-colored3"><u>Greetings </u></span></a></h4>
 
-  		</div>
-  		<div class="col-md-6 col-sm-6">
-
-  			<div class="card effect__random" data-id="2">
-              <div class="card__front bg-theme-colored">
-                  <div class="card__text">
-                    <div class="display-table-parent">
-                      <div class="display-table">
-                        <div class="display-table-cell">
-                          <div class="icon-box mb-0">
-                            <a href="#" class="icon mb-0">
-                              <i class="text-white far fa-file-alt font-72"></i>
-                            </a>
-                            <h3 class="icon-box-title text-white">Course Scheme</h3>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-               </div>
-              <div class="card__back" data-bg-color="#e0e0e0">
-                <div class="card__text">
-                  <div class="display-table-parent p-30">
-                      <div class="display-table">
-                        <div class="display-table-cell">
-                          <h4>Course Scheme</h4>
-                          <p>Here is course scheme given accordingly batch.To get course scheme simply click on course scheme and write your batch get your course scheme</p>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </div>	
-  		</div>
+	                    <h4 class="font-raleway font-weight-700 mt-15"><a href="#">Dr. <span class="text-theme-colored3">Mudasir Ahmed Memon</span></a></h4>
+	                    <small class="font-raleway font-weight-700 mt-5">Incharge Chairman Department of Electronic Engineering</small>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+	            <div class="text-center col-sm-5 col-md-4">
+								<img src="<?=base_url('assets/images/FET-logo.png')?>"  id="programLogo">
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </section>
   	</div>
   </div>
 
 </div>
 
 <script>
-      
+
       (function() {
 
         // cache vars

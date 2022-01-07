@@ -65,8 +65,6 @@ class Pages extends CI_Controller
 		$this->load->view('includes/header', $data);
 		$this->load->view('pages/edit_profile');
 		$this->load->view('includes/footer');
-
-
 	}
 
 	public function update_profile()

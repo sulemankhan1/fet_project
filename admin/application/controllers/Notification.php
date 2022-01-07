@@ -33,7 +33,7 @@ class Notification extends CI_Controller
     public function new()
     {
       // redirect student to dashboard
-      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+      if ($this->session->user_type == 'STUDENT' || $this->session->user_type == 'OTHER') {
           redirect('dashboard');
       }
       $this->load->model('Main_model');
@@ -55,7 +55,7 @@ class Notification extends CI_Controller
 
     public function save() {
       // redirect student to dashboard
-      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+      if ($this->session->user_type == 'STUDENT' || $this->session->user_type == 'OTHER') {
           redirect('dashboard');
       }
       if($this->input->post()) {
@@ -146,7 +146,7 @@ class Notification extends CI_Controller
 
     public function edit($id) {
       // redirect student to dashboard
-      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+      if ($this->session->user_type == 'STUDENT' || $this->session->user_type == 'OTHER') {
           redirect('dashboard');
       }
       $id = hashids_decrypt($id);
@@ -184,7 +184,7 @@ class Notification extends CI_Controller
 
     public function delete($id) {
       // redirect student to dashboard
-      if ($this->session->user_type != 'ADMIN' || $this->session->user_type != 'SUPERADMIN') {
+      if ($this->session->user_type == 'STUDENT' || $this->session->user_type == 'OTHER') {
           redirect('dashboard');
       }
       $id = hashids_decrypt($id);

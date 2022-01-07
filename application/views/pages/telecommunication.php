@@ -1,5 +1,5 @@
 <div class="main-content">
-	
+
 	 <!-- Section: inner-header -->
      <section class="inner-header divider parallax layer-overlay overlay-white-8 teachers-top-sec" data-bg-img="<?=base_url('assets/images/bg/bg8.jpg')?>">
     <div class="container pt-30 pb-30">
@@ -19,87 +19,48 @@
   </section>
 
   <div class="container">
-  	<div class="row mt-50">
-  		<div class="col-md-12 col-sm-12">
-  			<h2 class="mt-0 line-height-1 line-bottom-edu">Welcome to <span class="text-theme-colored3">Telecommunication</span></h2>
-  			<p>Welcome to telecommunication course content and course scheme. Here you will find all course content and scheme accordingly telecommunication.</p>
-  		</div>
-  	</div>
+
   	<div class="row mt-50 mb-60">
-  		<div class="col-md-6 col-sm-6">
+			<!-- Section: About  -->
+	    <section id="about">
+	      <div class="container pb-90 pb-sm-90 welcome-cont">
+	        <div class="section-content">
+	          <div class="row">
+	            <div class="col-sm-7 col-md-8">
+	              <h2 class="mt-0 line-height-1 line-bottom-edu">Welcome to <span class="text-theme-colored3">Telecommunication</span></h2>
+	              <h4 >About</h4>
+	              <p>To produce intellectual graduates with eclectic vision in the field of telecommunication to keep pace with the current trends and envisage future prospects in terms of both the professional and research practices.</p>
+	              <div class="row sm-text-center mt-100 mb-100">
+	                <div class="col-sm-3 col-md-3">
+	                  <div class="thumb">
+	                    <img src="<?=base_url('assets/images/team/khalil.jpg')?>" class="mt-5" alt="" id="imgprogram2" width="200">
+	                  </div>
 
-  		    <div class="card effect__random" data-id="1">
-              <div class="card__front bg-theme-colored">
-                  <div class="card__text">
-                    <div class="display-table-parent">
-                      <div class="display-table">
-                        <div class="display-table-cell">
-                          <div class="icon-box mb-0">
-                            <a href="#" class="icon mb-0">
-                              <i class="text-white far fa-file-alt font-72"></i>
-                            </a>
-                            <h3 class="icon-box-title text-white">Course Content</h3>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-               </div>
-              <div class="card__back" data-bg-color="#e0e0e0">
-                <div class="card__text">
-                  <div class="display-table-parent p-30">
-                      <div class="display-table">
-                        <div class="display-table-cell">
-                          <h4>Course Content</h4>
-                          <p>Here Course is given accordingly batch.To get course content simply click on course content and write your batch , part , semster and subject to get your course content</p>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </div>	
+	                </div>
+	                <div class=" col-sm-8 col-md-8">
+	                  <div class="mb-15">
+	                    <h4 class="font-raleway font-weight-700 mt-15"><a href="#"><span class="text-theme-colored3"><u>Greetings </u></span></a></h4>
 
-  		</div>
-  		<div class="col-md-6 col-sm-6">
-
-  			<div class="card effect__random" data-id="2">
-              <div class="card__front bg-theme-colored">
-                  <div class="card__text">
-                    <div class="display-table-parent">
-                      <div class="display-table">
-                        <div class="display-table-cell">
-                          <div class="icon-box mb-0">
-                            <a href="#" class="icon mb-0">
-                              <i class="text-white far fa-file-alt font-72"></i>
-                            </a>
-                            <h3 class="icon-box-title text-white">Course Scheme</h3>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-               </div>
-              <div class="card__back" data-bg-color="#e0e0e0">
-                <div class="card__text">
-                  <div class="display-table-parent p-30">
-                      <div class="display-table">
-                        <div class="display-table-cell">
-                          <h4>Course Scheme</h4>
-                          <p>Here is course scheme given accordingly batch.To get course scheme simply click on course scheme and write your batch get your course scheme</p>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </div>	
-  		</div>
+	                    <h4 class="font-raleway font-weight-700 mt-15"><a href="#">Prof Dr. <span class="text-theme-colored3">Khalil-Ur-Rehman Khoumbati</span></a></h4>
+	                    <small class="font-raleway font-weight-700 mt-5">Incharge Chairman Department of Telecommunication Engineering</small>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+	            <div class="text-center col-sm-5 col-md-4">
+								<img src="<?=base_url('assets/images/FET-logo.png')?>"  id="programLogo">
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </section>
   	</div>
   </div>
 
 </div>
 
 <script>
-      
+
       (function() {
 
         // cache vars

@@ -75,14 +75,14 @@
 <body class="">
   <div id="wrapper" class="clearfix">
     <!-- preloader -->
-    <div id="preloader">
+    <!-- <div id="preloader">
       <div id="spinner">
         <div class="preloader-dot-loading">
           <div class="dfg"><i></i><i></i><i></i><i></i></div>
         </div>
       </div>
       <div id="disable-preloader" class="btn btn-default btn-sm">Disable Preloader</div>
-    </div>
+    </div> -->
 
     <!-- Header -->
     <header id="header" class="header">
@@ -105,12 +105,9 @@
                     <li class="bg-theme-colored3 text-white mb-xs-5"><i class="fa fa-registered"></i> <a class="text-white" href="<?=site_url('register')?>">Register</a></li>
 
                   <?php }else{ ?>
-                    <!-- <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Dropdown</a>
-  </li> -->
                     <li class="nav-item dropdown bg-theme-colored text-white mb-xs-5">
                       <i class="fa fa-user"></i>
-                      <a class="nav-link dropdown-toggle text-white" href="<?=site_url('login')?>" data-toggle="dropdown" href="#"> My Account </a>
+                      <a class="nav-link dropdown-toggle text-white" href="<?=site_url('login')?>" data-toggle="dropdown" href="#"> <?=$this->session->username?> </a>
                       <div class="dropdown-menu" style="padding-left: 7px;">
                         <a class="dropdown-item" href="<?=site_url('admin/dashboard')?>">Dashboard</a>
                         <a class="dropdown-item" href="<?=site_url('edit_profile/'.hashids_encrypt($this->session->userdata('user_id')))?>">Edit Profile</a>
@@ -158,24 +155,10 @@
             <li>
               <a href="javascript:void(0)">programs</a>
               <ul class="dropdown">
-                <li><a href="">Bachelors</a>
-                  <ul class="dropdown">
-                    <li><a href="<?=site_url('software_eng')?>">Software Engineering</a>
-
-                    </li>
-                    <li><a href="<?=site_url('information_tech')?>">Information Technology</a>
-
-                    </li>
-                    <li><a href="<?=site_url('telecommunication')?>">Telecommunication</a>
-
-                    </li>
-                    <li><a href="<?=site_url('electronics')?>">Electronics</a>
-
-                    </li>
-                  </ul>
-                </li>
-                <li><a href="">Masters</a></li>
-                <li><a href="">Ph.D</a></li>
+                <li><a href="<?=site_url('software_eng')?>">Software Engineering</a></li>
+                <li><a href="<?=site_url('information_tech')?>">Information Technology</a></li>
+                <li><a href="<?=site_url('telecommunication')?>">Telecommunication</a></li>
+                <li><a href="<?=site_url('electronics')?>">Electronics</a></li>
               </ul>
             </li>
 
@@ -184,13 +167,13 @@
                 </li>
                <li><a href="<?=site_url('faculty') ?>">Faculty</a></li>
                 <li><a href="<?=site_url('news')?>">News</a></li>
-                <li><a href="javascript:void(0)">Resources</a>
+                <!-- <li><a href="javascript:void(0)">Resources</a>
                   <ul class="dropdown">
                     <li><a href="#">FYP Resources</a></li>
                     <li><a href="<?=site_url('telephone')?>">Telephone</a></li>
                     <li><a href="#">Site Map</a></li>
                   </ul>
-                </li>
+                </li> -->
                 <li><a href="<?=site_url('about')?>">About</a></li>
                   <li><a href="<?=site_url('contact')?>">Contact</a></li>
 
