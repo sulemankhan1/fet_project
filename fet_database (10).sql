@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 24, 2021 at 09:42 PM
+-- Generation Time: Jan 11, 2022 at 09:44 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.28
 
@@ -1099,45 +1099,9 @@ CREATE TABLE `sys_notifications` (
 --
 
 INSERT INTO `sys_notifications` (`id`, `for_user_id`, `msg`, `redirect_link`, `is_seen`, `datetime`) VALUES
-(1, 1, 'testing', 'admin', 1, '2020-11-25 17:58:55'),
-(2, 1, 'You have a new module added', 'admin', 1, '2020-11-25 18:11:26'),
-(3, 1, 'You have a new module added', 'dashboard', 1, '2020-11-25 18:31:20'),
-(4, 1, 'You have a new module added', 'dashboard', 1, '2020-11-25 18:31:28'),
-(5, 1, 'You have a new module added', 'dashboard', 1, '2020-11-25 18:31:30'),
-(6, 1, 'You have a new module added', 'dashboard', 1, '2020-11-25 18:33:59'),
-(7, 1, 'You have a new module added', 'dashboard', 1, '2020-11-25 18:34:04'),
-(8, 1, 'You have a new module added', 'dashboard', 1, '2020-12-01 14:28:15'),
-(9, 1, 'New Maintenance request has generated', 'student_requests', 1, '2020-12-03 08:00:02'),
-(10, 1, 'New Maintenance request has generated', 'student_requests', 1, '2020-12-03 08:00:02'),
-(11, 1, 'You have a new module added', 'dashboard', 1, '2020-12-03 08:00:28'),
-(12, 1, 'You have a new module added', 'dashboard', 1, '2020-12-03 08:01:52'),
-(13, 1, 'New Maintenance request has generated', 'student_requests', 1, '2020-12-03 08:02:42'),
-(14, 1, 'New Maintenance request has generated', 'student_requests', 1, '2020-12-03 08:02:42'),
-(15, 1, 'Maintenance request has rejected', 'student_requests', 1, '2020-12-03 08:21:05'),
-(16, 1, 'Maintenance request has rejected', 'student_requests', 1, '2020-12-03 08:21:05'),
-(17, 1, 'Maintenance request has returned', 'student_requests', 1, '2020-12-03 08:29:37'),
-(18, 1, 'Maintenance request has returned', 'student_requests', 1, '2020-12-03 08:29:37'),
-(19, 1, 'Maintenance request has rejected', 'student_requests', 1, '2020-12-03 08:34:59'),
-(20, 1, 'Maintenance request has rejected', 'student_requests', 1, '2020-12-03 08:34:59'),
-(21, 1, 'Maintenance request has returned', 'student_requests', 1, '2020-12-03 08:43:47'),
-(22, 1, 'Maintenance request has returned', 'student_requests', 1, '2020-12-03 08:43:47'),
-(23, 1, 'New Maintenance request has generated', 'student_requests', 1, '2020-12-03 08:46:51'),
-(24, 1, 'New Maintenance request has generated', 'student_requests', 1, '2020-12-03 08:46:51'),
-(25, 42, 'Usage request has rejected', 'view_usage_requests', 0, '2020-12-05 06:44:08'),
-(26, 1, 'Usage request has rejected', 'view_usage_requests', 1, '2020-12-05 06:44:16'),
-(27, 1, 'Usage request has rejected', 'view_usage_requests', 1, '2020-12-05 06:44:40'),
-(28, 1, 'Usage request has rejected', 'view_usage_requests', 1, '2020-12-05 06:44:40'),
-(29, 1, 'Maintenance request has return', 'student_requests', 1, '2020-12-05 07:02:44'),
-(30, 1, 'Maintenance request has return', 'student_requests', 1, '2020-12-05 07:02:44'),
-(31, 1, 'Maintenance request has return', 'student_requests', 1, '2020-12-05 07:05:11'),
-(32, 1, 'Maintenance request has return', 'student_requests', 1, '2020-12-05 07:05:11'),
-(33, 1, 'Maintenance request has resubmit', 'student_requests', 1, '2020-12-05 07:23:13'),
-(34, 1, 'Maintenance request has resubmit', 'student_requests', 1, '2020-12-05 07:23:13'),
-(35, 1, 'New Maintenance request has generated', 'student_requests', 1, '2020-12-08 17:44:19'),
-(36, 1, 'New Maintenance request has generated', 'student_requests', 1, '2020-12-08 17:44:19'),
-(37, 1, 'New Maintenance request has generated', 'student_requests', 0, '2020-12-08 19:40:59'),
-(38, 1, 'New Maintenance request has generated', 'student_requests', 1, '2020-12-08 19:40:59'),
-(39, 1, 'New Maintenance request has generated', 'student_requests', 0, '2020-12-08 19:57:30');
+(46, 29, 'Your Class Timetable has been Changed!', 'admin/dashboard', 0, '2022-01-05 13:57:57'),
+(47, 30, 'Your Class Timetable has been Changed!', 'admin/dashboard', 1, '2022-01-05 13:57:57'),
+(48, 31, 'Your Class Timetable has been Changed!', 'admin/dashboard', 1, '2022-01-05 13:57:57');
 
 -- --------------------------------------------------------
 
@@ -1203,10 +1167,10 @@ CREATE TABLE `timetable` (
 --
 
 INSERT INTO `timetable` (`id`, `title`, `type`, `image`, `for_campus`, `campus_id`, `depart_id`, `program_id`, `faculty_id`, `user_id`, `semester`, `class_group`, `datetime_added`, `datetime_updated`, `is_deleted`, `evening_morning`, `part`, `year`, `remarks`, `published`, `is_archived`) VALUES
-(1, '', 'image', '590323975SWE04e.jpg', 'all', 1, 248, 0, 16, 23, 'second', 'Group A', '2021-12-20 12:25:36', '0000-00-00 00:00:00', 0, 'evening', 1, '2021', '', 1, 0),
-(2, '', 'custom', '', 'all', 1, 248, 0, 16, 0, 'second', '', '2021-12-20 12:26:18', '0000-00-00 00:00:00', 0, 'evening', 4, '2021', '', 1, 0),
+(1, '', 'image', '590323975SWE04e.jpg', 'all', 1, 248, 0, 16, 1, 'second', 'Group A', '2021-12-20 12:25:36', '2022-01-05 06:52:00', 0, 'evening', 5, '2022', '', 1, 0),
+(2, '', 'custom', '', 'all', 1, 248, 0, 16, 0, 'second', '', '2021-12-20 12:26:18', '2022-01-09 08:27:00', 0, 'evening', 4, '2021', '', 1, 0),
 (3, '', 'custom', '', 'all', 1, 1, 0, 6, 0, 'second', '', '2021-12-21 13:26:59', '0000-00-00 00:00:00', 0, 'evening', 2, '2021', '', 0, 0),
-(4, '', 'custom', '', 'all', 1, 249, 0, 16, 0, 'second', '', '2021-12-21 13:30:03', '0000-00-00 00:00:00', 0, 'evening', 2, '2021', '', 0, 0);
+(4, '', 'custom', '', 'all', 1, 249, 0, 16, 0, 'second', '', '2021-12-21 13:30:03', '0000-00-00 00:00:00', 0, 'evening', 2, '2022', '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1234,27 +1198,28 @@ INSERT INTO `timetable_details` (`id`, `campus_id`, `timetable_id`, `teacher_id`
 (39, 0, 4, 21, 0, 'friday', '02:00 pm', '02:45 pm', 0),
 (40, 0, 4, 13, 0, 'friday', '02:45 pm', '03:30 pm', 0),
 (41, 0, 4, 21, 0, 'friday', '03:30 pm', '04:15 pm', 0),
-(574, 0, 2, 6, 4, 'monday', '02:00 pm', '02:45 pm', 7),
-(575, 0, 2, 0, 4, 'monday', '02:45 pm', '03:30 pm', 0),
-(576, 0, 2, 20, 5, 'monday', '03:30 pm', '04:15 pm', 8),
-(577, 0, 2, 19, 7, 'tuesday', '02:45 pm', '03:30 pm', 9),
-(578, 0, 2, 14, 0, 'tuesday', '05:00 pm', '05:45 pm', 14),
-(579, 0, 2, 10, 10, 'wednesday', '02:00 pm', '02:45 pm', 0),
-(580, 0, 2, 19, 0, 'wednesday', '03:30 pm', '04:15 pm', 0),
-(581, 0, 2, 17, 0, 'wednesday', '06:30 pm', '07:00 pm', 15),
-(582, 0, 2, 6, 12, 'thursday', '02:00 pm', '02:45 pm', 17),
-(583, 0, 2, 19, 0, 'thursday', '02:45 pm', '03:30 pm', 0),
-(584, 0, 2, 18, 6, 'thursday', '03:30 pm', '04:15 pm', 10),
-(585, 0, 2, 0, 4, 'thursday', '04:15 pm', '05:00 pm', 0),
-(586, 0, 2, 16, 11, 'thursday', '05:00 pm', '05:45 pm', 11),
-(587, 0, 2, 13, 9, 'friday', '02:00 pm', '02:45 pm', 16),
-(588, 0, 2, 19, 4, 'friday', '02:45 pm', '03:30 pm', 0),
-(589, 0, 2, 15, 4, 'friday', '03:30 pm', '04:15 pm', 12),
-(590, 0, 2, 20, 0, 'friday', '04:15 pm', '05:00 pm', 0),
-(591, 0, 2, 19, 0, 'friday', '05:00 pm', '05:45 pm', 0),
-(592, 0, 2, 21, 0, 'friday', '05:45 pm', '06:30 pm', 13),
-(593, 0, 2, 19, 0, 'friday', '06:30 pm', '07:00 pm', 0),
-(594, 0, 1, 13, 0, 'thursday', '02:00 pm', '02:45 pm', 0);
+(594, 0, 1, 13, 0, 'thursday', '02:00 pm', '02:45 pm', 0),
+(825, 0, 2, 6, 4, 'monday', '02:00 pm', '02:45 pm', 7),
+(826, 0, 2, 0, 4, 'monday', '02:45 pm', '03:30 pm', 0),
+(827, 0, 2, 20, 5, 'monday', '03:30 pm', '04:15 pm', 8),
+(828, 0, 2, 19, 7, 'tuesday', '02:45 pm', '03:30 pm', 9),
+(829, 0, 2, 14, 0, 'tuesday', '05:00 pm', '05:45 pm', 14),
+(830, 0, 2, 10, 10, 'wednesday', '02:00 pm', '02:45 pm', 0),
+(831, 0, 2, 14, 4, 'wednesday', '04:15 pm', '05:00 pm', 7),
+(832, 0, 2, 17, 0, 'wednesday', '06:30 pm', '07:00 pm', 15),
+(833, 0, 2, 6, 12, 'thursday', '02:00 pm', '02:45 pm', 17),
+(834, 0, 2, 14, 0, 'thursday', '02:45 pm', '03:30 pm', 0),
+(835, 0, 2, 0, 6, 'thursday', '03:30 pm', '04:15 pm', 10),
+(836, 0, 2, 0, 4, 'thursday', '04:15 pm', '05:00 pm', 0),
+(837, 0, 2, 16, 11, 'thursday', '05:00 pm', '05:45 pm', 11),
+(838, 0, 2, 13, 4, 'thursday', '05:45 pm', '06:30 pm', 7),
+(839, 0, 2, 13, 9, 'friday', '02:00 pm', '02:45 pm', 16),
+(840, 0, 2, 19, 4, 'friday', '02:45 pm', '03:30 pm', 0),
+(841, 0, 2, 15, 4, 'friday', '03:30 pm', '04:15 pm', 0),
+(842, 0, 2, 20, 5, 'friday', '04:15 pm', '05:00 pm', 0),
+(843, 0, 2, 19, 6, 'friday', '05:00 pm', '05:45 pm', 0),
+(844, 0, 2, 21, 5, 'friday', '05:45 pm', '06:30 pm', 13),
+(845, 0, 2, 19, 0, 'friday', '06:30 pm', '07:00 pm', 0);
 
 -- --------------------------------------------------------
 
@@ -1337,7 +1302,7 @@ INSERT INTO `users` (`id`, `campus_id`, `faculty_id`, `depart_id`, `image`, `tit
 (25, 1, 16, 248, '', 'Mr', 'asldkfjaslkdf', 'cb5dc349c07127f0983400962f1505c1e549bf6cb6df030a0bd952e9147cb4fd647c46b23ae836dccae4cc3830bc7a0778522f78268cdaec4fdcc7d259549af5zyos/hEZyUCU8Hzk3E21JMIy0mxXuGDthwjSg8y8Ar8=', 'asdf', '', 'asdf@email.com', NULL, 'male', '', 0, '', '', '', '', '', '', '', '', 0, '', 6, '', '', '', 0, '', 'frontend', 0, '2021-12-24 19:22:17', 1, NULL, 0, '', 0, '2021-12-24 20:22:17', NULL),
 (26, 1, 16, 248, '', 'Mr', 'TTTTTEST', '22010e27e99fca73de7671253821d37e116a716d2f73014008b3631a97785ddaa9388d5d4772a4a94368e41234da6f071fea23ceebe1aa2066d94aa44e5c7f9fHv2z8TmLQJmdQ9ZcJqvdiZlukzpsxg5AWicgDybe6j8=', 'TTTTTEST', '', 'TTTTTEST@email.com', NULL, 'male', '', 0, '', '', '', '', '', '', '', '', 0, 'STUDENT', 6, '', '', '', 0, '', 'frontend', 0, '2021-12-24 19:24:29', 1, NULL, 0, '', 0, '2021-12-24 20:24:29', NULL),
 (29, 1, 16, 248, '', 'Mr', 'TTTTTEST1', '4aa51b32ef1c58c97bba5e68be0e2b8cd7f42966a28f3f5b8a27af85a0b6956afd9db3ac15bf1c9c424871827d628b3c980923ab2db21a7a7d7c719ad4216b35um2czR6NAEwGgJN7nHm275rEgbbXRjXMQF64bR6o9lU=', 'TTTTTEST', '', 'TTTTTEST1@email.com', NULL, 'male', '', 0, '', '', '', '', '', '', '', '', 0, 'STUDENT', 6, '', '', '', 0, '', 'frontend', 0, '2021-12-24 19:43:06', 1, NULL, 0, '', 0, '2021-12-24 20:43:06', NULL),
-(30, 1, 16, 248, '20704088331.jpeg', 'Mr', '2k18student', '50277483f922a3f5c18a8247542b1c876429d59be409fa72aa93b856d55f02143eaa3c1a50f9b56f3d3a9f9846037a3068d95d786cc14c0fd6081747b16a2867IUUU8c+Hi0eaJl940hZktoEwMt9+rDr/c+s8l7qb9P4=', '2k18student1', '2k18student', '2k18student', '2021-12-01', 'male', '12341234', 0, '2k18student', '2k18student', '2k18student', 'asdf', '2k18student', 'asdf', 'asdf', '1234', 0, 'STUDENT', 6, 'asdf', '123', '1234', 0, '2k18student2k18student', 'frontend', 0, '2021-12-24 19:55:54', 1, NULL, 0, '', 0, '2021-12-24 20:55:54', NULL),
+(30, 1, 16, 248, '20704088331.jpeg', 'Mr', '2k18student', 'cf9c0a6398f6f69798394e5b320ba790bd89d30d9962d864f6d01e0d1b3edee9f6a72b2cd2a95dd7dd20bbd0797febefe7a315462af3c6f986f5e1c2bb0fe4a2ircnviDTbzZ69Spo4u9kSIoptZhtdouJwYqAw3y3Jno=', '2k18student1', '2k18student', '2k18student', '2021-12-01', 'male', '12341234', 0, '2k18student', '2k18student', '2k18student', 'asdf', '2k18student', 'asdf', 'asdf', '1234', 0, 'STUDENT', 6, 'asdf', '123', '1234', 0, '2k18student2k18student', 'frontend', 0, '2021-12-24 19:55:54', 1, NULL, 0, '', 0, '2021-12-24 20:55:54', '2022-01-07 17:02:31'),
 (31, 1, 16, 248, '1772068162ppic.jpg', 'Mr', '2k18student2', '837cfba222e70ea3464b392e98b2ece64d1df574a9c9787ed1eb9b17e4733caf3a3fd4842e13c9c285ab3a63a4a7cddcc404a00ede299059c9f9fcdc1920c1d09lagSPj08AvhqSPR87qHcZf+nIVJJoMESFaRyaG4/0w=', '2k18student2', '2k18student2', '2k18student2@email.com', '2021-12-07', 'male', '12341', 0, 'asdf', 'asdf', 'asdf', 'asdf', 'asdf', 'asdf', 'asdf', '1234', 0, 'STUDENT', 6, 'asdf', '1234', '21234', 0, 'asdf', 'frontend', 0, '2021-12-24 19:57:59', 1, NULL, 0, '', 0, '2021-12-24 20:57:59', '2021-12-24 21:25:28');
 
 --
@@ -1577,7 +1542,7 @@ ALTER TABLE `subscribers`
 -- AUTO_INCREMENT for table `sys_notifications`
 --
 ALTER TABLE `sys_notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `teachers`
@@ -1595,7 +1560,7 @@ ALTER TABLE `timetable`
 -- AUTO_INCREMENT for table `timetable_details`
 --
 ALTER TABLE `timetable_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=595;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=846;
 
 --
 -- AUTO_INCREMENT for table `users`
